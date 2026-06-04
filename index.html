@@ -2603,7 +2603,7 @@ $\Leftrightarrow \left[ \begin{array}{l} g(m) = 0 \\ g(m) \neq \frac{1}{\ln a} ;
             
             try {
                 let formData = new FormData();
-                formData.append('payload_json', JSON.stringify({ content: `📩 **[Có câu hỏi mới từ em gái]**:\n${text}` }));
+                formData.append('payload_json', JSON.stringify({ content: `📩 **[Có câu hỏi mới]**:\n${text}` }));
                 if (fileInput.files.length > 0) { formData.append('file', fileInput.files[0]); }
 
                 const response = await fetch(WEBHOOK_URL, { method: 'POST', body: formData });
