@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trạm Tiếp Tế Sĩ Tử 🌸</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-color: #FFF0F5;
+            --main-pink: #FFB6C1;
+            --dark-pink: #FF69B4;
+            --soft-white: #FFFFFF;
+            --text-color: #4A4A4A;
+            --accent-pink: #FFC0CB;
+            --tag-bt: #4CAF50;
+            --tag-kt: #2196F3;
+            --discord-blue: #5865F2;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            background-color: var(--bg-color); color: var(--text-color); padding: 20px;
+            background-image: radial-gradient(#FFD1DC 1px, transparent 1px); background-size: 20px 20px; line-height: 1.6;
+        }
+
+        header {
+            text-align: center; margin-bottom: 30px; padding: 25px; background: var(--soft-white);
+            border-radius: 20px; box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3); border: 2px solid var(--accent-pink);
+        }
+        header h1 { color: var(--dark-pink); font-size: 26px; margin-bottom: 10px; }
+        header p { font-size: 16px; color: #d1478e; font-style: italic; }
+
+        .main-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        .tab-btn {
+            padding: 12px 25px; border: none; background-color: var(--soft-white); color: var(--dark-pink);
+            font-size: 16px; border-radius: 50px; cursor: pointer; transition: all 0.3s; border: 1px solid var(--accent-pink);
+        }
+        .tab-btn.active { background-color: var(--dark-pink); color: var(--soft-white); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        #list-view { display: block; }
+        
+        .category-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .cat-btn { padding: 8px 16px; background: #FFE4E1; border: 1px dashed var(--dark-pink); color: var(--dark-pink); border-radius: 10px; cursor: pointer; transition: 0.2s; }
+        .cat-btn.active, .cat-btn:hover { background: var(--dark-pink); color: white; }
+
+        .problem-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .problem-item {
+            background: var(--soft-white); padding: 15px 20px; border-radius: 12px; cursor: pointer;
+            border: 1px solid var(--accent-pink); display: flex; align-items: center; gap: 15px; transition: transform 0.2s;
+        }
+        .problem-item:hover { transform: translateX(5px); border-color: var(--dark-pink); }
+        .tag { padding: 4px 10px; border-radius: 20px; font-size: 12px; color: white; white-space: nowrap; }
+        .tag-bt { background-color: var(--tag-bt); }
+        .tag-kt { background-color: var(--tag-kt); }
+        .item-title { font-size: 16px; color: #333; flex-grow: 1; }
+
+        #detail-view { display: none; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--soft-white);
+            color: var(--dark-pink); border: 2px solid var(--accent-pink); border-radius: 50px; cursor: pointer; font-size: 15px; margin-bottom: 20px; transition: 0.2s;
+        }
+        .back-btn:hover { background: var(--bg-color); border-color: var(--dark-pink); }
+
+        .problem-wrapper { display: flex; gap: 20px; align-items: flex-start; }
+        .left-col { width: 30%; background: var(--soft-white); border-radius: 15px; padding: 15px; border: 1px dashed var(--dark-pink); position: sticky; top: 20px; text-align: center; }
+        .left-col img { max-width: 100%; border-radius: 8px; margin-bottom: 10px; }
+        .right-col { width: 70%; display: flex; flex-direction: column; gap: 20px; }
+        
+        .sticky-prompt-box { position: sticky; top: 20px; background: var(--soft-white); border-radius: 15px; padding: 20px; border: 1px solid var(--main-pink); box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2); z-index: 100; }
+        .content-box { background: var(--soft-white); border-radius: 15px; padding: 25px; border: 1px solid #FFE4E1; overflow-x: auto; }
+        
+        /* CSS xử lý ảnh chèn giữa bài toán (Hình học, BBT) */
+        .inline-img { max-width: 100%; height: auto; display: block; margin: 15px auto; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        
+        .mindset-box { background: #FFF9C4; border-left: 5px solid #FFC107; padding: 20px; border-radius: 0 15px 15px 0; margin-top: 10px; }
+        .mindset-box h4 { color: #F57F17; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        
+        /* Dành cho text có xuống dòng */
+        .format-text { white-space: pre-line; }
+
+        /* Discord Form CSS */
+        .discord-form-container { max-width: 600px; margin: 0 auto; background: var(--soft-white); border-radius: 20px; padding: 30px; border: 2px solid var(--discord-blue); box-shadow: 0 4px 15px rgba(88, 101, 242, 0.15); }
+        .form-title { font-size: 20px; color: var(--discord-blue); margin-bottom: 8px; font-weight: 600; }
+        .form-desc { font-size: 14px; color: #6b7280; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #4b5563; font-size: 14px; font-weight: 500; }
+        .text-input { width: 100%; height: 100px; padding: 15px; border: 1px solid #e5e7eb; border-radius: 12px; resize: none; outline: none; font-size: 14px; }
+        .text-input:focus { border-color: var(--discord-blue); }
+        .paste-area { width: 100%; min-height: 150px; border: 2px dashed var(--discord-blue); border-radius: 12px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #6b7280; padding: 20px; cursor: pointer; overflow: hidden; position: relative; }
+        .paste-area img { max-width: 100%; max-height: 300px; border-radius: 8px; margin-top: 10px; z-index: 2; border: 1px solid #e5e7eb; }
+        .paste-instruction { text-align: center; z-index: 1; pointer-events: none; line-height: 1.8; }
+        .key-btn { background: #EEE; padding: 3px 8px; border-radius: 5px; color: #333; border: 1px solid #CCC; font-size: 12px; font-weight: 600; }
+        .file-input-manual { margin-top: 10px; font-size: 13px; color: #6b7280; }
+        .file-input-manual input { border: none; background: transparent; color: var(--discord-blue); font-size: 13px; }
+        .submit-btn { width: 100%; padding: 14px; background: var(--discord-blue); color: white; border: none; border-radius: 12px; font-size: 16px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .submit-btn:hover { background: #4752C4; }
+        .submit-btn:disabled { background: #9ba1ea; cursor: not-allowed; }
+        .status-msg { text-align: center; font-size: 14px; margin-top: 15px; font-weight: 500; display: none; }
+        .msg-success { color: #16a34a; }
+        .msg-error { color: #dc2626; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Trạm Tiếp Tế Sĩ Tử 🌟</h1>
+        <p>"Dù điểm em có như thế nào, anh cũng cảm thấy may mắn vì đã được chứng kiến em vượt qua bản thân."</p>
+    </header>
+
+    <div class="main-tabs">
+        <button class="tab-btn active" onclick="switchMainTab('toan')">📚 Bí Kíp Toán - Lý</button>
+        <button class="tab-btn" onclick="switchMainTab('tinnhan')">💌 Hỏi Bài Cấp Tốc</button>
+    </div>
+
+    <div id="tab-toan" class="tab-content active">
+        
+        <div id="list-view">
+            <div class="category-tabs" id="categoryTabs">
+                <button class="cat-btn active" onclick="filterCategory('all')">Tất cả</button>
+                <button class="cat-btn" onclick="filterCategory('ham-so')">Hàm số</button>
+                <button class="cat-btn" onclick="filterCategory('tich-phan')">Tích phân</button>
+                <button class="cat-btn" onclick="filterCategory('hinh-khong-gian')">Hình học không gian</button>
+                <button class="cat-btn" onclick="filterCategory('toa-do-oxyz')">Tọa độ Oxyz</button>
+                <button class="cat-btn" onclick="filterCategory('conic-oxy')">Ba đường Conic & Hình học Oxy</button>
+                <button class="cat-btn" onclick="filterCategory('luong-giac')">Lượng giác</button>
+                <button class="cat-btn" onclick="filterCategory('to-hop-xac-suat')">Tổ hợp - Xác suất & Thống kê</button>
+                <button class="cat-btn" onclick="filterCategory('day-so-dai-so')">Đại số tổng hợp</button>
+            </div>
+
+            <div class="problem-list" id="problemList"></div>
+        </div>
+
+        <div id="detail-view">
+            <button class="back-btn" onclick="hideDetail()">← Quay lại danh sách</button>
+            <div id="detailContentContainer"></div>
+        </div>
+    </div>
+
+    <div id="tab-tinnhan" class="tab-content">
+        <div class="discord-form-container">
+            <h3 class="form-title">Gửi câu hỏi</h3>
+            <p class="form-desc">Gặp bài nào hóc búa, chụp ảnh tải lên đây. Lời nhắn sẽ bay thẳng vào Discord của anh.</p>
+            <form id="discordForm">
+                <div class="form-group">
+                    <label>Nội dung câu hỏi hoặc lời nhắn:</label>
+                    <textarea id="msgContent" class="text-input" placeholder="Anh giải hộ em bài này với..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Đính kèm hình ảnh bài toán (nếu có):</label>
+                    <div class="paste-area" id="pasteBox">
+                        <div class="paste-instruction" id="pasteText">
+                            Đầu tiên mở đề lên, nhấn <span class="key-btn">Win</span> + <span class="key-btn">Shift</span> + <span class="key-btn">S</span> để cắt ảnh.<br>
+                            Sau đó click vào ô này và ấn <span class="key-btn">Ctrl</span> + <span class="key-btn">V</span> để dán vào.
+                        </div>
+                    </div>
+                    <div class="file-input-manual">
+                        Hoặc chọn file từ máy: <input type="file" id="imgFile" accept="image/*">
+                    </div>
+                </div>
+                <button type="submit" id="submit-btn" class="submit-btn">Gửi câu hỏi đi 🚀</button>
+            </form>
+            <p id="status-msg" class="status-msg"></p>
+        </div>
+    </div>
+
+    <script>
+        // =====================================================================================
+        // KHO DỮ LIỆU JAVASCRIPT (ÔNG VÀ AI STUDIO CHỈ LÀM VIỆC Ở KHU VỰC NÀY)
+        // =====================================================================================
+        const khoDuLieu = [
+            {
+                id: "ham_so_1",
+                chuyenDe: "ham-so",
+                loaiTag: "Kiến thức",
+                tieuDe: "1. Phương pháp Ghép trục cơ bản",
+                hinhAnhLeft: "", // Để trống nếu không cần ảnh bên cột trái
+                
+                // Đề bài (có thể để trống đối với các mục thuần lý thuyết)
+                deBai: String.raw`Cho bảng biến thiên của một hàm số: 
+                $x: \quad -\frac{\pi}{3} \quad 0 \quad \pi$
+                $u: \quad -\frac{1}{2} \quad 1 \quad -1$`,
+                
+                // Lời giải: Nơi AI Studio sẽ chèn thẳng thẻ <img src="..."> vào vị trí của [H] hoặc [BBT]
+                loiGiai: String.raw`
+                    <img src="./images/bbt_ghep_truc_1.png" class="inline-img" alt="Bảng biến thiên ghép trục">
+                    Note: Nghiệm của $u$ chạy từ $\left[-\frac{1}{2}; \pi\right]$.
+                    $\Rightarrow$ Nhớ phải đi từ $-\frac{1}{2} \to 0 \to \pi$.
+                `,
+                
+                // Tư duy: Nơi ông viết tay thủ công
+                tuDuy: String.raw`Phương pháp ghép trục này rất mạnh để giải nhanh hàm hợp. 
+                Cạm bẫy cực lớn: Các bé rất hay quên xếp lại các điểm cực trị của hàm $f(u)$ lên trục $u$ theo đúng thứ tự tăng giảm. Chậm lại một nhịp ở đoạn kẻ mũi tên nhé!`
+            },
+            {
+                id: "ham_so_2",
+                chuyenDe: "ham-so",
+                loaiTag: "Bài toán",
+                tieuDe: "2. Biện luận số nghiệm của hàm hợp f(cos x) bằng Ghép trục",
+                hinhAnhLeft: "", 
+                
+                deBai: String.raw`Cho bảng biến thiên của $f(x)$:
+                $x: \quad -\infty \quad -1 \quad \frac{1}{2} \quad \frac{\sqrt{3}}{2} \quad 1 \quad +\infty$
+                $f(x): \quad +\infty \to -4 \to 2 \to -4 \to 2 \to +\infty$
+                Tìm $m$ để $f^2(\cos x) + (3-m)f(\cos x) + 2m - 4 = 0$ có vô số nghiệm thuộc $\left[-\frac{\pi}{3}; \pi\right]$.`,
+                
+                loiGiai: String.raw`
+                    Đặt $t=f(\cos x)$. Phương trình trở thành: $t^2+(3-m)t+2m-4=0$
+                    $\Leftrightarrow t^2+3t-mt+2m-4=0$
+                    $\Leftrightarrow t^2+3t-4=m(t-2)$
+                    $\Leftrightarrow m=\frac{t^2+3t-4}{t-2}=g(t)$
+                    
+                    Note: Vì lúc này không phải là $f(u) \to f(x)$ như thường mà từ $f(u)$ đã thay vào 1 dạng phương trình khác hoàn toàn.
+                    
+                    Từ đó sẽ làm nghịch đảo lại, ta đi khảo sát phương trình $g(x)=\frac{x^2+3x-4}{x-2}$ thay vì phương trình ban đầu.
+                    Có các điểm cực trị tại $x=1, x=-1, x=3$ (với $x \neq 2$).
+                    
+                    Ráp lại ta có cực trị $u=\frac{1}{2}, u=\frac{\sqrt{3}}{2}, u=-1$.
+                    Bảng ghép trục hoàn chỉnh:
+                    <img src="./images/bbt_ghep_truc_2.png" class="inline-img" alt="Bảng ghép trục hàm cos">
+                    
+                    Từ đây ta sẽ đi theo $g(x)$. Đồ thị uốn lượn tại các mức giá trị 4, m, 9, 4... Dựa vào đường thẳng $y=m$ cắt ngang đồ thị để đếm số nghiệm.
+                `,
+                
+                tuDuy: String.raw`Bài này kết hợp cả ghép trục và cô lập $m$. 
+                Nhớ để ý điều kiện mẫu số khi khảo sát hàm phân thức $g(t)$ kẻo vẽ nhầm tiệm cận đứng thành điểm đi qua là sai hết bài.`
+            }
+            // COPY THÊM CÁC KHỐI NGOẶC NHỌN KHÁC VÀO ĐÂY LÀ XONG
+        ];
+
+        // =====================================================================================
+        // CODE RENDER TỰ ĐỘNG - ÔNG KHÔNG CẦN CHẠM VÀO KHU VỰC NÀY
+        // =====================================================================================
+
+        function renderDanhSach(category = 'all') {
+            const listContainer = document.getElementById('problemList');
+            listContainer.innerHTML = ''; 
+
+            // Bước 1: Lọc dữ liệu theo chuyên đề (nút Tab đang bấm)
+            let filteredData = khoDuLieu;
+            if (category !== 'all') {
+                filteredData = khoDuLieu.filter(bai => bai.chuyenDe === category);
+            }
+
+            // Bước 2: Tách mảng thành 2 nhóm riêng biệt: Kiến thức và Bài tập
+            const kienThucList = filteredData.filter(bai => bai.loaiTag.toLowerCase().includes('kiến thức'));
+            const baiTapList = filteredData.filter(bai => bai.loaiTag.toLowerCase().includes('bài toán') || bai.loaiTag.toLowerCase().includes('bài tập'));
+
+            // Hàm tạo giao diện cho từng item
+            const taoItemHTML = (bai) => {
+                const tagClass = bai.loaiTag.toLowerCase().includes('kiến thức') ? 'tag-kt' : 'tag-bt';
+                return `
+                    <div class="problem-item" onclick="hienThiChiTiet('${bai.id}')">
+                        <span class="tag ${tagClass}">${bai.loaiTag}</span>
+                        <span class="item-title">${bai.tieuDe}</span>
+                    </div>
+                `;
+            };
+
+            // Bước 3: In nhóm Kiến Thức ra trước (nếu có)
+            if (kienThucList.length > 0) {
+                listContainer.insertAdjacentHTML('beforeend', `<h4 style="color: var(--dark-pink); margin: 10px 0 5px 5px; font-size: 15px;">📚 TỔNG ÔN KIẾN THỨC</h4>`);
+                kienThucList.forEach(bai => {
+                    listContainer.insertAdjacentHTML('beforeend', taoItemHTML(bai));
+                });
+            }
+
+            // Bước 4: In nhóm Bài Tập ra sau (nếu có)
+            if (baiTapList.length > 0) {
+                listContainer.insertAdjacentHTML('beforeend', `<h4 style="color: #4CAF50; margin: 20px 0 5px 5px; font-size: 15px;">🚀 THỰC CHIẾN BÀI TẬP</h4>`);
+                baiTapList.forEach(bai => {
+                    listContainer.insertAdjacentHTML('beforeend', taoItemHTML(bai));
+                });
+            }
+            
+            // Trường hợp không có dữ liệu nào
+            if (kienThucList.length === 0 && baiTapList.length === 0) {
+                listContainer.innerHTML = `<p style="text-align: center; color: #888; margin-top: 20px;">Đang cập nhật dữ liệu chuyên đề này...</p>`;
+            }
+        }
+
+        function hienThiChiTiet(id) {
+            const bai = khoDuLieu.find(b => b.id === id);
+            if (!bai) return;
+
+            document.getElementById('list-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+
+            let leftColHTML = '';
+            let rightColClass = 'style="width: 100%"';
+
+            if (bai.hinhAnhLeft && bai.hinhAnhLeft.trim() !== "") {
+                leftColHTML = `
+                    <div class="left-col">
+                        <img src="${bai.hinhAnhLeft}" alt="Hình bài toán">
+                        <div style="color: #888; font-size: 13px;">Hình minh họa</div>
+                    </div>
+                `;
+                rightColClass = 'class="right-col"';
+            }
+
+            let deBaiHTML = '';
+            if (bai.deBai && bai.deBai.trim() !== "") {
+                deBaiHTML = `
+                    <div class="sticky-prompt-box">
+                        <h4 style="color: #333; margin-bottom: 8px;">Đề bài / Vấn đề:</h4>
+                        <p class="format-text">${bai.deBai}</p>
+                    </div>
+                `;
+            }
+
+            let tuDuyHTML = '';
+            if (bai.tuDuy && bai.tuDuy.trim() !== "") {
+                tuDuyHTML = `
+                    <div class="mindset-box">
+                        <h4>💡 Phương pháp tư duy & Cạm bẫy</h4>
+                        <p class="format-text">${bai.tuDuy}</p>
+                    </div>
+                `;
+            }
+
+            const detailHTML = `
+                <div class="problem-wrapper">
+                    ${leftColHTML}
+                    <div ${rightColClass}>
+                        ${deBaiHTML}
+                        <div class="content-box">
+                            <h4 style="color: #4CAF50; margin-bottom: 15px;">Nội dung / Lời giải:</h4>
+                            <div class="format-text">${bai.loiGiai}</div>
+                        </div>
+                        ${tuDuyHTML}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detailContentContainer').innerHTML = detailHTML;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Kích hoạt render Toán học ngay sau khi bơm HTML vào
+            renderMathInElement(document.getElementById('detailContentContainer'), {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false
+            });
+        }
+
+        function hideDetail() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('list-view').style.display = 'block';
+        }
+
+        function filterCategory(category) {
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderDanhSach(category);
+        }
+
+        function switchMainTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.main-tabs .tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+            if(tabId === 'toan') hideDetail();
+        }
+
+        // --- Khởi tạo ---
+        document.addEventListener("DOMContentLoaded", () => {
+            renderDanhSach('all');
+        });
+
+        // --- Logic Discord Form (Giữ nguyên như cũ) ---
+        const pasteBox = document.getElementById('pasteBox');
+        const pasteText = document.getElementById('pasteText');
+        const fileInput = document.getElementById('imgFile');
+
+        pasteBox.addEventListener('paste', (e) => {
+            const items = e.clipboardData.items;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    const blob = items[i].getAsFile();
+                    const reader = new FileReader();
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(blob);
+                    fileInput.files = dataTransfer.files;
+
+                    reader.onload = (event) => {
+                        pasteText.style.display = 'none';
+                        const oldImg = pasteBox.querySelector('img');
+                        if (oldImg) oldImg.remove();
+                        const img = document.createElement('img');
+                        img.src = event.target.result;
+                        pasteBox.appendChild(img);
+                    };
+                    reader.readAsDataURL(blob);
+                }
+            }
+        });
+
+        pasteBox.addEventListener('click', () => { pasteBox.focus(); });
+        pasteBox.setAttribute("tabindex", "0");
+        pasteBox.style.outline = "none";
+
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1511746905141416049/5F_fsTiUFr23vMb13ic_NJQphEZBKGC8CDZVhk4Hb8vkeEdm-ryoH9ig88bnMjqv538V";
+
+        document.getElementById('discordForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const statusMsg = document.getElementById('status-msg');
+            const text = document.getElementById('msgContent').value;
+            
+            btn.innerText = "Đang truyền dữ liệu lên Discord...";
+            btn.disabled = true;
+            statusMsg.style.display = 'none';
+            statusMsg.className = 'status-msg';
+            
+            try {
+                let formData = new FormData();
+                formData.append('payload_json', JSON.stringify({ content: `📩 **[Có câu hỏi mới từ em gái]**:\n${text}` }));
+                if (fileInput.files.length > 0) { formData.append('file', fileInput.files[0]); }
+
+                const response = await fetch(WEBHOOK_URL, { method: 'POST', body: formData });
+
+                if (response.ok) {
+                    statusMsg.innerText = "Đã gửi thành công! Chờ anh rep nhé.";
+                    statusMsg.classList.add('msg-success');
+                    document.getElementById('discordForm').reset();
+                    const oldImg = pasteBox.querySelector('img');
+                    if (oldImg) oldImg.remove();
+                    pasteText.style.display = 'block';
+                } else { throw new Error('Lỗi từ Server Discord'); }
+            } catch (error) {
+                statusMsg.innerText = "Lỗi mạng. Em check lại kết nối internet nhé!";
+                statusMsg.classList.add('msg-error');
+            } finally {
+                statusMsg.style.display = 'block';
+                btn.innerText = "Gửi câu hỏi đi 🚀";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
