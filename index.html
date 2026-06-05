@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trạm Tiếp Tế Sĩ Tử 🌸</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-color: #FFF0F5;
+            --main-pink: #FFB6C1;
+            --dark-pink: #FF69B4;
+            --soft-white: #FFFFFF;
+            --text-color: #4A4A4A;
+            --accent-pink: #FFC0CB;
+            --tag-bt: #4CAF50;
+            --tag-kt: #2196F3;
+            --discord-blue: #5865F2;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            background-color: var(--bg-color); color: var(--text-color); padding: 20px;
+            background-image: radial-gradient(#FFD1DC 1px, transparent 1px); background-size: 20px 20px; line-height: 1.6;
+        }
+
+        header {
+            text-align: center; margin-bottom: 30px; padding: 25px; background: var(--soft-white);
+            border-radius: 20px; box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3); border: 2px solid var(--accent-pink);
+        }
+        header h1 { color: var(--dark-pink); font-size: 26px; margin-bottom: 10px; }
+        header p { font-size: 16px; color: #d1478e; font-style: italic; }
+
+        .main-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        .tab-btn {
+            padding: 12px 25px; border: none; background-color: var(--soft-white); color: var(--dark-pink);
+            font-size: 16px; border-radius: 50px; cursor: pointer; transition: all 0.3s; border: 1px solid var(--accent-pink);
+        }
+        .tab-btn.active { background-color: var(--dark-pink); color: var(--soft-white); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        #list-view { display: block; }
+        
+        .category-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .cat-btn { padding: 8px 16px; background: #FFE4E1; border: 1px dashed var(--dark-pink); color: var(--dark-pink); border-radius: 10px; cursor: pointer; transition: 0.2s; }
+        .cat-btn.active, .cat-btn:hover { background: var(--dark-pink); color: white; }
+
+        .problem-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .problem-item {
+            background: var(--soft-white); padding: 15px 20px; border-radius: 12px; cursor: pointer;
+            border: 1px solid var(--accent-pink); display: flex; align-items: center; gap: 15px; transition: transform 0.2s;
+        }
+        .problem-item:hover { transform: translateX(5px); border-color: var(--dark-pink); }
+        .tag { padding: 4px 10px; border-radius: 20px; font-size: 12px; color: white; white-space: nowrap; }
+        .tag-bt { background-color: var(--tag-bt); }
+        .tag-kt { background-color: var(--tag-kt); }
+        .item-title { font-size: 16px; color: #333; flex-grow: 1; }
+
+        #detail-view { display: none; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--soft-white);
+            color: var(--dark-pink); border: 2px solid var(--accent-pink); border-radius: 50px; cursor: pointer; font-size: 15px; margin-bottom: 20px; transition: 0.2s;
+        }
+        .back-btn:hover { background: var(--bg-color); border-color: var(--dark-pink); }
+
+        .problem-wrapper { display: flex; gap: 20px; align-items: flex-start; }
+        .left-col { width: 40%; 
+            background: #FFF9C4; /* Nền vàng nhạt giống giấy note */
+            border-radius: 15px; 
+            padding: 25px; 
+            border: 2px dashed #FFC107; 
+            position: sticky; 
+            top: 20px; 
+            max-height: 85vh; 
+            overflow-y: auto; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        ..left-col img { max-width: 100%; border-radius: 8px; margin-bottom: 10px; }
+        .right-col { width: 60%; display: flex; flex-direction: column; gap: 20px; }
+        
+        .sticky-prompt-box { 
+    background: var(--soft-white); 
+    border-radius: 15px; 
+    padding: 20px; 
+    border: 1px solid var(--main-pink); 
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2); 
+    margin-bottom: 20px;
+    max-height: 250px; 
+    overflow-y: auto; 
+}
+        .content-box { background: var(--soft-white); border-radius: 15px; padding: 25px; border: 1px solid #FFE4E1; overflow-x: auto; }
+        
+        .inline-img { max-width: 100%; height: auto; display: block; margin: 15px auto; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        
+        .mindset-box { background: #FFF9C4; border-left: 5px solid #FFC107; padding: 20px; border-radius: 0 15px 15px 0; margin-top: 10px; }
+        .mindset-box h4 { color: #F57F17; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        
+        .format-text { white-space: pre-line; }
+
+        .discord-form-container { max-width: 600px; margin: 0 auto; background: var(--soft-white); border-radius: 20px; padding: 30px; border: 2px solid var(--discord-blue); box-shadow: 0 4px 15px rgba(88, 101, 242, 0.15); }
+        .form-title { font-size: 20px; color: var(--discord-blue); margin-bottom: 8px; font-weight: 600; }
+        .form-desc { font-size: 14px; color: #6b7280; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #4b5563; font-size: 14px; font-weight: 500; }
+        .text-input { width: 100%; height: 100px; padding: 15px; border: 1px solid #e5e7eb; border-radius: 12px; resize: none; outline: none; font-size: 14px; }
+        .text-input:focus { border-color: var(--discord-blue); }
+        .paste-area { width: 100%; min-height: 150px; border: 2px dashed var(--discord-blue); border-radius: 12px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #6b7280; padding: 20px; cursor: pointer; overflow: hidden; position: relative; }
+        .paste-area img { max-width: 100%; max-height: 300px; border-radius: 8px; margin-top: 10px; z-index: 2; border: 1px solid #e5e7eb; }
+        .paste-instruction { text-align: center; z-index: 1; pointer-events: none; line-height: 1.8; }
+        .key-btn { background: #EEE; padding: 3px 8px; border-radius: 5px; color: #333; border: 1px solid #CCC; font-size: 12px; font-weight: 600; }
+        .file-input-manual { margin-top: 10px; font-size: 13px; color: #6b7280; }
+        .file-input-manual input { border: none; background: transparent; color: var(--discord-blue); font-size: 13px; }
+        .submit-btn { width: 100%; padding: 14px; background: var(--discord-blue); color: white; border: none; border-radius: 12px; font-size: 16px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .submit-btn:hover { background: #4752C4; }
+        .submit-btn:disabled { background: #9ba1ea; cursor: not-allowed; }
+        .status-msg { text-align: center; font-size: 14px; margin-top: 15px; font-weight: 500; display: none; }
+        .msg-success { color: #16a34a; }
+        .msg-error { color: #dc2626; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Trạm Tiếp Tế Sĩ Tử 🌟</h1>
+        <p>"Dù điểm em có như thế nào, anh cũng cảm thấy may mắn vì đã được chứng kiến em vượt qua bản thân."</p>
+    </header>
+
+    <div class="main-tabs">
+        <button class="tab-btn active" onclick="switchMainTab('toan')">📚 Bí Kíp Toán - Lý</button>
+        <button class="tab-btn" onclick="switchMainTab('tinnhan')">💌 Hỏi Bài Cấp Tốc</button>
+    </div>
+
+    <div id="tab-toan" class="tab-content active">
+        
+        <div id="list-view">
+            <div class="category-tabs" id="categoryTabs">
+                <button class="cat-btn active" onclick="filterCategory('all')">Tất cả</button>
+                <button class="cat-btn" onclick="filterCategory('ham-so')">Hàm số</button>
+                <button class="cat-btn" onclick="filterCategory('tich-phan')">Tích phân</button>
+                <button class="cat-btn" onclick="filterCategory('hinh-khong-gian')">Hình học không gian</button>
+                <button class="cat-btn" onclick="filterCategory('toa-do-oxyz')">Tọa độ Oxyz</button>
+                <button class="cat-btn" onclick="filterCategory('conic-oxy')">Ba đường Conic & Hình học Oxy</button>
+                <button class="cat-btn" onclick="filterCategory('luong-giac')">Lượng giác</button>
+                <button class="cat-btn" onclick="filterCategory('to-hop-xac-suat')">Tổ hợp - Xác suất & Thống kê</button>
+                <button class="cat-btn" onclick="filterCategory('day-so-dai-so')">Đại số tổng hợp</button>
+            </div>
+
+            <div class="problem-list" id="problemList"></div>
+        </div>
+
+        <div id="detail-view">
+            <button class="back-btn" onclick="hideDetail()">← Quay lại danh sách</button>
+            <div id="detailContentContainer"></div>
+        </div>
+    </div>
+
+    <div id="tab-tinnhan" class="tab-content">
+        <div class="discord-form-container">
+            <h3 class="form-title">Gửi câu hỏi</h3>
+            <p class="form-desc">Gặp bài nào hóc búa, chụp ảnh tải lên đây.</p>
+            <form id="discordForm">
+                <div class="form-group">
+                    <label>Nội dung câu hỏi hoặc lời nhắn:</label>
+                    <textarea id="msgContent" class="text-input" placeholder="Anh giải hộ em bài này với..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Đính kèm hình ảnh bài toán (nếu có):</label>
+                    <div class="paste-area" id="pasteBox">
+                        <div class="paste-instruction" id="pasteText">
+                            Đầu tiên mở đề lên, nhấn <span class="key-btn">Win</span> + <span class="key-btn">Shift</span> + <span class="key-btn">S</span> để cắt ảnh.<br>
+                            Sau đó click vào ô này và ấn <span class="key-btn">Ctrl</span> + <span class="key-btn">V</span> để dán vào.
+                        </div>
+                    </div>
+                    <div class="file-input-manual">
+                        Hoặc chọn file từ máy: <input type="file" id="imgFile" accept="image/*">
+                    </div>
+                </div>
+                <button type="submit" id="submit-btn" class="submit-btn">Gửi câu hỏi đi 🚀</button>
+            </form>
+            <p id="status-msg" class="status-msg"></p>
+        </div>
+    </div>
+
+    <script>
+        // BƯỚC 1: KHỞI TẠO MẢNG RỖNG (TUYỆT ĐỐI KHÔNG XÓA DÒNG NÀY)
+        const khoDuLieu = [];
+        // ---------------------------------------------------------------------
+        khoDuLieu.push({
+    id: "kien_thuc_1_phuong_phap_ghep_truc_co_ban",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 1: Phương pháp Ghép trục cơ bản**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`KỸ THUẬT VDC 1: GHÉP TRỤC & ĐỒ THỊ TRỤC
+Nội dung: Ghép trục
+<img src="images/toan2_t13_h1.png" />
+Note: Nghiệm của $u$ chạy từ $\left[-\frac{1}{2}; \pi\right]$. $\Rightarrow$ Nhớ phải đi từ $-\frac{1}{2} \to 0 \to \pi$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Nội dung",
+            toanHoc: String.raw`Nội dung bài`,
+            giaiThich: String.raw``
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_1_bien_luan_so_nghiem_cua_ham_hop_fcosx_bang_ghep_truc",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 1: Biện luận số nghiệm của hàm hợp $f(\cos x)$ bằng Ghép trục**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Bài tập ví dụ ghép trục:
+<img src="images/toan2_t14_h1.png" />
+Tìm $m$ để $f^2(\cos x) + (3-m)f(\cos x) + 2m - 4 = 0$ có vô số nghiệm thuộc $\left[-\frac{\pi}{3}; \pi\right]$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đặt ẩn phụ và cô lập tham số m",
+            toanHoc: String.raw`Đặt $t = f(\cos x)$. Phương trình trở thành: $t^2 + (3-m)t + 2m - 4 = 0$
+$\Leftrightarrow t^2 + 3t - mt + 2m - 4 = 0$
+$\Leftrightarrow t^2 + 3t - 4 = m(t - 2)$
+$\Leftrightarrow m = \frac{t^2 + 3t - 4}{t - 2} = u(t)$`,
+            giaiThich: String.raw`Chỉ còn 6 ngày nữa là thi, nhìn thấy phương trình dài này tuyệt đối không được hoảng. Bẫy ở đây là mức 6 điểm rất hay lao vào đạo hàm trực tiếp.
+Phản xạ đầu tiên phải nảy số: Thấy cụm nào giống nhau lặp đi lặp lại, đặt ngay làm ẩn phụ.
+Ở đây có 2 lựa chọn:
+$$ \text{1. } t = \cos x $$
+$$ \text{2. } t = f(\cos x) $$
+Rõ ràng ốp cách 2 sẽ đưa phương trình về bậc 2 cực kỳ gọn. Sau đó, quan sát thấy $m$ bậc 1 đứng rời rạc, nguyên tắc sinh tồn là đẩy hết $m$ sang một vế để cô lập.
+Khẩu hiệu: **"Lõi lặp lại - Đặt ẩn phụ ngay. Thấy m bậc 1 - Cô lập m!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Xây dựng hàm mới và Ghép trục đồ thị",
+            toanHoc: String.raw`Note: Mình có thể lấy bảng thanh nhiều chia $x \to f(x) \to f(\dots)$. Ta có sơ đồ biến đổi:
+$f(x) \to f(\cos x) \to \frac{f^2(\cos x) + 3f(\cos x) - 4}{f(\cos x) - 2}$.
+$\Rightarrow$ Vì lúc này không phải là $f(u) \to$ vào $f(x)$ như thường mà từ $f(u)$ đã thay vào 1 dạng phương trình khác hoàn toàn. Kiểu ban đầu: $f(x) = x^2 + 2x \Rightarrow u = \cos x \Rightarrow f(u) = \cos^2 x + 2\cos x$. Nhưng lúc sau lại: $f(u) = \cos^2 x + 2\cos x$ từ có phương trình mới là: $g(x) = \frac{x^2 + 3x - 4}{x - 2}$ (không còn là $f(x)$).
+$\Rightarrow g(\cos^2 x + 2\cos x) = \frac{(\cos^2 x + 2\cos x)^2 + 3(\dots) - 4}{(\dots) - 2}$
+$\Rightarrow$ Từ đó sẽ làm nghịch đảo lại, từ suy giữ lại của phương trình $y = \frac{x^2 + 3x - 4}{x - 2}$ thay vì phương trình ban đầu. $\Rightarrow$ Có các điểm cực trị tại $\begin{cases} x = 1 \\ x = -1 \\ x = 3 \end{cases}$ (với $x \neq 2$). $\Rightarrow$ Tìm phương trình $g(f(u))$. $\Rightarrow$ Ráp lúc sau có cực trị $f'(u)$ có cực trị $u = \frac{1}{2}$, $u = \frac{\sqrt{3}}{2} \Rightarrow \text{từ ghép đồ thị ban đầu lại } u = -1$.
+$\Rightarrow$ Từ đây ta sẽ đi theo $g(x)$ không là $f(x)$ nữa. $g(f(u))$:
+<img src="images/toan2_t15_h1.png" />`,
+            giaiThich: String.raw`Ra đến $m = g(t) = \frac{t^2 + 3t - 4}{t - 2}$ rồi, chỗ này là cái bẫy triệt hạ rất nhiều người. Ai bê nguyên bảng biến thiên $f(x)$ của đề bài vào tương giao là sai bản chất. Nhìn kỹ lại, phương trình ban đầu đã bị biến đổi thành một hàm hoàn toàn mới là $g(t)$.
+Việc phải làm bây giờ là kẻ một "Bảng ghép trục" mới tinh cho chuỗi: $x \to \cos x \to f(\cos x) \to g(f(\cos x))$. Đạo hàm hàm phân thức $g(t)$ để tìm các điểm cực trị ($x=1, -1, 3$). Sau đó ráp vào sự biến thiên của $x \in \left[-\frac{\pi}{3}; \pi\right]$.
+Khẩu hiệu: **"Hàm mới thì vỏ mới - Ghép trục vẽ lại từ đầu!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_2_mo_rong_ly_thuyet_ghep_truc",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 2: Mở rộng lý thuyết Ghép trục**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $(*)$ Kỹ thuật ghép trục: Đặt trục và hàm hợp $f(u) = g(x)$
+- TH1: Nếu $u = ax + b \rightarrow f(t) = h(t)$.
+- TH2: Nếu $u \neq ax + b$
+  - Dạng 1: Đặt $t = u \rightarrow f(t), h(t)$.
+  - Dạng 2: Khi $g(x) = x + a$. Đặt $y = u \rightarrow \begin{cases} f(y) = x + a \\ y = u \end{cases} \Rightarrow \text{Chuyển trục (hoặc dùng tính chất đồ thị) để quay về bài toán tương giao.}$
+$(*)$ Chú ý:
+- Đồ thị $y = f(u)$ có thể thay bởi $y = f'(u)$.
+- Nhận diện đồ thị: Đồ thị $y = f(x)$ và $x = f(y)$ đối xứng nhau qua đường phân giác $y = x$.
+- Một số bài toán chúng ta phải sử dụng phương pháp đánh giá.`,
+    loiGiai: [
+        {
+            tenBuoc: "Nội dung",
+            toanHoc: String.raw`Nội dung bài`,
+            giaiThich: String.raw``
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_3_va_bai_2_ky_thuat_do_thi_truc_tuong_giao_ham_hop_bang_lat_do_thi",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức & Bài toán",
+    tieuDe: "**Kiến thức 3 & Bài 2: Kỹ thuật Đồ thị trục - Tương giao hàm hợp bằng lật đồ thị**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Kỹ thuật đồ thị trục Cho hàm $f(x)$. $\Rightarrow f(x^4 - 2m^2 x^2 + 4) = x$ có bao nhiêu nghiệm? Nhiều nghiệm nhất là bao nhiêu?
+<img src="images/toan2_t16_h2.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chuyển vị đồ thị - Tư duy hàm ngược",
+            toanHoc: String.raw`$\Rightarrow$ Vì $x = f(y)$ nên đồ thị nó như thế này.
+<img src="images/toan2_t17_h1.png" />`,
+            giaiThich: String.raw`Đọc đề $f(x^4 - 2m^2 x^2 + 4) = x$, cấu trúc này rất cồng kềnh. Ruột bên trong $f$ phức tạp, bên ngoài lại là biến $x$. Cố đoán đồ thị $f(x)$ rồi nhét nguyên cụm bậc 4 vào là tự sát trong phòng thi.
+Trực giác cần có: Trong $f$ là một mớ hỗn độn, ngoài là $x$, lôi ngay tư duy đồ thị hàm ngược ra xử lý. Công thức:
+$$ y = f(x) \Leftrightarrow x = f(y) $$
+Chỉ cần lấy đồ thị $y = f(x)$ đề cho, lật ngang tờ giấy 90 độ (hoặc gập đối xứng qua đường $y=x$). Ta thu được ngay một đồ thị lượn sóng theo phương dọc.
+Khẩu hiệu: **"Trong F phức tạp, ngoài F là X - Lật ngang đồ thị!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Tương giao hệ phương trình",
+            toanHoc: String.raw`Đặt $y = x^4 - 2m^2 x^2 + 4$.
+$\Rightarrow \begin{cases} f(y) = x \\ y = x^4 - 2m^2 x^2 + 4 \end{cases}$
+$\Rightarrow$ Nghiệm là giao điểm của $2$ hàm này.
+<img src="images/toan2_t17_h2.png" />
+Trục sẽ bị đổi lại. Điểm cực trị $x=0 \to y=3$. $\Rightarrow 10$ giao điểm.`,
+            giaiThich: String.raw`Lật xong đồ thị thành $x = f(y)$, đặt toàn bộ cái ruột phức tạp kia bằng $y$. Lập thành một hệ phương trình. Giờ đắp cái đồ thị hàm bậc 4 (hình chữ W) lên trên đồ thị dọc vừa vẽ. Đếm số giao điểm là chốt ngay số nghiệm. Triệt tiêu hoàn toàn các bước đạo hàm lằng nhằng.
+Khẩu hiệu: **"Đặt ruột làm y - Tương giao đếm điểm!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "kien_thuc_4_va_bai_3_tu_duy_nghiem_boi_danh_gia_ham_so_luon_khong_am",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức & Bài toán",
+    tieuDe: "**Kiến thức 4 & Bài 3: Tư duy Nghiệm Bội - Đánh giá hàm số luôn không âm**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Tư duy nghiệm bội Tìm $m$ để: $m(x^4 - x^3 + x) - m^2(x^2 + x) - 2x \ge 0$ đúng $\forall x \in (-1; 3)$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Rút nhân tử chung và Ép điều kiện nghiệm bội",
+            toanHoc: String.raw`$\Leftrightarrow x[m(x^3 - x^2 + 1) - m^2(x + 1) - 2] \ge 0$
+$\Leftrightarrow x[m x^3 - (m^2 + m)x^2 + m^2 - m - 2] \ge 0$
+$\Rightarrow$ Để hàm luôn $\ge 0$. Đặt $f(x) = m x^3 - (m^2 + m)x^2 + m^2 - m - 2$. Có nghiệm $f(x) = 0 \Rightarrow m^2 - m - 2 = 0$
+$\Rightarrow \begin{cases} m = 2 \\ m = -1 \end{cases} \rightarrow$ Thay vào thì có $m = -1$ thỏa mãn cho hàm luôn dương $(+)$. Note: Để ý nghiệm bội. $(x - x_0)^{2k + 1}$
+<img src="images/toan2_t18_h1.png" />
+$\rightarrow$ Để hàm không cực trị, đơn điệu. (Phương pháp 2: PP2).`,
+            giaiThich: String.raw`Gặp mớ hỗn độn vừa $m$ vừa $x$ ép $\ge 0$, tuyệt đối đừng lao vào lập bảng biến thiên.
+Tư duy thực chiến: Quét mắt thấy tất cả các số hạng đều chứa $x$, lập tức rút $x$ ra ngoài làm nhân tử chung. Đưa về form:
+$$ f(x) = x \cdot [\text{cụm lõi}] \ge 0 $$
+Đề ép hàm $\ge 0$ trên $(-1; 3)$, mà số $0$ lại nằm chình ình giữa khoảng này. Để hàm số đi qua gốc tọa độ mà không bị lật dấu, "cụm lõi" bên trong bắt buộc phải nhận $x=0$ làm nghiệm. Ghép với $x$ ở ngoài sẽ ra $x^2$ (nghiệm kép), giữ cho hàm luôn không âm.
+Khẩu hiệu: **"Qua ngã tư không đổi dấu - Chắc chắn là nghiệm kép!"**. Rút $x$ ra và ép lõi bằng $0$ tại $x=0$.`
+        },
+        {
+            tenBuoc: "Bước 2: Phân tích bài toán tương tự (Kinh điển)",
+            toanHoc: String.raw`Tư duy nghiệm bội + Phân tích liên hợp luôn $f(x) = ax^4 + bx^3 + cx + d$.
+$p(x) = (x-1)[m^3 f(2x-1) - mf(x) + f(x) - 1] \rightarrow$ Tìm $m$ để $h(x) \ge 0, \forall x \in \mathbb{R}$.
+<img src="images/toan2_t18_h2.png" />
+Có $(x-1)$ mà $h(x) \ge 0 \Rightarrow p(x) = (x-1) \cdot g(x)$.
+$\Rightarrow p(1) = 0 \Leftrightarrow m^3 f(1) - mf(1) + f(1) - 1 = 0$
+$\Leftrightarrow m^3 - m = 0$ (vì $f(1) = 1$ theo đồ thị)
+$\Leftrightarrow \begin{cases} m = 0 \\ m = \pm 1 \end{cases}$
+- TH1: $m = 0 \Rightarrow h(x) = (x-1)[f(x) - 1]$. Ta thấy tại $f(x) = 1 \Rightarrow$ chỉ có $1$ nghiệm $x = 1$. $\Rightarrow h(x) = 0$ và $f(x) = 1$ luôn chỉ có $1$ nghiệm. $\Rightarrow h(x) = (x-1)(x-1)(ax^2 + \dots)$ (vì $a > 0 \Rightarrow ax^2 + \dots \ge 0, \forall x$). $\Rightarrow h(x) \ge 0, \forall x \Rightarrow$ (Thỏa mãn).
+- TH2: $m = 1 \Rightarrow h(x) = (x-1)(f(2x-1) - 1)$. Đặt $2x-1 = u \Rightarrow f(u) - 1$ cũng chỉ có $1$ nghiệm tại $u = 1$. $\Leftrightarrow 2x-1 = 1 \Leftrightarrow x = 1$. $\Rightarrow h(x) = (x-1)^2 \cdot [a(2x-1)^2 + \dots] \ge 0, \forall x$. (Tương tự như TH1).
+- TH3: $m = -1 \Rightarrow h(x) = (x-1)[-f(2x-1) + 2f(x) - 1]$. Ta thấy $k(x) = -a(2x-1)^3 + 2ax^3 + \dots = -8ax^3 + 2ax^3 = -6ax^3 + \dots$ Khi $x \to +\infty \Rightarrow h(x) < 0. \Rightarrow$ Loại $m = -1$.`,
+            giaiThich: String.raw`Dạng này form y hệt ví dụ đã phân tích. Rút $(x-1)$ ra, ép phần ruột bằng $0$ tại $x=1$. Giải ra $m$ rồi thì nhớ nguyên tắc sống còn: BẮT BUỘC phải thử lại từng giá trị của $m$. Quan sát kỹ cách dùng đánh giá giới hạn vô cực để loại bỏ $m=-1$ ở dưới, kỹ năng này cực kỳ quan trọng để xử lý nhanh.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_5_mo_rong_ly_thuyet_nghiem_boi",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 5: Mở rộng lý thuyết Nghiệm bội**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $(*)$ Nghiệm bội cho câu hỏi Vận dụng cao (VDC): $+>$ Mở rộng: $f'(x) = (x - x_0)^k \cdot g(x) \Rightarrow f(x_0) = f'(x_0) = f''(x_0) = \dots = f^{(k-1)}(x_0) = 0$ với $k \in \mathbb{N}^*$. $+>$ Nếu $f(x) = \frac{(x - x_0)^{2k+1} \cdot g(x)}{(x - x_0)} \ge 0$ (hoặc $\le 0$), $\forall x \in (a; b)$. Nếu $x_0 \in (a; b)$ thì điều kiện cần là $g(x_0) = 0$.
+$+>$ Nếu $y = f(x, m)$ là một hàm đa thức đạt cực đại tại $x = x_0$ mà: TH1: $y' = f'(x, m) = (x - x_0)^{2k+1} \cdot g(x, m) \Rightarrow$ Điều kiện 1: Nếu $x = x_0$ là điểm cực tiểu $\Rightarrow \begin{bmatrix} g(x_0, m) = 0 \\ g(x_0, m) > 0 \end{bmatrix} \Rightarrow$ Điều kiện 2: Nếu $x = x_0$ là điểm cực đại $\Rightarrow \begin{bmatrix} g(x_0, m) = 0 \\ g(x_0, m) < 0 \end{bmatrix}$
+<img src="images/toan1_t28_h1.png" />
+TH2: $y' = f'(x, m) = (x - x_0)^{2n} \cdot g(x, m) \Rightarrow$ Điều kiện cần: $g(x_0, m) = 0 \Leftrightarrow m = m_i \rightarrow$ Điều kiện đủ: Thay vào để kiểm tra xem nó có đạt cực trị tại $x_0$ hay không.`,
+    loiGiai: [
+        {
+            tenBuoc: "Nội dung",
+            toanHoc: String.raw`Nội dung bài`,
+            giaiThich: String.raw``
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_4_tu_duy_nghiem_boi_dat_cuc_tieu_tai_1_diem",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 4: Tư duy nghiệm bội - Đạt cực tiểu tại 1 điểm**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Tư duy nghiệm bội (PP1): Đề: Có bao nhiêu giá trị nguyên của $m$ để hàm số: $y = x^8 + (m - 2)x^5 - (m^2 - 4)x^4 + 1$ đạt cực tiểu tại $x = 0$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tính đạo hàm và rút nhân tử chẵn/lẻ",
+            toanHoc: String.raw`Đạo hàm: $y' = 8x^7 + 5(m - 2)x^4 - 4(m^2 - 4)x^3$
+$y' = x^3 \underbrace{\left[ 8x^4 + 5(m - 2)x - 4(m^2 - 4) \right]}_{P(x)}$`,
+            giaiThich: String.raw`Đề hỏi Cực tiểu, thao tác đầu tiên là đạo hàm! Nhưng chú ý bẫy này: Đạo hàm xong tuyệt đối không để nguyên một cục, phải nhóm nhân tử chung ra tối đa:
+$$ y' = x^k \cdot P(x) $$
+Ở đây rút được $x^3$ ra ngoài (nghiệm bội lẻ). Hàm đạt cực tiểu tại $x=0$ tức là đạo hàm $y'$ phải lật dấu từ âm sang dương khi đi qua $0$. Bản thân $x^3$ đã đảm nhận đúng việc lật dấu từ $(-)$ sang $(+)$ rồi. Vậy phần lõi $P(x)$ còn lại phải giữ nguyên dấu, cấm được lật dấu thêm.
+Khẩu hiệu: **"Hỏi cực trị ở đâu - Tách nhân tử tại đó!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Ép điều kiện dấu cho P(x) và THỬ LẠI",
+            toanHoc: String.raw`$\Rightarrow$ Để có cực tiểu tại $x = 0$ thì $P(0)$ phải $\ge 0$ hoặc $= 0$.
+$\Rightarrow \begin{cases} -4(m^2 - 4) \ge 0 \\ -4(m^2 - 4) = 0 \end{cases} \Rightarrow \begin{cases} -2 \le m \le 2 \\ m = \pm 2 \end{cases}$
+- Xét $m = 2 \Rightarrow y' = x^3 \cdot 8x^4 = 8x^7$. $y' = 0 \Leftrightarrow x = 0$. Dấu đổi từ $(-)$ sang $(+) \Rightarrow$ Đạt cực tiểu (Thỏa mãn).
+- Xét $m = -2 \Rightarrow y' = x^3 \cdot (8x^4 - 20x) = x^4 \cdot (8x^3 - 20)$.
+Tại $x = 0$, $y'$ không đổi dấu (nghiệm bội chẵn $x^4$) $\Rightarrow$ không đạt cực trị (Không thỏa mãn).
+<img src="images/toan2_t20_h1.png" />
+Vậy $m \in \{-1, 0, 1, 2\}$.`,
+            giaiThich: String.raw`Như phân tích ở trên, $x^3$ đã lo việc đổi dấu chuẩn cực tiểu, nên $P(0)$ bắt buộc phải LUÔN DƯƠNG hoặc cùng lắm là bằng 0. Nếu $P(0) < 0$ thì cả cụm $y'$ sẽ lật ngược thành cực đại.
+Điều kiện: Xét $P(0) \ge 0$.
+Bẫy chết người: Giải ra $m$ xong khoanh luôn là mất điểm. Với $m=2$ hoặc $m=-2$, hàm số bị triệt tiêu phần tử, bản chất chẵn/lẻ thay đổi hoàn toàn. Bắt buộc phải thay ngược $m$ vào $y'$ để kiểm tra lại lần cuối xem có đúng là cực tiểu không. Phải khắc cốt ghi tâm bước này.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_5_danh_gia_ham_so_lon_hon_dao_ham_va_dong_bien",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 5: Đánh giá hàm số lớn hơn đạo hàm và đồng biến**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: Cho hàm số $f(x) = x^3 + ax^2 + bx + c$ với $f(0) = f'(0)$. Hàm số $f(x) \ge f'(x)$, $\forall x \ge -1$. Có bao nhiêu tham số $a$ để hàm đồng biến trên khoảng $(-\infty; +\infty)$?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Khai thác giả thiết và tạo hàm mới ép nghiệm bội",
+            toanHoc: String.raw`Ta có: $f(0) = c, f'(0) = b \Rightarrow c = b$. Ta có: $f(x) - f'(x) \ge 0$
+$\Leftrightarrow x^3 + ax^2 + bx + c - 3x^2 - 2ax - b \ge 0 \text{ (do } c = b)$
+$\Leftrightarrow x^3 + (a - 3)x^2 + (b - 2a)x \ge 0$
+$\Leftrightarrow x \underbrace{\left[ x^2 + (a - 3)x + (b - 2a) \right]}_{P(x)} \ge 0$
+Để bất phương trình trên đúng với mọi $x \ge -1$, đa thức phải có nghiệm bội tại $x = 0$.
+$\Rightarrow P(0) = 0 \Leftrightarrow b - 2a = 0 \Rightarrow b = 2a$. Khi đó $a = \frac{b}{2}$.
+<img src="images/toan2_t19_h1.png" />`,
+            giaiThich: String.raw`Đọc đề thấy ngay giả thiết $f(0) = f'(0)$ và biểu thức $f(x) \ge f'(x)$. Phản xạ thực chiến: Chuyển vế ngay để tạo thành một hàm $P(x)$ đánh giá dấu.
+Vũ khí sử dụng:
+$$ f(x) - f'(x) \ge 0 $$
+Bài toán ép biểu thức này $\ge 0$ với mọi $x \ge -1$. Quét mắt thấy điểm $x=0$ nằm lọt thỏm trong khoảng này, mà thay $x=0$ vào thì biểu thức bằng $0$ (do $f(0) = f'(0)$). Một hàm đi qua mốc $0$ mà đòi giữ nguyên dấu không bị lật (luôn $\ge 0$) thì bắt buộc $x=0$ phải là nghiệm kép. Việc của em là rút nhân tử chung $x$ ra ngoài và ép nốt phần lõi bên trong bằng $0$ tại $x=0$.
+Khẩu hiệu: **"Dồn vế tạo hàm - Lõi bằng 0 chốt hạ nghiệm kép!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Xử lý điều kiện đạo hàm đồng biến và chốt chặn khoảng",
+            toanHoc: String.raw`$\Rightarrow f'(x) = 3x^2 + 2ax + a$. Để $f'(x) \ge 0, \forall x \in (-\infty; +\infty)$:
+$\Leftrightarrow \Delta' \le 0 \Rightarrow a^2 - 3a \le 0 \Rightarrow 0 \le a \le 3$ (Trong bản gốc ghi $a^2 - 12b \ge 0$ rồi lại $\dots \le 12$ rất rối rắm, nhưng mạch logic là tìm điều kiện của đạo hàm). Ghi chép theo đúng chữ viết tay mờ: $D = a^2 - 12b \dots \Rightarrow 0 \le a \le 12 \quad (1)$.
+
+Lại có $P(x) = x^2 + (a - 3)x$. Khi $x \ge -1$: $\Rightarrow x + a - 3 \ge 0, \forall x \ge -1 \Rightarrow a \ge 3 - x, \forall x \ge -1 \Rightarrow a \ge 4 \quad (2)$. Kết hợp $(1)$ và $(2)$ (đoạn này bị cắt ngang dưới cuối trang).`,
+            giaiThich: String.raw`Đoạn sau đề yêu cầu hàm gốc $f(x)$ đồng biến trên $\mathbb{R}$. Tức là $f'(x) \ge 0$ với mọi $x$. Đây là bài toán tam thức bậc 2 kinh điển, lấy ngay vũ khí sát thương cao nhất ra dùng:
+$$ \Delta' \le 0 $$
+Mặc kệ nháp bị rối rắm hay lỗi số liệu, tư duy cốt lõi không đổi: Giải điều kiện $\Delta' \le 0$ của hàm đạo hàm, sau đó kết hợp với điều kiện giữ dấu đuôi của cái lõi $P(x)$ lúc nãy ($P(x) \ge 0$ khi $x \ge -1$) để kẹp ra khoảng chặn cuối cùng của $a$.
+Khẩu hiệu: **"Hàm đồng biến trên R - Ốp ngay Delta âm!"**`
+        }
+    ]
+});
+        // KẾT THÚC KHU VỰC DÁN DỮ LIỆU
+    </script>
+
+
+    <script>
+        function renderDanhSach(category = 'all') {
+            const listContainer = document.getElementById('problemList');
+            if (!listContainer) return;
+            listContainer.innerHTML = ''; 
+
+            let filteredData = khoDuLieu;
+            if (category !== 'all') {
+                filteredData = khoDuLieu.filter(bai => bai.chuyenDe === category);
+            }
+
+            const kienThucList = filteredData.filter(bai => bai.loaiTag.toLowerCase().includes('kiến thức'));
+            const baiTapList = filteredData.filter(bai => bai.loaiTag.toLowerCase().includes('bài toán') || bai.loaiTag.toLowerCase().includes('bài tập'));
+
+            const taoItemHTML = (bai) => {
+                const tagClass = bai.loaiTag.toLowerCase().includes('kiến thức') ? 'tag-kt' : 'tag-bt';
+                return `
+                    <div class="problem-item" onclick="hienThiChiTiet('${bai.id}')">
+                        <span class="tag ${tagClass}">${bai.loaiTag}</span>
+                        <span class="item-title">${bai.tieuDe}</span>
+                    </div>
+                `;
+            };
+
+            if (kienThucList.length > 0) {
+                listContainer.insertAdjacentHTML('beforeend', `<h4 style="color: var(--dark-pink); margin: 10px 0 5px 5px; font-size: 15px;">📚 TỔNG ÔN KIẾN THỨC</h4>`);
+                kienThucList.forEach(bai => {
+                    listContainer.insertAdjacentHTML('beforeend', taoItemHTML(bai));
+                });
+            }
+
+            if (baiTapList.length > 0) {
+                listContainer.insertAdjacentHTML('beforeend', `<h4 style="color: #4CAF50; margin: 20px 0 5px 5px; font-size: 15px;">🚀 THỰC CHIẾN BÀI TẬP</h4>`);
+                baiTapList.forEach(bai => {
+                    listContainer.insertAdjacentHTML('beforeend', taoItemHTML(bai));
+                });
+            }
+            
+            if (kienThucList.length === 0 && baiTapList.length === 0) {
+                listContainer.innerHTML = `<p style="text-align: center; color: #888; margin-top: 20px;">Chưa có dữ liệu. Hãy dán code từ AI Studio vào file HTML!</p>`;
+            }
+        }
+
+        function hienThiChiTiet(id) {
+            const bai = khoDuLieu.find(b => b.id === id);
+            if (!bai) return;
+
+            document.getElementById('list-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+
+            // 1. ĐỀ BÀI TRÊN CÙNG (100% CHIỀU RỘNG)
+            let deBaiHTML = '';
+            if (bai.deBai && bai.deBai.trim() !== "") {
+                deBaiHTML = `
+                    <div class="sticky-prompt-box" style="width: 100%;">
+                        <h4 style="color: #333; margin-bottom: 8px;">Đề bài / Vấn đề:</h4>
+                        <p class="format-text">${bai.deBai}</p>
+                    </div>
+                `;
+            }
+
+            // 2. KHU VỰC BÊN DƯỚI (CHIA TRÁI - PHẢI)
+            let mainContentHTML = '';
+
+            if (Array.isArray(bai.loiGiai)) {
+                // --- CHUẨN MỚI: CHIA CỘT 40/60 CHO TỪNG BƯỚC GIẢI ---
+                mainContentHTML += `
+                    <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                        <div style="width: 40%;"><h4 style="color: #E65100; border-bottom: 2px solid #FFCA28; padding-bottom: 5px;">🧠 Cột Lời Giảng</h4></div>
+                        <div style="width: 60%;"><h4 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 5px;">🚀 Cột Bài Làm ([H] & [BBT])</h4></div>
+                    </div>
+                `;
+
+                // Xử lý Tư duy tổng quan (Trái) và Ảnh bổ trợ [H] (Phải)
+                if ((bai.tuDuy && bai.tuDuy.trim() !== "") || (bai.hinhAnhLeft && bai.hinhAnhLeft.trim() !== "")) {
+                    let tuDuyHTML = bai.tuDuy ? `<div class="format-text" style="color: #424242; line-height: 1.6;">${bai.tuDuy}</div>` : '';
+                    let imgHTML = bai.hinhAnhLeft ? `<img src="${bai.hinhAnhLeft}" class="inline-img" style="max-width: 90%;">` : '';
+                    
+                    mainContentHTML += `
+                        <div style="display: flex; gap: 20px; padding: 15px 0; border-bottom: 2px dashed #FFC0CB;">
+                            <div style="width: 40%; background: #FFF9C4; padding: 15px; border-radius: 10px;">${tuDuyHTML}</div>
+                            <div style="width: 60%; text-align: center;">${imgHTML}</div>
+                        </div>
+                    `;
+                }
+
+                // Render từng bước giải theo tỉ lệ Trái 40 - Phải 60
+                bai.loiGiai.forEach(buoc => {
+                    let leftBox = `<strong style="color: #E65100; font-size: 16px;">${buoc.tenBuoc}</strong>`;
+                    if (buoc.giaiThich && buoc.giaiThich.trim() !== "") {
+                        leftBox += `<div class="format-text" style="margin-top: 8px; font-size: 14.5px; color: #424242;">${buoc.giaiThich}</div>`;
+                    }
+
+                    let rightBox = `<div class="step-math format-text" style="font-size: 16px;">${buoc.toanHoc}</div>`;
+
+                    mainContentHTML += `
+                        <div style="display: flex; gap: 20px; padding: 15px 0; border-bottom: 1px solid #FFE4E1; align-items: stretch;">
+                            <div style="width: 40%; background: #FFF9C4; padding: 15px; border-radius: 10px; border-left: 4px solid #FFC107; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                ${leftBox}
+                            </div>
+                            <div style="width: 60%; background: var(--soft-white); padding: 15px; border-radius: 10px; border: 1px solid #FFC0CB; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                ${rightBox}
+                            </div>
+                        </div>
+                    `;
+                });
+
+            } else {
+                // --- CHUẨN CŨ (Dành cho các bài chưa update) ---
+                let leftHTML = '';
+                if (bai.tuDuy && bai.tuDuy.trim() !== "") {
+                    leftHTML = `
+                        <div style="width: 40%; background: #FFF9C4; padding: 25px; border-radius: 15px; border: 2px dashed #FFC107; position: sticky; top: 20px; max-height: 85vh; overflow-y: auto;">
+                            <h4 style="color: #E65100; margin-bottom: 20px; font-size: 18px; border-bottom: 2px solid #FFCA28; padding-bottom: 10px;">🧠 Lời Giảng / Tư Duy</h4>
+                            <div class="format-text" style="font-size: 15px; line-height: 1.8; color: #424242;">${bai.tuDuy}</div>
+                        </div>
+                    `;
+                }
+
+                let imgHTML = bai.hinhAnhLeft ? `<img src="${bai.hinhAnhLeft}" class="inline-img" style="max-width: 90%; margin: 10px auto;">` : '';
+                let rightWidth = leftHTML !== '' ? '60%' : '100%';
+
+                mainContentHTML += `
+                    <div style="display: flex; gap: 20px; align-items: flex-start;">
+                        ${leftHTML}
+                        <div style="width: ${rightWidth}; display: flex; flex-direction: column; gap: 20px;">
+                            <div class="content-box" style="width: 100%;">
+                                <h4 style="color: #4CAF50; margin-bottom: 20px; font-size: 18px; text-transform: uppercase;">🚀 Bài làm:</h4>
+                                ${imgHTML}
+                                <div class="format-text">${bai.loiGiai}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // 3. RÁP LẠI TOÀN BỘ CHI TIẾT
+            const detailHTML = `
+                ${deBaiHTML}
+                <div style="margin-top: 20px;">
+                    ${mainContentHTML}
+                </div>
+            `;
+
+            document.getElementById('detailContentContainer').innerHTML = detailHTML;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            renderMathInElement(document.getElementById('detailContentContainer'), {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false
+            });
+        }
+
+        function hideDetail() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('list-view').style.display = 'block';
+        }
+
+        function filterCategory(category) {
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderDanhSach(category);
+        }
+
+        function switchMainTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.main-tabs .tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+            if(tabId === 'toan') hideDetail();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderDanhSach('all');
+        });
+
+        // -------------------------------------------------------------
+        // LOGIC DISCORD FORM 
+        // -------------------------------------------------------------
+        const pasteBox = document.getElementById('pasteBox');
+        const pasteText = document.getElementById('pasteText');
+        const fileInput = document.getElementById('imgFile');
+
+        pasteBox.addEventListener('paste', (e) => {
+            const items = e.clipboardData.items;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    const blob = items[i].getAsFile();
+                    const reader = new FileReader();
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(blob);
+                    fileInput.files = dataTransfer.files;
+
+                    reader.onload = (event) => {
+                        pasteText.style.display = 'none';
+                        const oldImg = pasteBox.querySelector('img');
+                        if (oldImg) oldImg.remove();
+                        const img = document.createElement('img');
+                        img.src = event.target.result;
+                        pasteBox.appendChild(img);
+                    };
+                    reader.readAsDataURL(blob);
+                }
+            }
+        });
+
+        pasteBox.addEventListener('click', () => { pasteBox.focus(); });
+        pasteBox.setAttribute("tabindex", "0");
+        pasteBox.style.outline = "none";
+
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1511746905141416049/5F_fsTiUFr23vMb13ic_NJQphEZBKGC8CDZVhk4Hb8vkeEdm-ryoH9ig88bnMjqv538V";
+
+        document.getElementById('discordForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const statusMsg = document.getElementById('status-msg');
+            const text = document.getElementById('msgContent').value;
+            
+            btn.innerText = "Đang truyền dữ liệu lên Discord...";
+            btn.disabled = true;
+            statusMsg.style.display = 'none';
+            statusMsg.className = 'status-msg';
+            
+            try {
+                let formData = new FormData();
+                formData.append('payload_json', JSON.stringify({ content: `📩 **[Có câu hỏi mới từ em gái]**:\n${text}` }));
+                if (fileInput.files.length > 0) { formData.append('file', fileInput.files[0]); }
+
+                const response = await fetch(WEBHOOK_URL, { method: 'POST', body: formData });
+
+                if (response.ok) {
+                    statusMsg.innerText = "Đã gửi thành công! Chờ anh rep nhé.";
+                    statusMsg.classList.add('msg-success');
+                    document.getElementById('discordForm').reset();
+                    const oldImg = pasteBox.querySelector('img');
+                    if (oldImg) oldImg.remove();
+                    pasteText.style.display = 'block';
+                } else { throw new Error('Lỗi từ Server Discord'); }
+            } catch (error) {
+                statusMsg.innerText = "Lỗi mạng. Em check lại kết nối internet nhé!";
+                statusMsg.classList.add('msg-error');
+            } finally {
+                statusMsg.style.display = 'block';
+                btn.innerText = "Gửi câu hỏi đi 🚀";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
