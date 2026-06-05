@@ -1,0 +1,3225 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trạm Tiếp Tế Sĩ Tử 🌸</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-color: #FFF0F5;
+            --main-pink: #FFB6C1;
+            --dark-pink: #FF69B4;
+            --soft-white: #FFFFFF;
+            --text-color: #4A4A4A;
+            --accent-pink: #FFC0CB;
+            --tag-bt: #4CAF50;
+            --tag-kt: #2196F3;
+            --discord-blue: #5865F2;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            background-color: var(--bg-color); color: var(--text-color); padding: 20px;
+            background-image: radial-gradient(#FFD1DC 1px, transparent 1px); background-size: 20px 20px; line-height: 1.6;
+        }
+
+        header {
+            text-align: center; margin-bottom: 30px; padding: 25px; background: var(--soft-white);
+            border-radius: 20px; box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3); border: 2px solid var(--accent-pink);
+        }
+        header h1 { color: var(--dark-pink); font-size: 26px; margin-bottom: 10px; }
+        header p { font-size: 16px; color: #d1478e; font-style: italic; }
+
+        .main-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        .tab-btn {
+            padding: 12px 25px; border: none; background-color: var(--soft-white); color: var(--dark-pink);
+            font-size: 16px; border-radius: 50px; cursor: pointer; transition: all 0.3s; border: 1px solid var(--accent-pink);
+        }
+        .tab-btn.active { background-color: var(--dark-pink); color: var(--soft-white); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        #list-view { display: block; }
+        
+        .category-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .cat-btn { padding: 8px 16px; background: #FFE4E1; border: 1px dashed var(--dark-pink); color: var(--dark-pink); border-radius: 10px; cursor: pointer; transition: 0.2s; }
+        .cat-btn.active, .cat-btn:hover { background: var(--dark-pink); color: white; }
+
+        .problem-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .problem-item {
+            background: var(--soft-white); padding: 15px 20px; border-radius: 12px; cursor: pointer;
+            border: 1px solid var(--accent-pink); display: flex; align-items: center; gap: 15px; transition: transform 0.2s;
+        }
+        .problem-item:hover { transform: translateX(5px); border-color: var(--dark-pink); }
+        .tag { padding: 4px 10px; border-radius: 20px; font-size: 12px; color: white; white-space: nowrap; }
+        .tag-bt { background-color: var(--tag-bt); }
+        .tag-kt { background-color: var(--tag-kt); }
+        .item-title { font-size: 16px; color: #333; flex-grow: 1; }
+
+        #detail-view { display: none; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--soft-white);
+            color: var(--dark-pink); border: 2px solid var(--accent-pink); border-radius: 50px; cursor: pointer; font-size: 15px; margin-bottom: 20px; transition: 0.2s;
+        }
+        .back-btn:hover { background: var(--bg-color); border-color: var(--dark-pink); }
+
+        .problem-wrapper { display: flex; gap: 20px; align-items: flex-start; }
+        .left-col { width: 40%; 
+            background: #FFF9C4; /* Nền vàng nhạt giống giấy note */
+            border-radius: 15px; 
+            padding: 25px; 
+            border: 2px dashed #FFC107; 
+            position: sticky; 
+            top: 20px; 
+            max-height: 85vh; 
+            overflow-y: auto; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        ..left-col img { max-width: 100%; border-radius: 8px; margin-bottom: 10px; }
+        .right-col { width: 60%; display: flex; flex-direction: column; gap: 20px; }
+        
+        .sticky-prompt-box { 
+    background: var(--soft-white); 
+    border-radius: 15px; 
+    padding: 20px; 
+    border: 1px solid var(--main-pink); 
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2); 
+    margin-bottom: 20px;
+    max-height: 250px; 
+    overflow-y: auto; 
+}
+        .content-box { background: var(--soft-white); border-radius: 15px; padding: 25px; border: 1px solid #FFE4E1; overflow-x: auto; }
+        
+        .inline-img { max-width: 100%; height: auto; display: block; margin: 15px auto; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        
+        .mindset-box { background: #FFF9C4; border-left: 5px solid #FFC107; padding: 20px; border-radius: 0 15px 15px 0; margin-top: 10px; }
+        .mindset-box h4 { color: #F57F17; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        
+        .format-text { white-space: pre-line; }
+
+        .discord-form-container { max-width: 600px; margin: 0 auto; background: var(--soft-white); border-radius: 20px; padding: 30px; border: 2px solid var(--discord-blue); box-shadow: 0 4px 15px rgba(88, 101, 242, 0.15); }
+        .form-title { font-size: 20px; color: var(--discord-blue); margin-bottom: 8px; font-weight: 600; }
+        .form-desc { font-size: 14px; color: #6b7280; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #4b5563; font-size: 14px; font-weight: 500; }
+        .text-input { width: 100%; height: 100px; padding: 15px; border: 1px solid #e5e7eb; border-radius: 12px; resize: none; outline: none; font-size: 14px; }
+        .text-input:focus { border-color: var(--discord-blue); }
+        .paste-area { width: 100%; min-height: 150px; border: 2px dashed var(--discord-blue); border-radius: 12px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #6b7280; padding: 20px; cursor: pointer; overflow: hidden; position: relative; }
+        .paste-area img { max-width: 100%; max-height: 300px; border-radius: 8px; margin-top: 10px; z-index: 2; border: 1px solid #e5e7eb; }
+        .paste-instruction { text-align: center; z-index: 1; pointer-events: none; line-height: 1.8; }
+        .key-btn { background: #EEE; padding: 3px 8px; border-radius: 5px; color: #333; border: 1px solid #CCC; font-size: 12px; font-weight: 600; }
+        .file-input-manual { margin-top: 10px; font-size: 13px; color: #6b7280; }
+        .file-input-manual input { border: none; background: transparent; color: var(--discord-blue); font-size: 13px; }
+        .submit-btn { width: 100%; padding: 14px; background: var(--discord-blue); color: white; border: none; border-radius: 12px; font-size: 16px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .submit-btn:hover { background: #4752C4; }
+        .submit-btn:disabled { background: #9ba1ea; cursor: not-allowed; }
+        .status-msg { text-align: center; font-size: 14px; margin-top: 15px; font-weight: 500; display: none; }
+        .msg-success { color: #16a34a; }
+        .msg-error { color: #dc2626; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Trạm Tiếp Tế Sĩ Tử 🌟</h1>
+        <p>"Dù điểm em có như thế nào, anh cũng cảm thấy may mắn vì đã được chứng kiến em vượt qua bản thân."</p>
+    </header>
+
+    <div class="main-tabs">
+        <button class="tab-btn active" onclick="switchMainTab('toan')">📚 Bí Kíp Toán - Lý</button>
+        <button class="tab-btn" onclick="switchMainTab('tinnhan')">💌 Hỏi Bài Cấp Tốc</button>
+    </div>
+
+    <div id="tab-toan" class="tab-content active">
+        
+        <div id="list-view">
+            <div class="category-tabs" id="categoryTabs">
+                <button class="cat-btn active" onclick="filterCategory('all')">Tất cả</button>
+                <button class="cat-btn" onclick="filterCategory('ham-so')">Hàm số</button>
+                <button class="cat-btn" onclick="filterCategory('tich-phan')">Tích phân</button>
+                <button class="cat-btn" onclick="filterCategory('hinh-khong-gian')">Hình học không gian</button>
+                <button class="cat-btn" onclick="filterCategory('toa-do-oxyz')">Tọa độ Oxyz</button>
+                <button class="cat-btn" onclick="filterCategory('conic-oxy')">Ba đường Conic & Hình học Oxy</button>
+                <button class="cat-btn" onclick="filterCategory('luong-giac')">Lượng giác</button>
+                <button class="cat-btn" onclick="filterCategory('to-hop-xac-suat')">Tổ hợp - Xác suất & Thống kê</button>
+                <button class="cat-btn" onclick="filterCategory('day-so-dai-so')">Đại số tổng hợp</button>
+            </div>
+
+            <div class="problem-list" id="problemList"></div>
+        </div>
+
+        <div id="detail-view">
+            <button class="back-btn" onclick="hideDetail()">← Quay lại danh sách</button>
+            <div id="detailContentContainer"></div>
+        </div>
+    </div>
+
+    <div id="tab-tinnhan" class="tab-content">
+        <div class="discord-form-container">
+            <h3 class="form-title">Gửi câu hỏi</h3>
+            <p class="form-desc">Gặp bài nào hóc búa, chụp ảnh tải lên đây.</p>
+            <form id="discordForm">
+                <div class="form-group">
+                    <label>Nội dung câu hỏi hoặc lời nhắn:</label>
+                    <textarea id="msgContent" class="text-input" placeholder="Anh giải hộ em bài này với..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Đính kèm hình ảnh bài toán (nếu có):</label>
+                    <div class="paste-area" id="pasteBox">
+                        <div class="paste-instruction" id="pasteText">
+                            Đầu tiên mở đề lên, nhấn <span class="key-btn">Win</span> + <span class="key-btn">Shift</span> + <span class="key-btn">S</span> để cắt ảnh.<br>
+                            Sau đó click vào ô này và ấn <span class="key-btn">Ctrl</span> + <span class="key-btn">V</span> để dán vào.
+                        </div>
+                    </div>
+                    <div class="file-input-manual">
+                        Hoặc chọn file từ máy: <input type="file" id="imgFile" accept="image/*">
+                    </div>
+                </div>
+                <button type="submit" id="submit-btn" class="submit-btn">Gửi câu hỏi đi 🚀</button>
+            </form>
+            <p id="status-msg" class="status-msg"></p>
+        </div>
+    </div>
+
+    <script>
+        // BƯỚC 1: KHỞI TẠO MẢNG RỖNG (TUYỆT ĐỐI KHÔNG XÓA DÒNG NÀY)
+        const khoDuLieu = [];
+        // ---------------------------------------------------------------------
+        khoDuLieu.push({
+    id: "kien_thuc_1_phuong_phap_ghep_truc_co_ban",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 1: Phương pháp Ghép trục cơ bản**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`KỸ THUẬT VDC 1: GHÉP TRỤC & ĐỒ THỊ TRỤC
+Nội dung: Ghép trục
+<img src="images/toan2_t13_h1.png" />
+Note: Nghiệm của $u$ chạy từ $\left[-\frac{1}{2}; \pi\right]$. $\Rightarrow$ Nhớ phải đi từ $-\frac{1}{2} \to 0 \to \pi$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Nội dung",
+            toanHoc: String.raw`Nội dung bài`,
+            giaiThich: String.raw``
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_1_bien_luan_so_nghiem_cua_ham_hop_fcosx_bang_ghep_truc",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 1: Biện luận số nghiệm của hàm hợp $f(\cos x)$ bằng Ghép trục**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Bài tập ví dụ ghép trục:
+<img src="images/toan2_t14_h1.png" />
+Tìm $m$ để $f^2(\cos x) + (3-m)f(\cos x) + 2m - 4 = 0$ có vô số nghiệm thuộc $\left[-\frac{\pi}{3}; \pi\right]$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đặt ẩn phụ và cô lập tham số m",
+            toanHoc: String.raw`Đặt $t = f(\cos x)$. Phương trình trở thành: $t^2 + (3-m)t + 2m - 4 = 0$
+$\Leftrightarrow t^2 + 3t - mt + 2m - 4 = 0$
+$\Leftrightarrow t^2 + 3t - 4 = m(t - 2)$
+$\Leftrightarrow m = \frac{t^2 + 3t - 4}{t - 2} = u(t)$`,
+            giaiThich: String.raw`Chỉ còn 6 ngày nữa là thi, nhìn thấy phương trình dài này tuyệt đối không được hoảng. Bẫy ở đây là mức 6 điểm rất hay lao vào đạo hàm trực tiếp.
+Phản xạ đầu tiên phải nảy số: Thấy cụm nào giống nhau lặp đi lặp lại, đặt ngay làm ẩn phụ.
+Ở đây có 2 lựa chọn:
+$$ \text{1. } t = \cos x $$
+$$ \text{2. } t = f(\cos x) $$
+Rõ ràng ốp cách 2 sẽ đưa phương trình về bậc 2 cực kỳ gọn. Sau đó, quan sát thấy $m$ bậc 1 đứng rời rạc, nguyên tắc sinh tồn là đẩy hết $m$ sang một vế để cô lập.
+Khẩu hiệu: **"Lõi lặp lại - Đặt ẩn phụ ngay. Thấy m bậc 1 - Cô lập m!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Xây dựng hàm mới và Ghép trục đồ thị",
+            toanHoc: String.raw`Note: Mình có thể lấy bảng thanh nhiều chia $x \to f(x) \to f(\dots)$. Ta có sơ đồ biến đổi:
+$f(x) \to f(\cos x) \to \frac{f^2(\cos x) + 3f(\cos x) - 4}{f(\cos x) - 2}$.
+$\Rightarrow$ Vì lúc này không phải là $f(u) \to$ vào $f(x)$ như thường mà từ $f(u)$ đã thay vào 1 dạng phương trình khác hoàn toàn. Kiểu ban đầu: $f(x) = x^2 + 2x \Rightarrow u = \cos x \Rightarrow f(u) = \cos^2 x + 2\cos x$. Nhưng lúc sau lại: $f(u) = \cos^2 x + 2\cos x$ từ có phương trình mới là: $g(x) = \frac{x^2 + 3x - 4}{x - 2}$ (không còn là $f(x)$).
+$\Rightarrow g(\cos^2 x + 2\cos x) = \frac{(\cos^2 x + 2\cos x)^2 + 3(\dots) - 4}{(\dots) - 2}$
+$\Rightarrow$ Từ đó sẽ làm nghịch đảo lại, từ suy giữ lại của phương trình $y = \frac{x^2 + 3x - 4}{x - 2}$ thay vì phương trình ban đầu. $\Rightarrow$ Có các điểm cực trị tại $\begin{cases} x = 1 \\ x = -1 \\ x = 3 \end{cases}$ (với $x \neq 2$). $\Rightarrow$ Tìm phương trình $g(f(u))$. $\Rightarrow$ Ráp lúc sau có cực trị $f'(u)$ có cực trị $u = \frac{1}{2}$, $u = \frac{\sqrt{3}}{2} \Rightarrow \text{từ ghép đồ thị ban đầu lại } u = -1$.
+$\Rightarrow$ Từ đây ta sẽ đi theo $g(x)$ không là $f(x)$ nữa. $g(f(u))$:
+<img src="images/toan2_t15_h1.png" />`,
+            giaiThich: String.raw`Ra đến $m = g(t) = \frac{t^2 + 3t - 4}{t - 2}$ rồi, chỗ này là cái bẫy triệt hạ rất nhiều người. Ai bê nguyên bảng biến thiên $f(x)$ của đề bài vào tương giao là sai bản chất. Nhìn kỹ lại, phương trình ban đầu đã bị biến đổi thành một hàm hoàn toàn mới là $g(t)$.
+Việc phải làm bây giờ là kẻ một "Bảng ghép trục" mới tinh cho chuỗi: $x \to \cos x \to f(\cos x) \to g(f(\cos x))$. Đạo hàm hàm phân thức $g(t)$ để tìm các điểm cực trị ($x=1, -1, 3$). Sau đó ráp vào sự biến thiên của $x \in \left[-\frac{\pi}{3}; \pi\right]$.
+Khẩu hiệu: **"Hàm mới thì vỏ mới - Ghép trục vẽ lại từ đầu!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_2_mo_rong_ly_thuyet_ghep_truc",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 2: Mở rộng lý thuyết Ghép trục**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $(*)$ Kỹ thuật ghép trục: Đặt trục và hàm hợp $f(u) = g(x)$
+- TH1: Nếu $u = ax + b \rightarrow f(t) = h(t)$.
+- TH2: Nếu $u \neq ax + b$
+  - Dạng 1: Đặt $t = u \rightarrow f(t), h(t)$.
+  - Dạng 2: Khi $g(x) = x + a$. Đặt $y = u \rightarrow \begin{cases} f(y) = x + a \\ y = u \end{cases} \Rightarrow \text{Chuyển trục (hoặc dùng tính chất đồ thị) để quay về bài toán tương giao.}$
+$(*)$ Chú ý:
+- Đồ thị $y = f(u)$ có thể thay bởi $y = f'(u)$.
+- Nhận diện đồ thị: Đồ thị $y = f(x)$ và $x = f(y)$ đối xứng nhau qua đường phân giác $y = x$.
+- Một số bài toán chúng ta phải sử dụng phương pháp đánh giá.`,
+    loiGiai: [
+        {
+            tenBuoc: "Nội dung",
+            toanHoc: String.raw`Nội dung bài`,
+            giaiThich: String.raw``
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_3_va_bai_2_ky_thuat_do_thi_truc_tuong_giao_ham_hop_bang_lat_do_thi",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức & Bài toán",
+    tieuDe: "**Kiến thức 3 & Bài 2: Kỹ thuật Đồ thị trục - Tương giao hàm hợp bằng lật đồ thị**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Kỹ thuật đồ thị trục Cho hàm $f(x)$. $\Rightarrow f(x^4 - 2m^2 x^2 + 4) = x$ có bao nhiêu nghiệm? Nhiều nghiệm nhất là bao nhiêu?
+<img src="images/toan2_t16_h2.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chuyển vị đồ thị - Tư duy hàm ngược",
+            toanHoc: String.raw`$\Rightarrow$ Vì $x = f(y)$ nên đồ thị nó như thế này.
+<img src="images/toan2_t17_h1.png" />`,
+            giaiThich: String.raw`Đọc đề $f(x^4 - 2m^2 x^2 + 4) = x$, cấu trúc này rất cồng kềnh. Ruột bên trong $f$ phức tạp, bên ngoài lại là biến $x$. Cố đoán đồ thị $f(x)$ rồi nhét nguyên cụm bậc 4 vào là tự sát trong phòng thi.
+Trực giác cần có: Trong $f$ là một mớ hỗn độn, ngoài là $x$, lôi ngay tư duy đồ thị hàm ngược ra xử lý. Công thức:
+$$ y = f(x) \Leftrightarrow x = f(y) $$
+Chỉ cần lấy đồ thị $y = f(x)$ đề cho, lật ngang tờ giấy 90 độ (hoặc gập đối xứng qua đường $y=x$). Ta thu được ngay một đồ thị lượn sóng theo phương dọc.
+Khẩu hiệu: **"Trong F phức tạp, ngoài F là X - Lật ngang đồ thị!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Tương giao hệ phương trình",
+            toanHoc: String.raw`Đặt $y = x^4 - 2m^2 x^2 + 4$.
+$\Rightarrow \begin{cases} f(y) = x \\ y = x^4 - 2m^2 x^2 + 4 \end{cases}$
+$\Rightarrow$ Nghiệm là giao điểm của $2$ hàm này.
+<img src="images/toan2_t17_h2.png" />
+Trục sẽ bị đổi lại. Điểm cực trị $x=0 \to y=3$. $\Rightarrow 10$ giao điểm.`,
+            giaiThich: String.raw`Lật xong đồ thị thành $x = f(y)$, đặt toàn bộ cái ruột phức tạp kia bằng $y$. Lập thành một hệ phương trình. Giờ đắp cái đồ thị hàm bậc 4 (hình chữ W) lên trên đồ thị dọc vừa vẽ. Đếm số giao điểm là chốt ngay số nghiệm. Triệt tiêu hoàn toàn các bước đạo hàm lằng nhằng.
+Khẩu hiệu: **"Đặt ruột làm y - Tương giao đếm điểm!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "kien_thuc_4_va_bai_3_tu_duy_nghiem_boi_danh_gia_ham_so_luon_khong_am",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức & Bài toán",
+    tieuDe: "**Kiến thức 4 & Bài 3: Tư duy Nghiệm Bội - Đánh giá hàm số luôn không âm**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Tư duy nghiệm bội Tìm $m$ để: $m(x^4 - x^3 + x) - m^2(x^2 + x) - 2x \ge 0$ đúng $\forall x \in (-1; 3)$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Rút nhân tử chung và Ép điều kiện nghiệm bội",
+            toanHoc: String.raw`$\Leftrightarrow x[m(x^3 - x^2 + 1) - m^2(x + 1) - 2] \ge 0$
+$\Leftrightarrow x[m x^3 - (m^2 + m)x^2 + m^2 - m - 2] \ge 0$
+$\Rightarrow$ Để hàm luôn $\ge 0$. Đặt $f(x) = m x^3 - (m^2 + m)x^2 + m^2 - m - 2$. Có nghiệm $f(x) = 0 \Rightarrow m^2 - m - 2 = 0$
+$\Rightarrow \begin{cases} m = 2 \\ m = -1 \end{cases} \rightarrow$ Thay vào thì có $m = -1$ thỏa mãn cho hàm luôn dương $(+)$. Note: Để ý nghiệm bội. $(x - x_0)^{2k + 1}$
+<img src="images/toan2_t18_h1.png" />
+$\rightarrow$ Để hàm không cực trị, đơn điệu. (Phương pháp 2: PP2).`,
+            giaiThich: String.raw`Gặp mớ hỗn độn vừa $m$ vừa $x$ ép $\ge 0$, tuyệt đối đừng lao vào lập bảng biến thiên.
+Tư duy thực chiến: Quét mắt thấy tất cả các số hạng đều chứa $x$, lập tức rút $x$ ra ngoài làm nhân tử chung. Đưa về form:
+$$ f(x) = x \cdot [\text{cụm lõi}] \ge 0 $$
+Đề ép hàm $\ge 0$ trên $(-1; 3)$, mà số $0$ lại nằm chình ình giữa khoảng này. Để hàm số đi qua gốc tọa độ mà không bị lật dấu, "cụm lõi" bên trong bắt buộc phải nhận $x=0$ làm nghiệm. Ghép với $x$ ở ngoài sẽ ra $x^2$ (nghiệm kép), giữ cho hàm luôn không âm.
+Khẩu hiệu: **"Qua ngã tư không đổi dấu - Chắc chắn là nghiệm kép!"**. Rút $x$ ra và ép lõi bằng $0$ tại $x=0$.`
+        },
+        {
+            tenBuoc: "Bước 2: Phân tích bài toán tương tự (Kinh điển)",
+            toanHoc: String.raw`Tư duy nghiệm bội + Phân tích liên hợp luôn $f(x) = ax^4 + bx^3 + cx + d$.
+$p(x) = (x-1)[m^3 f(2x-1) - mf(x) + f(x) - 1] \rightarrow$ Tìm $m$ để $h(x) \ge 0, \forall x \in \mathbb{R}$.
+<img src="images/toan2_t18_h2.png" />
+Có $(x-1)$ mà $h(x) \ge 0 \Rightarrow p(x) = (x-1) \cdot g(x)$.
+$\Rightarrow p(1) = 0 \Leftrightarrow m^3 f(1) - mf(1) + f(1) - 1 = 0$
+$\Leftrightarrow m^3 - m = 0$ (vì $f(1) = 1$ theo đồ thị)
+$\Leftrightarrow \begin{cases} m = 0 \\ m = \pm 1 \end{cases}$
+- TH1: $m = 0 \Rightarrow h(x) = (x-1)[f(x) - 1]$. Ta thấy tại $f(x) = 1 \Rightarrow$ chỉ có $1$ nghiệm $x = 1$. $\Rightarrow h(x) = 0$ và $f(x) = 1$ luôn chỉ có $1$ nghiệm. $\Rightarrow h(x) = (x-1)(x-1)(ax^2 + \dots)$ (vì $a > 0 \Rightarrow ax^2 + \dots \ge 0, \forall x$). $\Rightarrow h(x) \ge 0, \forall x \Rightarrow$ (Thỏa mãn).
+- TH2: $m = 1 \Rightarrow h(x) = (x-1)(f(2x-1) - 1)$. Đặt $2x-1 = u \Rightarrow f(u) - 1$ cũng chỉ có $1$ nghiệm tại $u = 1$. $\Leftrightarrow 2x-1 = 1 \Leftrightarrow x = 1$. $\Rightarrow h(x) = (x-1)^2 \cdot [a(2x-1)^2 + \dots] \ge 0, \forall x$. (Tương tự như TH1).
+- TH3: $m = -1 \Rightarrow h(x) = (x-1)[-f(2x-1) + 2f(x) - 1]$. Ta thấy $k(x) = -a(2x-1)^3 + 2ax^3 + \dots = -8ax^3 + 2ax^3 = -6ax^3 + \dots$ Khi $x \to +\infty \Rightarrow h(x) < 0. \Rightarrow$ Loại $m = -1$.`,
+            giaiThich: String.raw`Dạng này form y hệt ví dụ đã phân tích. Rút $(x-1)$ ra, ép phần ruột bằng $0$ tại $x=1$. Giải ra $m$ rồi thì nhớ nguyên tắc sống còn: BẮT BUỘC phải thử lại từng giá trị của $m$. Quan sát kỹ cách dùng đánh giá giới hạn vô cực để loại bỏ $m=-1$ ở dưới, kỹ năng này cực kỳ quan trọng để xử lý nhanh.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_5_mo_rong_ly_thuyet_nghiem_boi",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 5: Mở rộng lý thuyết Nghiệm bội**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $(*)$ Nghiệm bội cho câu hỏi Vận dụng cao (VDC): $+>$ Mở rộng: $f'(x) = (x - x_0)^k \cdot g(x) \Rightarrow f(x_0) = f'(x_0) = f''(x_0) = \dots = f^{(k-1)}(x_0) = 0$ với $k \in \mathbb{N}^*$. $+>$ Nếu $f(x) = \frac{(x - x_0)^{2k+1} \cdot g(x)}{(x - x_0)} \ge 0$ (hoặc $\le 0$), $\forall x \in (a; b)$. Nếu $x_0 \in (a; b)$ thì điều kiện cần là $g(x_0) = 0$.
+$+>$ Nếu $y = f(x, m)$ là một hàm đa thức đạt cực đại tại $x = x_0$ mà: TH1: $y' = f'(x, m) = (x - x_0)^{2k+1} \cdot g(x, m) \Rightarrow$ Điều kiện 1: Nếu $x = x_0$ là điểm cực tiểu $\Rightarrow \begin{bmatrix} g(x_0, m) = 0 \\ g(x_0, m) > 0 \end{bmatrix} \Rightarrow$ Điều kiện 2: Nếu $x = x_0$ là điểm cực đại $\Rightarrow \begin{bmatrix} g(x_0, m) = 0 \\ g(x_0, m) < 0 \end{bmatrix}$
+<img src="images/toan1_t28_h1.png" />
+TH2: $y' = f'(x, m) = (x - x_0)^{2n} \cdot g(x, m) \Rightarrow$ Điều kiện cần: $g(x_0, m) = 0 \Leftrightarrow m = m_i \rightarrow$ Điều kiện đủ: Thay vào để kiểm tra xem nó có đạt cực trị tại $x_0$ hay không.`,
+    loiGiai: [
+        {
+            tenBuoc: "Nội dung",
+            toanHoc: String.raw`Nội dung bài`,
+            giaiThich: String.raw``
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_4_tu_duy_nghiem_boi_dat_cuc_tieu_tai_1_diem",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 4: Tư duy nghiệm bội - Đạt cực tiểu tại 1 điểm**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Tư duy nghiệm bội (PP1): Đề: Có bao nhiêu giá trị nguyên của $m$ để hàm số: $y = x^8 + (m - 2)x^5 - (m^2 - 4)x^4 + 1$ đạt cực tiểu tại $x = 0$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tính đạo hàm và rút nhân tử chẵn/lẻ",
+            toanHoc: String.raw`Đạo hàm: $y' = 8x^7 + 5(m - 2)x^4 - 4(m^2 - 4)x^3$
+$y' = x^3 \underbrace{\left[ 8x^4 + 5(m - 2)x - 4(m^2 - 4) \right]}_{P(x)}$`,
+            giaiThich: String.raw`Đề hỏi Cực tiểu, thao tác đầu tiên là đạo hàm! Nhưng chú ý bẫy này: Đạo hàm xong tuyệt đối không để nguyên một cục, phải nhóm nhân tử chung ra tối đa:
+$$ y' = x^k \cdot P(x) $$
+Ở đây rút được $x^3$ ra ngoài (nghiệm bội lẻ). Hàm đạt cực tiểu tại $x=0$ tức là đạo hàm $y'$ phải lật dấu từ âm sang dương khi đi qua $0$. Bản thân $x^3$ đã đảm nhận đúng việc lật dấu từ $(-)$ sang $(+)$ rồi. Vậy phần lõi $P(x)$ còn lại phải giữ nguyên dấu, cấm được lật dấu thêm.
+Khẩu hiệu: **"Hỏi cực trị ở đâu - Tách nhân tử tại đó!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Ép điều kiện dấu cho P(x) và THỬ LẠI",
+            toanHoc: String.raw`$\Rightarrow$ Để có cực tiểu tại $x = 0$ thì $P(0)$ phải $\ge 0$ hoặc $= 0$.
+$\Rightarrow \begin{cases} -4(m^2 - 4) \ge 0 \\ -4(m^2 - 4) = 0 \end{cases} \Rightarrow \begin{cases} -2 \le m \le 2 \\ m = \pm 2 \end{cases}$
+- Xét $m = 2 \Rightarrow y' = x^3 \cdot 8x^4 = 8x^7$. $y' = 0 \Leftrightarrow x = 0$. Dấu đổi từ $(-)$ sang $(+) \Rightarrow$ Đạt cực tiểu (Thỏa mãn).
+- Xét $m = -2 \Rightarrow y' = x^3 \cdot (8x^4 - 20x) = x^4 \cdot (8x^3 - 20)$.
+Tại $x = 0$, $y'$ không đổi dấu (nghiệm bội chẵn $x^4$) $\Rightarrow$ không đạt cực trị (Không thỏa mãn).
+<img src="images/toan2_t20_h1.png" />
+Vậy $m \in \{-1, 0, 1, 2\}$.`,
+            giaiThich: String.raw`Như phân tích ở trên, $x^3$ đã lo việc đổi dấu chuẩn cực tiểu, nên $P(0)$ bắt buộc phải LUÔN DƯƠNG hoặc cùng lắm là bằng 0. Nếu $P(0) < 0$ thì cả cụm $y'$ sẽ lật ngược thành cực đại.
+Điều kiện: Xét $P(0) \ge 0$.
+Bẫy chết người: Giải ra $m$ xong khoanh luôn là mất điểm. Với $m=2$ hoặc $m=-2$, hàm số bị triệt tiêu phần tử, bản chất chẵn/lẻ thay đổi hoàn toàn. Bắt buộc phải thay ngược $m$ vào $y'$ để kiểm tra lại lần cuối xem có đúng là cực tiểu không. Phải khắc cốt ghi tâm bước này.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_5_danh_gia_ham_so_lon_hon_dao_ham_va_dong_bien",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 5: Đánh giá hàm số lớn hơn đạo hàm và đồng biến**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: Cho hàm số $f(x) = x^3 + ax^2 + bx + c$ với $f(0) = f'(0)$. Hàm số $f(x) \ge f'(x)$, $\forall x \ge -1$. Có bao nhiêu tham số $a$ để hàm đồng biến trên khoảng $(-\infty; +\infty)$?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Khai thác giả thiết và tạo hàm mới ép nghiệm bội",
+            toanHoc: String.raw`Ta có: $f(0) = c, f'(0) = b \Rightarrow c = b$. Ta có: $f(x) - f'(x) \ge 0$
+$\Leftrightarrow x^3 + ax^2 + bx + c - 3x^2 - 2ax - b \ge 0 \text{ (do } c = b)$
+$\Leftrightarrow x^3 + (a - 3)x^2 + (b - 2a)x \ge 0$
+$\Leftrightarrow x \underbrace{\left[ x^2 + (a - 3)x + (b - 2a) \right]}_{P(x)} \ge 0$
+Để bất phương trình trên đúng với mọi $x \ge -1$, đa thức phải có nghiệm bội tại $x = 0$.
+$\Rightarrow P(0) = 0 \Leftrightarrow b - 2a = 0 \Rightarrow b = 2a$. Khi đó $a = \frac{b}{2}$.
+<img src="images/toan2_t19_h1.png" />`,
+            giaiThich: String.raw`Đọc đề thấy ngay giả thiết $f(0) = f'(0)$ và biểu thức $f(x) \ge f'(x)$. Phản xạ thực chiến: Chuyển vế ngay để tạo thành một hàm $P(x)$ đánh giá dấu.
+Vũ khí sử dụng:
+$$ f(x) - f'(x) \ge 0 $$
+Bài toán ép biểu thức này $\ge 0$ với mọi $x \ge -1$. Quét mắt thấy điểm $x=0$ nằm lọt thỏm trong khoảng này, mà thay $x=0$ vào thì biểu thức bằng $0$ (do $f(0) = f'(0)$). Một hàm đi qua mốc $0$ mà đòi giữ nguyên dấu không bị lật (luôn $\ge 0$) thì bắt buộc $x=0$ phải là nghiệm kép. Việc của em là rút nhân tử chung $x$ ra ngoài và ép nốt phần lõi bên trong bằng $0$ tại $x=0$.
+Khẩu hiệu: **"Dồn vế tạo hàm - Lõi bằng 0 chốt hạ nghiệm kép!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Xử lý điều kiện đạo hàm đồng biến và chốt chặn khoảng",
+            toanHoc: String.raw`$\Rightarrow f'(x) = 3x^2 + 2ax + a$. Để $f'(x) \ge 0, \forall x \in (-\infty; +\infty)$:
+$\Leftrightarrow \Delta' \le 0 \Rightarrow a^2 - 3a \le 0 \Rightarrow 0 \le a \le 3$ (Trong bản gốc ghi $a^2 - 12b \ge 0$ rồi lại $\dots \le 12$ rất rối rắm, nhưng mạch logic là tìm điều kiện của đạo hàm). Ghi chép theo đúng chữ viết tay mờ: $D = a^2 - 12b \dots \Rightarrow 0 \le a \le 12 \quad (1)$.
+
+Lại có $P(x) = x^2 + (a - 3)x$. Khi $x \ge -1$: $\Rightarrow x + a - 3 \ge 0, \forall x \ge -1 \Rightarrow a \ge 3 - x, \forall x \ge -1 \Rightarrow a \ge 4 \quad (2)$. Kết hợp $(1)$ và $(2)$ (đoạn này bị cắt ngang dưới cuối trang).`,
+            giaiThich: String.raw`Đoạn sau đề yêu cầu hàm gốc $f(x)$ đồng biến trên $\mathbb{R}$. Tức là $f'(x) \ge 0$ với mọi $x$. Đây là bài toán tam thức bậc 2 kinh điển, lấy ngay vũ khí sát thương cao nhất ra dùng:
+$$ \Delta' \le 0 $$
+Mặc kệ nháp bị rối rắm hay lỗi số liệu, tư duy cốt lõi không đổi: Giải điều kiện $\Delta' \le 0$ của hàm đạo hàm, sau đó kết hợp với điều kiện giữ dấu đuôi của cái lõi $P(x)$ lúc nãy ($P(x) \ge 0$ khi $x \ge -1$) để kẹp ra khoảng chặn cuối cùng của $a$.
+Khẩu hiệu: **"Hàm đồng biến trên R - Ốp ngay Delta âm!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_6_ham_so_tri_tuyet_doi_dong_bien_tren_khoang",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 6: Hàm số Trị tuyệt đối đồng biến trên khoảng**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hình ảnh bổ trợ [H]:
+<img src="images/toan2_t20_h2.png" />
+Nội dung: Tư duy nghiệm bội (PP3) Bài toán trị tuyệt đối: Đề: Có bao nhiêu giá trị nguyên $m$ để hàm số $y = |x^5 - 5x^4 + 5(m - 1)x - 8|$ đồng biến trên khoảng $(-\infty; 1)$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Giải mã bản chất đồng biến của hàm Trị tuyệt đối",
+            toanHoc: String.raw`Ta có: Hàm số $y = |f(x)|$ sẽ đồng biến khi và chỉ khi:
+$\begin{cases} \text{TH1: } f(x) \le 0 \\ \quad \quad f'(x) \le 0 \end{cases}$ (vì hàm nằm dưới trục hoành và đang nghịch biến, khi lấy trị tuyệt đối sẽ lật lên thành đồng biến). Hoặc:
+$\begin{cases} \text{TH2: } f(x) \ge 0 \\ \quad \quad f'(x) \ge 0 \end{cases}$ (vì hàm nằm trên trục hoành và đang đồng biến).
+
+- Xét TH1: $\begin{cases} f'(x) \le 0 \\ f(1) \le 0 \end{cases} \Rightarrow 5x^4 - 20x^3 + 5(m - 1) \le 0, \forall x \in (-\infty; 1)$. Ta thấy khi $x \to -\infty \Rightarrow f'(x) \to +\infty \Rightarrow$ Điều kiện $f'(x) \le 0, \forall x \in (-\infty; 1)$ vô lý (Loại).`,
+            giaiThich: String.raw`Hàm trị tuyệt đối đồng biến/nghịch biến là trùm bẫy. Quy luật bản chất: Trị tuyệt đối lật toàn bộ phần đồ thị bên dưới trục hoành bẻ ngược lên trên.
+Vậy muốn cái vỏ $|f(x)|$ đồng biến (đi lên), phần ruột $f(x)$ bên trong chỉ có 2 cửa để sống:
+$$ \text{TH1: } f(x) \le 0 \text{ và } f'(x) \le 0 $$
+$$ \text{TH2: } f(x) \ge 0 \text{ và } f'(x) \ge 0 $$
+Tức là: Hoặc mày nằm trên trục hoành và đang đi lên (TH2), hoặc mày nằm dưới trục hoành nhưng đang cắm đầu xuống (TH1 - lật lên nó mới thành đi lên).
+Khẩu hiệu: **"Trị tuyệt đối đi lên - Cùng dương đi lên hoặc cùng âm cắm xuống!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Cô lập m và chốt chặn Max",
+            toanHoc: String.raw`- Xét TH2: $5x^4 - 20x^3 + 5(m - 1) \ge 0, \forall x \in (-\infty; 1)$. Vì khi $x \to -\infty \Rightarrow f'(x) \to +\infty \Rightarrow$ Thỏa mãn. $\Leftrightarrow 5(m - 1) \ge 20x^3 - 5x^4, \forall x \in (-\infty; 1)$ $\Leftrightarrow m \ge \frac{4x^3 - x^4}{1} + 1 \Leftrightarrow m \ge -x^4 + 4x^3 + 1$.
+
+Xét hàm số $g(x) = -x^4 + 4x^3 + 1$ trên $(-\infty; 1)$. Đạo hàm: $g'(x) = -4x^3 + 12x^2 = 0 \Leftrightarrow \begin{cases} x = 0 \\ x = 3 \text{ (Loại)} \end{cases}$
+<img src="images/toan2_t21_h1.png" />
+(Dựa theo số liệu trong bảng biến thiên gốc ghi 0,99 và 2,14 - chữ rất khó đọc). $\Rightarrow m \ge \max g(x) \Rightarrow m \ge 4$. (Trong tài liệu ghi $m \ge 2,14$).
+
+Lại có điều kiện $f(1) \ge 0$: $\Rightarrow 1 - 5 + 5(m - 1) - 8 \ge 0 \Leftrightarrow 5(m - 1) \ge 12 \Leftrightarrow m \ge \frac{17}{5} = 3,4$. Vậy $m \ge 4$.`,
+            giaiThich: String.raw`TH1 bị loại ngay từ vòng gửi xe vì giới hạn vô cực sai bét. Chuyển sang TH2, nhìn thấy $m$ đứng bậc 1, quy tắc sinh tồn vĩnh cửu: Cô lập $m$. Đưa về dạng $m \ge g(x)$.
+Vũ khí chặn miền:
+$$ m \ge g(x), \forall x \Rightarrow m \ge \max g(x) $$
+Đạo hàm ngay $g(x)$, lập bảng biến thiên trên khoảng $(-\infty; 1)$ để nhặt ra giá trị Max.
+Và cẩn thận cái bẫy này: Đừng quên điều kiện đầu mút $f(1) \ge 0$ ban đầu, phải thử lại để bọc lót không thừa nghiệm.
+Khẩu hiệu: **"Cô lập m - Muốn lớn hơn tất cả thì đè thằng Max!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_6_xet_don_dieu_ham_phan_thuc_co_chua_tri_tuyet_doi",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 6: Xét đơn điệu hàm phân thức có chứa trị tuyệt đối**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Note: Khi xét đơn điệu hàm phân thức có chứa trị tuyệt đối: Ví dụ: $y = \left| \frac{mx + 3}{x + m + 2} \right|$ nghịch biến trên khoảng $(1; +\infty)$. $\Rightarrow$ Vì đạo hàm của nó có 2 trường hợp: nằm trên hoặc nằm dưới trục hoành.
+<img src="images/toan2_t21_h2.png" />
+$\Rightarrow$ Nên ta cần xét $f'(x) > 0$ hay $f'(x) < 0$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Nội dung",
+            toanHoc: String.raw`Nội dung bài`,
+            giaiThich: String.raw``
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_7_tinh_so_diem_cuc_tri_ham_tri_tuyet_doi",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 7: Tính số điểm cực trị hàm trị tuyệt đối**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Tính số điểm cực trị: Số điểm cực trị của hàm số $y = |g(x)|$ bằng tổng của số điểm cực trị của hàm số $g(x)$ và số nghiệm đơn (hoặc nghiệm bội lẻ) của phương trình $g(x) = 0$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Củng cố vũ khí tính nhanh cực trị trị tuyệt đối",
+            toanHoc: String.raw`Nội dung: $+>$ Tính số điểm cực trị: Số điểm cực trị của hàm số $y = |g(x)|$ bằng tổng của số điểm cực trị của hàm số $g(x)$ và số nghiệm đơn (hoặc nghiệm bội lẻ) của phương trình $g(x) = 0$.`,
+            giaiThich: String.raw`Đây là hai nốt lý thuyết để ăn điểm cực nhanh không cần tính nháp nhiều. Với hàm phân thức chứa trị tuyệt đối, đạo hàm không bao giờ đổi dấu (luôn dương hoặc luôn âm), nên chỉ cần chia thẳng 2 trường hợp xét trên/dưới trục hoành là ra.
+Đặc biệt, đếm số cực trị hàm $|g(x)|$, cứ ném luôn công thức tính nhẩm thần thánh này vào:
+$$ \text{Cực Trị } |g(x)| = \text{Cực Trị gốc} + \text{Nghiệm cắt ngang trục hoành} $$
+Khẩu hiệu: **"Phân thức xét dấu nguyên cục - Cực trị lật: Cộng cực trị gốc với số nghiệm cắt ngang!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_7_tuong_giao_do_thi_ham_so_tim_so_nghiem_nguyen",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 7: Tương giao đồ thị hàm số tìm số nghiệm nguyên**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`PHẦN 4: ĐƠN ĐIỆU, TƯƠNG GIAO & BIỆN LUẬN NGHIỆM
+Nội dung: $f(x) \le y$. Tìm $y$ sao cho $f(x)$ có $3$ nghiệm nguyên. Lập bảng biến thiên $f(x)$:
+<img src="images/toan2_t6_h2.png" />
+Đường thẳng $f(x) = y \Rightarrow$ Kẻ ngang đường $y$ cắt trục.`,
+    loiGiai: [
+        {
+            tenBuoc: "Nội dung",
+            toanHoc: String.raw`Nội dung bài`,
+            giaiThich: String.raw``
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_8_tim_gioi_han_do_thi_va_bien_luan_so_nghiem_cua_phuong_trinh_chua_can",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 8: Tìm giới hạn đồ thị và Biện luận số nghiệm của phương trình chứa căn**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Tìm giới hạn đồ thị Cho hàm số: $\lim_{x \to -\infty} \frac{x}{\sqrt{x^2+3}}$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Rút x khỏi căn giới hạn âm vô cực",
+            toanHoc: String.raw`Ta có: $\lim_{x \to -\infty} \frac{x}{\sqrt{x^2+3}} = \lim_{x \to -\infty} \frac{x}{|x|\sqrt{1 + \frac{3}{x^2}}}$ Vì $x \to -\infty$ nên $|x| = -x. \Rightarrow \lim_{x \to -\infty} \frac{x}{-x\sqrt{1 + \frac{3}{x^2}}} = \frac{1}{-1} = -1.$`,
+            giaiThich: String.raw`Bài toán tương giao chứa căn tiến về $-\infty$ là trạm thu phí tử thần của kỳ thi. Rất nhiều bạn cứ nhắm mắt rút $x^2$ ra ngoài căn mà để nguyên dấu dương là mất điểm luôn.
+Nguyên tắc bất di bất dịch:
+$$ \sqrt{x^2} = |x| = -x \text{ (khi } x \to -\infty) $$
+Bắt buộc phải nhả dấu âm ra khi rút $x$ khỏi căn, sau đó triệt tiêu tử mẫu để tìm giới hạn.
+Đừng để chết ở một bước biến đổi sơ cấp này.
+Khẩu hiệu: **"Rút X khỏi căn tiến về âm vô cực - Dính chặt dấu trừ!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Biện luận nghiệm qua bảng biến thiên và đường tiệm cận",
+            toanHoc: String.raw`Tìm $m$ để phương trình $f\left(\frac{x+3}{\sqrt{x^2+3}}\right) = m$ có $3$ nghiệm.
+<img src="images/toan2_t12_h1.png" />
+Đồ thị $f(u)$ đi từ $0$ lên $2$, đi xuống một giá trị rồi đi lên lại.
+<img src="images/toan2_t13_h1_2.png" />
+$\Rightarrow$ $m$ có thể bằng $0$ vì $x \to -\infty$ tiệm cận ngang là $0$ thì đồ thị sẽ không chạm tới vạch đó $\Rightarrow$ Không tính là nghiệm.`,
+            giaiThich: String.raw`Tìm $m$ để phương trình có 3 nghiệm. Khi kẻ đường thẳng $y=m$ cắt ngang đồ thị hàm $f(u)$, bẫy tinh vi nhất nằm ở đuôi vô cực.
+Nếu $x \to -\infty$ cho ra tiệm cận ngang $y=0$ (hoặc $-1$ tùy hàm), nghĩa là đồ thị cắm xuống nhưng trượt dài sát mặt vạch số đó chứ không bao giờ chạm vào. Nếu kẻ vạch $m$ đè đúng lên đường tiệm cận ngang, chỗ đó KHÔNG ĐƯỢC tính là giao điểm (không tính là nghiệm). Quan sát thật kỹ đường đi của đồ thị để không kết luận thừa.
+Khẩu hiệu: **"Tiệm cận ngang là ranh giới vô hình - Sát mặt nhưng không chạm điểm!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "kien_thuc_8_tuong_giao_ham_so_mu_diem_uon_tiep_xuc",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 8: Tương giao hàm số mũ (Điểm uốn / Tiếp xúc)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nhận diện bẫy tiếp xúc đồ thị",
+            toanHoc: String.raw`Nội dung:
+<img src="images/toan1_t25_h1.png" />
+$(*)$ Nghiệm của hàm mũ: Phương trình: $a^x = g(m)x + 1$.
+- Có $1$ nghiệm
+$\Rightarrow \begin{cases} g(m)x + 1 = h(x) \\ g(m) \le 0 \end{cases}$ (hoặc là đường tiếp tuyến).
+- $a^x = g(m)x + 1$ có $2$ nghiệm
+$\Rightarrow \begin{cases} g(m) \neq \ln a \\ g(m) > 0 \end{cases}$
+
+<img src="images/toan1_t26_h1.png" />
+Phương trình: $\log_a x = g(m)x - g(m) = g(m)(x - 1)$.
+- Có $2$ nghiệm
+$\Rightarrow \begin{cases} g(m) \neq \frac{1}{\ln a} \\ g(m) > 0 \end{cases}$
+- Có $1$ nghiệm
+$\Leftrightarrow \left[ \begin{array}{l} g(m) = 0 \\ g(m) \neq \frac{1}{\ln a} ; g(m) < 0 \\ g(m) = \frac{1}{\ln a} \end{array} \right.$`,
+            giaiThich: String.raw`Phần lý thuyết này rất hay gặp trong các bài vận dụng cao. Đây là tương giao giữa một đường cong hàm mũ $a^x$ và một chùm đường thẳng quay quanh một điểm cố định (ở đây là điểm $(0,1)$).
+Bẫy lớn nhất: Học sinh hay quên mất trường hợp đường thẳng đi ngang "tiếp xúc" hoặc cắt qua "điểm uốn" của đồ thị. Tùy vào hệ số góc $g(m)$ mà đường thẳng đó sẽ cắt 1 điểm, 2 điểm hoặc sượt qua tiếp tuyến. Nhìn kỹ các hình minh họa bên dưới để nhớ mặt đồ thị.
+Khẩu hiệu: **"Hàm mũ gặp chùm đường thẳng - Cẩn thận bẫy tiếp tuyến!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_9_ham_so_le_va_tinh_don_dieu",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 9: Hàm số lẻ và tính đơn điệu**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Ứng dụng hàm lẻ giải nhanh bất phương trình",
+            toanHoc: String.raw`Nội dung: $+>$ Hàm số lẻ thỏa mãn tính chất $f(x) = -f(-x)$ hoặc $f(-x) = -f(x)$.
+$\rightarrow$ Điều kiện: $f(x)$ luôn đồng biến hoặc nghịch biến. $\hookrightarrow$ Áp dụng Vận dụng cao (VDC) cho bất phương trình: $f(a) + f(b) \ge 0$
+$\Rightarrow f(a) \ge -f(b)$. Vì hàm số là hàm lẻ nên $-f(b) = f(-b)$. Do đó:
+$f(a) \ge f(-b) \Rightarrow a \ge -b$ (Nếu hàm số đồng biến).`,
+            giaiThich: String.raw`Dấu hiệu nhận biết: Đề cho một hàm số có cấu trúc đối xứng kiểu $f(-x) = -f(x)$, đó chính là đặc trưng của hàm lẻ. Nếu đề gài thêm chi tiết "hàm luôn đồng biến" nữa, thì em đang cầm trong tay vũ khí cực mạnh để xử lý nhanh gọn các cụm $f(a) + f(b) \ge 0$.
+Chuyển $f(b)$ sang phải thành $-f(b)$. Nhờ tính chất hàm lẻ, dấu trừ sẽ chui tọt vào bên trong lõi thành $f(-b)$. Lúc này do hàm đồng biến, em vứt luôn cái vỏ $f$ đi, ép trực tiếp hai cái lõi $a \ge -b$ với nhau là xong phim.
+Khẩu hiệu: **"Hàm lẻ đồng biến - Nuốt dấu trừ vào lõi, vứt vỏ!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_10_dieu_kien_chung_ve_tinh_don_dieu",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 10: Điều kiện chung về Tính Đơn Điệu**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Quy tắc dấu đa thức trên R",
+            toanHoc: String.raw`Nội dung: $+>$ Điều kiện đơn điệu: Hàm số nghịch biến:
+$\begin{cases} \Delta' (y') \le 0 \\ a (y') < 0 \end{cases}$ Hàm số đồng biến:
+$\begin{cases} \Delta' (y') \le 0 \\ a (y') > 0 \end{cases}$`,
+            giaiThich: String.raw`Đây là kiến thức nền tảng ăn điểm, nhưng lúc luống cuống đi thi rất hay xét sai dấu hoặc quên mất hệ số $a$. Hàm đa thức muốn luôn đồng biến hoặc nghịch biến trên toàn bộ $\mathbb{R}$ thì đạo hàm của nó không được phép đổi dấu.
+Vũ khí cơ bản: Đập ngay $\Delta \le 0$ cho y', và kẹp thêm điều kiện hệ số $a$ phải cùng chiều với yêu cầu bài toán (đồng biến thì $a>0$, nghịch biến thì $a<0$).
+Khẩu hiệu: **"Đơn điệu trên R - Delta y' âm, a cùng dấu!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_13_ham_so_bac_3_dong_bien_tren_1_khoang_co_do_dai_bang_1",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 13: Hàm số bậc 3 đồng biến trên 1 khoảng có độ dài bằng 1**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Cho hàm số $y = -x^3 + 3x^2 + (m-1)x + 2m - 3$. Tìm $m$ để hàm số đồng biến trên $1$ khoảng có độ dài bằng $1$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Điều kiện tồn tại khoảng đơn điệu hẹp",
+            toanHoc: String.raw`Ta có đạo hàm: $y' = -3x^2 + 6x + m - 1$. Vì $a = -3 < 0$. Xét
+$\Delta' = 3^2 - (-3)(m-1) = 9 + 3m - 3 = 3m + 6$. Trường hợp 1:
+$\Delta' \le 0 \Rightarrow m \le -2 \Rightarrow y' \le 0, \forall x \Rightarrow$ Hàm số nghịch biến trên $\mathbb{R} \Rightarrow$ Vô lý (Loại). Trường hợp 2:
+$\Delta' > 0 \Rightarrow m > -2$.`,
+            giaiThich: String.raw`Đề bắt hàm số đồng biến trên một khoảng có độ dài hữu hạn. Phản xạ ngay: Đồ thị hàm bậc 3 có hệ số $a$ âm (chữ N ngược) chỉ ngoi lên (đồng biến) ở cái đoạn nằm lọt thỏm giữa hai điểm cực trị. Tức là khoảng đồng biến đó chính là đoạn $(x_1, x_2)$.
+Vậy việc đầu tiên bắt buộc phải làm là ép $\Delta' > 0$ của đạo hàm để chắc chắn nó sinh ra 2 điểm cực trị đã.
+Khẩu hiệu: **"Đồng biến trên khoảng hẹp - Bắt buộc kẹp giữa 2 cực trị!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Xử lý hiệu hai nghiệm bằng Vi-et",
+            toanHoc: String.raw`Hàm số đồng biến trên khoảng $(x_1, x_2)$ có độ dài bằng $1 \Rightarrow |x_1 - x_2| = 1$
+$\Leftrightarrow (x_1 + x_2)^2 - 4x_1x_2 = 1$ Theo định lý Vi-et:
+$\begin{cases} x_1 + x_2 = 2 \\ x_1x_2 = \frac{m-1}{-3} = \frac{1-m}{3} \end{cases}$
+Thay vào phương trình: $\Leftrightarrow 2^2 - 4\left(\frac{1-m}{3}\right) = 1$
+$\Leftrightarrow 4 + \frac{4m-4}{3} = 1 \Leftrightarrow 12 + 4m - 4 = 3$
+$\Leftrightarrow 4m = -5 \Rightarrow m = -\frac{7}{4}$ (Loại, nguyên văn ghi -7/4 (L)).
+$\Rightarrow$ Không có $m$ thỏa mãn.`,
+            giaiThich: String.raw`Độ dài khoảng bằng 1 tức là khoảng cách $|x_1 - x_2| = 1$. Gặp hiệu 2 nghiệm thì vũ khí kinh điển luôn là bình phương hai vế lên.
+$$ (x_1 - x_2)^2 = (x_1 + x_2)^2 - 4x_1x_2 $$
+Biến đổi xong, em chỉ việc nhặt định lý Vi-et từ phương trình $y'=0$ ném vào là nhổ tận gốc con $m$. Đừng quên đối chiếu lại với điều kiện $\Delta' > 0$ ở Bước 1 nhé.
+Khẩu hiệu: **"Hiệu 2 nghiệm - Bình phương ốp ngay Vi-et!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_11_dieu_kien_xac_dinh_mau_so_khi_khao_sat_don_dieu",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức & Bài toán",
+    tieuDe: "**Kiến thức 11: Điều kiện xác định (Mẫu số) khi khảo sát đơn điệu**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Quy tắc 'Thở' trước khi làm toán - Đặt điều kiện mẫu",
+            toanHoc: String.raw`Nội dung: $+>$ Luôn nhớ đặt điều kiện mẫu số. Ví dụ: Tìm $m$ để hàm số $y = \frac{2^x + 10}{2^x - m}$ nghịch biến trên khoảng $(1; 4)$.
+$\Rightarrow$ Điều kiện xác định: $2^x - m \neq 0 \Rightarrow m \neq 2^x$. Vì $x \in (1; 4) \Rightarrow 2^x \in (2^1; 2^4) \Rightarrow 2^x \in (2; 16)$.
+$\Rightarrow m \notin (2; 16) \Rightarrow \begin{bmatrix} m \le 2 \\ m \ge 16 \end{bmatrix}$.`,
+            giaiThich: String.raw`Đây là lỗi sơ đẳng nhất nhưng cũng chí mạng nhất khiến mức 6 điểm bay mất điểm oan.
+Gặp hàm phân thức, chưa cần biết đề hỏi đồng biến hay nghịch biến, việc đầu tiên bắt buộc phải làm là lôi cái mẫu số ra cho khác 0. Đừng cắm đầu vào đạo hàm ngay!
+Ví dụ bài này, mẫu chứa $m$, em rút $m \neq 2^x$. Vì $x$ bị nhốt trong khoảng $(1; 4)$, em chặn ngay được $2^x$ nằm trong khoảng $(2; 16)$. Vậy $m$ tuyệt đối không được bén mảng vào cái vùng "cấm địa" này, tức là phải dạt ra hai bên rìa.
+Khẩu hiệu: **"Thấy phân thức - Đặt mẫu khác 0 trước khi nhấc bút đạo hàm!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "kien_thuc_8_tuong_giao_ham_so_mu_diem_uon_tiep_xuc",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 8: Tương giao hàm số mũ (Điểm uốn / Tiếp xúc)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nhận diện bẫy tiếp xúc đồ thị",
+            toanHoc: String.raw`Nội dung:
+<img src="images/toan1_t25_h1.png" />
+$(*)$ Nghiệm của hàm mũ: Phương trình: $a^x = g(m)x + 1$.
+- Có $1$ nghiệm
+$\Rightarrow \begin{cases} g(m)x + 1 = h(x) \\ g(m) \le 0 \end{cases}$ (hoặc là đường tiếp tuyến).
+- $a^x = g(m)x + 1$ có $2$ nghiệm
+$\Rightarrow \begin{cases} g(m) \neq \ln a \\ g(m) > 0 \end{cases}$
+
+<img src="images/toan1_t26_h1.png" />
+Phương trình: $\log_a x = g(m)x - g(m) = g(m)(x - 1)$.
+- Có $2$ nghiệm
+$\Rightarrow \begin{cases} g(m) \neq \frac{1}{\ln a} \\ g(m) > 0 \end{cases}$
+- Có $1$ nghiệm
+$\Leftrightarrow \left[ \begin{array}{l} g(m) = 0 \\ g(m) \neq \frac{1}{\ln a} ; g(m) < 0 \\ g(m) = \frac{1}{\ln a} \end{array} \right.$`,
+            giaiThich: String.raw`Phần lý thuyết này rất hay gặp trong các bài vận dụng cao. Đây là tương giao giữa một đường cong hàm mũ $a^x$ và một chùm đường thẳng quay quanh một điểm cố định (ở đây là điểm $(0,1)$).
+Bẫy lớn nhất: Học sinh hay quên mất trường hợp đường thẳng đi ngang "tiếp xúc" hoặc cắt qua "điểm uốn" của đồ thị. Tùy vào hệ số góc $g(m)$ mà đường thẳng đó sẽ cắt 1 điểm, 2 điểm hoặc sượt qua tiếp tuyến. Nhìn kỹ các hình minh họa bên dưới để nhớ mặt đồ thị.
+Khẩu hiệu: **"Hàm mũ gặp chùm đường thẳng - Cẩn thận bẫy tiếp tuyến!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_9_ham_so_le_va_tinh_don_dieu",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 9: Hàm số lẻ và tính đơn điệu**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Ứng dụng hàm lẻ giải nhanh bất phương trình",
+            toanHoc: String.raw`Nội dung: $+>$ Hàm số lẻ thỏa mãn tính chất $f(x) = -f(-x)$ hoặc $f(-x) = -f(x)$.
+$\rightarrow$ Điều kiện: $f(x)$ luôn đồng biến hoặc nghịch biến. $\hookrightarrow$ Áp dụng Vận dụng cao (VDC) cho bất phương trình: $f(a) + f(b) \ge 0$
+$\Rightarrow f(a) \ge -f(b)$. Vì hàm số là hàm lẻ nên $-f(b) = f(-b)$. Do đó:
+$f(a) \ge f(-b) \Rightarrow a \ge -b$ (Nếu hàm số đồng biến).`,
+            giaiThich: String.raw`Dấu hiệu nhận biết: Đề cho một hàm số có cấu trúc đối xứng kiểu $f(-x) = -f(x)$, đó chính là đặc trưng của hàm lẻ. Nếu đề gài thêm chi tiết "hàm luôn đồng biến" nữa, thì em đang cầm trong tay vũ khí cực mạnh để xử lý nhanh gọn các cụm $f(a) + f(b) \ge 0$.
+Chuyển $f(b)$ sang phải thành $-f(b)$. Nhờ tính chất hàm lẻ, dấu trừ sẽ chui tọt vào bên trong lõi thành $f(-b)$. Lúc này do hàm đồng biến, em vứt luôn cái vỏ $f$ đi, ép trực tiếp hai cái lõi $a \ge -b$ với nhau là xong phim.
+Khẩu hiệu: **"Hàm lẻ đồng biến - Nuốt dấu trừ vào lõi, vứt vỏ!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_10_dieu_kien_chung_ve_tinh_don_dieu",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 10: Điều kiện chung về Tính Đơn Điệu**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Quy tắc dấu đa thức trên R",
+            toanHoc: String.raw`Nội dung: $+>$ Điều kiện đơn điệu: Hàm số nghịch biến:
+$\begin{cases} \Delta' (y') \le 0 \\ a (y') < 0 \end{cases}$ Hàm số đồng biến:
+$\begin{cases} \Delta' (y') \le 0 \\ a (y') > 0 \end{cases}$`,
+            giaiThich: String.raw`Đây là kiến thức nền tảng ăn điểm, nhưng lúc luống cuống đi thi rất hay xét sai dấu hoặc quên mất hệ số $a$. Hàm đa thức muốn luôn đồng biến hoặc nghịch biến trên toàn bộ $\mathbb{R}$ thì đạo hàm của nó không được phép đổi dấu.
+Vũ khí cơ bản: Đập ngay $\Delta \le 0$ cho y', và kẹp thêm điều kiện hệ số $a$ phải cùng chiều với yêu cầu bài toán (đồng biến thì $a>0$, nghịch biến thì $a<0$).
+Khẩu hiệu: **"Đơn điệu trên R - Delta y' âm, a cùng dấu!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_13_ham_so_bac_3_dong_bien_tren_1_khoang_co_do_dai_bang_1",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 13: Hàm số bậc 3 đồng biến trên 1 khoảng có độ dài bằng 1**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Cho hàm số $y = -x^3 + 3x^2 + (m-1)x + 2m - 3$. Tìm $m$ để hàm số đồng biến trên $1$ khoảng có độ dài bằng $1$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Điều kiện tồn tại khoảng đơn điệu hẹp",
+            toanHoc: String.raw`Ta có đạo hàm: $y' = -3x^2 + 6x + m - 1$. Vì $a = -3 < 0$. Xét
+$\Delta' = 3^2 - (-3)(m-1) = 9 + 3m - 3 = 3m + 6$. Trường hợp 1:
+$\Delta' \le 0 \Rightarrow m \le -2 \Rightarrow y' \le 0, \forall x \Rightarrow$ Hàm số nghịch biến trên $\mathbb{R} \Rightarrow$ Vô lý (Loại). Trường hợp 2:
+$\Delta' > 0 \Rightarrow m > -2$.`,
+            giaiThich: String.raw`Đề bắt hàm số đồng biến trên một khoảng có độ dài hữu hạn. Phản xạ ngay: Đồ thị hàm bậc 3 có hệ số $a$ âm (chữ N ngược) chỉ ngoi lên (đồng biến) ở cái đoạn nằm lọt thỏm giữa hai điểm cực trị. Tức là khoảng đồng biến đó chính là đoạn $(x_1, x_2)$.
+Vậy việc đầu tiên bắt buộc phải làm là ép $\Delta' > 0$ của đạo hàm để chắc chắn nó sinh ra 2 điểm cực trị đã.
+Khẩu hiệu: **"Đồng biến trên khoảng hẹp - Bắt buộc kẹp giữa 2 cực trị!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Xử lý hiệu hai nghiệm bằng Vi-et",
+            toanHoc: String.raw`Hàm số đồng biến trên khoảng $(x_1, x_2)$ có độ dài bằng $1 \Rightarrow |x_1 - x_2| = 1$
+$\Leftrightarrow (x_1 + x_2)^2 - 4x_1x_2 = 1$ Theo định lý Vi-et:
+$\begin{cases} x_1 + x_2 = 2 \\ x_1x_2 = \frac{m-1}{-3} = \frac{1-m}{3} \end{cases}$
+Thay vào phương trình: $\Leftrightarrow 2^2 - 4\left(\frac{1-m}{3}\right) = 1$
+$\Leftrightarrow 4 + \frac{4m-4}{3} = 1 \Leftrightarrow 12 + 4m - 4 = 3$
+$\Leftrightarrow 4m = -5 \Rightarrow m = -\frac{7}{4}$ (Loại, nguyên văn ghi -7/4 (L)).
+$\Rightarrow$ Không có $m$ thỏa mãn.`,
+            giaiThich: String.raw`Độ dài khoảng bằng 1 tức là khoảng cách $|x_1 - x_2| = 1$. Gặp hiệu 2 nghiệm thì vũ khí kinh điển luôn là bình phương hai vế lên.
+$$ (x_1 - x_2)^2 = (x_1 + x_2)^2 - 4x_1x_2 $$
+Biến đổi xong, em chỉ việc nhặt định lý Vi-et từ phương trình $y'=0$ ném vào là nhổ tận gốc con $m$. Đừng quên đối chiếu lại với điều kiện $\Delta' > 0$ ở Bước 1 nhé.
+Khẩu hiệu: **"Hiệu 2 nghiệm - Bình phương ốp ngay Vi-et!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_11_dieu_kien_xac_dinh_mau_so_khi_khao_sat_don_dieu",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức & Bài toán",
+    tieuDe: "**Kiến thức 11: Điều kiện xác định (Mẫu số) khi khảo sát đơn điệu**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Quy tắc 'Thở' trước khi làm toán - Đặt điều kiện mẫu",
+            toanHoc: String.raw`Nội dung: $+>$ Luôn nhớ đặt điều kiện mẫu số. Ví dụ: Tìm $m$ để hàm số $y = \frac{2^x + 10}{2^x - m}$ nghịch biến trên khoảng $(1; 4)$.
+$\Rightarrow$ Điều kiện xác định: $2^x - m \neq 0 \Rightarrow m \neq 2^x$. Vì $x \in (1; 4) \Rightarrow 2^x \in (2^1; 2^4) \Rightarrow 2^x \in (2; 16)$.
+$\Rightarrow m \notin (2; 16) \Rightarrow \begin{bmatrix} m \le 2 \\ m \ge 16 \end{bmatrix}$.`,
+            giaiThich: String.raw`Đây là lỗi sơ đẳng nhất nhưng cũng chí mạng nhất khiến mức 6 điểm bay mất điểm oan.
+Gặp hàm phân thức, chưa cần biết đề hỏi đồng biến hay nghịch biến, việc đầu tiên bắt buộc phải làm là lôi cái mẫu số ra cho khác 0. Đừng cắm đầu vào đạo hàm ngay!
+Ví dụ bài này, mẫu chứa $m$, em rút $m \neq 2^x$. Vì $x$ bị nhốt trong khoảng $(1; 4)$, em chặn ngay được $2^x$ nằm trong khoảng $(2; 16)$. Vậy $m$ tuyệt đối không được bén mảng vào cái vùng "cấm địa" này, tức là phải dạt ra hai bên rìa.
+Khẩu hiệu: **"Thấy phân thức - Đặt mẫu khác 0 trước khi nhấc bút đạo hàm!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "kien_thuc_12_danh_gia_tinh_don_dieu_cua_ham_so_chua_tham_so",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 12: Đánh giá tính đơn điệu của hàm số chứa tham số**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chốt hạ miền xác định cho m",
+            toanHoc: String.raw`Nội dung:
+- Hàm nghịch biến, đồng biến luôn nhỏ hơn điều kiện của ẩn $m$. Ví dụ:
+$y = \frac{1}{x - m}$ với $x \in (-1; 1)$
+$\Rightarrow m \neq x \Rightarrow m \notin (-1; 1) \Rightarrow m \in (-\infty; -1] \cup [1; +\infty)$`,
+            giaiThich: String.raw`Kiến thức này bổ trợ trực tiếp cho phần trên. Rất nhiều bạn giải xong điều kiện đạo hàm nhưng quên khuấy mất bước chốt chặn này. Dù hàm bắt đồng biến hay nghịch biến thì điều kiện "Mẫu khác 0" (tức $m \neq x$) luôn phải được ưu tiên số 1. $x$ chạy trong vùng nào thì $m$ phải "né" vùng đó ra. Nếu không cắt đuôi mượt mà chỗ này, đáp án sẽ bị thừa nghiệm ngay.
+Khẩu hiệu: **"Đơn điệu chạy đâu thì chạy - M vẫn phải né X ra!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_13_phuong_phap_danh_gia_tinh_don_dieu_cua_ham_a_x",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 13: Phương pháp đánh giá tính đơn điệu của hàm $a^x$**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Mẹo nhẩm nhanh số nghiệm hàm mũ",
+            toanHoc: String.raw`Nội dung: $+>$ Phương trình $a^x = b^x$ luôn có $1$ nghiệm dù đồng biến hay nghịch biến. $+>$ Phương trình $a^x = f(x)$ có $1$ nghiệm $\Leftrightarrow 1$ vế là hàm đồng biến, $1$ vế là hàm nghịch biến $\Rightarrow$ có $1$ nghiệm. Hoặc
+$\begin{cases} a > 1 \\ 0 < b < 1 \end{cases} \Rightarrow \text{có 1 nghiệm.}$
+$\begin{cases} 0 < a < 1 \\ b > 1 \end{cases}$
+$\begin{cases} 0 < a < 1 \\ 0 < x < 1 \end{cases}$ (Ghi chú: phần này liệt kê các trường hợp cơ số để hàm số đồng biến hoặc nghịch biến).`,
+            giaiThich: String.raw`Đi thi trắc nghiệm, có những phương trình nhìn rất cồng kềnh nhưng thực chất chỉ cần dùng tính chất đơn điệu là chốt hạ luôn số nghiệm.
+Em khắc cốt ghi tâm quy tắc "Trái dấu đơn điệu" này: Một vế là hàm luôn đi lên (đồng biến), vế kia là hàm luôn cắm xuống (nghịch biến), hoặc vế kia là đường nằm ngang (hằng số). Hai đường này nếu có cắt nhau thì chắc chắn chỉ "chạm" nhau đúng 1 lần duy nhất trong đời. Nên số nghiệm tối đa luôn là 1. Không cần giải chi tiết, chỉ cần chứng minh được tính đơn điệu trái ngược là khoanh luôn.
+Khẩu hiệu: **"Một lên một xuống - Chỉ cắt nhau 1 điểm duy nhất!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_14_va_bai_14_danh_gia_bat_phuong_trinh_bang_dao_ham",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức & Bài toán",
+    tieuDe: "**Kiến thức 14 & Bài 14: Đánh giá bất phương trình bằng đạo hàm**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Ví dụ: Đánh giá bất phương trình bằng đạo hàm
+Đề bài: Giải bất phương trình $4^{-x} - 3x + \log_4(y - x) - 2y + 2 \le 0$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tạo hàm số và đánh giá toàn cục dấu y'",
+            toanHoc: String.raw`Note: Khi xét bất đẳng thức hay phương trình, hãy thử đạo hàm và đánh giá.
+Xét hàm số $f(x) = 4^{-x} - 3x + \log_4(y - x) - 2y + 2$. Ta đánh giá giá trị của đạo hàm $f'(x)$. $f'(x) = -4^{-x}\ln 4 - 3 - \frac{1}{(y - x)\ln 4}$ Điều kiện xác định của logarit là $y - x > 0 \Rightarrow \frac{1}{(y - x)\ln 4} > 0$. Ta thấy:
+$-4^{-x}\ln 4 < 0 ; -3 < 0 ; -\frac{1}{(y - x)\ln 4} < 0$
+$\Rightarrow f'(x) < 0, \forall x < y$.
+$\Rightarrow$ Hàm số $f(x)$ luôn nghịch biến trên tập xác định.`,
+            giaiThich: String.raw`Gặp bất phương trình hỗn tạp, có cả hàm mũ $4^{-x}$, đa thức $-3x$ và logarit $\log_4$, tuyệt đối đừng hy vọng tìm ra công thức nghiệm chung.
+Đường sống duy nhất: Dồn hết về một vế tạo thành hàm $f(x)$, đạo hàm ngay để kiểm tra tính đơn điệu.
+Cái hay của dạng này là khi đạo hàm xong, các cụm chứa $x$ thường sẽ tự bộc lộ rõ bản chất luôn âm hoặc luôn dương. Nhìn đạo hàm $f'(x)$ kia kìa, từng thành phần đều dính dấu âm, chứng tỏ $f'(x) < 0$ luôn. Vậy hàm này cắm đầu đi xuống từ đầu đến cuối. Kết hợp với việc tìm nhẩm ra 1 điểm làm mốc là xong bài.
+Khẩu hiệu: **"Phương trình lai tạp mũ, log, đa thức - Dồn vế đạo hàm đánh giá dấu ngay!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_15_khao_sat_ham_so_tim_min_max_bien_doi_t_xy",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 15: Khảo sát hàm số tìm Min, Max (biến đổi $t = xy$)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Khảo sát hàm theo ẩn phụ và bắt Max/Min tại đỉnh/mút",
+            toanHoc: String.raw`Nội dung: Khảo sát hàm $P(t) = -2t^2 + 2t + 1$ trên đoạn $\left[-\frac{1}{3}; 1\right]$. Đạo hàm
+$P'(t) = -4t + 2 = 0 \Leftrightarrow t = \frac{1}{2}$.
+<img src="images/toan2_t9_h1.png" />`,
+            giaiThich: String.raw`Đây là cái lõi cuối cùng sau khi em đã chuyển được phương trình 2 biến $x,y$ về một ẩn phụ $t$. Việc còn lại chỉ là bài toán lớp 12 cơ bản: Tìm Min, Max của một đa thức trên đoạn hữu hạn $\left[-\frac{1}{3}; 1\right]$.
+Vũ khí: Đạo hàm tìm nghiệm, kẻ bảng biến thiên. Đừng lười bấm máy tính mode 7 (hoặc mode 8) nếu hàm dễ bị trôi sai số. Điểm chết là quên không lấy mốc giá trị tại hai đầu mút $-\frac{1}{3}$ và $1$ để so sánh với cực trị. Đỉnh núi (Max) hoặc đáy vực (Min) chắc chắn nằm trong đám này.
+Khẩu hiệu: **"Max/Min trên đoạn - Tính cực trị và chốt hạ hai đầu mút!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_16_danh_gia_khoang_gia_tri_ham_so_phan_thuc_dung_delta",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 16: Đánh giá khoảng giá trị hàm số phân thức (Dùng Delta)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Kỹ thuật dồn biến I và ép Delta tồn tại nghiệm",
+            toanHoc: String.raw`Nội dung:
+- Tìm điều kiện để phân thức nhận giá trị nguyên. Ví dụ: Tìm $x$ để biểu thức $I = \frac{-6x - 2}{x^2 + 3}$ là số nguyên. Ta có:
+$I = \frac{-6x - 2}{x^2 + 3} \Rightarrow I(x^2 + 3) = -6x - 2$
+$\Leftrightarrow Ix^2 + 6x + 3I + 2 = 0$ Được xem như phương trình bậc $2$ ẩn $x$.
+
+Để phương trình có nghiệm thì: $\Delta' = 3^2 - I(3I + 2) \ge 0$
+$\Leftrightarrow 9 - 3I^2 - 2I \ge 0 \Leftrightarrow -3I^2 - 2I + 9 \ge 0$
+$\Leftrightarrow -2,04 \le I \le 1,43$ Vì $I$ nguyên nên $I \in \{-2; -1; 0; 1\}$.`,
+            giaiThich: String.raw`Đề bắt tìm $x$ để hàm phân thức ra một số nguyên $I$. Bình thường làm đạo hàm lập BBT sẽ khá cồng kềnh. Ở đây có một mẹo đi tắt cực hay của bậc 2: Nhân chéo mẫu lên, chuyển vế để gom toàn bộ về dạng phương trình bậc 2 theo ẩn $x$, coi cái thằng $I$ kia là tham số.
+Vũ khí sắc bén:
+$$ Ax^2 + Bx + C = 0 $$
+Muốn tìm được $x$ thì phương trình này BẮT BUỘC phải có nghiệm. Vậy là em chỉ cần quất $\Delta \ge 0$ (hoặc $\Delta' \ge 0$). Bất phương trình $\Delta$ đó sẽ tự động kẹp cái thằng $I$ vào giữa một khoảng rất hẹp. Vì đề yêu cầu $I$ là số nguyên, em chỉ cần mò các số nguyên nằm trong khoảng kẹp đó là xong.
+Khẩu hiệu: **"Nhân chéo tạo bậc 2 - Quất Delta ép kẹp khoảng nguyên!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_17_danh_gia_min_max_bang_delta_doi_voi_ham_luong_giac",
+    chuyenDe: "luong-giac",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 17: Đánh giá Min/Max bằng Delta đối với hàm lượng giác**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Rút gọn về dạng a.sin + b.cos = c và kẹp điều kiện có nghiệm",
+            toanHoc: String.raw`Nội dung: $+>$ Cho hàm số $y = \frac{1 - m\sin x}{\cos x + 2}$. Tìm tham số $m$ để giá trị nhỏ nhất (min) của $y < -2$.
+
+$\Rightarrow y\cos x + 2y = 1 - m\sin x$
+$\Leftrightarrow m\sin x + y\cos x = 1 - 2y$ Điều kiện để phương trình có nghiệm lượng giác: $A^2 + B^2 \ge C^2 \Rightarrow m^2 + y^2 \ge (1 - 2y)^2$
+$\Leftrightarrow m^2 + y^2 \ge 1 - 4y + 4y^2$
+$\Leftrightarrow 3y^2 - 4y + 1 - m^2 \le 0$ Xét
+$\Delta' = 4 - 3(1 - m^2) = 1 + 3m^2 > 0$
+$\Rightarrow y_1 = \frac{2 + \sqrt{1 + 3m^2}}{3} ; y_2 = \frac{2 - \sqrt{1 + 3m^2}}{3}$
+$\Rightarrow \frac{2 - \sqrt{1 + 3m^2}}{3} \le y \le \frac{2 + \sqrt{1 + 3m^2}}{3}$
+
+Yêu cầu bài toán: $\min(y) < -2 \Rightarrow \frac{2 - \sqrt{1 + 3m^2}}{3} < -2$
+$\Leftrightarrow 2 - \sqrt{1 + 3m^2} < -6 \Leftrightarrow \sqrt{1 + 3m^2} > 8$
+$\Leftrightarrow 1 + 3m^2 > 64 \Leftrightarrow m^2 > 21$
+$\Leftrightarrow m > \sqrt{21} \text{ hoặc } m < -\sqrt{21}$.`,
+            giaiThich: String.raw`Gặp phân thức lượng giác chứa $\sin$ và $\cos$, nếu đi đạo hàm trực tiếp thì dài miên man. Lại dùng tuyệt chiêu nhân chéo như bài trên!
+Nhân tung lên và gom $\sin x$ về một cụm, $\cos x$ về một cụm, em sẽ thu được phương trình dạng chuẩn: $A\sin x + B\cos x = C$.
+Đây là phương trình lượng giác cơ bản lớp 11, điều kiện sống còn để nó có nghiệm là:
+$$ A^2 + B^2 \ge C^2 $$
+Thế thẳng các cụm chứa $y$ và $m$ vào. Em sẽ ép được thằng $y$ vào một cái phương trình bậc 2. Giải phương trình đó, em sẽ chặn được $y$ ở hai đầu mút, đó chính là Min và Max. Đề đòi Min $<$ số mấy thì em bốc thẳng cái mút nhỏ hơn đó cho giải bất phương trình là ăn điểm.
+Khẩu hiệu: **"Lượng giác phân thức nhân chéo - Nhồi công thức bình phương A B C kẹp Min Max!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_18_tim_gia_tri_lon_nhat_max_va_nho_nhat_min_cua_ham_luong_giac",
+    chuyenDe: "luong-giac",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 18: Tìm giá trị lớn nhất (max) và nhỏ nhất (min) của hàm lượng giác**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Thu gọn biểu thức a.sin + b.cos bằng góc phụ",
+            toanHoc: String.raw`Nội dung: $+>$ Cho hàm số: $y = 3\sin x + 4\cos x + 1$. Tìm giá trị lớn nhất (max) và nhỏ nhất (min) của $y$?
+
+Chia cả hai vế cho $5$:
+$\frac{y}{5} = \frac{3}{5}\sin x + \frac{4}{5}\cos x + \frac{1}{5}$ Đặt $\cos \alpha = \frac{3}{5}$ và $\sin \alpha = \frac{4}{5}$. Khi đó phương trình trở thành: $\frac{y}{5} = \sin x \cos \alpha + \cos x \sin \alpha + \frac{1}{5}$
+$\Leftrightarrow \frac{y}{5} = \sin(x + \alpha) + \frac{1}{5}$
+
+Vì $-1 \le \sin(x + \alpha) \le 1$ nên:
+$-1 + \frac{1}{5} \le \frac{y}{5} \le 1 + \frac{1}{5}$
+$\Leftrightarrow \frac{-4}{5} \le \frac{y}{5} \le \frac{6}{5}$ Nhân cả $3$ vế với $5$, ta được:
+$-4 \le y \le 6$. Vậy $y_{\min} = -4$ và $y_{\max} = 6$.`,
+            giaiThich: String.raw`Đây là một kỹ thuật biến đổi lượng giác cực kỳ đẳng cấp để tìm Max/Min không cần đạo hàm. Vẫn là cái cấu trúc $A\sin x + B\cos x$, em hãy chia cả 2 vế cho $\sqrt{A^2 + B^2}$ (ở đây là số $5$).
+Tự động các hệ số mới ($\frac{3}{5}$ và $\frac{4}{5}$) sẽ biến thành $\cos$ và $\sin$ của một góc $\alpha$ bí ẩn nào đó. Em gom nó lại thành duy nhất một hàm $\sin(x + \alpha)$.
+Mấu chốt: Dù cái ruột $(x + \alpha)$ có phức tạp thế nào, thì bản thân cái vỏ $\sin$ bao giờ cũng bị nhốt gọn trong khoảng $[-1; 1]$. Ép khoảng này, rồi nhân/cộng ngược trở lại là ra ngay Min Max của $y$. Quá gọn gàng!
+Khẩu hiệu: **"Gom a.sin + b.cos thành 1 sin duy nhất - Đè giá trị vào kẹp [-1; 1]!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_19_khao_sat_ham_so_luy_thua_mu_tim_min_max",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 19: Khảo sát hàm số lũy thừa/mũ tìm Min/Max**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đặt ẩn phụ t và tìm biên cho t",
+            toanHoc: String.raw`Nội dung: Đặt $t = 3^{x^2}$. Xét hàm $t(x) = 3^{x^2}$ trên đoạn $[-2; 1]$. Đạo hàm: $t' = 3^{x^2} \cdot \ln 3 \cdot 2x = 0 \Leftrightarrow x = 0$.
+
+Bảng biến thiên của $t(x)$:
+<img src="images/toan2_t25_h1.png" />
+Từ bảng biến thiên, ta thấy $t \in [1; 3^4] \Rightarrow t \in [1; 81]$.`,
+            giaiThich: String.raw`Bài toán mũ phức tạp, bước đầu tiên dĩ nhiên là đặt $t = 3^{x^2}$. Nhưng cái bẫy kinh điển: Học sinh quên béng mất việc tìm khoảng giá trị mới cho $t$ mà cứ ốp luôn vào phương trình bậc 2.
+Biến $x$ chạy trong đoạn $[-2; 1]$, em BẮT BUỘC phải vẽ bảng biến thiên của cái hàm $t(x) = 3^{x^2}$ này ra. Mốc Max là $3^4=81$, mốc Min nằm ở đỉnh đáy $3^0=1$. Vậy $t$ chỉ được phép loanh quanh trong lồng $[1; 81]$.
+Khẩu hiệu: **"Đổi biến mũ - Phải dựng bảng biến thiên tìm kẹp cho t ngay!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Giải hàm bậc 2 trên miền t bị chặn",
+            toanHoc: String.raw`Phương trình ban đầu trở thành: $t^2 - 4t + 8 = m$. Xét hàm số $f(t) = t^2 - 4t + 8$ trên đoạn $t \in [1; 81]$. Đạo hàm: $f'(t) = 2t - 4 = 0 \Leftrightarrow t = 2$.
+
+Bảng biến thiên của $f(t)$:
+<img src="images/toan2_t25_h2.png" />
+Dựa vào bảng biến thiên, để phương trình có nghiệm thì $m$ phải cắt đồ thị hàm $f(t)$:
+$\Rightarrow 4 \le m \le 6245$.`,
+            giaiThich: String.raw`Lôi được miền $t \in [1; 81]$ rồi, giờ vứt hẳn phương trình gốc đi, mình quy bài toán về tìm tương giao của đồ thị parabol $f(t) = t^2 - 4t + 8$ và đường thẳng $y=m$ trên đoạn kẹp này.
+Lập bảng biến thiên $f(t)$ bình thường. Để phương trình có nghiệm thì $m$ phải cắt vào đường cong này. Từ mốc thấp nhất (Min) đến mốc cao nhất (Max) chính là giới hạn của $m$.
+Khẩu hiệu: **"Tương giao m - Nhìn đáy và đỉnh của bảng biến thiên!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "kien_thuc_15_kien_thuc_chung_ve_min_max_ham_chua_tham_so_fx",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 15: Kiến thức chung về Min/Max hàm chứa tham số $f(x)$**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Trực giác đánh giá điểm rơi cực trị",
+            toanHoc: String.raw`Nội dung: $+>$ Khi $f(x) \ge m, \forall x \in ( \dots ) \Rightarrow \min f(x) = m$ khi $x = x_0$.
+$+>$ Khi $f(x) \le m, \forall x \in ( \dots ) \Rightarrow \max f(x) = m$ khi $x = x_0$.
+<img src="images/toan1_t27_h1.png" />
+$\Rightarrow$ Phải thay vào để thử lại. Ví dụ: $a^x \ge ax + 1$
+$\Leftrightarrow a^x - ax - 1 \ge 0$ Xét hàm
+$f(x) = a^x - ax - 1 \Rightarrow f(0) = 0 \Rightarrow \min \text{ tại } x_0 = 0$
+$\Rightarrow f'(0) = 0 \Leftrightarrow \ln a \cdot a^0 - a = 0 \Rightarrow a = e$.`,
+            giaiThich: String.raw`Lý thuyết này cung cấp cho em một mẹo đánh giá rất tinh tế: Nếu đề cho một bất phương trình luôn đúng kiểu $f(x) \ge m$ với mọi $x$, em hãy hiểu ngay rằng $m$ chính là cái đáy vực (Min) của hàm $f(x)$.
+Mà đã là Min thì nó phải nằm tại một điểm cực tiểu $x_0$ nào đó, tức là đạo hàm $f'(x_0)$ phải bằng $0$.
+Trong ví dụ $a^x \ge ax + 1$, chuyển vế được hàm $f(x) \ge 0$. Nhẩm thấy thay $x=0$ vào thì $f(0) = 0$ vừa khít. Vậy $x=0$ đích thị là điểm rơi của đáy Min! Phang ngay đạo hàm, cho $f'(0)=0$ là moi được tham số $a$ ra cực nhanh mà không cần khảo sát rườm rà.
+Khẩu hiệu: **"Bất đẳng thức luôn đúng - Bắt ngay điểm rơi làm cực trị!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_20_khao_sat_ham_so_mu_ket_hop_ham_da_thuc",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 20: Khảo sát hàm số mũ kết hợp hàm đa thức**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chuyển vế tạo hàm và biện luận qua số điểm cực trị",
+            toanHoc: String.raw`Nội dung: $+>$ Với bài toán hàm số mũ đối với hàm đa thức: Ví dụ: Giải phương trình $3^{\frac{x}{6}} = 2x + m$. $\Rightarrow$ Chuyển hết sang $1$ vế tạo thành hàm số $f(x)$.
+$\Rightarrow$ Giải $f'(x) = 0$. Nếu phương trình đạo hàm có $1$ nghiệm $x_0$ thì phương trình gốc sẽ có tối đa $2$ nghiệm.
+Ta có: $f(x) = 3^{\frac{x}{6}} - 2x - m = 0$
+$\Rightarrow f'(x) = \frac{\ln 3}{6} \cdot 3^{\frac{x}{6}} - 2 = 0$
+$\Rightarrow 3^{\frac{x}{6}} = \frac{12}{\ln 3} \Rightarrow x = 6 \log_3 \left( \frac{12}{\ln 3} \right)$.
+<img src="images/toan1_t30_h1.png" />
+- Dòng $x$: $-\infty \quad x_0 \quad +\infty$ (với $x_0 = 6 \log_3 (\frac{12}{\ln 3})$).
+- Dòng $f'(x)$: Mang dấu âm $(-)$ trong khoảng $(-\infty; x_0)$ và mang dấu dương $(+)$ trong khoảng $(x_0; +\infty)$. Tại $x_0$ thì $f'(x) = 0$.
+- Dòng $f(x)$: Nghịch biến đi xuống giá trị cực tiểu $\approx -17,86$ rồi đồng biến đi lên.
+$\Rightarrow$ Nếu đường thẳng $y=0$ cắt đồ thị $\Rightarrow$ Có tối đa $2$ nghiệm.`,
+            giaiThich: String.raw`Gặp phương trình có một vế là Mũ ($3^{\frac{x}{6}}$), một vế là đa thức bậc nhất ($2x$), phương pháp giải tay dứt khoát là dồn hết về một vế tạo hàm $f(x)$.
+Bí quyết: Hàm lai tạp này em giải đạo hàm $f'(x) = 0$ ra được duy nhất 1 nghiệm $x_0$. Mà đồ thị chỉ có 1 điểm cực trị (hình chữ U hoặc V), thì một đường thẳng nằm ngang cắt qua nó sẽ đẻ ra TỐI ĐA 2 giao điểm.
+Em chỉ cần lập bảng biến thiên, quan sát đường đi của hàm số. Nếu cái rốn cực tiểu của nó nằm dưới đường trục hoành (mang giá trị âm), và hai đầu mút đâm lên $+\infty$, thì chắc chắn trục hoành $y=0$ sẽ chém ngang qua đồ thị tạo ra đúng 2 nghiệm.
+Khẩu hiệu: **"Một điểm cực trị - Cắt ngang tối đa 2 điểm!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_16_tong_quat_giai_min_max_cua_phuong_trinh_2_bien",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 16: Tổng quát giải Min, Max của phương trình 2 biến**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Menu vũ khí giải phương trình logarit nhiều biến",
+            toanHoc: String.raw`Nội dung: $(*)$ Các hệ phương trình logarit $\rightarrow$ tìm $\max$, $\min$: $+>$ Đưa về hàm số $\rightarrow$ Lập bảng biến thiên. $+>$ Đưa về phương trình bậc $2$ theo ẩn $x, y$. $+>$ Sử dụng các bất đẳng thức (bất đẳng thức cơ bản để đánh giá). $+>$ Hình học: Khi bài toán có $2$ biến số nguyên yêu cầu tìm $\max$:
+- Có $1$ biến thuộc tập $D$ cho trước, hàm số để đánh giá biến nguyên chưa, tách theo điều kiện có nghiệm.
+- Rút dựa biến này thay cho biến kia và xét điều kiện để biến kia nguyên (dựa vào tính chia hết).
+- Rút ẩn biến này theo biến kia, viết được về dạng bậc nhất. Tìm điểm có tọa độ nguyên trên các miền hình phẳng xác định.
+- Đưa về phương trình $2$ biến. Lấy cái ẩn phụ của $2$ biến, tích của $2$ biến nguyên.`,
+            giaiThich: String.raw`Đây là la bàn định hướng cho mọi bài toán Logarit chứa 2 biến $x, y$ vận dụng cao. Đi thi, kẹt quá không biết dùng cách nào thì cứ lướt qua cái list menu này trong đầu:
+1. Có cô lập được một biến rồi đưa về hàm $f(t)$ khảo sát không?
+2. Có nén thành cấu trúc phương trình bậc 2 kẹp Delta được không?
+3. Cấu trúc có lộ liễu để dùng các bất đẳng thức cơ bản (như Cô-si) không?
+4. Nếu đề ép điều kiện biến MANG GIÁ TRỊ NGUYÊN, thì rút ẩn này theo ẩn kia rồi đánh giá tính chia hết, hoặc nhìn dưới góc độ hình học (nhặt điểm nằm trong miền).
+Thuộc cái sườn này, em sẽ không bao giờ bị "đứng hình" trước bài khó.
+Khẩu hiệu: **"Không hoảng loạn - Quét tuần tự 4 tuyệt chiêu dồn biến!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_1_ung_dung_tich_phan_tinh_the_tich_khoi_da_dien_mat_cat_ngang",
+    chuyenDe: "tich-phan",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 1: Ứng dụng tích phân tính thể tích khối đa diện (Mặt cắt ngang)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hình ảnh bổ trợ [H]:
+<img src="images/toan2_t8_h1.png" />
+Nội dung: Diện tích mặt cắt ngang tại cao độ $z$ là một hình vuông có cạnh là $2 \cdot \frac{3 - |z|}{2} = 3 - |z|$.
+$S_{\text{mặt cắt}} = 4 \left( \frac{3 - |z|}{2} \right)^2 = (3 - |z|)^2$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Xác định công thức mặt cắt và ốp tích phân",
+            toanHoc: String.raw`Tiếp tục tính thể tích khối đa diện:
+$V(H) = \int_{-3}^3 S_{\text{mặt cắt}} dz = \int_{-3}^3 (3 - |z|)^2 dz$
+$= 2 \int_0^3 (3 - z)^2 dz = 2 \left[ -\frac{(3 - z)^3}{3} \right]_0^3 = 2 \left( 0 - \left(-\frac{27}{3}\right) \right) = 18$.`,
+            giaiThich: String.raw`Đi thi gặp bài thể tích vật thể, bẫy lớn nhất là học sinh hay lộn sang công thức khối tròn xoay (có $\pi$ và bình phương hàm). Đọc kỹ, đề cho "mặt cắt", không phải quay quanh trục nào cả.
+Vũ khí của em ở đây cực kỳ đơn giản:
+$$ V = \int_{a}^{b} S(x) dx $$
+Người ta đã cho sẵn diện tích mặt cắt $S$ theo biến $z$ rồi, chỉ việc lắp thẳng cái biểu thức đó vào tích phân, chọn cận chạy từ đáy dưới đến đỉnh trên là máy bấm ra luôn.
+Khẩu hiệu: **"Cắt ngang thì không có Pi - Lắp thẳng S(x) vào tích phân!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_2_tinh_chat_tich_phan_phan_nhanh_ham_cho_boi_nhieu_cong_thuc",
+    chuyenDe: "tich-phan",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 2: Tính chất Tích phân phân nhánh (Hàm cho bởi nhiều công thức)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tách cận theo điểm gãy",
+            toanHoc: String.raw`Nội dung: $+>$ Tích phân phân nhánh: Hàm số
+$f(x) = \begin{cases} A & \text{với } x \ge m \\ B & \text{với } x < m \end{cases}$
+$\Rightarrow \int_{a}^{b} f(x) dx = \int_{a}^{m} f(x) dx + \int_{m}^{b} f(x) dx$.`,
+            giaiThich: String.raw`Anh thấy nhiều bạn rất sợ cái hàm cho bởi 2, 3 công thức ngoặc nhọn. Thực chất nó chỉ là một cái hàm bị "gãy" làm đôi tại điểm $m$.
+Vũ khí đối phó: Dùng tính chất chêm điểm của tích phân.
+$$ \int_{a}^{b} = \int_{a}^{m} + \int_{m}^{b} $$
+Cứ xẻ đôi cái tích phân ra tại đúng cái mốc gãy $m$. Nửa trước $m$ ốp hàm dưới, nửa sau $m$ ốp hàm trên. Vậy là xong, không có gì phải hoảng.
+Khẩu hiệu: **"Hàm gãy ở đâu - Chêm cận tách đôi ở đó!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "kien_thuc_3_cong_thuc_tich_phan_dac_biet_ham_so_chan",
+    chuyenDe: "tich-phan",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 3: Công thức Tích phân đặc biệt (Hàm số chẵn)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Triệt tiêu mẫu số chứa mũ",
+            toanHoc: String.raw`Nội dung: $+>$ Công thức tích phân đặc biệt: Nếu $f(x)$ là hàm số chẵn trên đoạn $[-a; a]$ (tức là $f(x) = f(-x)$), ta có:
+$\int_{-a}^{a} \frac{f(x)}{b^x + 1} dx = \int_{0}^{a} f(x) dx$.`,
+            giaiThich: String.raw`Dấu hiệu nhận biết dạng này cực kỳ lộ liễu: Cận tích phân đối xứng nhau kiểu $[-a; a]$ và hàm $f(x)$ trên tử là hàm chẵn (như $x^2, \cos x$).
+Cái mẫu số $b^x + 1$ nhìn rất hầm hố nhưng thực chất chỉ là "bù nhìn". Em được phép dùng thẳng công thức này để chém bay cái mẫu số đi, chỉ còn lại tích phân một nửa cận từ $0$ đến $a$ của riêng cái tử số.
+Vũ khí siêu tốc:
+$$ \int_{-a}^{a} \frac{f(x)}{b^x + 1} dx = \int_{0}^{a} f(x) dx $$
+Khẩu hiệu: **"Cận đối xứng, tử chẵn - Vứt luôn mẫu số chứa mũ!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_4_tong_hop_cac_tinh_chat_dac_biet_cua_tich_phan_ham_an",
+    chuyenDe: "tich-phan",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 4: Tổng hợp các tính chất đặc biệt của Tích phân hàm ẩn**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nhận diện hệ thức đổi biến kinh điển",
+            toanHoc: String.raw`Nội dung: $+>$ Các tính chất của Tích phân:
+1) $\int_{a}^{b} f(x) dx = \int_{a}^{b} f(a + b - x) dx$.
+2) $\int_{-a}^{a} f(x) dx = \int_{-a}^{0} f(x) dx + \int_{0}^{a} f(x) dx = \int_{0}^{a} f(-x) dx + \int_{0}^{a} f(x) dx$.
+3) $\int_{0}^{a} f(x) dx = \int_{0}^{a} f(a - x) dx$.
+4) $\int_{\alpha}^{\beta} f(ax + b) dx = \frac{1}{a} \int_{a\alpha + b}^{a\beta + b} f(t) dt \quad$ (với $a \neq 0$).
+5) $\int_{-a}^{a} f(|x|) dx = 2 \int_{0}^{a} f(x) dx$.
+6) $\int_{-b}^{a} f(-x) dx = -\int_{b}^{-a} f(t) dt = \int_{-a}^{b} f(x) dx$.`,
+            giaiThich: String.raw`Đây là 6 công thức xương sống cho mọi bài tích phân hàm ẩn vận dụng cao. Điểm chết là em ngồi học vẹt mà không hiểu bản chất nó đều xuất phát từ việc đặt $t = -x$ hoặc $t = a+b-x$.
+Vũ khí mạnh và hay gặp nhất trong đề thi là số (1):
+$$ \int_{a}^{b} f(x) dx = \int_{a}^{b} f(a + b - x) dx $$
+Cứ thấy hàm ẩn bên trong ngoặc lộn xộn, hãy nghĩ ngay đến việc cộng hai cái cận lại rồi trừ đi $x$.
+Khẩu hiệu: **"Hàm ẩn lộn xộn - Đổi biến $t$ để đưa về hàm gốc!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_11_cuc_tri_oxyz_tim_diem_m_tren_mat_phang_lam_min_bieu_thuc",
+    chuyenDe: "toa-do-oxyz",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 11: Cực trị Oxyz: Tìm điểm $M$ trên mặt phẳng làm Min biểu thức $3MA^2 + 2MB^2 - MC^2$**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Cho $A(0,0,1), B(0,1,0), C(1,0,1)$. Tìm điểm $M \in (P)$ sao cho biểu thức $P = 3MA^2 + 2MB^2 - MC^2$ đạt giá trị nhỏ nhất (min).`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tung tọa độ M và ép hằng đẳng thức",
+            toanHoc: String.raw`$\Rightarrow P = 3\left[x^2 + y^2 + (z-1)^2\right] + 2\left[x^2 + (y-1)^2 + z^2\right] - \left[(x-1)^2 + y^2 + (z-1)^2\right]$
+$= 4x^2 + 4y^2 + 4z^2 + 6x - 4y - 4z + 4$
+$= 4x^2 + 6x + \frac{9}{4} + 4y^2 - 4y + 1 + 4z^2 - 8z + 4 - \frac{9}{4}$
+$= \left(2x + \frac{3}{2}\right)^2 + (2y - 1)^2 + (2z - 2)^2 - \frac{9}{4} \ge -\frac{9}{4}$
+$\Rightarrow P_{\min} = -\frac{9}{4} \Leftrightarrow \begin{cases} x = -\frac{3}{4} \\ y = \frac{1}{2} \\ z = 1 \end{cases}$`,
+            giaiThich: String.raw`Dạng bài tâm tỉ cự này nếu em gọi điểm $I$ chèn vector thì chuẩn sách giáo khoa nhưng dễ nhầm dấu cực kỳ. Kinh nghiệm thực chiến cho mức điểm khá: Cứ gọi thẳng $M(x,y,z)$, tính thẳng độ dài bung bét ra.
+Nó sẽ luôn rút gọn lại thành các đa thức bậc 2 theo riêng từng biến $x, y, z$. Việc của em chỉ là ép nó về các hằng đẳng thức.
+Vũ khí:
+$$ (ax+b)^2 + c \ge c $$
+Cứ gom hết vào bình phương, cái phần đuôi dư ra chính là giá trị Min. Điểm $M$ thì nhặt nghiệm cho các bình phương bằng 0 là xong. Trâu bò nhưng an toàn tuyệt đối.
+Khẩu hiệu: **"Bung hết tọa độ - Ép bình phương gom Min!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_12_cuc_tri_do_dai_doan_thang_noi_2_diem_thuoc_2_duong_tron_mat_cau",
+    chuyenDe: "toa-do-oxyz",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 12: Cực trị độ dài đoạn thẳng nối 2 điểm thuộc 2 đường tròn/mặt cầu**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hình ảnh bổ trợ [H]:
+<img src="images/toan1_t3_h1.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chèn tâm và đánh giá qua góc cosin",
+            toanHoc: String.raw`Nội dung:
+Ta có: $I_1I_2^2 = \left(\vec{I_1A} + \vec{AB} + \vec{BI_2}\right)^2$
+$= I_1A^2 + I_2B^2 + AB^2 + 2\vec{I_1A}\cdot\vec{AB} + 2\vec{AB}\cdot\vec{BI_2} + 2\vec{I_1A}\cdot\vec{BI_2}$
+(Do $\vec{I_1A} \perp \vec{AB}$ và $\vec{I_2B} \perp \vec{AB}$ nên các tích vô hướng liên quan đến $\vec{AB}$ bằng $0$)
+$\Leftrightarrow I_1I_2^2 = I_1A^2 + I_2B^2 + AB^2 - 2\vec{I_1A}\cdot\vec{I_2B}$ (vì $\vec{BI_2} = -\vec{I_2B}$)
+$\Leftrightarrow AB^2 = I_1I_2^2 - I_1A^2 - I_2B^2 + 2\vec{I_1A}\cdot\vec{I_2B}$
+$\Leftrightarrow AB = \sqrt{20 + 2 \cdot 2 \cdot 1 \cdot \cos(\vec{I_1A}, \vec{I_2B})} = \sqrt{20 + 4 \cos(\vec{I_1A}, \vec{I_2B})}$
+$\Rightarrow \max \cos(\vec{I_1A}, \vec{I_2B}) = 1 \Rightarrow \text{Trường hợp 1}$
+$\min \cos(\vec{I_1A}, \vec{I_2B}) = -1 \Rightarrow \text{Trường hợp 2}$
+$\Rightarrow AB_{\max} = \sqrt{20 + 4} = 2\sqrt{6}$
+$AB_{\min} = \sqrt{20 - 4} = \sqrt{16} = 4$.`,
+            giaiThich: String.raw`Đừng cố tính trực tiếp độ dài $AB$, em sẽ đi vào ngõ cụt. Tư duy chuẩn ở đây là chèn 2 cái tâm $I_1, I_2$ vào vector $\vec{AB}$.
+Sau khi bung hằng đẳng thức vector ra, các tích vô hướng vuông góc sẽ triệt tiêu hết. Cốt lõi cuối cùng sẽ rớt vào cái tích vô hướng chứa góc giữa hai vector bán kính.
+Vũ khí chặn Min/Max:
+$$ -1 \le \cos(\alpha) \le 1 $$
+Max xảy ra khi $\cos = 1$ (cùng hướng), Min khi $\cos = -1$ (ngược hướng). Thay thẳng số vào là chốt đáp án.
+Khẩu hiệu: **"Chèn tâm bung vector - Chốt chặn bằng Cosin!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_13_khoang_cach_ngan_nhat_giua_2_diem_di_dong_tren_2_duong_thang_oxyz",
+    chuyenDe: "toa-do-oxyz",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 13: Khoảng cách ngắn nhất giữa 2 điểm di động trên 2 đường thẳng (Oxyz)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Cho $A(0; -2; 3), B(2; -2; -3), C(4; 0; 2), D(4; 4; 4)$. Có điểm $M$ di chuyển trên đường thẳng $CD$, điểm $N$ di chuyển... (Tìm tham số $t$ để độ dài đạt cực trị).`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tham số hóa và khảo sát đỉnh Parabol",
+            toanHoc: String.raw`Vector chỉ phương của đường thẳng $CD$: $\vec{CD} = (0; 4; 2) \Rightarrow$ Chọn VTCP $\vec{u} = (0; 2; 1)$. Để chuẩn hóa vector $\vec{N}$ trên đường thẳng:
+$\vec{N} = (0; 3k; 4k)$. Khoảng cách chuẩn $|\vec{N}'| = 1 \Rightarrow \sqrt{0^2 + (3k)^2 + (4k)^2} = 1 \Leftrightarrow \sqrt{25k^2} = 1 \Rightarrow 5k = 1 \Rightarrow k = \frac{1}{5}$.
+$\Rightarrow \vec{N}' = \left(0; \frac{3}{5}; \frac{4}{5}\right)$.
+
+Gọi điểm trên tia thỏa mãn là $M = A + t \cdot \vec{v_1} \Rightarrow M(t; -2; 3)$.
+Điểm tương ứng trên đường thẳng kia (giả thiết) có tọa độ phụ thuộc $t$:
+$N = \left(4; \frac{4}{5}t + 2; \frac{3}{5}t - 1\right)$. Bình phương khoảng cách $MN$:
+$MN^2 = (t - 4)^2 + \left(\frac{4}{5}t + 2\right)^2 + \left(\frac{3}{5}t - 1\right)^2$
+Khai triển và rút gọn:
+$= t^2 - 8t + 16 + \frac{16}{25}t^2 + \frac{16}{5}t + 4 + \frac{9}{25}t^2 - \frac{6}{5}t + 1$
+$= \left(1 + \frac{16}{25} + \frac{9}{25}\right)t^2 + \left(-8 + \frac{16}{5} - \frac{6}{5}\right)t + (16 + 4 + 1) = 2t^2 - 16t + 36$
+Hàm số đạt giá trị cực trị (nhỏ nhất) khi: $t = \frac{16}{2 \cdot 2} = 4$.`,
+            giaiThich: String.raw`Đọc đề thấy điểm di động trên đường thẳng, quy tắc bất di bất dịch: Tham số hóa tọa độ điểm đó theo biến $t$.
+Tính bình phương khoảng cách $MN^2$, em sẽ luôn thu được một tam thức bậc 2 dạng $at^2 + bt + c$. Đừng đạo hàm lập bảng biến thiên làm gì cho mất thời gian.
+Vũ khí bắt đáy:
+$$ t = -\frac{b}{2a} $$
+Đây chính là hoành độ đỉnh Parabol, nơi giá trị đạt Min. Ốp thẳng công thức này là tìm ra $t$ trong 5 giây.
+Khẩu hiệu: **"Điểm di chuyển thì tham số hóa - Khoảng cách Min nằm tại đỉnh Parabol!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_14_meo_giai_hinh_oxyz_vector_ty_le_va_hinh_binh_hanh",
+    chuyenDe: "toa-do-oxyz",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 14: Mẹo giải hình Oxyz: Vector tỷ lệ và hình bình hành**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hình ảnh bổ trợ [H]:
+<img src="images/toan1_t17_h1.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Gán tọa độ qua tư duy hình bình hành",
+            toanHoc: String.raw`Nội dung:
+- Cố gắng đưa các vector về nhau để làm ra các vector tỷ lệ. Ví dụ:
+$A(3, 2, 1)$, có vector đơn vị trên trục Ox là $\vec{i}(1, 0, 0)$. Giả sử có $\vec{MN} = \vec{i}$. $\Rightarrow$ Lấy điểm $C$ sao cho $\vec{AC} = \vec{i}$.
+$\Rightarrow \vec{MN} = \vec{i} = \vec{AC} \Rightarrow \vec{MN} = \vec{AC}$.
+$\Rightarrow AMNC$ là hình bình hành $\Rightarrow \vec{CN} = \vec{AM}$.`,
+            giaiThich: String.raw`Làm hình Oxyz mà cứ ngồi tưởng tượng không gian trong đầu là tẩu hỏa nhập ma đấy. Kỹ năng thực chiến: Chuyển hết quan hệ song song/bằng nhau về vector.
+Nếu em thiết lập được 2 vector bằng nhau, 4 điểm đó tự khắc tạo thành hình bình hành.
+Vũ khí:
+$$ \vec{MN} = \vec{AC} \Leftrightarrow M, N, C, A \text{ tạo hình bình hành} $$
+Từ đó dùng quy tắc trung điểm hoặc cộng trừ chéo tọa độ để suy ra ngay tọa độ điểm còn thiếu bấm máy nhoáy cái là xong.
+Khẩu hiệu: **"Vector bằng nhau - Ghép thành hình bình hành cộng trừ tọa độ!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_15_cong_thuc_toa_do_tam_duong_tron_noi_tiep_tam_giac_oxyz",
+    chuyenDe: "toa-do-oxyz",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 15: Công thức tọa độ tâm đường tròn nội tiếp tam giác (Oxyz)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Ốp công thức nhân chéo tỉ lệ cạnh",
+            toanHoc: String.raw`Nội dung: $+>$ Công thức tọa độ tâm đường tròn nội tiếp (qua hệ tọa độ Oxy):
+$\begin{cases} a = BC \\ b = CA \\ c = AB \end{cases} \Rightarrow x_I = \frac{ax_1 + bx_2 + cx_3}{a + b + c} ; \quad y_I = \frac{ay_1 + by_2 + cy_3}{a + b + c}$.
+Với $A(x_1, y_1), B(x_2, y_2), C(x_3, y_3)$.
+
+Còn trong không gian Oxyz thì chèn thêm cao độ $z$:
+$z_I = \frac{az_1 + bz_2 + cz_3}{a + b + c}$.`,
+            giaiThich: String.raw`Bài tìm tâm nội tiếp là câu hỏi lấy điểm cực ngon nếu thuộc công thức, và là thảm họa mất 15 phút nếu giải chay bằng giao điểm đường phân giác.
+Em chỉ cần nhớ quy tắc: Tính độ dài 3 cạnh $a,b,c$. Sau đó lấy cạnh nào thì nhân với tọa độ đỉnh ĐỐI DIỆN với cạnh đó, cộng lại rồi chia cho tổng chu vi.
+Vũ khí:
+$$ x_I = \frac{ax_A + bx_B + cx_C}{a + b + c} $$
+Oxy hay Oxyz đều dùng chung cấu trúc này, chỉ cần chèn thêm $z$ vào là xong.
+Khẩu hiệu: **"Tâm nội tiếp - Độ dài cạnh nhân chéo tọa độ đỉnh đối diện!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_16_khoang_cach_ngan_nhat_tu_mot_diem_den_mot_doan_thang",
+    chuyenDe: "conic-oxy",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 16: Khoảng cách ngắn nhất từ một điểm đến một đoạn thẳng**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`PHẦN BỔ SUNG CUỐI CÙNG: [HÌNH HỌC OXY & TƯ DUY HÌNH HỌC HÓA]
+Hình ảnh bổ trợ [H]:
+<img src="images/toan1_t26_h1.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: So sánh hình chiếu và đầu mút",
+            toanHoc: String.raw`Nội dung: Bài toán: Lấy điểm $M$ sao cho đoạn $CM$ đạt giá trị nhỏ nhất ($\min$). Vì $M \in$ đoạn thẳng $AB$, ta xét $2$ trường hợp:
+
+- Trường hợp 1: Hình chiếu vuông góc của $C_1$ (gọi là $H$) nằm trong vùng đoạn thẳng $AB$. $\Rightarrow CM_{\min}$ chính là khoảng cách đường cao $C_1H$.
+- Trường hợp 2: Điểm $C_2$ nằm ngoài vùng chiếu vuông góc xuống đoạn $AB$. $\Rightarrow CM_{\min}$ sẽ là khoảng cách từ $C_2$ đến một trong hai đầu mút $A$ hoặc $B$ (tức là so sánh độ dài đoạn $C_2A$ và $C_2B$, chọn đoạn ngắn hơn).`,
+            giaiThich: String.raw`Khoảng cách từ 1 điểm đến 1 "ĐOẠN THẲNG" chứ không phải đường thẳng. Bẫy sai lầm phổ biến nhất: Mặc định Min là kẻ đường vuông góc.
+Nhưng nếu cái chân đường vuông góc nó rơi rớt ra ngoài cái đoạn $AB$ thì sao? Lúc đó điểm $M$ không thể chạm vào chân đường cao được. Vậy khoảng cách ngắn nhất chỉ có thể là nối thẳng từ $C$ đến đầu mút $A$ hoặc $B$. Hãy cẩn thận kiểm tra vị trí hình chiếu.
+Khẩu hiệu: **"Vuông góc nằm trong đoạn thì lấy - Rơi ra ngoài thì đo luôn hai đầu mút!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_17_cuc_tri_hinh_hoc_phang_tong_khoang_cach_mambmc_dat_max",
+    chuyenDe: "conic-oxy",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 17: Cực trị Hình học phẳng: Tổng khoảng cách $MA+MB+MC$ đạt Max**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hình ảnh bổ trợ [H]:
+<img src="images/toan1_t1_h1.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Dựng điểm phụ gom đoạn thẳng và ép giới hạn đường kính",
+            toanHoc: String.raw`Nội dung: Đề bài: Cho tam giác $ABC$ đều nội tiếp đường tròn $(C)$. Tìm điểm $M$ để $MA + MB + MC$ đạt giá trị lớn nhất ($\max$).
+
+Bài giải: Chọn điểm $E$ trên đoạn $AM$ sao cho $BE = BM$. Xét $\Delta ABE$ và $\Delta CBM$ có:
+$\begin{cases} AB = BC \text{ (do } \Delta ABC \text{ đều)} \\ BE = BM \text{ (theo cách dựng)} \\ \widehat{BAE} = \widehat{BCM} \text{ (góc nội tiếp cùng chắn cung } BM) \end{cases}$
+$\Rightarrow \Delta ABE = \Delta CBM \text{ (c-g-c)} \Rightarrow AE = CM$.
+Ta có: $MA + MB + MC = AM + BM + CM = AM + AE + EM = AM + AM = 2AM$ (vì $BM = EM$ do $\Delta BEM$ đều và $AE = CM$).
+
+Để tổng này lớn nhất thì $AM$ phải lớn nhất:
+$\Rightarrow 2AM \le 2 \times \text{đường kính} = 4R \Rightarrow M \text{ thuộc điểm chính giữa cung } BC. \Rightarrow AM \text{ là đường kính hình tròn.}$`,
+            giaiThich: String.raw`Cực trị tổng 3 đoạn thẳng nội tiếp đường tròn. Đi thi mà ngồi tự nghĩ cách dựng hình thì chắc hết giờ.
+Kinh nghiệm ép khuôn: Với tam giác đều, em dùng phép quay hoặc lấy một điểm phụ $E$ để gộp hai đoạn $MB + MC$ lại thành 1. Tổng $3$ đoạn lằng nhằng lúc này sẽ bị dồn hết về bằng đúng $2AM$.
+Vũ khí hình tròn cơ bản: Một dây cung bất kỳ không bao giờ dài hơn đường kính.
+$$ AM \le 2R $$
+Ép Max vào là kết thúc bài toán.
+Khẩu hiệu: **"Tổng 3 đoạn - Gộp thành 1 dây cung và ép bằng Đường kính!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_18_tinh_chat_cac_duong_conic_elip_va_hypebol",
+    chuyenDe: "conic-oxy",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 18: Tính chất các đường Conic: Elip và Hypebol**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hình ảnh bổ trợ [H]:
+<img src="images/toan1_t15_h1.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nhận diện hệ thức a,b,c ngược dấu phương trình",
+            toanHoc: String.raw`Nội dung: $+>$ Đường Elip:
+- Phương trình chính tắc: $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$
+- Điều kiện: $0 < c < a$ (và $a > b > 0$)
+- Mối liên hệ: $c^2 = a^2 - b^2$.
+
+Hình ảnh bổ trợ [H]:
+<img src="images/toan1_t16_h1.png" />
+Nội dung: $+>$ Đường Hypebol:
+- Phương trình chính tắc: $\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$
+- Mối liên hệ: $c^2 = a^2 + b^2$.
+- Tính chất độ dài bán kính qua tiêu của điểm $M(x_M, y_M) \in (H)$:
+$MF_1 = |a + e x_M| \quad ; \quad MF_2 = |a - e x_M|$`,
+            giaiThich: String.raw`Lên lớp 12 rất nhiều bạn rụng sạch kiến thức Conic lớp 10. Điểm chết là hay nhầm lẫn cái công thức liên hệ giữa $a, b, c$ của Elip và Hypebol.
+Mẹo nhớ cực nhanh anh chỉ cho: Nếu phương trình chính tắc mang dấu CỘNG ($+$) như Elip, thì công thức $c^2$ sẽ mang dấu TRỪ ($-$). Ngược lại với Hypebol.
+Vũ khí:
+$$ \text{Elip } (+): c^2 = a^2 - b^2 $$
+Khẩu hiệu: **"Phương trình dấu gì - Hệ thức a b c mang dấu ngược lại!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_19_phuong_phap_giao_diem_tim_min_mamb_bai_toan_bat_dang_thuc_tam_giac",
+    chuyenDe: "conic-oxy",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 19: Phương pháp giao điểm tìm Min MA+MB (Bài toán Bất đẳng thức tam giác)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hình ảnh bổ trợ [H]:
+<img src="images/toan1_t16_h2.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Lấy đối xứng và chốt thẳng hàng",
+            toanHoc: String.raw`Nội dung: $+>$ Phương pháp giao điểm (Bài toán tìm điểm thỏa mãn tổng khoảng cách min):
+- Đề bài: Cho hai điểm $A, B$ nằm cùng phía so với đường thẳng $d$. Tìm điểm $M \in d$ sao cho $MA + MB$ đạt giá trị nhỏ nhất ($\min$).
+- Phương pháp giải:
+1. Lấy điểm $B'$ đối xứng với $B$ qua đường thẳng $d$.
+2. Giao điểm của đường thẳng $AB'$ với đường thẳng $d$ chính là điểm $M$ cần tìm.
+3. Khi đó, do tính chất đối xứng, $MB = MB'$.
+4. Suy ra $MA + MB = MA + MB' \ge AB'$. Dấu "=" xảy ra khi $A, M, B'$ thẳng hàng.
+5. Giá trị nhỏ nhất là đoạn thẳng $AB'$.`,
+            giaiThich: String.raw`Đây là bài toán thực tế kinh điển (con nhện và con kiến, đi gánh nước sông...). Hai điểm $A, B$ đang nằm cùng một phía bờ tường. Em muốn chạy từ $A$ chạm tường $M$ rồi nảy tới $B$ quãng đường ngắn nhất thì đường đó phải... thẳng.
+Nhưng vì nó bị gấp khúc bởi bức tường, em bắt buộc phải lật đối xứng điểm $B$ qua tường thành $B'$. Lúc này bài toán quy về khoảng cách nối 2 điểm.
+Vũ khí bất đẳng thức tam giác:
+$$ MA + MB' \ge AB' $$
+Min đạt được khi 3 điểm kéo thành một đường thẳng tắp.
+Khẩu hiệu: **"Cùng phía thì lật đối xứng - Kéo thẳng hàng là ra Min!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_20_tu_duy_dai_so_hoa_hinh_hoc_oxy_oxyz",
+    chuyenDe: "conic-oxy",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 20: Tư duy Đại số hóa Hình học (Oxy / Oxyz)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nhận diện biểu thức chứa căn và dịch sang hệ tọa độ",
+            toanHoc: String.raw`Nội dung: $\rightarrow$ Bậc 1: Chuyển dữ kiện $\rightarrow$ Hình học Oxy ($2$ biến) / Hình học Oxyz ($3$ biến). $\rightarrow$ Bậc 2: Dùng các tính chất hình học để xử lý (cắt logarit, Elip, Hypebol).
+
+$(*)$ Luôn phải để ý các dấu hiệu: Ví dụ: $P = \sqrt{(a - m)^2 + (b - n)^2}$
+$\Rightarrow \text{Giao với một đường thẳng từ } A(a, b) \text{ và } B(m, n)$
+$\Rightarrow P = AB = \sqrt{(a - m)^2 + (b - n)^2}$.
+
+$(*)$ Hình học: Khi bài toán có $2$ biến số nguyên yêu cầu tìm $\max$:
+- Có $1$ biến thuộc tập $D$ cho trước, hàm số để đánh giá biến nguyên chưa, tách theo điều kiện có nghiệm.
+- Rút dựa biến này thay cho biến kia và xét điều kiện để biến kia nguyên (dựa vào tính chia hết).
+- Rút ẩn biến này theo biến kia, viết được về dạng bậc nhất. Tìm điểm có tọa độ nguyên trên các miền hình phẳng xác định.
+- Đưa về phương trình $2$ biến. Lấy cái ẩn phụ của $2$ biến, tích của $2$ biến nguyên.`,
+            giaiThich: String.raw`Khi nhìn thấy một biểu thức toàn căn bậc 2 của các bình phương cộng trừ với nhau, đừng bao giờ hì hục đạo hàm hay bình phương lên, tẩu hỏa nhập ma ngay.
+Đó là tín hiệu khẩn cấp để em dịch ngôn ngữ Đại số sang Hình học.
+Vũ khí:
+$$ P = \sqrt{(x_A - x_B)^2 + (y_A - y_B)^2} $$
+Em hãy ép cái căn đó thành độ dài đoạn thẳng nối giữa 2 điểm tọa độ. Tự dưng một bài toán phương trình nhức đầu sẽ biến thành bài toán tìm điểm Min/Max trên mặt phẳng Oxy rất trực quan.
+Khẩu hiệu: **"Căn bình phương cộng nhau - Đổi ngay sang độ dài đoạn thẳng!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "kien_thuc_26_phuong_phap_luong_giac_hoa_duong_tron_tim_min_max",
+    chuyenDe: "luong-giac",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 26: Phương pháp Lượng giác hóa đường tròn tìm Min/Max**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`PHẦN BỔ SUNG LẦN 3 (CHỐT HẠ): [HÌNH HỌC PHẲNG & CÔNG THỨC NHANH]`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đổi hệ tọa độ vuông góc sang lượng giác và ép có nghiệm",
+            toanHoc: String.raw`Nội dung: $(*)$ Lượng giác hóa cho bài toán $\min - \max$:
+$\rightarrow \text{Input: } (x - x_c)^2 + (y - y_c)^2 = R^2 \rightarrow \text{Đặt: } \begin{cases} x = x_c + R\cos t \\ y = y_c + R\sin t \end{cases}$
+$\rightarrow \text{Chuyển về lượng giác: } a\sin t + b\cos t = c$
+$\Rightarrow \text{Phương trình có nghiệm } \Leftrightarrow a^2 + b^2 \ge c^2 \Rightarrow \text{Đánh giá cực trị (min/max)}$.`,
+            giaiThich: String.raw`Đề cho cấu trúc bình phương cộng bình phương bằng một hằng số $R^2$, đây chính xác là phương trình của đường tròn. Nếu giữ nguyên $x, y$ để đánh giá sẽ cực kỳ bế tắc.
+Giải pháp tối ưu: Đổi hệ tọa độ. Gán thẳng $\sin$ và $\cos$ cho $x$ và $y$. Mọi bài toán sẽ bị bóp nghẹt về dạng lượng giác bậc 1:
+$$ A\sin t + B\cos t = C $$
+Đến đây thì móc lại ngay vũ khí sinh tồn: Phương trình có nghiệm khi $A^2 + B^2 \ge C^2$.
+Ốp vào là tự động kẹp ra được hai đầu Min Max.
+Khẩu hiệu: **"Thấy đường tròn - Đổi ngay sang Sin Cos và ép điều kiện có nghiệm!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_27_cong_thuc_goc_giua_2_vector_va_ban_kinh_noi_ngoai_tiep_tam_giac",
+    chuyenDe: "toa-do-oxyz",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 27: Công thức góc giữa 2 Vector và Bán kính nội/ngoại tiếp tam giác**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Quét nhanh công thức chống sai ngu",
+            toanHoc: String.raw`Nội dung: $+>$ Góc giữa hai vector:
+$\cos(\vec{u}, \vec{v}) = \frac{|\vec{u} \cdot \vec{v}|}{|\vec{u}| \cdot |\vec{v}|}$
+$+>$ Các công thức bán kính đường tròn trong tam giác:
+$r = \frac{S_{ABC}}{p} \rightarrow \text{với } p \text{ là nửa chu vi (Bán kính đường tròn nội tiếp)}$
+$R = \frac{a}{2\sin A} = \dots = \frac{abc}{4S_{ABC}} \text{ (Bán kính đường tròn ngoại tiếp)}$`,
+            giaiThich: String.raw`Mấy công thức râu ria của lớp 10 này hay bị bỏ quên nhưng đề thi rất hay lôi ra để chống bấm máy.
+Khi tính góc vector, nhớ là nó có thể âm (góc tù), KHÔNG ĐƯỢC tự ý ốp trị tuyệt đối lên tử số (đấy là góc giữa 2 đường thẳng). Còn tính bán kính nội tiếp/ngoại tiếp $r, R$, bí quyết duy nhất là đi lòng vòng qua công thức Diện tích $S$.
+Vũ khí bám rễ:
+$$ S = p \cdot r = \frac{abc}{4R} $$
+Tính $S$ trước (dùng Heron hoặc $\frac{1}{2}\sin$), sau đó suy ngược ra $r$ và $R$ là an toàn nhất.
+Khẩu hiệu: **"Góc vector cẩn thận dấu - Bán kính thì bám chặt vào Diện tích!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_28_cong_thuc_co_tinh_chat_hinh_hoc_van_toc_goc_he_thuc_luong",
+    chuyenDe: "luong-giac",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 28: Công thức có tính chất hình học (Vận tốc góc, Hệ thức lượng)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nắm công thức thực tế chống liệt",
+            toanHoc: String.raw`Nội dung: $\omega = \frac{\Delta \alpha}{\Delta t}$
+Nội dung:
+$W = \cos^2 \alpha \cdot \frac{h^2}{d^2}$`,
+            giaiThich: String.raw`Đề thi bây giờ rất hay chèn mấy bài toán có hơi hướng Vật lý hay mô hình thực tế. Đứa nào yếu lý nhìn thấy chữ "vận tốc góc" là xanh mặt bỏ qua. Nhưng bản chất nó chỉ là Toán học.
+Vận tốc góc $\omega$ đơn giản chỉ là góc quét được chia cho thời gian. Còn cái hệ thức lượng kia thì vẽ cái tam giác vuông ra là ốp được ngay. Đừng để những từ ngữ chuyên ngành hù dọa mình.
+Khẩu hiệu: **"Toán thực tế giấu mặt - Cứ vẽ hình và ốp thẳng công thức!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_29_luong_giac_hoa_gia_thiet_dang_elip_bien_doi_ve_duong_tron",
+    chuyenDe: "luong-giac",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 29: Lượng giác hóa giả thiết dạng Elip (Biến đổi về đường tròn)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`PHẦN BỔ SUNG LẦN 4 (DỌN SẠCH 100%): [HÌNH HỌC TỔNG HỢP]
+Nội dung: Cách 1: Phương pháp lượng giác hóa Từ giả thiết $x^2 + 4y^2 = 1 \Leftrightarrow x^2 + (2y)^2 = 1$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nặn Elip về đúng khuôn đường tròn để Lượng giác hóa",
+            toanHoc: String.raw`Đặt:
+$\begin{cases} x = \cos t \\ 2y = \sin t \Rightarrow y = \frac{1}{2}\sin t \end{cases}$
+Thay vào biểu thức $P$: $P = \frac{x - 2y - 1}{x + y + 4}$`,
+            giaiThich: String.raw`Lúc trước anh vừa dạy em đổi $x, y$ sang $\sin$ và $\cos$ khi gặp đường tròn. Nhưng ở đây biểu thức là $x^2 + 4y^2 = 1$. Cái số 4 chình ình ở đó cản đường, bản chất nó là đường Elip.
+Kỹ năng xử lý: Bắt buộc phải gom hết hệ số chui tọt vào bên trong dấu bình phương. $4y^2$ phải lôi về $(2y)^2$. Lúc này, cái cụm $2y$ đóng vai trò như một biến mới.
+Vũ khí:
+$$ A^2 + B^2 = 1 \Rightarrow \text{Gán } A = \cos t, B = \sin t $$
+Gán xong, rút $x$ và $y$ ra nhét hết vào biểu thức $P$.
+Khẩu hiệu: **"Gặp Elip - Nhét hệ số vào bình phương rồi mới ép Sin Cos!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Dồn về dạng a.sin + b.cos = c và ép có nghiệm",
+            toanHoc: String.raw`$\Leftrightarrow P = \frac{\cos t - \sin t - 1}{\cos t + \frac{1}{2}\sin t + 4} = \frac{2\cos t - 2\sin t - 2}{2\cos t + \sin t + 8}$
+$\Leftrightarrow P(2\cos t + \sin t + 8) = 2\cos t - 2\sin t - 2$
+$\Leftrightarrow (2P - 2)\cos t + (P + 2)\sin t = -8P - 2$. Để phương trình có nghiệm $\Leftrightarrow a^2 + b^2 \ge c^2$:
+$\Leftrightarrow (2P - 2)^2 + (P + 2)^2 \ge (-8P - 2)^2$
+$\Leftrightarrow 4P^2 - 8P + 4 + P^2 + 4P + 4 \ge 64P^2 + 32P + 4$
+$\Leftrightarrow -59P^2 - 36P + 4 \ge 0 \Rightarrow -0,72 \le P \le 0,082$.
+$\Rightarrow P_{\max} \approx 0,082 ; P_{\min} \approx -0,72$.`,
+            giaiThich: String.raw`Sau khi thế lượng giác vào, biểu thức $P$ trở thành một mớ hỗn độn chứa $\sin t$ và $\cos t$. Tuyệt đối không được ngồi đạo hàm cái phân thức này!
+Nhân chéo cái mẫu lên, chuyển vế để gom tất cả $\sin t$ vào một cụm, $\cos t$ vào một cụm. Mọi thứ lại quay về đúng quỹ đạo quen thuộc: Phương trình $A\sin t + B\cos t = C$.
+Vũ khí hủy diệt Min/Max vẫn là:
+$$ A^2 + B^2 \ge C^2 $$
+Ốp hệ số chứa $P$ vào bất phương trình này, em sẽ ra một cái đa thức bậc 2 theo $P$.
+Bấm máy tính tìm khoảng nghiệm là túm được ngay Min, Max mà không tốn một giọt mồ hôi khảo sát nào.
+Khẩu hiệu: **"Nhân chéo gom Sin Cos - Ép A bình cộng B bình chốt hạ Min Max!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_30_vector_van_toc_trong_khong_gian_oxyz",
+    chuyenDe: "toa-do-oxyz",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 30: Vector vận tốc trong không gian Oxyz**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Dịch ngôn ngữ Chuyển động sang Hình học giải tích",
+            toanHoc: String.raw`Nội dung:
+- Nếu vật di chuyển với vận tốc $\vec{v}(a, b, c) \Rightarrow$ vector chỉ phương của nó là $(a, b, c)$ và có độ lớn $\sqrt{a^2 + b^2 + c^2}$.`,
+            giaiThich: String.raw`Kiến thức này cực kỳ hay thi ở mức ăn điểm chống trượt, nhưng đề bài sẽ gài chữ "vận tốc", "quỹ đạo chuyển động" để làm loạn tư duy.
+Bản chất hình học: Khi một vật bay trong không gian Oxyz, quỹ đạo của nó chính là một "đường thẳng". Cái "Vector vận tốc" $\vec{v}$ mà đề cho, thực chất 100% chính là "Vector chỉ phương" của đường thẳng đó.
+Còn "Tốc độ" của vật chính là độ dài (mô-đun) của vector đó.
+Vũ khí giải mã:
+$$ \text{Vận tốc } \vec{v}(a, b, c) \equiv \text{VTCP } \vec{u}(a, b, c) $$
+Cứ quy hết về đường thẳng và vector chỉ phương là mọi bài chuyển động Oxyz tự động bung bét.
+Khẩu hiệu: **"Quỹ đạo là đường thẳng - Vận tốc chính là Vector chỉ phương!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_1_danh_gia_hai_ve_phuong_trinh_logarit",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 1: Đánh giá hai vế phương trình Logarit (Đã fix logic AI)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`PHÂN LOẠI: [MŨ VÀ LOGARIT]
+Nội dung: Biến đổi phương trình:
+$\log_{2022}[(x^4-2x^2+2023)^{y^2+2022}] = 2y+2021$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đánh giá Min - Max hai vế (Trái dấu đơn điệu)",
+            toanHoc: String.raw`$\Leftrightarrow (y^2+2022)\log_{2022}(x^4-2x^2+2023) = 2y+2021$
+$\Leftrightarrow \log_{2022}((x^2-1)^2+2022) = \frac{2y+2021}{y^2+2022}$
+Đánh giá: Vế trái $\ge 1$, Vế phải $\le 1$. Dấu "=" xảy ra khi:
+$\begin{cases} (x^2 - 1)^2 = 0 \Rightarrow x = \pm 1 \\ y = 1 \end{cases}$
+Note: Biến đổi theo đánh giá luôn phải nhìn xem vế trái và vế phải.`,
+            giaiThich: String.raw`Đi thi gặp một phương trình vừa chứa Logarit lồng nhằng, vừa chứa đa thức khác bậc ở hai vế, tuyệt đối đừng cố giải bằng biến đổi tương đương. Tẩu hỏa nhập ma ngay!
+Trực giác VDC: Phương trình lai tạp cấu trúc kiểu này 99% là dùng đánh giá chặn miền giá trị. Em tách riêng vế trái (VT) và vế phải (VP). Nhìn vào ruột hàm, ép các bình phương $\ge 0$ để tìm Min của VT và Max của VP.
+Vũ khí:
+$$ VT \ge A \text{ và } VP \le A \Rightarrow VT = VP = A $$
+Nghiệm chính là dấu bằng (điểm rơi) của các bình phương đó.
+Khẩu hiệu: **"Hàm lai tạp khác loài - Khóa Min Max hai vế chốt điểm rơi!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_2_logarit_da_bien_phuong_phap_ham_dac_trung_lap_bang_gia_tri",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 2: Logarit đa biến: Phương pháp Hàm đặc trưng & Lập bảng giá trị (Đã fix logic AI)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề bài: Giải phương trình nghiệm nguyên: $\log_2[(x+1)(y+1)]^{y+1} = 4 - (x-1)(y+1)$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Khai triển Logarit và cô lập cụm biến",
+            toanHoc: String.raw`Bước 1: Khai triển và nhóm biến
+Điều kiện: $(x+1)(y+1) > 0$. Hạ số mũ xuống theo tính chất của logarit, phương trình tương đương:
+$(y+1)\log_2[(x+1)(y+1)] = 4 - (x-1)(y+1)$
+Chia cả hai vế cho $(y+1)$. (Dễ thấy $y = -1$ không là nghiệm vì khi đó $0 = 4$ vô lý):
+$\log_2[(x+1)(y+1)] = \frac{4}{y+1} - (x-1)$
+Tách logarit của một tích ở vế trái (Xét trường hợp $x+1>0$ và $y+1>0$):
+$\log_2(x+1) + \log_2(y+1) = \frac{4}{y+1} - x + 1$`,
+            giaiThich: String.raw`Thấy Logarit của một tích và số mũ lơ lửng, phản xạ đầu tiên: Kéo số mũ xuống và tách tích thành tổng Logarit.
+Nhưng bẫy nằm ở cái cụm $(y+1)$ đang nhân chéo. Em phải chia nó sang vế bên kia để giải phóng Logarit. Nhớ test nhẹ $y=-1$ xem có phải nghiệm không trước khi chia nhé.
+Khẩu hiệu: **"Mũ kéo xuống, tích tách tổng - Rút gọn để cô lập Logarit!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Chắp vá hệ số tạo Hàm đặc trưng",
+            toanHoc: String.raw`Bước 2: Thiết lập hàm đặc trưng
+Cố tình cộng thêm $2$ vào hai vế để gom $x$ về một bên, $y$ về một bên và thiết lập cấu trúc đối xứng:
+$\log_2(x+1) + \log_2(y+1) + 2 = \frac{4}{y+1} - (x-1) + 2$
+$\Leftrightarrow \log_2(x+1) + (x+1) = 2 - \log_2(y+1) + \frac{4}{y+1}$
+$\Leftrightarrow \log_2(x+1) + (x+1) = \log_2 4 - \log_2(y+1) + \frac{4}{y+1}$
+$\Leftrightarrow \log_2(x+1) + (x+1) = \log_2\left(\frac{4}{y+1}\right) + \frac{4}{y+1}$
+Xét hàm số $f(t) = \log_2 t + t$ trên khoảng $(0, +\infty)$. Đạo hàm $f'(t) = \frac{1}{t \ln 2} + 1 > 0, \forall t > 0$. Suy ra hàm số $f(t)$ luôn đồng biến trên $(0, +\infty)$. Do đó, phương trình $f(x+1) = f\left(\frac{4}{y+1}\right)$ xảy ra khi và chỉ khi: $x+1 = \frac{4}{y+1} \Leftrightarrow (x+1)(y+1) = 4$`,
+            giaiThich: String.raw`Đây là kỹ năng "thêm mắm dặm muối" VDC. Vế trái có $\log_2(x+1)$, vế phải có $x$, nhưng đang lệch hệ số. Nhiệm vụ của em là cộng/trừ thêm các hằng số (ở đây là cộng 2) vào cả 2 vế để ép nó về form đối xứng tuyệt đối.
+Vũ khí:
+$$ f(u) = f(v) \Leftrightarrow u = v \quad (\text{khi hàm } f \text{ đơn điệu}) $$
+Ép xong form, vứt cái vỏ $f(t)$ đi, ta thu được mối liên hệ trực tiếp giữa $x$ và $y$.
+Khẩu hiệu: **"Lệch hệ số thì cộng mồi - Ép chuẩn form lột vỏ hàm đặc trưng!"**`
+        },
+        {
+            tenBuoc: "Bước 3: Xử lý phương trình nghiệm nguyên bằng ước số",
+            toanHoc: String.raw`Bước 3: Lập bảng xét các trường hợp ước số của $4$
+Vì $x, y \in \mathbb{Z}$ nên $x+1$ và $y+1$ là các ước nguyên của $4$. Ta có các hệ sau:
+Trường hợp 1: $\begin{cases} x+1 = 2 \\ y+1 = 2 \end{cases} \Rightarrow \begin{cases} x = 1 \\ y = 1 \end{cases}$ (Nhận)
+Trường hợp 2: $\begin{cases} x+1 = 1 \\ y+1 = 4 \end{cases} \Rightarrow \begin{cases} x = 0 \\ y = 3 \end{cases}$ (Loại)
+Trường hợp 3: $\begin{cases} x+1 = 4 \\ y+1 = 1 \end{cases} \Rightarrow \begin{cases} x = 3 \\ y = 0 \end{cases}$ (Loại)
+Trường hợp 4: $\begin{cases} x+1 = -2 \\ y+1 = -2 \end{cases} \Rightarrow \begin{cases} x = -3 \\ y = -3 \end{cases}$ (Nhận)
+Trường hợp 5: $\begin{cases} x+1 = -1 \\ y+1 = -4 \end{cases} \Rightarrow \begin{cases} x = -2 \\ y = -5 \end{cases}$ (Loại)
+Trường hợp 6: $\begin{cases} x+1 = -4 \\ y+1 = -1 \end{cases} \Rightarrow \begin{cases} x = -5 \\ y = -2 \end{cases}$ (Loại)
+
+Cách 2: Cô lập biến và lập bảng giá trị
+Từ phương trình hàm đặc trưng:
+$x + 1 = \frac{4}{y+1} \Rightarrow x = \frac{4}{y+1} - 1 = \frac{3-y}{y+1}$
+Để $x \in \mathbb{Z}$ thì $\frac{4}{y+1}$ là số nguyên $\Rightarrow y+1 \in U(4) = \{-4, -2, -1, 1, 2, 4\}$.
+Lập bảng giá trị:
+$y+1$: $-4 \quad -2 \quad -1 \quad 1 \quad 2 \quad 4$
+$y$: $\quad -5 \quad -3 \quad -2 \quad 0 \quad 1 \quad 3$
+$x$: $\quad -2 \quad -3 \quad -5 \quad 3 \quad 1 \quad 0$
+Kiểm tra điều kiện $x > 1 \Rightarrow x = 3, y = 0$ (Loại vì $y+1 > 0$ nhưng trong logarit có $y+1$).`,
+            giaiThich: String.raw`Đến đây bài toán quy về cấp 2: Tích 2 số nguyên bằng 4. Lập bảng ước số của 4 ($\pm 1, \pm 2, \pm 4$) và nhặt ra các cặp $(x,y)$. Bẫy duy nhất ở bước này là nhặt xong quên không đối chiếu lại với điều kiện xác định ban đầu của Logarit. Test lại cho chắc ăn.
+Khẩu hiệu: **"Tích bằng hằng số - Lập bảng ước, quét nghiệm nguyên!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_3_danh_gia_co_so_va_hoan_thanh_binh_phuong_bat_phuong_trinh_logarit",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 3: Đánh giá cơ số và Hoàn thành bình phương bất phương trình Logarit (Đã fix logic AI)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề bài: Có bao nhiêu cặp số nguyên $(x, y)$ thỏa mãn:
+$\log_{x^2+5y^2+1}\left(4x-y+1.7\right) \ge 1$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chặn cơ số để định đoạt chiều bất phương trình",
+            toanHoc: String.raw`Bước 1: Điều kiện và đánh giá cơ số
+Ta thấy cơ số $x^2 + 5y^2 + 1 \ge 1$ với mọi $x, y \in \mathbb{Z}$. Trường hợp $x^2 + 5y^2 + 1 = 1 \Leftrightarrow x=0$ và $y=0$. Thay $(0, 0)$ vào bất phương trình ta có $\log_1(1.7) \ge 1$ (Vô lý vì cơ số logarit phải khác $1$). Do đó, cơ số $x^2 + 5y^2 + 1 > 1$.`,
+            giaiThich: String.raw`Gặp bất phương trình Logarit có chứa ẩn ở CƠ SỐ, bẫy tử thần nằm ở việc em nhắm mắt đội mũ lên mà không biết cơ số đó lớn hơn 1 hay nằm trong $(0; 1)$.
+Trực giác: Nhìn cái cơ số $x^2 + 5y^2 + 1$. Tổng các bình phương cộng 1 thì chắc chắn nó $\ge 1$ rồi. Test thử trường hợp nó bằng 1 xem sao (khi $x=y=0$). Vô lý! Vậy cơ số này lớn hẳn hơn 1.
+Vũ khí:
+$$ \log_a B \ge 1 \text{ (với } a > 1) \Leftrightarrow B \ge a^1 $$
+Chiều bất phương trình giữ nguyên, mạnh dạn phá Logarit!
+Khẩu hiệu: **"Ẩn ở cơ số - Quét giới hạn cơ số trước khi đội mũ!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Gom hằng đẳng thức và kẹp khoảng cho nghiệm nguyên",
+            toanHoc: String.raw`Bước 2: Phá logarit và hoàn thành bình phương
+Vì cơ số lớn hơn $1$, bất phương trình giữ nguyên chiều:
+$4x - y + 1.7 \ge x^2 + 5y^2 + 1$
+$\Leftrightarrow x^2 - 4x + 5y^2 + y \le 0.7$
+$\Leftrightarrow (x^2 - 4x + 4) + 5\left(y^2 + \frac{1}{5}y + \frac{1}{100}\right) \le 0.7 + 4 + 5\left(\frac{1}{100}\right)$
+$\Leftrightarrow (x - 2)^2 + 5\left(y + \frac{1}{10}\right)^2 \le 4.75$
+
+Bước 3: Chặn khoảng biến $y$ và xét trường hợp
+Vì $(x - 2)^2 \ge 0$ với mọi $x$, ta suy ra: $5\left(y + 0.1\right)^2 \le 4.75 \Rightarrow (y + 0.1)^2 \le 0.95 \Rightarrow -0.97 \le y + 0.1 \le 0.97 \Rightarrow -1.07 \le y \le 0.87$
+Vì $y \in \mathbb{Z}$, biến $y$ chỉ có thể nhận hai giá trị là $y = -1$ hoặc $y = 0$.
+
+Trường hợp 1: $y = -1$
+Thay vào: $(x - 2)^2 + 5(-0.9)^2 \le 4.75 \Leftrightarrow (x - 2)^2 \le 0.7$
+Vì $x \in \mathbb{Z}$, số chính phương duy nhất thỏa mãn là $0$. $\Rightarrow x = 2$. Cặp nghiệm: $(2, -1)$.
+
+Trường hợp 2: $y = 0$
+Thay vào: $(x - 2)^2 + 5(0.1)^2 \le 4.75 \Leftrightarrow (x - 2)^2 \le 4.7$
+Vì $x \in \mathbb{Z}$, các số chính phương thỏa mãn là $0, 1, 4$.
+$\Rightarrow x - 2 \in \{-2, -1, 0, 1, 2\} \Rightarrow x \in \{0, 1, 2, 3, 4\}$.
+Các cặp nghiệm: $(0, 0), (1, 0), (2, 0), (3, 0), (4, 0)$.
+Đối chiếu Bước 1, loại $(0,0)$.
+Kết luận: Có $5$ cặp số nguyên $(x, y)$ thỏa mãn là $(2, -1), (1, 0), (2, 0), (3, 0), (4, 0)$.`,
+            giaiThich: String.raw`Sau khi đội mũ lên, em thu được một bất phương trình bậc 2 theo cả $x$ và $y$. Cách xử lý duy nhất là hất hết sang một vế, rồi hoàn thành bình phương để tạo ra các cụm $(x-a)^2 + (y-b)^2 \le R^2$.
+Đây là phương trình của một hình tròn/elip. Em cứ lấy cái cụm chứa $y$ (hoặc cụm có hệ số lớn hơn) để đánh giá chặn trước, vì bình phương luôn $\ge 0$. Từ đó kẹp ra được một vài giá trị nguyên lẻ tẻ của $y$.
+Khẩu hiệu: **"Gặp bậc 2 hai ẩn - Ép hằng đẳng thức hình tròn, kẹp chặn biến!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_4_giai_phuong_trinh_mu_bang_cach_lay_logarit_hai_ve_dieu_kien_delta",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 4: Giải phương trình mũ bằng cách lấy Logarit hai vế (Điều kiện Delta)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: Có bao nhiêu số nguyên $x$ để tồn tại $y$ thỏa mãn $4^{x+y} = 3^{x^2+y^2}$?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Logarit hóa hai vế và dùng Delta ép tồn tại nghiệm",
+            toanHoc: String.raw`Ta có: $\log_3(4^{x+y}) = x^2 + y^2 \Leftrightarrow (x+y)\log_3 4 = x^2 + y^2$
+$\Leftrightarrow y^2 - y\log_3 4 + x^2 - x\log_3 4 = 0$
+Phương trình có nghiệm $y \Leftrightarrow \Delta \ge 0$
+$\Leftrightarrow (\log_3 4)^2 - 4(x^2 - x\log_3 4) \ge 0$
+$\Rightarrow -1,4 \le x \le 2,6$
+Vì $x \in \mathbb{Z} \Rightarrow$ có $2$ số $x$ là $x = 0, 1$.
+Note: Đưa về phương trình bậc $2$ đối với tham số $x \Rightarrow$ đưa theo $x$.`,
+            giaiThich: String.raw`Gặp phương trình mũ với 2 cơ số khác hẳn nhau (4 và 3) mà số mũ thì đa thức lằng nhằng, đừng cố tìm cách đưa về cùng cơ số vô ích.
+Vũ khí giải mã:
+$$ a^{U} = b^{V} \Leftrightarrow \log_b(a^{U}) = \log_b(b^{V}) \Leftrightarrow U \cdot \log_b a = V $$
+Lấy Logarit 2 vế ngay lập tức! Phương trình sẽ rơi về dạng bậc 2. Câu thần chú "tồn tại y" là tín hiệu phát lệnh cho em coi $y$ là ẩn chính, còn $x$ là tham số. Bắt buộc $\Delta \ge 0$. Từ đó kẹp ra được khoảng của $x$ và nhặt các số nguyên.
+Khẩu hiệu: **"Hai cơ số lệch pha - Logarit hai vế, ép Delta nặn nghiệm!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_5_giai_he_logarit_mu_bang_bdt_va_phuong_phap_hinh_hoc",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 5: Giải hệ Logarit - Mũ bằng BĐT và Phương pháp Hình học**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: Có bao nhiêu cặp số nguyên $(x, y)$ thỏa mãn $\log_3(x+y) = \log_4(x^2+y^2)$?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đặt ẩn phụ t và giải hệ bằng BĐT hoặc Hình học",
+            toanHoc: String.raw`Điều kiện: $x+y > 0$. Đặt $\log_3(x+y) = \log_4(x^2+y^2) = t$
+$\Rightarrow \begin{cases} x+y = 3^t \\ x^2+y^2 = 4^t \end{cases}$
+
+Cách 1: Áp dụng bất đẳng thức Bunhiacopxki (Bunyakovsky), ta có:
+$((1)^2 + (1)^2)(x^2+y^2) \ge (x \cdot 1 + y \cdot 1)^2$
+$\Leftrightarrow 2(x^2+y^2) \ge (x+y)^2$
+$\Rightarrow 2 \cdot 4^t \ge (3^t)^2 \Leftrightarrow 2 \cdot 4^t \ge 9^t$
+$\Rightarrow \left(\frac{9}{4}\right)^t \le 2 \Rightarrow t \le \log_{\frac{9}{4}} 2 \approx 0,85$
+Note: Đặt ẩn chung $t$. Dùng bất đẳng thức khi có $(x^2+y^2)$ và $(x+y)$; có $(x+y)^2 \le 2(x^2+y^2)$.
+
+Cách 2: Giải theo phương pháp hình học.
+$\begin{cases} x+y = 3^t \Rightarrow \text{Đường thẳng } (d): x+y - 3^t = 0 \\ x^2+y^2 = 4^t \Rightarrow \text{Đường tròn } (C): x^2+y^2 = (2^t)^2 \text{ tâm } I(0, 0), R = 2^t \end{cases}$
+Để tồn tại nghiệm chung, đường thẳng và đường tròn phải cắt nhau:
+$d(I, d) \le R \Leftrightarrow \frac{|-3^t|}{\sqrt{1^2+1^2}} \le 2^t \Rightarrow \frac{3^t}{\sqrt{2}} \le 2^t$
+$\Rightarrow \left(\frac{3}{2}\right)^t \le \sqrt{2} \Rightarrow t \le 0,85$
+Vì $x, y \in \mathbb{Z} \Rightarrow t \le 0$. Nếu $t = 0 \Rightarrow \begin{cases} x+y = 1 \\ x^2+y^2 = 1 \end{cases}$ Giải hệ ta được: $(x, y) = (1, 0)$ hoặc $(0, 1)$.
+
+Note: Tách các vế cho hệ hình học:
+- Đường thẳng $d$: $ax+by+c=0$
+- Đường tròn $(C)$: $(x-a)^2+(y-b)^2 \le R^2$`,
+            giaiThich: String.raw`Chuỗi $\log = \log$ này là kinh điển. Phản xạ không bao giờ sai: Đặt bằng $t$ để phá tan Logarit, chuyển sang hệ phương trình Mũ.
+Trong hệ này xuất hiện cặp bài trùng $(x+y)$ và $(x^2+y^2)$. Em có 2 con đường:
+1. Dùng BĐT Bunhiacopxki để đè chết cái bậc 1 bằng cái bậc 2.
+2. Dịch hệ này sang hình học (Đường thẳng cắt Đường tròn) và ép điều kiện có nghiệm:
+$$ d(I, \text{đường thẳng}) \le R $$
+Cả hai cách đều sẽ chặn được giá trị của $t$. Từ đó tìm ra $(x,y)$. Cách Hình học trực quan và ít sợ sai dấu hơn.
+Khẩu hiệu: **"Chuỗi Log bằng nhau - Đặt t phá thành Mũ, chốt hạ bằng khoảng cách!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_6_bien_doi_dai_so_chung_logarit_mu_ham_dac_trung",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 6: Biến đổi đại số chung Logarit & Mũ (Hàm đặc trưng)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: Giải phương trình $\log_3(3x+3) + x = 2y + 9^y$ với $0 \le x \le 2022$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nặn Hàm đặc trưng cho cấu trúc lai Mũ - Logarit",
+            toanHoc: String.raw`Biến đổi phương trình: $\log_3(3(x+1)) + x = \log_3(3^{2y}) + 3^{2y}$
+$\Leftrightarrow \log_3(x+1) + 1 + x = 2y + 3^{2y}$
+$\Leftrightarrow \log_3(x+1) + (x+1) = \log_3(3^{2y}) + 3^{2y}$
+Xét hàm số đặc trưng $f(t) = \log_3 t + t$ (đồng biến vì $f'(t) > 0$).
+$\Rightarrow f(x+1) = f(3^{2y}) \Rightarrow x+1 = 3^{2y}$.
+Vì $1 \le x+1 \le 2023 \Rightarrow 1 \le 3^{2y} \le 2023$.
+$\Rightarrow 0 \le 2y \le \log_3 2023 \approx 6,93 \Rightarrow 0 \le y \le 3,46$.
+Vì $y \in \mathbb{Z} \Rightarrow y \in \{0, 1, 2, 3\}$. Với mỗi giá trị $y$ tạo ra $1$ giá trị $x \Rightarrow$ có $4$ nghiệm.`,
+            giaiThich: String.raw`Cấu trúc phương trình có $\log$ ở một vế và có Mũ ở một vế. Đây là tín hiệu cầu cứu của Hàm đặc trưng.
+Nhiệm vụ của em là tách, thêm, bớt làm sao để vế trái là một hàm của một cụm $U$, vế phải là hàm tương tự của cụm $V$.
+Vũ khí: Đưa $9^y$ về $3^{2y}$, và gài cái $2y$ vào trong một cái $\log_3$.
+$$ 2y = \log_3(3^{2y}) $$
+Khi hai vế đã chuẩn form $f(t) = \log_3 t + t$, vứt cái vỏ đi, cho lõi bằng nhau. Cuối cùng, ốp cái điều kiện kẹp của $x$ vào để giới hạn miền của $y$.
+Khẩu hiệu: **"Lai tạp Mũ - Log: Chế tạo hàm đặc trưng, lột vỏ ép lõi!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_7_phuong_trinh_logarit_chua_can_dat_an_phu",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 7: Phương trình logarit chứa căn (Đặt ẩn phụ)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: Cho $\sqrt{\log_2 x} + \sqrt{\log_2 y} + \log_2 \sqrt{x} + \log_2 \sqrt{y} = 100$. Tính $x \cdot y = ?$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đặt ẩn phụ phá căn và nhẩm nghiệm tổng bình phương",
+            toanHoc: String.raw`Điều kiện: $\log_2 x \ge 0, \log_2 y \ge 0$. Đặt:
+$\begin{cases} \sqrt{\log_2 x} = a \ge 0 \Rightarrow \log_2 x = a^2 \Rightarrow \log_2 \sqrt{x} = \frac{1}{2}a^2 \\ \sqrt{\log_2 y} = b \ge 0 \Rightarrow \log_2 y = b^2 \Rightarrow \log_2 \sqrt{y} = \frac{1}{2}b^2 \end{cases}$
+
+Thay vào phương trình: $a + b + \frac{1}{2}a^2 + \frac{1}{2}b^2 = 100$
+$\Leftrightarrow a^2 + b^2 + 2a + 2b = 200 \Leftrightarrow (a+1)^2 + (b+1)^2 = 202$
+Vì $a, b \ge 0 \Rightarrow a+1 \ge 1, b+1 \ge 1$. Tổng hai bình phương số nguyên bằng $202$, các trường hợp có thể là: $9^2 + 11^2 = 81 + 121 = 202$.
+$\Rightarrow \begin{cases} a+1 = 9 \\ b+1 = 11 \end{cases} \text{ hoặc } \begin{cases} a+1 = 11 \\ b+1 = 9 \end{cases}$
+$\Rightarrow \begin{cases} a = 8 \\ b = 10 \end{cases} \text{ hoặc } \begin{cases} a = 10 \\ b = 8 \end{cases}$
+Dù trường hợp nào thì $\log_2 x + \log_2 y = a^2 + b^2 = 8^2 + 10^2 = 164$.
+$\Rightarrow \log_2(xy) = 164 \Rightarrow xy = 2^{164}$.`,
+            giaiThich: String.raw`Đề lằng nhằng rễ tre toàn căn với logarit. Cách gọn nhất là quăng hết cái rườm rà đi bằng cách đặt ẩn phụ.
+Cứ thấy căn thì đặt $a = \text{căn}$. Chú ý tính chất: $\log_2 \sqrt{x} = \frac{1}{2} \log_2 x$.
+Thay hết vào phương trình, em sẽ thu được một phương trình đường tròn dạng $(a+1)^2 + (b+1)^2 = 202$.
+Bẫy ở đây: Đừng đi giải phương trình nghiệm nguyên này bằng đại số. Tổng 2 bình phương bằng 202, nhẩm nhanh các số chính phương gần 202 là ra ngay $81 + 121$.
+Khẩu hiệu: **"Thấy căn phức tạp - Đặt ẩn phụ tạo hình tròn, nhẩm chính phương!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_8_tim_min_max_bieu_thuc_logarit_2_bien_su_dung_dao_ham",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 8: Tìm Min, Max biểu thức Logarit 2 biến (Sử dụng đạo hàm)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: Xét $a > b > 1$. Tìm $P_{\min}$. Với $P = \log_{\frac{a}{b}} (a^2) + 3\log_b \left(\frac{a}{b}\right)$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chèn cơ số dồn về 1 biến t và khảo sát",
+            toanHoc: String.raw`Ta có: $a > b > 1 \Rightarrow 0 < \log_a b < 1$. Đặt $\log_a b = t \Rightarrow 0 < t < 1$.
+$P = \frac{4}{1 - \log_a b} + \frac{3}{\log_b a} - 3$
+$\Leftrightarrow P = \frac{4}{1 - t} + 3t - 3$
+$P' = \frac{4}{(1 - t)^2} - 3 = 0 \Leftrightarrow \frac{4}{(1 - t)^2} = 3 \Rightarrow (1 - t)^2 = \frac{4}{3} \Rightarrow t = 1 - \frac{2}{\sqrt{3}} \dots$
+
+Viết lại phương trình đạo hàm (theo ảnh gốc):
+$P' = \frac{2(t-1)}{(t-1)^4} - \frac{3}{t^2} = 0 \Leftrightarrow \frac{8}{(t-1)^3} = \frac{3}{t^2}$
+$\Rightarrow 8t^2 = 3(t^3 - 3t^2 + 3t - 1) \Rightarrow 3t^3 - 11t^2 + 9t - 3 = 0$
+Note: Luôn phải để ý ẩn hiện. $\rightarrow$ Vì $a, b$ là $1$ số nên ẩn ở đây phải là $t$ không phải là $x$ như hai cái cho là hàm $x$.`,
+            giaiThich: String.raw`Biểu thức lộn xộn các cơ số $\frac{a}{b}$, $b$... Phản xạ đầu tiên phải là "Tẩy cơ số". Dùng công thức chèn cơ số đổi mọi thứ về cơ số $a$ (hoặc $b$) để biến biểu thức thành một hàm duy nhất theo ẩn $t = \log_a b$.
+Bẫy chí mạng: Rất nhiều bạn quên điều kiện của $t$. Đề cho $a > b > 1$, bắt buộc em phải suy ra $0 < \log_a b < 1$, tức là $t \in (0; 1)$.
+Sau khi có hàm $P(t)$, phang đạo hàm, lập bảng biến thiên trên đúng khoảng $(0; 1)$ là ăn điểm.
+Khẩu hiệu: **"Lệch cơ số - Chèn cơ số dồn ẩn t, cẩn thận khoảng kẹp!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_9_max_min_phuong_trinh_mu_khong_co_dieu_kien_hai_bien",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 9: Max, min phương trình mũ không có điều kiện hai biến**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: $a > 1 ; b > 1$. $a^{2x} = b^{2y} = \sqrt{ab}$. Tìm $P_{\min} = 6x + y^2$?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Rút x, y theo tham số trung gian và đạo hàm",
+            toanHoc: String.raw`$\Rightarrow \begin{cases} 4x = 1 + \log_a b \\ 4y = 1 + \log_b a \end{cases}$
+$P = 6x + y^2 \Rightarrow 16P = 24(4x) + (4y)^2$
+$\Leftrightarrow 16P = 24(1 + \log_a b) + (1 + \log_b a)^2$
+Đặt $t = \log_b a \Rightarrow \log_a b = \frac{1}{t}$. Vì $a, b > 1 \Rightarrow t > 0$.
+$\Leftrightarrow 16P = 24\left(1 + \frac{1}{t}\right) + (1 + t)^2$
+Đạo hàm: $16P' = -\frac{24}{t^2} + 2(1 + t) = 0 \Leftrightarrow \frac{-12}{t^2} + 1 + t = 0 \Leftrightarrow t^3 + t^2 - 12 = 0 \Rightarrow t = 2$.
+Thay $t = 2$:
+$16P_{\min} = 24\left(1 + \frac{1}{2}\right) + (1 + 2)^2 \Rightarrow 16P_{\min} = 36 + 9 = 45$
+$\Rightarrow P_{\min} = \frac{45}{16}$.`,
+            giaiThich: String.raw`Dãy phương trình bằng nhau này nhìn sợ nhưng lại rất dễ xử. Cứ tách làm đôi: Lấy $a^{2x} = \sqrt{ab}$ và $b^{2y} = \sqrt{ab}$. Logarit 2 vế để kéo cổ thằng $x$ và $y$ xuống đất.
+Em sẽ biểu diễn được $x$ và $y$ theo một cấu trúc chỉ chứa $\log_a b$ và $\log_b a$.
+Vũ khí: Đặt $t = \log_b a$, thì cái kia nghịch đảo là $\frac{1}{t}$.
+Ném tất cả vào biểu thức $P$, đạo hàm theo $t$ và giải phương trình bằng 0.
+Khẩu hiệu: **"Chuỗi bằng nhau - Logarit kéo Mũ xuống, nghịch đảo ẩn t!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_10_danh_gia_phuong_trinh_mu_logarit_ket_hop_bdt_am_gm",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 10: Đánh giá phương trình Mũ - Logarit kết hợp BĐT AM-GM**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: Cho $2m + n < 0$. Tìm $m, n$ thỏa mãn phương trình:
+$9^{-m} \cdot 3^{-n} \cdot 3^{\frac{-4}{2m+n}} + \ln[(2m + n + 2)^2 + 1] = 81$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Thu gọn và đánh giá bằng Cauchy (AM-GM)",
+            toanHoc: String.raw`Biến đổi phương trình:
+$3^{-(2m+n)} \cdot 3^{\frac{-4}{2m+n}} + \ln[(2m + n + 2)^2 + 1] = 81$
+Đặt $2m + n = t$. Vì $2m + n < 0 \Rightarrow t < 0 \Rightarrow -t > 0$.
+$\Rightarrow 3^{-t - \frac{4}{t}} + \ln[(t + 2)^2 + 1] = 81$
+Ta có: $(t + 2)^2 \ge 0 \Rightarrow (t + 2)^2 + 1 \ge 1 \Rightarrow \ln[(t + 2)^2 + 1] \ge \ln 1 = 0$.
+
+Xét biểu thức $3^{-t - \frac{4}{t}}$:
+Vì $t < 0 \Rightarrow -t > 0, -\frac{4}{t} > 0$. Áp dụng bất đẳng thức AM-GM (Cauchy) cho hai số dương $-t$ và $-\frac{4}{t}$:
+$-t - \frac{4}{t} \ge 2\sqrt{(-t)\left(-\frac{4}{t}\right)} = 2\sqrt{4} = 4$.
+$\Rightarrow 3^{-t - \frac{4}{t}} \ge 3^4 = 81$.
+
+Từ đó: $\underbrace{3^{-t - \frac{4}{t}}}_{\ge 81} + \underbrace{\ln[(t + 2)^2 + 1]}_{\ge 0} = 81$
+Phương trình xảy ra dấu bằng khi và chỉ khi:
+$\begin{cases} -t - \frac{4}{t} = 4 \Rightarrow t = -2 \\ \ln[(t + 2)^2 + 1] = 0 \Rightarrow t = -2 \end{cases}$
+Vậy $t = -2$ thỏa mãn. $\Rightarrow 2m + n = -2$.
+Note: Đánh giá phương trình khi không thể đưa về hàm đặc trưng hay không thể giải được.`,
+            giaiThich: String.raw`Đây là câu chốt chặn 9.4+ trong đề. Cấu trúc Mũ nhân nhau lộn xộn cộng với $\ln$ không thể giải theo cách thường.
+Bí quyết: Tinh mắt nhận ra cụm $(2m+n)$ lặp lại 3 lần. Gom hết mũ lại, đặt $t = 2m+n$.
+Sau đó, đánh giá rạch ròi 2 thành phần:
+1. Thằng Logarit: $\ln(u^2 + 1) \ge \ln 1 = 0$.
+2. Thằng Mũ: Số mũ là tổng của 2 đại lượng có tích là hằng số, vũ khí BĐT Cauchy (AM-GM) phải được lôi ra ngay. Ép ra Min của nó đúng bằng 81.
+Tổng 2 Min bằng đúng vế phải, vậy điểm rơi chính là nghiệm.
+Khẩu hiệu: **"Phương trình lai tạp bất khả thi - Bắt điểm rơi bằng AM-GM và bình phương!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_11_rut_gon_bieu_thuc_va_tim_min_he_thuc_mu_logarit",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 11: Rút gọn biểu thức và Tìm Min hệ thức Mũ - Logarit**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: Cho $a^{x_1} \cdot b^{x_2-x_1} = 1$ với $a, b > 1$. $S = \left(\frac{x_1 x_2}{x_1 + x_2}\right)^2 - 4x_1 \cdot 4x_2$. Tìm $\min S$?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Logarit hóa đưa về phương trình bậc 1",
+            toanHoc: String.raw`Từ phương trình: $a^{x_1} \cdot b^{x_2-x_1} = 1$. Lấy logarit cơ số $a$ hai vế:
+$\log_a(a^{x_1} \cdot b^{x_2-x_1}) = \log_a 1 = 0$
+$\Leftrightarrow x_1 + (x_2 - x_1)\log_a b = 0$
+$\Leftrightarrow x_1(1 - \log_a b) + x_2 \log_a b = 0$.
+$\Rightarrow x_2 \log_a b = x_1(\log_a b - 1)$.
+$\Rightarrow x_2 = x_1\left(1 - \frac{1}{\log_a b}\right) = x_1(1 - \log_b a)$.
+
+Từ đó: $S = \left(\frac{x_1 x_2}{x_1 + x_2}\right)^2 - 4(x_1 + x_2)$. (Dùng hệ thức Vi-et để biến đổi). Rút gọn:
+$\Rightarrow S = \left(\frac{-1}{\log_b a}\right)^2 - 4\left(\frac{1}{\log_b a}\right) \Rightarrow S_{\min} = \dots$`,
+            giaiThich: String.raw`Gặp giả thiết tích các cơ số Mũ bằng 1, vũ khí mạnh nhất là táng Logarit cơ số $a$ (hoặc $b$) vào cả 2 vế. Vế phải $\log_a 1$ biến ngay thành $0$.
+Từ đó em sẽ thu được một biểu thức bậc 1 siêu đẹp tuyến tính giữa $x_1$ và $x_2$. Rút $x_2$ theo $x_1$, ném vào biểu thức $S$ cần tìm Min. Bài toán biến thành khảo sát hàm số 1 biến bình thường.
+Khẩu hiệu: **"Tích mũ bằng 1 - Táng Logarit kéo số mũ xuống đất!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_12_danh_gia_co_so_logarit",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 12: Đánh giá cơ số Logarit**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề: Có bao nhiêu cặp $(x, y)$ thỏa mãn $\log_{x^2 + 4y^2 + 1} \left(4x - y + \frac{34}{20}\right) \ge 1$?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đánh giá cơ số > 1 và ép hình tròn",
+            toanHoc: String.raw`Vì cơ số $x^2 + 4y^2 + 1 \ge 1$. Nếu $x^2 + 4y^2 + 1 = 1 \Rightarrow \begin{cases} x = 0 \\ y = 0 \end{cases}$, thay vào bất phương trình $\Rightarrow \log_1 \dots$ (Không thỏa mãn, cơ số phải $\neq 1$). $\Rightarrow x^2 + 4y^2 + 1 > 1$. Bất phương trình:
+$\Leftrightarrow 4x - y + \frac{34}{20} \ge x^2 + 4y^2 + 1$
+$\Leftrightarrow x^2 - 4x + 4y^2 + y \le \frac{14}{20}$
+$\Leftrightarrow (x - 2)^2 + 4\left(y^2 + \frac{1}{4}y\right) \le \frac{14}{20} + 4$
+$\Leftrightarrow (x - 2)^2 + 4\left(y + \frac{1}{8}\right)^2 \le 4 + \dots$
+
+(Bản gốc ghi $(x - 2)^2 + 4(y + \frac{1}{10})^2 \le 9$). Từ đó đánh giá:
+Vì $(x - 2)^2 \ge 0 \Rightarrow 4(y + \frac{1}{10})^2 \le 9 \Rightarrow -1 \le y + \frac{1}{10} \le 1$.
+
+Trường hợp 1: $y = -1 \Rightarrow (x-2)^2 + \frac{81}{100} \le 9 \Leftrightarrow (x-2)^2 \le \frac{819}{100}$
+$\Leftrightarrow -2,8 \le x - 2 \le 2,8 \Leftrightarrow -0,8 \le x \le 4,8$. Vì $x$ là số nguyên $\Rightarrow x = 2$. Ta có $1$ cặp nghiệm $(2; -1)$.
+Trường hợp 2: $y = 0 \Rightarrow (x-2)^2 \le \frac{104}{20} = 5,2$
+$\Leftrightarrow -2,2 \le x - 2 \le 2,2 \Leftrightarrow -0,2 \le x \le 4,2$. Vì $x$ là số nguyên $\Rightarrow x \in \{0; 1; 2; 3; 4\}$. $\Rightarrow$ Loại trường hợp nghiệm $(0; 0)$ vì khi thay vào sẽ xuất hiện cơ số $\log_1$.`,
+            giaiThich: String.raw`Form này giống hệt bài 3 ở trên. Phản xạ lại chu trình: Kiểm tra cơ số $>1 \Rightarrow$ Đội mũ lên giữ nguyên chiều $\Rightarrow$ Gom hằng đẳng thức bậc 2 tạo thành phương trình đường tròn $\Rightarrow$ Dùng bình phương $\ge 0$ để kẹp giới hạn của một biến (chọn biến $y$).
+Làm thuần thục form này đi thi tiết kiệm được 10 phút đấy.
+Khẩu hiệu: **"Cơ số lớn hơn 1 - Đội mũ, gom bình phương, kẹp biến!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_13_khao_sat_phuong_trinh_mu_chua_tham_so_m",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 13: Khảo sát phương trình mũ chứa tham số $m$**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đề bài: Tìm $m$ để phương trình $9^{x^2} - 4 \cdot 3^{x^2} + 8 = m$ có nghiệm thuộc đoạn $x \in [-2; 1]$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đặt ẩn phụ và Cảnh báo kẹp khoảng T",
+            toanHoc: String.raw`Note: Chú ý đặt các điều kiện hiện diện của nghiệm. Đặt $t = 3^{x^2}$. Xét hàm $t(x) = 3^{x^2}$ trên đoạn $[-2; 1]$. Đạo hàm: $t' = 3^{x^2} \cdot \ln 3 \cdot 2x = 0 \Leftrightarrow x = 0$.
+Bảng biến thiên của $t(x)$:
+<img src="images/toan2_t25_h1.png" />
+Từ bảng biến thiên, ta thấy $t \in [1; 3^4] \Rightarrow t \in [1; 81]$.`,
+            giaiThich: String.raw`Thấy $9^{x^2}$ và $3^{x^2}$, 100% học sinh đều biết đặt $t = 3^{x^2}$. Nhưng 90% học sinh 6 điểm chết ở chỗ: cho $x$ chạy từ $[-2; 1]$ rồi nhắm mắt thay 2 đầu mút vào tìm khoảng của $t$. Sai bét!
+Cái mũ $x^2$ nó là hàm parabol, nó vắt qua gốc tọa độ $0$. Nên em BẮT BUỘC phải đạo hàm $t'$, lập bảng biến thiên riêng cho thằng $t$ để vét được cái điểm lõm cực tiểu của nó.
+Tìm đúng kẹp $t \in [\text{Min}; \text{Max}]$ rồi mới được đi tiếp.
+Khẩu hiệu: **"Đổi ẩn phụ Mũ bậc chẵn - Bắt buộc kẻ bảng biến thiên kẹp miền mới!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Cô lập m và tìm giao điểm trên miền T",
+            toanHoc: String.raw`Phương trình ban đầu trở thành: $t^2 - 4t + 8 = m$. Xét hàm số $f(t) = t^2 - 4t + 8$ trên đoạn $t \in [1; 81]$. Đạo hàm: $f'(t) = 2t - 4 = 0 \Leftrightarrow t = 2$.
+Bảng biến thiên của $f(t)$:
+<img src="images/toan2_t25_h2.png" />
+Dựa vào bảng biến thiên, để phương trình có nghiệm thì $m$ phải cắt đồ thị hàm $f(t)$:
+$\Rightarrow 4 \le m \le 6245$.`,
+            giaiThich: String.raw`Ra được miền $t \in [1; 81]$ rồi, bài toán quy về khảo sát hàm parabol $f(t) = t^2 - 4t + 8$ bình thường trên đoạn này. Đạo hàm, lập BBT thứ 2. $m$ đứng riêng một vế đóng vai trò là một thanh gươm chém ngang qua đồ thị. Cắt trúng thì có nghiệm. Nhìn đỉnh và đáy của đồ thị để khóa giới hạn cho $m$.
+Khẩu hiệu: **"Cô lập m - Cầm đường ngang chém vào bảng biến thiên!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_14_giai_phuong_trinh_chua_logarit_tren_mu",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 14: Giải phương trình chứa Logarit trên mũ**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Giải phương trình:
+$x^{\frac{1}{2}\log_2 x} = \log_2 \frac{x}{a} \Rightarrow P_{\min} = 4a^3 + b^3 - 4\log_2(\dots)$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Rút ẩn t và dùng BĐT AM-GM để chặn đáy",
+            toanHoc: String.raw`Đặt $t = 4a^3 + b^3$ Ta có:
+$4a^3 + \frac{b^3}{2} + \frac{b^3}{2} \ge 3 \sqrt[3]{4a^3 \cdot \frac{b^3}{2} \cdot \frac{b^3}{2}} = 3ab^2$`,
+            giaiThich: String.raw`Đề cho cấu trúc phương trình rối rắm nhưng lại bắt tìm Min của một biểu thức $P$ phụ thuộc vào $a, b$. Kỹ thuật ở đây là gộp cái cụm chứa $a$ và $b$ lại thành một ẩn $t$.
+Vũ khí để chặn Min/Max của $t$ chính là BĐT AM-GM (Cauchy) cho 3 số. Bẫy ở chỗ em phải biết tách $b^3$ làm đôi thành $\frac{b^3}{2} + \frac{b^3}{2}$ để lúc nhân vào nó triệt tiêu được hệ số, ra đúng cụm $ab^2$ đẹp đẽ.
+Khẩu hiệu: **"Tách số hạng - Ốp AM-GM 3 số nặn ra hằng số chặn Min!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Đạo hàm hàm P theo t",
+            toanHoc: String.raw`$\Rightarrow P = t - 4\log_2 (t)$
+$P' = 1 - \frac{4}{t \ln 2} = 0 \Rightarrow t = \frac{4}{\ln 2}$
+[BBT]: $\Rightarrow P_{\min} = \frac{4}{\ln 2} - 4\log_2\left(\frac{4}{\ln 2}\right)$`,
+            giaiThich: String.raw`Sau khi ép được BĐT, biểu thức $P$ sẽ trơ trọi lại thành một hàm số một biến $t$. Việc còn lại quá quen thuộc: Đạo hàm $P'$ theo $t$, cho bằng $0$ để tìm điểm rơi. Nhớ công thức đạo hàm $\log_2 t$ là $\frac{1}{t \ln 2}$ nhé, rất nhiều bạn đạo hàm sai chỗ này đâm ra sai cả bài.
+Khẩu hiệu: **"Đưa về 1 ẩn t - Đạo hàm tìm điểm rơi!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_15_giai_phuong_trinh_logarit_chua_tri_tuyet_doi_va_can",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 15: Giải phương trình Logarit chứa Trị tuyệt đối và Căn**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Giải phương trình:
+$\log_2 |x| - x\sqrt{2} = \log_4 (x^2 - 2\sqrt{2}x + 2)$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Rút gọn logarit và gom hằng đẳng thức",
+            toanHoc: String.raw`$\Leftrightarrow \log_2 |x| - x\sqrt{2} = \frac{1}{2} \log_2 (x - \sqrt{2})^2$
+$\Leftrightarrow \log_2 |x| - x\sqrt{2} = \log_2 |x - \sqrt{2}|$
+$\Leftrightarrow \log_2 |x| - \log_2 |x - \sqrt{2}| = x\sqrt{2}$`,
+            giaiThich: String.raw`Nhìn $\log_4$ và tam thức bậc 2 bên trong, 100% nó là hằng đẳng thức. Cụm $x^2 - 2\sqrt{2}x + 2$ chính là $(x - \sqrt{2})^2$.
+Cơ số $4$ hạ xuống thành $\frac{1}{2}\log_2$, triệt tiêu luôn cái bình phương kia đi. Nhưng bẫy chết người ở đây: $\sqrt{A^2} = |A|$. Tuyệt đối không được bỏ trị tuyệt đối khi chưa biết dấu của $x - \sqrt{2}$.
+Khẩu hiệu: **"Hạ bình phương trong Log - Bắt buộc đóng ngoặc trị tuyệt đối!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Phá trị tuyệt đối bằng cách chia trường hợp",
+            toanHoc: String.raw`Trường hợp 1: $x > 0$
+$\Rightarrow \begin{cases} t = 2^k \\ t+2 = 4^k \end{cases} \Rightarrow 2^k + 2 = 4^k \Rightarrow 2^k = 2 \Rightarrow k = 1 \Rightarrow \text{Có 1 nghiệm}.$
+Trường hợp 2: $x < 0$
+$\Rightarrow \begin{cases} -t = 2^k \\ t+2 = 4^k \end{cases} \Rightarrow -2^k + 2 = 4^k \Rightarrow 4^k + 2^k - 2 = 0 \Rightarrow 2^k = 1 \Rightarrow k = 0 \Rightarrow \text{Có 1 nghiệm}.$
+$\Rightarrow x = 0 \text{ (Loại)} \Rightarrow x = \sqrt{2} \text{ (Loại)}.$`,
+            giaiThich: String.raw`Bây giờ phương trình chứa 2 cái trị tuyệt đối $|x|$ và $|x - \sqrt{2}|$. Cách giải quyết dứt điểm là chia trường hợp $x>0$ và $x<0$ để lột cái vỏ trị tuyệt đối ra.
+Sau khi lột vỏ, đặt bằng $k$ (hoặc rút thế) đưa về phương trình Mũ. Dùng tính chất nhẩm nghiệm duy nhất (Hàm đồng biến/nghịch biến cắt đường thẳng ngang) để chốt hạ.
+Khẩu hiệu: **"Dính trị tuyệt đối - Bổ đôi trường hợp âm dương rồi lột vỏ!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_16_bien_doi_dai_so_phuong_trinh_logarit_binh_phuong",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 16: Biến đổi đại số phương trình Logarit bình phương**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Giải phương trình logarit:
+$\log_2^2(xy) = \log_2 \left(\frac{x}{2}\right) \log_2(4y)$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tách rời cấu trúc và đặt ẩn phụ",
+            toanHoc: String.raw`$\Rightarrow (\log_2 x + \log_2 y)^2 = (\log_2 x - 1)(\log_2 y + 2)$
+Đặt $\log_2 x = a, \log_2 y = b$.
+$\Leftrightarrow (a+b)^2 = (a-1)(b+2)$
+$\Leftrightarrow a^2 + b^2 + 2ab = ab + 2a - b - 2$
+$\Leftrightarrow a^2 + b^2 + ab - 2a + b + 2 = 0$`,
+            giaiThich: String.raw`Một nùi logarit nhân chia lộn xộn. Nguyên tắc: Đập vỡ hết ra thành các viên gạch nhỏ nhất.
+Vũ khí: Log của Tích bằng Tổng, Log của Thương bằng Hiệu.
+Tách $\log_2(xy)$ thành $\log_2 x + \log_2 y$. Tách $\log_2(x/2)$ thành $\log_2 x - 1$. Sau đó đặt ngay $a = \log_2 x$ và $b = \log_2 y$ để biến một bài toán Logarit ác mộng thành một bài phương trình đại số bậc 2 rất hiền lành.
+Khẩu hiệu: **"Đập vụn Tích/Thương thành Tổng/Hiệu - Đặt a, b dọn dẹp ngay!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Kỹ năng gom tổng bình phương bằng 0",
+            toanHoc: String.raw`Nhân cả hai vế với $2$:
+$2a^2 + 2b^2 + 2ab - 4a + 2b + 4 = 0$
+Nhóm thành các hằng đẳng thức:
+$(a+b)^2 + (a-2)^2 + (b+2)^2 = 0$
+Vì tổng các bình phương luôn lớn hơn hoặc bằng $0$, nên dấu bằng xảy ra khi và chỉ khi:
+$\begin{cases} a+b = 0 \\ a-2 = 0 \\ b+2 = 0 \end{cases} \Leftrightarrow \begin{cases} a = 2 \\ b = -2 \end{cases}$
+(Nghiệm thỏa mãn hệ phương trình).`,
+            giaiThich: String.raw`Làm sao để giải phương trình 1 dòng mà có đến 2 ẩn $a, b$? Chìa khóa vàng: Ép thành Tổng các bình phương.
+Thấy $ab$ bị dính liền, nhân 2 cả hai vế để tạo ra $2ab$. Lúc này, em tha hồ mượn $a^2$ và $b^2$ ghép cặp với nó thành hằng đẳng thức $(a+b)^2$. Phần còn dư lại tự động tạo thành $(a-2)^2$ và $(b+2)^2$.
+Vũ khí quyết định:
+$$ X^2 + Y^2 + Z^2 = 0 \Leftrightarrow X = Y = Z = 0 $$
+Khẩu hiệu: **"Phương trình nhiều ẩn thiếu dữ kiện - Nhân 2 ép hệ thống bình phương!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_17_giai_bat_phuong_trinh_mu",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 17: Giải bất phương trình Mũ**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Giải bất phương trình: $x \cdot 2^x - m \cdot 2^x - 4x + 4m < 0$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nhóm nhân tử chéo",
+            toanHoc: String.raw`$\Leftrightarrow 2^x(x - m) - 4(x - m) < 0 \Leftrightarrow (2^x - 4)(x - m) < 0$`,
+            giaiThich: String.raw`Phương trình có 4 số hạng. Đừng cuống cuồng bấm máy tính hay đạo hàm. Quét mắt thấy sự tương đồng tỷ lệ: Thằng đầu đi với $2^x$, thằng sau đi với 4. Cả hai cụm đều có nhân tử chung $(x - m)$.
+Chỉ cần nhặt đúng đồ, rút $(x - m)$ ra ngoài là phương trình tự động vỡ đôi.
+Khẩu hiệu: **"Bốn số hạng rời rạc - Bắt cặp rút nhân tử chung!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Phân tích dấu tích A.B < 0",
+            toanHoc: String.raw`Hệ tương đương với $2$ trường hợp:
+Trường hợp 1: $\begin{cases} 2^x - 4 < 0 \\ x - m > 0 \end{cases} \Leftrightarrow \begin{cases} x < 2 \\ x > m \end{cases} \Rightarrow m < x < 2$
+Trường hợp 2: $\begin{cases} 2^x - 4 > 0 \\ x - m < 0 \end{cases} \Leftrightarrow \begin{cases} x > 2 \\ x < m \end{cases} \Rightarrow 2 < x < m$
+$\Rightarrow \begin{cases} m = 8 \\ m = -4 \end{cases}$ (Các giá trị nguyên của $m$ thỏa mãn khoảng nghiệm).`,
+            giaiThich: String.raw`Tích 2 biểu thức $< 0$ khi và chỉ khi chúng Trái Dấu. Em chia thẳng 2 trường hợp: Một thằng âm, thằng kia dương và ngược lại.
+Giải từng cái kẹp ra khoảng nghiệm của $x$ theo $m$. Từ đó nhặt mốc nguyên của $m$ theo yêu cầu đề bài.
+Khẩu hiệu: **"Tích âm - Bổ đôi trường hợp Trái Dấu!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_18_dieu_kien_cua_mau_so_trong_ham_mu",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 18: Điều kiện của mẫu số trong hàm Mũ**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Quy tắc 'Mẫu khác 0' trên miền cho trước",
+            toanHoc: String.raw`Nội dung: $+>$ Luôn nhớ đặt điều kiện mẫu số. Ví dụ: Tìm $m$ để hàm số $y = \frac{2^x + 10}{2^x - m}$ nghịch biến trên khoảng $(1; 4)$.
+$\Rightarrow$ Điều kiện xác định: $2^x - m \neq 0 \Rightarrow m \neq 2^x$.
+Vì $x \in (1; 4) \Rightarrow 2^x \in (2^1; 2^4) \Rightarrow 2^x \in (2; 16)$.
+$\Rightarrow m \notin (2; 16) \Rightarrow \begin{bmatrix} m \le 2 \\ m \ge 16 \end{bmatrix}$.`,
+            giaiThich: String.raw`Nhắc lại lần nữa chống liệt: Gặp phân thức là phải móc mẫu số ra cho khác 0. Đề bắt xét trên khoảng $(1; 4)$, thì em đem khoảng đó nhét vào cái điều kiện mẫu số vừa tìm, xem tham số $m$ bị cấm cửa ở những vùng nào.
+Khẩu hiệu: **"Đơn điệu trên khoảng - Ép Mẫu khác 0 phải né khoảng đó ra!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_19_ham_so_mu_doi_voi_ham_da_thuc_khao_sat",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 19: Hàm số mũ đối với hàm đa thức (Khảo sát)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Với bài toán hàm số mũ đối với hàm đa thức: Ví dụ: Giải phương trình $3^{\frac{x}{6}} = 2x + m$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Khảo sát cực trị và dự đoán số nghiệm",
+            toanHoc: String.raw`$\Rightarrow$ Chuyển hết sang $1$ vế tạo thành hàm số $f(x)$. $\Rightarrow$ Giải $f'(x) = 0$. Nếu phương trình đạo hàm có $1$ nghiệm $x_0$ thì phương trình gốc sẽ có tối đa $2$ nghiệm. Ta có:
+$f(x) = 3^{\frac{x}{6}} - 2x - m = 0$
+$\Rightarrow f'(x) = \frac{\ln 3}{6} \cdot 3^{\frac{x}{6}} - 2 = 0$
+$\Rightarrow 3^{\frac{x}{6}} = \frac{12}{\ln 3} \Rightarrow x = 6 \log_3 \left( \frac{12}{\ln 3} \right)$.
+<img src="images/toan1_t30_h1.png" />
+Bảng biến thiên: [BBT]:
+- Dòng $x$: $-\infty \quad x_0 \quad +\infty$ (với $x_0 = 6 \log_3 (\frac{12}{\ln 3})$).
+- Dòng $f'(x)$: Mang dấu âm $(-)$ trong khoảng $(-\infty; x_0)$ và mang dấu dương $(+)$ trong khoảng $(x_0; +\infty)$. Tại $x_0$ thì $f'(x) = 0$.`,
+            giaiThich: String.raw`Đã chữa form này ở bài trước. Hàm Mũ chọi với Đa thức bậc 1, đạo hàm 1 phát là moi ra đúng 1 nghiệm $x_0$.
+Đồ thị chỉ lồi/lõm đúng 1 chỗ. Một đường thẳng cắt ngang qua cái đồ thị lồi/lõm đó thì chỉ đẻ ra Cùng Lắm là 2 nghiệm. Vẽ bảng biến thiên ra là chốt hạ được khoảng của $m$.
+Khẩu hiệu: **"Mũ chọi Đa thức bậc 1 - Đạo hàm 1 nghiệm, cắt ngang tối đa 2 phát!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_20_cac_meo_giai_nhanh_va_luu_y_logarit",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 20: Các mẹo giải nhanh và Lưu ý Logarit**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Ghi sổ tay 7 nguyên tắc sinh tồn Mũ/Log",
+            toanHoc: String.raw`Nội dung:
+- Logarit phân thức: $\log_a(u \cdot v) = \log_a u + \log_a v$ ; $\log_a\left(\frac{u}{v}\right) = \log_a u - \log_a v$.
+- Chú ý logarit về hai cơ số khác nhau: $a^x = b^y \Rightarrow a^{x/y} = b \Rightarrow \frac{x}{y} = \log_a b \Rightarrow x = y\log_a b$.
+- Nhìn hàm nào không tách được thì xét cả $2 \Rightarrow$ chuyển hết về $1$ bên $\Rightarrow f(x) = 0$.
+- Nhớ phải có điều kiện logarit.
+- Cùng cơ số thì nhân.
+- Tách các vế cho hệ hình học: Đường thẳng $d$: $ax+by+c=0$; Đường tròn $(C)$: $(x-a)^2+(y-b)^2 \le R^2$.
+- Dạng 6: Bài toán liên quan tới số logarit có nghiệm nguyên thì ta sẽ coi $1$ biến là tham số và biến nguyên (liên quan tới số nghiệm bài toán yêu cầu) là biến độc lập. Lập hàm số hoặc khảo sát hàm trực tiếp để quy về bài toán tương giao.`,
+            giaiThich: String.raw`Vào phòng thi hay quên công thức, chỉ cần tụng thuộc lòng 7 quy tắc này để tự cứu mình thoát khỏi những cái bẫy sơ đẳng:
+1. Luôn đặt Điều kiện. Không ĐK = Xóa sổ bài.
+2. Tích thành Tổng, Thương thành Hiệu.
+3. Lệch cơ số: Rút thế biến $x$ theo $y$ qua cầu nối $\log$.
+4. Hàm lai tạp Mũ - Log: Chuyển vế, đạo hàm chốt Min/Max.
+5. Cùng cơ số thì gộp nhân chia.
+6. Hệ nhiều phương trình: Dịch sang Hình học (Đường thẳng cắt Đường tròn).
+7. Bài có biến đếm nguyên: Cô lập M, khảo sát tương giao.
+Khẩu hiệu: **"Nhớ 7 quy tắc - Sống sót mọi kèo Logarit!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_21_phuong_trinh_mu_2_bien_dua_ve_ham_so_va_tim_min_max",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 21: Phương trình mũ 2 biến (Đưa về hàm số và Tìm Min/Max)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`BỔ SUNG: [MŨ VÀ LOGARIT] (Các bài toán giải bằng Hàm số/Đồ thị)
+Nội dung: Đề: Thay bằng $5^{x+y-1} + 25^{x^2+y^2-1-xy} = 0 \Rightarrow$ Tìm $\min, \max$ của $P = x^4 + y^4 - x^2y^2$?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Rút hệ thức từ phương trình tổng bằng 0",
+            toanHoc: String.raw`Từ phương trình: $\Rightarrow x^2 + y^2 - xy = 1 \Leftrightarrow x^2 + y^2 = xy + 1$
+Ta có: $P = (x^2+y^2)^2 - 3x^2y^2$
+Thay $x^2 + y^2 = xy + 1$ vào: $P = (xy + 1)^2 - 3(xy)^2$
+$\Rightarrow P = (xy)^2 + 2xy + 1 - 3(xy)^2 \Rightarrow P = -2(xy)^2 + 2xy + 1$`,
+            giaiThich: String.raw`Đề cho Mũ cộng Mũ bằng 0 là một cú lừa. Một hàm Mũ thì luôn dương ($>0$). Tổng của hai thằng dương làm sao bằng 0 được? Đề bị gõ lỗi dấu. Bản chất của các bài dạng này là ép số mũ bằng 0 (nếu cơ số là 1), hoặc nó là một phương trình hàm đặc trưng.
+Nhưng nhìn vào dòng giải, bài toán đang khai thác một hệ thức móc nối giữa $(x^2+y^2)$ và $xy$.
+Từ đó dồn biểu thức $P$ về một ẩn $t = xy$.
+Khẩu hiệu: **"Tìm mối liên hệ giữa các cụm Mũ - Rút ẩn quy về hàm t!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Tìm chặn biên cho biến t bằng BĐT cơ bản",
+            toanHoc: String.raw`Đặt $t = xy$. Để tìm $\min, \max$ ta phải tìm khoảng chặn của $t$. Từ giả thiết:
+$xy + 1 = x^2 + y^2 \Leftrightarrow 3xy + 1 = (x+y)^2 \ge 0 \Rightarrow 3xy \ge -1 \Rightarrow xy \ge -\frac{1}{3}$.
+Mặt khác: $xy + 1 = x^2 + y^2 \ge 2xy \Rightarrow 1 \ge xy \Rightarrow xy \le 1$.
+$\Rightarrow t \in \left[-\frac{1}{3}; 1\right]$.
+
+Note: Khi đạo hàm chỉ làm ra $\max \rightarrow$ để tìm $\min$ ta phải luôn tìm điều kiện bị chặn (Tạo ra $1$ phương trình cho ẩn).
+Khảo sát hàm $P(t) = -2t^2 + 2t + 1$ trên đoạn $\left[-\frac{1}{3}; 1\right]$. Đạo hàm $P'(t) = -4t + 2 = 0 \Leftrightarrow t = \frac{1}{2}$.
+<img src="images/toan2_t9_h1.png" />
+[BBT]: (Bảng biến thiên y hệt bài 15)`,
+            giaiThich: String.raw`Vẫn là kịch bản cũ: Đã đổi biến $t = xy$, không tìm điều kiện chặn cho $t$ thì vứt đi hết.
+Vũ khí chặn Min/Max của tích $xy$ là dùng 2 cái BĐT nền tảng:
+$$ (x+y)^2 \ge 0 \Rightarrow x^2+y^2 \ge -2xy $$
+$$ (x-y)^2 \ge 0 \Rightarrow x^2+y^2 \ge 2xy $$
+Nhét cái hệ thức $x^2+y^2 = xy+1$ vừa tìm được vào đây, em sẽ kẹp được $t$ vào giữa $\left[-\frac{1}{3}; 1\right]$. Cuối cùng đạo hàm hàm $P(t)$ nặn ra Min/Max.
+Khẩu hiệu: **"Đổi biến tích xy - Kẹp BĐT bình phương tìm biên ngay!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_22_phuong_trinh_logarit_chua_ham_mu_co_lap_bien_va_khao_sat_cuc_tri",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 22: Phương trình Logarit chứa hàm Mũ (Cô lập biến và Khảo sát cực trị)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $\ln(1 + x + 2y) = 2y + 3x - 10$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đẩy Log thành Mũ và đạo hàm khảo sát",
+            toanHoc: String.raw`Điều kiện: $1 + x + 2y > 0 \Leftrightarrow y > \frac{-x - 1}{2}$
+Hàm số: $f(y) = 1 + x + 2y - e^{2y + 3x - 10} = 0$
+Xét $y \ge \frac{-x - 1}{2}$. Đạo hàm: $f'(y) = 2 - 2 \cdot e^{2y + 3x - 10} = 0 \Leftrightarrow 2y + 3x - 10 = 0 \Leftrightarrow y = \frac{10 - 3x}{2}$`,
+            giaiThich: String.raw`Đề cho hàm có $\ln$, trước hết cứ rút lõi ra bằng cách đội mũ cơ số $e$ lên. Em sẽ thu được một phương trình Mũ.
+Gom hết về một hàm $f(y)$ (coi $x$ là tham số tĩnh). Đạo hàm $f'(y)$ và cho bằng 0 để định vị mốc cực trị của đồ thị (hoành độ là một đường thẳng chéo theo $x$).
+Khẩu hiệu: **"Phá Ln thành Mũ - Cố định X, đạo hàm theo Y!"**`
+        },
+        {
+            tenBuoc: "Bước 2: Đối chiếu Cực trị với Miền xác định và chốt nghiệm",
+            toanHoc: String.raw`- TH1: $\frac{10 - 3x}{2} \ge \frac{-x - 1}{2}$ (Điều kiện cực trị nằm trong khoảng xác định).
+Bảng biến thiên: $y$: $\frac{-x - 1}{2} \quad \frac{10 - 3x}{2} \quad +\infty$; $f'(y)$: $\quad + \quad 0 \quad -$; $f(y)$: Đi lên từ một giá trị âm đến giá trị cực đại $\frac{10 - 3x}{2}$ rồi đi xuống $0$.
+<img src="images/toan2_t7_h1.png" />
+[BBT]: $\Rightarrow$ Để phương trình có nghiệm $\Leftrightarrow$ Giá trị cực đại $f\left(\frac{10 - 3x}{2}\right) \ge 0 \Rightarrow 10 - 2x \ge 0 \Rightarrow x \le 5$.
+$\Rightarrow x \in \{1, 2, 3, 4\} \Rightarrow$ Tìm $y$.
+
+- TH2: $\frac{10 - 3x}{2} < \frac{-x - 1}{2}$ (Cực trị nằm ngoài khoảng xác định).
+Đường thẳng cắt tại một điểm âm. $\Rightarrow$ Không có nghiệm.
+<img src="images/toan2_t7_h2.png" />`,
+            giaiThich: String.raw`Bài này bẫy cực tinh vi ở chỗ: Em tìm ra đỉnh cực trị rồi, nhưng liệu cái đỉnh đó CÓ NẰM TRONG vùng xác định của $y$ không?
+Em phải chia 2 trường hợp:
+- TH1: Đỉnh lọt vào vùng xác định. Kẻ bảng biến thiên, ép cái đỉnh đó nhô lên khỏi mặt nước ($\ge 0$) thì mới cắt trục hoành tạo ra nghiệm. Giải ra được khoảng của $x$.
+- TH2: Đỉnh văng ra ngoài vùng. Đồ thị cứ thế cắm đầu đi xuống âm, không bao giờ trồi lên cắt trục hoành được $\Rightarrow$ Vô nghiệm.
+Khẩu hiệu: **"Tung đỉnh cực trị - Phải test xem có nằm trong vùng sống không!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_23_danh_gia_bat_phuong_trinh_mu_logarit_bang_dao_ham",
+    chuyenDe: "ham-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 23: Đánh giá Bất phương trình Mũ - Logarit bằng Đạo hàm**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Ví dụ: Đánh giá bất phương trình bằng đạo hàm Đề bài: Giải bất phương trình $4^{-x} - 3x + \log_4(y - x) - 2y + 2 \le 0$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Quét dấu đạo hàm hàm lai tạp",
+            toanHoc: String.raw`Note: Khi xét bất đẳng thức hay phương trình, hãy thử đạo hàm và đánh giá. Xét hàm số $f(x) = 4^{-x} - 3x + \log_4(y - x) - 2y + 2$. Ta đánh giá giá trị của đạo hàm $f'(x)$. $f'(x) = -4^{-x}\ln 4 - 3 - \frac{1}{(y - x)\ln 4}$
+Điều kiện xác định của logarit là $y - x > 0 \Rightarrow \frac{1}{(y - x)\ln 4} > 0$. Ta thấy:
+$-4^{-x}\ln 4 < 0; -3 < 0; -\frac{1}{(y - x)\ln 4} < 0$
+$\Rightarrow f'(x) < 0, \forall x < y$. $\Rightarrow$ Hàm số $f(x)$ luôn nghịch biến trên tập xác định.`,
+            giaiThich: String.raw`Kiến thức này anh đã lướt ở bài trên rồi. Dặn lại lần nữa: Khi em bế tắc toàn tập trước một mớ Logarit lộn Mũ, không có công thức nào khớp, thì hãy rút gươm Đạo Hàm ra.
+Hàm $f'(x)$ phơi bày ra toàn dấu âm, tức là nó cắm đầu đi xuống một mạch (nghịch biến). Từ đó em chỉ cần nhẩm 1 mốc nghiệm là có thể đánh giá bất phương trình nhỏ hơn 0 hoặc lớn hơn 0 một cách cực kỳ mượt mà.
+Khẩu hiệu: **"Không công thức, không BĐT - Đạo hàm quét dấu đè bẹp hàm lai!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_24_ly_thuyet_vdc_bien_luan_so_nghiem_phuong_trinh_mu_logarit_bang_do_thi",
+    chuyenDe: "ham-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 24: Lý thuyết VDC: Biện luận số nghiệm phương trình Mũ - Logarit bằng Đồ thị**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chốt 3 kịch bản Cắt đồ thị Mũ/Log",
+            toanHoc: String.raw`Nội dung: $+>$ Phương trình $a^x = b^x$ luôn có $1$ nghiệm dù đồng biến hay nghịch biến. $+>$ Phương trình $a^x = f(x)$ có $1$ nghiệm $\Leftrightarrow 1$ vế là hàm đồng biến, $1$ vế là hàm nghịch biến $\Rightarrow$ có $1$ nghiệm. Hoặc
+$\begin{cases} a > 1 \\ 0 < b < 1 \end{cases} \Rightarrow \text{có 1 nghiệm.} \quad \begin{cases} 0 < a < 1 \\ b > 1 \end{cases} \quad \begin{cases} 0 < a < 1 \\ 0 < x < 1 \end{cases}$ (Ghi chú: phần này liệt kê các trường hợp cơ số để hàm số đồng biến hoặc nghịch biến).
+
+$+>$ Phương trình $\log_a x = \log_b x$ khi cùng đồng biến hoặc cùng nghịch biến.
+
+$(*)$ Nghiệm của hàm mũ: Phương trình: $a^x = g(m)x + 1$.
+- Có $1$ nghiệm $\Rightarrow \begin{cases} g(m)x + 1 = h(x) \\ g(m) \le 0 \end{cases}$ (hoặc là đường tiếp tuyến).
+- $a^x = g(m)x + 1$ có $2$ nghiệm $\Rightarrow \begin{cases} g(m) \neq \ln a \\ g(m) > 0 \end{cases}$
+<img src="images/toan1_t26_h1.png" />
+
+Phương trình: $\log_a x = g(m)x - g(m) = g(m)(x - 1)$.
+- Có $2$ nghiệm $\Rightarrow \begin{cases} g(m) \neq \frac{1}{\ln a} \\ g(m) > 0 \end{cases}$
+- Có $1$ nghiệm $\Leftrightarrow \left[ \begin{array}{l} g(m) = 0 \\ g(m) \neq \frac{1}{\ln a} ; g(m) < 0 \\ g(m) = \frac{1}{\ln a} \end{array} \right.$
+<img src="images/toan1_t26_h2.png" />`,
+            giaiThich: String.raw`Lý thuyết này phải in vào não, đây là vũ khí ăn trọn điểm biện luận tương giao. Em chỉ cần nhớ 3 mô hình đồ thị kinh điển của đường $a^x$ (hoặc $\log$) cắt đường thẳng chéo:
+1. Đồ thị lượn một mạch cắt 1 điểm.
+2. Đồ thị võng lên cắt 2 điểm.
+3. Đồ thị cạ sát (tiếp tuyến) chạm đúng 1 điểm.
+Nhìn vào hệ số góc $g(m)$ của đường thẳng, em sẽ phán ngay được nó đâm vào đồ thị kiểu gì. Bẫy tiếp tuyến là bẫy dễ chết nhất.
+Khẩu hiệu: **"Mũ cắt đường chéo - So hệ số góc chốt số nghiệm!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_1_dem_so_bo_nghiem_thoa_man_bat_dang_thuc",
+    chuyenDe: "to-hop-xac-suat",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 1: Đếm số bộ nghiệm thỏa mãn bất đẳng thức**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`PHÂN LOẠI: [TỔ HỢP - XÁC SUẤT]
+Nội dung: Tổ hợp - Xác suất: Có bao nhiêu bộ số $(a, b, c)$ thỏa mãn $3 \le a \le b \le c \le 20$?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nới lỏng dấu '=' bằng cách cộng thêm hằng số",
+            toanHoc: String.raw`$\Rightarrow a < b+1 < c+2 \le 21$
+$\Rightarrow C_{19}^3$ (Tổ hợp chập $3$ của $19$ phần tử).
+Note: Cứ $1$ bộ $3$ số thì chỉ có $1$ bộ thỏa mãn ($x < y < z$).`,
+            giaiThich: String.raw`Đây là mẹo đếm cực đỉnh mà không phải ai cũng biết. Đề bài cho một chuỗi bất đẳng thức có dấu "$\le$". Nếu ngồi chia trường hợp (lúc $a=b$, lúc $b=c$) thì sẽ rối tinh rối mù.
+Kỹ thuật ở đây là "nới lỏng" khoảng cách. Em chỉ cần cộng $1$ vào biến thứ hai, cộng $2$ vào biến thứ ba. Tự động các dấu "$\le$" sẽ biến thành dấu "$<$" rất sắc nét:
+$$ a \le b \le c \Rightarrow a < b+1 < c+2 $$
+Khi đó, em đang tìm 3 số phân biệt từ khoảng $[3; 22]$. Số cách chọn chính là Tổ hợp chập 3 của số lượng các số trong khoảng đó.
+Khẩu hiệu: **"Có dấu bằng thì nới lỏng - Cộng thêm số tạo khoảng cách nghiêm ngặt!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_2_xac_suat_chia_do_vat_dung_bien_co_doi",
+    chuyenDe: "to-hop-xac-suat",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 2: Xác suất chia đồ vật (Dùng biến cố đối)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Bài toán xác suất: Có $8$ quả (táo/bưởi), xác suất sao cho $1$ đứa không chia hết: $\frac{2}{8} \Rightarrow$ không chia hết: $\frac{6}{8}$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tư duy phản biện bằng Biến cố đối",
+            toanHoc: String.raw`$\Rightarrow$ Đề bài:
+$1 - (\text{xác suất sao cho quả không chia hết}) > \frac{3}{4}$
+$\Rightarrow 1 - \left( \frac{6}{8} \cdot \frac{5}{7} \cdot \frac{4}{6} \cdot \frac{3}{5} \right) = 0,78 > \frac{3}{4}$.
+$\Rightarrow$ Chỉ cần rút $4$ quả. (Còn $4$ quả không chia hết, lấy $1$ quả không chia hết).`,
+            giaiThich: String.raw`Khi bài toán xuất hiện cụm từ "ít nhất", "tối thiểu" hay "lớn hơn", đi đường thẳng sẽ dính rất nhiều trường hợp.
+Vũ khí của em là lật ngược vấn đề (Biến cố đối). Tính xác suất để "không thỏa mãn" (chia không hết), sau đó lấy $1$ trừ đi. Phép toán tích các phân số lùi dần chính là cách rút từng quả một ra khỏi rổ. Ép biểu thức này lớn hơn $\frac{3}{4}$ là tìm được số quả cần rút.
+Khẩu hiệu: **"Gặp chữ 'ít nhất/lớn hơn' - Lấy 1 trừ đi phần thừa!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_3_xac_suat_chon_3_hoc_sinh_ngoi_thanh_cap_so_cong",
+    chuyenDe: "to-hop-xac-suat",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 3: Xác suất chọn 3 học sinh ngồi thành cấp số cộng**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Bài toán tổ hợp - xác suất: Chọn ô... nếu bắt buộc phải có $2$ ô liên tiếp thì... Trong dãy có $2n+1$ học sinh. $3$ học sinh được chọn ngồi thành cấp số cộng là có xác suất là $\frac{31}{4368}$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chuyển cấu trúc CSC thành tính chẵn lẻ",
+            toanHoc: String.raw`Gọi vị trí $3$ học sinh là $a, b, c$. $\Rightarrow a + c = 2b \Rightarrow a, c$ phải cùng lẻ hoặc cùng chẵn.
+Trường hợp 1: cùng chẵn $\Rightarrow$ có $n$ số chẵn $\Rightarrow$ cách chọn là $C_n^2$.
+Trường hợp 2: cùng lẻ $\Rightarrow$ có $n+1$ số lẻ $\Rightarrow$ cách chọn là $C_{n+1}^2$.
+$\Rightarrow \text{Xác suất} = \frac{C_n^2 + C_{n+1}^2}{C_{2n+1}^3}$`,
+            giaiThich: String.raw`Chọn 3 vị trí lập thành Cấp số cộng (CSC). Nghe thì hàn lâm nhưng bản chất CSC là:
+$$ a + c = 2b $$
+Cái vế phải ($2b$) luôn luôn là MỘT SỐ CHẴN. Muốn tổng 2 số $a$ và $c$ là số chẵn thì bắt buộc 2 thằng đó phải CÙNG CHẴN hoặc CÙNG LẺ.
+Vậy bài toán quy về: Chọn 2 số chẵn (trong tập $n$ số), hoặc chọn 2 số lẻ (trong tập $n+1$ số). Có 2 đầu mút $a, c$ thì tự động sinh ra thằng $b$ ở giữa. Nhét tất cả vào công thức xác suất $\frac{\text{Kết quả}}{\text{Không gian mẫu}}$.
+Khẩu hiệu: **"Cấp số cộng 3 số - Bắt 2 thằng đầu đuôi cùng chẵn hoặc cùng lẻ!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_4_chu_y_giai_toan_to_hop_xac_suat_dau_hieu_chia_het",
+    chuyenDe: "to-hop-xac-suat",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 4: Chú ý giải toán Tổ hợp - Xác suất (Dấu hiệu chia hết)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Gom quy tắc chia hết và vòng lặp tận cùng",
+            toanHoc: String.raw`Nội dung: $+>$ Chú ý giải toán tổ hợp - xác suất:
+- Phải luôn ghi nhớ các trường hợp của xác suất.
+- Các chữ số có tổng chia hết cho $9 \Rightarrow$ Số đó chia hết cho $9$.
+- Các chữ số có tổng chia hết cho $3 \Rightarrow$ Số đó chia hết cho $3$.
+- Các số chia hết cho $4 \Rightarrow 2$ chữ số cuối cùng phải chia hết cho $4$.
+- Bài toán tìm chữ số tận cùng là gì $\Rightarrow$ Dùng vòng lặp số dư để tìm.
+Ví dụ: Tìm chữ số tận cùng của $2024^n \Rightarrow$ Xét tận cùng là $4^n$. Vì $4^1=4, 4^2=16, 4^3=64...$ nên số cuối sẽ lặp lại chu kỳ chẵn/lẻ.
+- Có bao nhiêu số từ $1$ đến $n$ chia hết cho một số $\Rightarrow$ Công thức xấp xỉ bằng phần nguyên: $\left\lfloor \frac{n}{\text{ƯCLN}} \right\rfloor + 1$.
+- Xác suất của phần giao $\Rightarrow$ Dùng ước chung lớn nhất (ƯCLN).`,
+            giaiThich: String.raw`Các bài toán lập số tự nhiên thường cài cắm điều kiện chia hết. Em chỉ cần khắc cốt ghi tâm vài mẹo:
+1. Chia hết 3, 9: Đếm tổng các chữ số.
+2. Chia hết 4, 25: Chỉ nhìn 2 chữ số TẬN CÙNG.
+3. Tìm chữ số tận cùng của lũy thừa khổng lồ (kiểu $2024^n$): Chỉ xét đúng số cuối ($4^n$) và đếm chu kỳ lặp lại.
+Khẩu hiệu: **"Chia 4 nhìn đuôi - Lũy thừa khổng lồ tìm chu kỳ vòng lặp!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_5_ky_thuat_dem_so_lan_xuat_hien_vet_dau_loang_da_giac",
+    chuyenDe: "to-hop-xac-suat",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 5: Kỹ thuật Đếm (Số lần xuất hiện, Vết dầu loang, Đa giác)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hình ảnh bổ trợ [H]:
+<img src="images/toan1_t22_h1.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Công thức chống sai cho bài Đa giác",
+            toanHoc: String.raw`Nội dung:
+- Phương pháp đếm số lần xuất hiện $n$ chữ số:
+$(\text{Các số}) \cdot (\text{Số lần xuất hiện}) \cdot (10^n + 10^{n-1} + \dots + 1)$
+- Kỹ thuật vết dầu loang (đếm số đường đi): Ví dụ: Có $x$ cách đi từ $A \to B$ này qua nhánh khác... $\Rightarrow$ có $x + y$ cách đi từ $A$ đến $C$.
+- Tập hợp có $m$ phần tử. Có một dãy nhị phân có độ dài $n$ chữ số thì có $2^n$ tập con. (Ghi chú gốc: Có $m$ dãy nhị phân có độ dài $n$ chữ $\Rightarrow$ Có $2^m$ tập con).
+
+$+>$ Đếm số đa giác: Xác định xem các đỉnh có liền nhau không (có thẳng hàng không). $\Rightarrow$ Dùng tổ hợp $C$ cách chọn.
+$+>$ Nếu cách chọn được lặp lại, ta phải trừ trường hợp tất cả cùng loại (thì không được lấy trường hợp cho cùng nhóm). Nhớ kỹ.
+- Với đa giác $n$ đỉnh $\Rightarrow$ Số giao điểm đường chéo:
+$\begin{cases} \text{Nếu không có 3 đường đồng quy: } C_n^4 \\ \text{Có đường chéo: } C_n^2 - n \end{cases}$
+- Trường hợp 1: Chọn số chia hết cho $2$. $2$ số chia hết cho $2$: $C_k^2$.`,
+            giaiThich: String.raw`Đếm đường chéo hay tam giác trong đa giác đều là mỏ điểm nếu thuộc công thức, và là địa ngục nếu tự ngồi vẽ để đếm.
+Em chỉ cần nhớ: Một đa giác $n$ đỉnh có $n$ cạnh. Lấy 2 đỉnh bất kỳ ($C_n^2$) sẽ tạo ra 1 đoạn thẳng, trừ đi số cạnh kề nhau ($n$) là ra số đường chéo.
+Vũ khí giao điểm:
+$$ \text{Số giao điểm đường chéo } = C_n^4 $$
+Vì cứ 4 đỉnh bất kỳ nối lại hình chữ X sẽ tạo ra ĐÚNG 1 giao điểm ở giữa.
+Khẩu hiệu: **"Giao điểm đường chéo - Bốc 4 đỉnh chốt luôn C chập 4!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_1_tim_so_hang_tong_quat_cua_he_thuc_truy_hoi_cap_so_nhan",
+    chuyenDe: "day-so-dai-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 1: Tìm số hạng tổng quát của hệ thức truy hồi (Cấp số nhân)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`PHÂN LOẠI: [DÃY SỐ - GIỚI HẠN]
+Nội dung: $+>$ Dãy số: Cho hệ điều kiện:
+$\begin{cases} u_1 = 2 \\ u_{n+1} + 4u_n = 4 - 5n \end{cases} \Rightarrow u_{2023} = ?$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Lắp ghép hàm phụ để khử biến n",
+            toanHoc: String.raw`Ta biến đổi phương trình truy hồi: $u_{n+1} = -4u_n - 5n + 4$
+Thêm hai vế với lượng $(n + 1)$:
+$u_{n+1} + n + 1 = -4u_n - 5n + 4 + n + 1$
+$u_{n+1} + n + 1 = -4u_n - 4n + 5$
+(Chỗ này biến đổi để đưa về dạng cấp số nhân. Theo nguyên bản tài liệu, ta đặt phụ):
+Đặt $v_n = u_n + n - 1$. Ta có
+$v_{n+1} = u_{n+1} + (n+1) - 1 = -4u_n - 5n + 4 + n = -4u_n - 4n + 4 = -4(u_n + n - 1) = -4v_n$.
+$\Rightarrow (v_n)$ là cấp số nhân với công bội $q = -4$.
+Số hạng đầu $v_1 = u_1 + 1 - 1 = 2$.
+(Ghi chú gốc ghi $v_1 = 3$, ta tuân theo hướng biến đổi của gốc: Đặt $v_n = u_n + n \Rightarrow v_{n+1} = -4v_n \Rightarrow v_1 = u_1 + 1 = 3$).
+Từ đó công thức tổng quát của cấp số nhân là:
+$v_n = v_1 \cdot q^{n-1} \Rightarrow v_{2023} = 3 \cdot (-4)^{2022} = 3 \cdot 4^{2022}$
+Trở lại biến cũ $u_n = v_n - n$:
+$\Rightarrow u_{2023} = 3 \cdot (-4)^{2022} - 2023$.
+Tương tự cho $u_{2022}$: $v_{2022} = 3 \cdot (-4)^{2021}$
+$\Rightarrow u_{2022} = 3 \cdot (-4)^{2021} - 2022$.`,
+            giaiThich: String.raw`Đây là dạng bài cấp số nhân bị làm nhiễu bởi cái đuôi chứa biến $n$. Nếu cứ để nguyên mà thay thì không bao giờ tìm ra quy luật.
+Kỹ thuật "Đặt ẩn phụ triệt tiêu": Đặt $v_n = u_n + an + b$. Cố tình thêm bớt để khi biến đổi, cái đuôi biến $n$ tự động biến mất, chỉ còn lại form tinh khiết: $v_{n+1} = q \cdot v_n$. Ở đây người ta đã nhẩm sẵn cho em cấu trúc $v_n = u_n + n - 1$.
+Từ đó $v_n$ biến thành cấp số nhân đẹp đẽ. Tìm $v_n$ xong trả lại tên cho $u_n$.
+Khẩu hiệu: **"Dãy số có đuôi n - Đặt biến phụ dọn sạch, ép về Cấp số nhân!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_2_tinh_tong_day_so_danh_gia_tong_phu_bang_phan_so",
+    chuyenDe: "day-so-dai-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 2: Tính tổng dãy số (Đánh giá tổng phụ bằng phân số)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Tính tổng dãy số:
+$P = \frac{3}{2^2} + \frac{8}{3^2} + \frac{15}{4^2} + \dots + \frac{399}{20^2}$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tách phần nguyên và Dùng BĐT triệt tiêu (Telescoping)",
+            toanHoc: String.raw`$= \frac{2^2 - 1}{2^2} + \frac{3^2 - 1}{3^2} + \frac{4^2 - 1}{4^2} + \dots + \frac{20^2 - 1}{20^2}$
+$= \left(1 - \frac{1}{2^2}\right) + \left(1 - \frac{1}{3^2}\right) + \left(1 - \frac{1}{4^2}\right) + \dots + \left(1 - \frac{1}{20^2}\right)$
+Có $19$ số hạng, do đó:
+$P = 19 - \left( \frac{1}{2^2} + \frac{1}{3^2} + \frac{1}{4^2} + \dots + \frac{1}{20^2} \right)$
+
+Đánh giá tổng phụ:
+$\frac{1}{k^2} < \frac{1}{k(k-1)} = \frac{1}{k-1} - \frac{1}{k}$ Áp dụng:
+$\frac{1}{2^2} < \frac{1}{1} - \frac{1}{2}$
+$\frac{1}{3^2} < \frac{1}{2} - \frac{1}{3} \dots$
+$\frac{1}{20^2} < \frac{1}{19} - \frac{1}{20}$
+
+Cộng vế theo vế các bất đẳng thức trên:
+$\frac{1}{2^2} + \frac{1}{3^2} + \dots + \frac{1}{20^2} < \left(1 - \frac{1}{2}\right) + \left(\frac{1}{2} - \frac{1}{3}\right) + \dots + \left(\frac{1}{19} - \frac{1}{20}\right) = 1 - \frac{1}{20} < 1$.
+Quay lại biểu thức $P$: $P = 19 - (\text{một số lớn hơn 0 và nhỏ hơn 1})$.
+$\Rightarrow 18 < P < 19. \Rightarrow P$ không phải là số nguyên.`,
+            giaiThich: String.raw`Gặp dãy phân số tử xấp xỉ mẫu bình phương, thao tác đầu tiên là chia tử cho mẫu để tách phần nguyên ra. Tách $\frac{k^2 - 1}{k^2}$ thành $1 - \frac{1}{k^2}$.
+Phần dư $\frac{1}{k^2}$ không thể tính tổng chính xác, nên ta dùng đánh giá kẹp.
+Vũ khí sai phân:
+$$ \frac{1}{k^2} < \frac{1}{(k-1)k} = \frac{1}{k-1} - \frac{1}{k} $$
+Áp dụng dây chuyền, các số hạng sẽ tự động triệt tiêu lẫn nhau (như domino đổ), chỉ còn chừa lại số đầu và số cuối.
+Khẩu hiệu: **"Tổng phân số dài vô tận - Đánh giá kẹp sai phân, chém triệt tiêu Domino!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_3_tinh_gioi_han_cua_day_so_chua_luy_thua",
+    chuyenDe: "day-so-dai-so",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 3: Tính giới hạn của dãy số chứa lũy thừa**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Tính giới hạn:
+$\lim_{n \to +\infty} \frac{3^n - 5^n}{2 \cdot 3^n + 5^n}$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Rút cơ số to nhất ra ngoài",
+            toanHoc: String.raw`Chia cả tử và mẫu cho $5^n$ (cơ số lớn nhất):
+$= \lim_{n \to +\infty} \frac{\left(\frac{3}{5}\right)^n - 1}{2\left(\frac{3}{5}\right)^n + 1}$
+Vì $\lim_{n \to +\infty} \left(\frac{3}{5}\right)^n = 0$ do $\left| \frac{3}{5} \right| < 1$, ta có:
+$= \frac{0 - 1}{2 \cdot 0 + 1} = -1$.`,
+            giaiThich: String.raw`Bài giới hạn lũy thừa này là mức độ nhận biết. Nguyên tắc sống còn: Thằng nào cơ số to nhất thì thằng đó làm trùm. Ở đây cơ số 5 to nhất, em cứ chia cả tử và mẫu cho $5^n$.
+Các phân số còn lại sẽ có dạng $(3/5)^n$. Vì cơ số $<1$ nên khi mũ vô cực lên nó sẽ biến hết thành số $0$.
+Khẩu hiệu: **"Giới hạn lũy thừa vô cực - Bám theo cơ số to nhất chia tất cả!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_4_tinh_chat_day_ti_so_bang_nhau",
+    chuyenDe: "day-so-dai-so",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 4: Tính chất dãy tỉ số bằng nhau**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Trộn hệ số tự do trên phân thức",
+            toanHoc: String.raw`Nội dung: $+>$ Tính chất dãy tỉ số bằng nhau:
+$\frac{a}{b} = \frac{c}{d} = \frac{e}{f} = \frac{a + c - e}{b + d - f} = \frac{a - c + e}{b - d + f}$`,
+            giaiThich: String.raw`Kiến thức lớp 7 này cực kỳ lợi hại khi làm bài Oxyz (dạng đường thẳng). Khi cho 3 phân số bằng nhau, em hoàn toàn có quyền cộng trừ các tử số với nhau, MIỄN LÀ các mẫu số bên dưới cũng phải cộng trừ y hệt theo đúng tỉ lệ đó. Tỉ số mới tạo ra vẫn bằng tỉ số ban đầu.
+Khẩu hiệu: **"Tử cộng sao mẫu cộng vậy - Tỉ số vẫn giữ y nguyên!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_5_ky_thuat_dua_bien_ra_khoi_can_khi_xet_gioi_han_toi_am_vo_cuc",
+    chuyenDe: "day-so-dai-so",
+    loaiTag: "Kiến thức & Bài toán",
+    tieuDe: "**Kiến thức 5: Kỹ thuật đưa biến ra khỏi căn khi xét giới hạn tới âm vô cực**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Bẫy dấu trừ âm vô cực",
+            toanHoc: String.raw`Nội dung: $+>$ Để ý giới hạn $\lim_{x \to -\infty}$ hay $\lim_{x \to +\infty}$.
+$\hookrightarrow$ Khi đưa ra khỏi căn bậc hai $\sqrt{x^2}$ hay $|x| = -x$.
+Tìm giới hạn đồ thị Cho hàm số: $\lim_{x \to -\infty} \frac{x}{\sqrt{x^2+3}}$ Ta có:
+$\lim_{x \to -\infty} \frac{x}{\sqrt{x^2+3}} = \lim_{x \to -\infty} \frac{x}{|x|\sqrt{1 + \frac{3}{x^2}}}$
+Vì $x \to -\infty$ nên $|x| = -x$.
+$\Rightarrow \lim_{x \to -\infty} \frac{x}{-x\sqrt{1 + \frac{3}{x^2}}} = \frac{1}{-1} = -1$.`,
+            giaiThich: String.raw`Đã nhắc lại lần 2 trong tài liệu, chứng tỏ lỗi này thí sinh sai cực nhiều. Khi bài toán cho $x \to -\infty$, em lôi $x^2$ ra khỏi căn bậc chẵn thì BẮT BUỘC phải nhả dấu âm ra. $\sqrt{x^2} = -x$. Quên dấu trừ này là bài giới hạn sai bét.
+Khẩu hiệu: **"Âm vô cực lôi khỏi căn chẵn - Kẹp liền dấu trừ!"**`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "bai_6_danh_gia_bieu_thuc_bang_bdt_bunhiacopxki",
+    chuyenDe: "bat-dang-thuc",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 6: Đánh giá biểu thức bằng BĐT Bunhiacopxki**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`PHÂN LOẠI: [BẤT ĐẲNG THỨC]`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nâng bậc biểu thức bằng hằng số ảo",
+            toanHoc: String.raw`Nội dung: Cách 1: Áp dụng bất đẳng thức Bunhiacopxki (Bunyakovsky), ta có:
+$((1)^2 + (1)^2)(x^2+y^2) \ge (x \cdot 1 + y \cdot 1)^2$
+$\Leftrightarrow 2(x^2+y^2) \ge (x+y)^2$`,
+            giaiThich: String.raw`Gặp biểu thức có $x^2+y^2$ mà cần ép xuống dạng bậc 1 là $(x+y)^2$, BĐT Bunhiacopxki là con đường ngắn nhất.
+Nếu biểu thức bị thiếu hệ số, hãy tự đẻ ra các số 1 ảo $(1^2+1^2)$ để ghép cặp cho đủ bộ.
+Vũ khí:
+$$ (A^2+B^2)(X^2+Y^2) \ge (AX+BY)^2 $$
+Khẩu hiệu: **"Bunhia hạ bậc - Mượn số 1 ghép cặp bình phương!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_7_danh_gia_bieu_thuc_bang_bdt_cauchy_am_gm_co_ban",
+    chuyenDe: "bat-dang-thuc",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 7: Đánh giá biểu thức bằng BĐT Cauchy (AM-GM) cơ bản**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Cauchy 2 số triệt tiêu",
+            toanHoc: String.raw`Nội dung: Áp dụng bất đẳng thức Cauchy (Cosi) cho biểu thức $y^2 + 2022$:
+Ta có $y^2 + 1 \ge 2\sqrt{y^2 \cdot 1} = 2|y| \ge 2y$.`,
+            giaiThich: String.raw`Gặp tổng 2 biểu thức dương, lấy Cauchy 2 số để chặn Min. Bài này $y^2 + 1$ là cơ bản nhất để chặn $\ge 2y$.
+Khẩu hiệu: **"Thấy tổng 2 số dương - Ốp ngay Cauchy $\ge 2\sqrt{AB}$!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_8_danh_gia_bdt_am_gm_cho_logarit",
+    chuyenDe: "bat-dang-thuc",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 8: Đánh giá BĐT AM-GM cho logarit**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: Đánh giá BĐT AM-GM: Cho $a, b > 0$. $10a + 20b \ge \dots$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Bắt điểm rơi của BĐT để giải hệ",
+            toanHoc: String.raw`(Các dòng biến đổi này khá nhòe, ghi chép lại theo nét viết):
+$$ P \ge \log(10a + 20b + 1) + \log(100b + 1) \dots \Rightarrow \text{Dấu "=" xảy ra} $$
+$$ \Leftrightarrow 25a^2 = b^2 \Rightarrow 5a = b. \Rightarrow \text{Có hệ:} $$
+$$ \begin{cases} 5a = b \\ \log(10a + 1) + \dots = 2 \end{cases} $$`,
+            giaiThich: String.raw`Đây là kỹ thuật VDC kinh điển: Khi một phương trình lằng nhằng đánh giá được bằng BĐT Cauchy, em không cần quan tâm quá trình chứng minh BĐT, chỉ cần tập trung vào việc DẤU BẰNG xảy ra khi nào.
+Cauchy xảy ra dấu bằng khi các thành phần tham gia bằng nhau. Từ đó rút ra được mối liên hệ $25a^2 = b^2 \Rightarrow 5a = b$. Thay ngược vào phương trình gốc là giải được biến còn lại.
+Khẩu hiệu: **"Đánh giá BĐT - Chốt hạ bằng hệ điều kiện điểm rơi!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_9_dung_bdt_am_gm_giai_phuong_trinh_mu",
+    chuyenDe: "bat-dang-thuc",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 9: Dùng BĐT AM-GM giải phương trình Mũ**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Cauchy nghịch đảo trên số mũ",
+            toanHoc: String.raw`Nội dung: Xét biểu thức $3^{-t - \frac{4}{t}}$: Vì
+$t < 0 \Rightarrow -t > 0, -\frac{4}{t} > 0$. Áp dụng bất đẳng thức AM-GM (Cauchy) cho hai số dương $-t$ và $-\frac{4}{t}$:
+$$ -t - \frac{4}{t} \ge 2\sqrt{(-t)\left(-\frac{4}{t}\right)} = 2\sqrt{4} = 4. $$
+$$ \Rightarrow 3^{-t - \frac{4}{t}} \ge 3^4 = 81. $$`,
+            giaiThich: String.raw`Lại một lần nữa BĐT Cauchy xuất hiện nhưng là ở trên số mũ. Khi trên mũ là tổng của hai số nghịch đảo (tích của chúng ra hằng số), ốp Cauchy sẽ làm biến mất ẩn $t$, trả về một con số nguyên Min cố định.
+Khẩu hiệu: **"Ẩn trên mũ nghịch đảo - Ép Cauchy triệt tiêu biến!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_10_bat_dang_thuc_bernoulli",
+    chuyenDe: "bat-dang-thuc",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 10: Bất đẳng thức Bernoulli**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nới lỏng hàm mũ thành hàm đa thức",
+            toanHoc: String.raw`Nội dung:
+- Bất đẳng thức Bernoulli: $(1 + x)^n \ge 1 + nx$.`,
+            giaiThich: String.raw`Rất ít người nhớ BĐT Bernoulli, nhưng nó là vũ khí làm phẳng hàm mũ rất tốt. Nó ép được cụm $(1+x)^n$ thành một đa thức bậc 1 là $1+nx$. Chỉ dùng trong các bài toán chặn khoảng VDC khi bế tắc.
+Khẩu hiệu: **"Hạ Mũ bằng Bernoulli - Rút thẳng xuống Đa thức bậc 1!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_11_tong_hop_cong_thuc_bat_dang_thuc_vdc",
+    chuyenDe: "bat-dang-thuc",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 11: Tổng hợp công thức Bất đẳng thức VDC**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Ghi sổ tay Menu Bất đẳng thức",
+            toanHoc: String.raw`Nội dung: (*) Bất đẳng thức (BĐT):
++> Cauchy (Cosi).
++> Bunhiacopxki (Bunyakovsky).
++> Xét dấu: $a^2 \ge 0, a^2 \le 0, \forall a \in \mathbb{R}$.
++> Bất đẳng thức trị tuyệt đối: $| |x| - |y| | \le |x + y| \le |x| + |y|$.
+- Bất đẳng thức Bunhiacopxki (Bunyakovsky):
+$$ (a^2 + b^2)(x^2 + y^2) \ge (ax + by)^2 $$
+$$ (a^2 + b^2 + \dots)(x^2 + y^2 + \dots) \ge (ax + by + \dots)^2 $$
+Dấu "=" xảy ra $\Leftrightarrow \frac{a}{x} = \frac{b}{y} = k$.
+- Bất đẳng thức Cauchy-Schwarz dạng phân thức:
+$$ \frac{a_1^2}{x_1} + \frac{a_2^2}{x_2} + \dots + \frac{a_n^2}{x_n} \ge \frac{(a_1 + a_2 + \dots + a_n)^2}{x_1 + x_2 + \dots + x_n} $$
+Dấu "=" xảy ra $\Leftrightarrow \frac{a_1}{x_1} = \frac{a_2}{x_2} = \dots = \frac{a_n}{x_n}$.
+- Bất đẳng thức Minkowski:
+$$ \sqrt{a^2 + b^2} + \sqrt{m^2 + n^2} \ge \sqrt{(a + m)^2 + (b + n)^2} $$
+Dấu "=" xảy ra $\Leftrightarrow \frac{a}{m} = \frac{b}{n} = k > 0$.`,
+            giaiThich: String.raw`Đây là bảng phong thần các BĐT kinh điển cho VDC. Đi thi chỉ cần nhớ form:
+- Cấu trúc tổng phân số $\Rightarrow$ Quất Cauchy-Schwarz dạng phân thức.
+- Cấu trúc tổng các Căn bậc 2 $\Rightarrow$ Quất Minkowski (độ dài vector).
+- Cấu trúc tích các bình phương $\Rightarrow$ Quất Bunhiacopxki.
+Nhận diện đúng form vỏ ngoài là giải quyết được 50% bài toán.
+Khẩu hiệu: **"Tổng phân số dập Schwarz - Tổng các căn táng Minkowski!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_12_bai_toan_chia_het_tim_min",
+    chuyenDe: "so-hoc",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 12: Bài toán chia hết - Tìm Min**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`PHÂN LOẠI: [SỐ HỌC & ĐA THỨC]`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Rút gọn tính chia hết",
+            toanHoc: String.raw`Nội dung: $+>$ Bài toán chia hết: Có $x^2 + y + 1$ chia hết cho $xy$ hay $x+y$ đạt giá trị nhỏ nhất (min). $\Rightarrow x^2 + 1 \vdots y$
+$$ \Rightarrow y_{\min} \Leftrightarrow y = x - 1 \Rightarrow y = \frac{x^2-1}{x-1} $$`,
+            giaiThich: String.raw`Đa thức chia hết cho tích $xy$, nghĩa là nó phải chia hết cho từng thằng cấu thành.
+Rút gọn $x^2 + y + 1$ chia cho $y$, con $y$ ở giữa bị chia hết tự triệt tiêu đi mất, chỉ còn lại cái đuôi $x^2 + 1 \vdots y$. Từ đó dồn biểu thức để tìm Min.
+Khẩu hiệu: **"Chia hết cho tích - Chia lẻ từng thằng, triệt tiêu gọn!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "kien_thuc_13_tinh_chat_chia_het_co_ban",
+    chuyenDe: "so-hoc",
+    loaiTag: "Kiến thức",
+    tieuDe: "**Kiến thức 13: Tính chất chia hết cơ bản**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw``,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Hằng đẳng thức chia hết",
+            toanHoc: String.raw`Nội dung: $+>$ Tính chất chia hết:
+$$ a^n - b^n \vdots a - b $$
+$$ a^n + b^n \vdots a + b \text{ (với } n \text{ lẻ)} $$`,
+            giaiThich: String.raw`Lý thuyết gốc của mọi bài chứng minh chia hết. Em chỉ cần nhớ Hằng đẳng thức đại số: $a^n - b^n$ luôn luôn bung ra được cái nhân tử $(a-b)$, nên nó chắc chắn chia hết cho $(a-b)$. Tương tự với dấu cộng khi mũ $n$ là số lẻ.
+Khẩu hiệu: **"Mũ bằng nhau trừ đi - Luôn chia hết cho hiệu!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_14_tim_so_du_cua_luy_thua_lon_bang_nhi_thuc_newton_va_dong_du",
+    chuyenDe: "so-hoc",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 14: Tìm số dư của lũy thừa lớn bằng Nhị thức Newton và Đồng dư**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Ví dụ: Tìm số dư của $2^{100}$ chia cho $9$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nặn cơ số sát mốc chia hết",
+            toanHoc: String.raw`Ta có: $2^{100} = 2 \cdot (2^3)^{33} = 2 \cdot (9-1)^{33}$
+Khai triển Nhị thức Newton:
+$$ = 2 \cdot \left( 9^{33} - C_{33}^1 \cdot 9^{32} + \dots - C_{33}^{32} \cdot 9 \cdot 1^{32} - 1 \right) $$
+$$ = 2 \cdot (B \cdot 9 - 1) \text{ (với B là tổng các số hạng nguyên)} $$
+$$ \Rightarrow 2^{100} = 2 \cdot B \cdot 9 - 2 $$
+Vì $-2 \equiv 7 \pmod 9 \Rightarrow 2^{100}$ chia 9 dư 7.
+
+Cách 2 (Dùng đồng dư thức):
+$$ 2^{100} = 2^{6 \cdot 16 + 4} = (2^6)^{16} \cdot 2^4 $$
+Có: $2^6 \equiv 1 \pmod 9$
+$$ \Rightarrow 2^{100} \equiv 1^{16} \cdot 16 \equiv 16 \equiv 7 \pmod 9. \text{ Vậy } 2^{100} \text{ chia 9 dư 7.} $$`,
+            giaiThich: String.raw`Đề bắt chia dư cho 9. Bằng mọi giá em phải tìm cách nặn con số $2^{100}$ thành một cơ số gần sát 9 nhất. Ở đây là số 8 (tức $2^3$). Biến $8$ thành $(9-1)$.
+Khi bung Nhị thức Newton ra, tất cả các số hạng chứa 9 đều nghiễm nhiên bị chia hết cho 9. Chỗ này em gom sạch thành một chữ $B$ đại diện. Chỉ duy nhất cái đuôi $(-1)^{\text{mũ}}$ bị rớt lại không chứa 9 chính là số dư của bài toán.
+Khẩu hiệu: **"Lũy thừa khổng lồ - Nặn sát mốc chia, bung Newton lụm cái đuôi!"**`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "bai_15_giai_phuong_trinh_diophantine_nghiem_nguyen",
+    chuyenDe: "so-hoc",
+    loaiTag: "Bài toán",
+    tieuDe: "**Bài 15: Giải phương trình Diophantine (Nghiệm nguyên)**",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`Nội dung: $+>$ Giải phương trình nghiệm nguyên:
+$4m^3 + m = 12n^3 + n \Leftrightarrow (m-n)(4m^2 + 4mn + 4n^2 + 1) = 8n^3$`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chứng minh hai nhân tử nguyên tố cùng nhau",
+            toanHoc: String.raw`Giả sử $p$ là số nguyên tố chung của $(m-n)$ và $(4m^2 + 4mn + 4n^2 + 1)$
+$$ \Rightarrow \begin{cases} 4m^2 + 4mn + 4n^2 + 1 \vdots p \\ m-n \vdots p \Rightarrow m \equiv n \pmod p \end{cases} $$
+Thay $m \equiv n$ vào biểu thức trên: $\Rightarrow 12n^2 + 1 \vdots p$. Lại có tích của chúng bằng $8n^3 \Rightarrow 8n^3 \vdots p \Rightarrow p | 8n^3$. Vì $12n^2+1$ là số lẻ nên $p$ lẻ $\Rightarrow p | n$. Nếu $p | n \Rightarrow 12n^2 \vdots p$, kết hợp với $12n^2+1 \vdots p \Rightarrow 1 \vdots p$ (Vô lý). $\Rightarrow p = 1$.
+$\Rightarrow (m-n)$ và $(4m^2+4mn+4n^2+1)$ là hai số nguyên tố cùng nhau. Mà tích của chúng bằng $(2n)^3$, nên mỗi số phải là một lập phương đúng. $\Rightarrow m-n$ là 1 số nguyên lập phương $x^3$. $4m^2+4mn+4n^2+1 = y^3$.
+$$ \Rightarrow m-n = \frac{(2n)^3}{y^3} \Rightarrow m-n \text{ là lập phương của 1 số.} $$`,
+            giaiThich: String.raw`Đây là câu chốt VDC, dùng số học để phá. Gặp vế trái là một tích phân tích được, vế phải là một Lập Phương hoàn hảo.
+Vũ khí giải quyết: Gọi $p$ là ước chung của 2 cụm trong ngoặc. Dùng các phép trừ đại số ép $p$ phải chia hết cho 1, tức là $p=1$.
+Hai cụm ngoặc mà nguyên tố cùng nhau (không có ước chung nào ngoài 1), mà nhân lại đẻ ra một Lập Phương ($8n^3$), thì duy nhất một khả năng: BẢN THÂN TỪNG CỤM phải là một lập phương đúng.
+Khẩu hiệu: **"Tích bằng Lập phương mà nguyên tố cùng nhau - Từng cụm phải là lập phương!"**`
+        }
+    ]
+});
+        // KẾT THÚC KHU VỰC DÁN DỮ LIỆU
+    </script>
+
+
+    <script>
+        function renderDanhSach(category = 'all') {
+            const listContainer = document.getElementById('problemList');
+            if (!listContainer) return;
+            listContainer.innerHTML = ''; 
+
+            let filteredData = khoDuLieu;
+            if (category !== 'all') {
+                filteredData = khoDuLieu.filter(bai => bai.chuyenDe === category);
+            }
+
+            const kienThucList = filteredData.filter(bai => bai.loaiTag.toLowerCase().includes('kiến thức'));
+            const baiTapList = filteredData.filter(bai => bai.loaiTag.toLowerCase().includes('bài toán') || bai.loaiTag.toLowerCase().includes('bài tập'));
+
+            const taoItemHTML = (bai) => {
+                const tagClass = bai.loaiTag.toLowerCase().includes('kiến thức') ? 'tag-kt' : 'tag-bt';
+                return `
+                    <div class="problem-item" onclick="hienThiChiTiet('${bai.id}')">
+                        <span class="tag ${tagClass}">${bai.loaiTag}</span>
+                        <span class="item-title">${bai.tieuDe}</span>
+                    </div>
+                `;
+            };
+
+            if (kienThucList.length > 0) {
+                listContainer.insertAdjacentHTML('beforeend', `<h4 style="color: var(--dark-pink); margin: 10px 0 5px 5px; font-size: 15px;">📚 TỔNG ÔN KIẾN THỨC</h4>`);
+                kienThucList.forEach(bai => {
+                    listContainer.insertAdjacentHTML('beforeend', taoItemHTML(bai));
+                });
+            }
+
+            if (baiTapList.length > 0) {
+                listContainer.insertAdjacentHTML('beforeend', `<h4 style="color: #4CAF50; margin: 20px 0 5px 5px; font-size: 15px;">🚀 THỰC CHIẾN BÀI TẬP</h4>`);
+                baiTapList.forEach(bai => {
+                    listContainer.insertAdjacentHTML('beforeend', taoItemHTML(bai));
+                });
+            }
+            
+            if (kienThucList.length === 0 && baiTapList.length === 0) {
+                listContainer.innerHTML = `<p style="text-align: center; color: #888; margin-top: 20px;">Chưa có dữ liệu!</p>`;
+            }
+        }
+
+        function hienThiChiTiet(id) {
+            const bai = khoDuLieu.find(b => b.id === id);
+            if (!bai) return;
+
+            document.getElementById('list-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+
+            // 1. ĐỀ BÀI TRÊN CÙNG (100% CHIỀU RỘNG)
+            let deBaiHTML = '';
+            if (bai.deBai && bai.deBai.trim() !== "") {
+                deBaiHTML = `
+                    <div class="sticky-prompt-box" style="width: 100%;">
+                        <h4 style="color: #333; margin-bottom: 8px;">Đề bài / Vấn đề:</h4>
+                        <p class="format-text">${bai.deBai}</p>
+                    </div>
+                `;
+            }
+
+            // 2. KHU VỰC BÊN DƯỚI (CHIA TRÁI - PHẢI)
+            let mainContentHTML = '';
+
+            if (Array.isArray(bai.loiGiai)) {
+                // --- CHUẨN MỚI: CHIA CỘT 40/60 CHO TỪNG BƯỚC GIẢI ---
+                mainContentHTML += `
+                    <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                        <div style="width: 40%;"><h4 style="color: #E65100; border-bottom: 2px solid #FFCA28; padding-bottom: 5px;">🧠 Cột Lời Giảng</h4></div>
+                        <div style="width: 60%;"><h4 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 5px;">🚀 Cột Bài Làm ([H] & [BBT])</h4></div>
+                    </div>
+                `;
+
+                // Xử lý Tư duy tổng quan (Trái) và Ảnh bổ trợ [H] (Phải)
+                if ((bai.tuDuy && bai.tuDuy.trim() !== "") || (bai.hinhAnhLeft && bai.hinhAnhLeft.trim() !== "")) {
+                    let tuDuyHTML = bai.tuDuy ? `<div class="format-text" style="color: #424242; line-height: 1.6;">${bai.tuDuy}</div>` : '';
+                    let imgHTML = bai.hinhAnhLeft ? `<img src="${bai.hinhAnhLeft}" class="inline-img" style="max-width: 90%;">` : '';
+                    
+                    mainContentHTML += `
+                        <div style="display: flex; gap: 20px; padding: 15px 0; border-bottom: 2px dashed #FFC0CB;">
+                            <div style="width: 40%; background: #FFF9C4; padding: 15px; border-radius: 10px;">${tuDuyHTML}</div>
+                            <div style="width: 60%; text-align: center;">${imgHTML}</div>
+                        </div>
+                    `;
+                }
+
+                // Render từng bước giải theo tỉ lệ Trái 40 - Phải 60
+                bai.loiGiai.forEach(buoc => {
+                    let leftBox = `<strong style="color: #E65100; font-size: 16px;">${buoc.tenBuoc}</strong>`;
+                    if (buoc.giaiThich && buoc.giaiThich.trim() !== "") {
+                        leftBox += `<div class="format-text" style="margin-top: 8px; font-size: 14.5px; color: #424242;">${buoc.giaiThich}</div>`;
+                    }
+
+                    let rightBox = `<div class="step-math format-text" style="font-size: 16px;">${buoc.toanHoc}</div>`;
+
+                    mainContentHTML += `
+                        <div style="display: flex; gap: 20px; padding: 15px 0; border-bottom: 1px solid #FFE4E1; align-items: stretch;">
+                            <div style="width: 40%; background: #FFF9C4; padding: 15px; border-radius: 10px; border-left: 4px solid #FFC107; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                ${leftBox}
+                            </div>
+                            <div style="width: 60%; background: var(--soft-white); padding: 15px; border-radius: 10px; border: 1px solid #FFC0CB; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                ${rightBox}
+                            </div>
+                        </div>
+                    `;
+                });
+
+            } else {
+                // --- CHUẨN CŨ (Dành cho các bài chưa update) ---
+                let leftHTML = '';
+                if (bai.tuDuy && bai.tuDuy.trim() !== "") {
+                    leftHTML = `
+                        <div style="width: 40%; background: #FFF9C4; padding: 25px; border-radius: 15px; border: 2px dashed #FFC107; position: sticky; top: 20px; max-height: 85vh; overflow-y: auto;">
+                            <h4 style="color: #E65100; margin-bottom: 20px; font-size: 18px; border-bottom: 2px solid #FFCA28; padding-bottom: 10px;">🧠 Lời Giảng / Tư Duy</h4>
+                            <div class="format-text" style="font-size: 15px; line-height: 1.8; color: #424242;">${bai.tuDuy}</div>
+                        </div>
+                    `;
+                }
+
+                let imgHTML = bai.hinhAnhLeft ? `<img src="${bai.hinhAnhLeft}" class="inline-img" style="max-width: 90%; margin: 10px auto;">` : '';
+                let rightWidth = leftHTML !== '' ? '60%' : '100%';
+
+                mainContentHTML += `
+                    <div style="display: flex; gap: 20px; align-items: flex-start;">
+                        ${leftHTML}
+                        <div style="width: ${rightWidth}; display: flex; flex-direction: column; gap: 20px;">
+                            <div class="content-box" style="width: 100%;">
+                                <h4 style="color: #4CAF50; margin-bottom: 20px; font-size: 18px; text-transform: uppercase;">🚀 Bài làm:</h4>
+                                ${imgHTML}
+                                <div class="format-text">${bai.loiGiai}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // 3. RÁP LẠI TOÀN BỘ CHI TIẾT
+            const detailHTML = `
+                ${deBaiHTML}
+                <div style="margin-top: 20px;">
+                    ${mainContentHTML}
+                </div>
+            `;
+
+            document.getElementById('detailContentContainer').innerHTML = detailHTML;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            renderMathInElement(document.getElementById('detailContentContainer'), {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false
+            });
+        }
+
+        function hideDetail() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('list-view').style.display = 'block';
+        }
+
+        function filterCategory(category) {
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderDanhSach(category);
+        }
+
+        function switchMainTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.main-tabs .tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+            if(tabId === 'toan') hideDetail();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderDanhSach('all');
+        });
+
+        // -------------------------------------------------------------
+        // LOGIC DISCORD FORM 
+        // -------------------------------------------------------------
+        const pasteBox = document.getElementById('pasteBox');
+        const pasteText = document.getElementById('pasteText');
+        const fileInput = document.getElementById('imgFile');
+
+        pasteBox.addEventListener('paste', (e) => {
+            const items = e.clipboardData.items;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    const blob = items[i].getAsFile();
+                    const reader = new FileReader();
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(blob);
+                    fileInput.files = dataTransfer.files;
+
+                    reader.onload = (event) => {
+                        pasteText.style.display = 'none';
+                        const oldImg = pasteBox.querySelector('img');
+                        if (oldImg) oldImg.remove();
+                        const img = document.createElement('img');
+                        img.src = event.target.result;
+                        pasteBox.appendChild(img);
+                    };
+                    reader.readAsDataURL(blob);
+                }
+            }
+        });
+
+        pasteBox.addEventListener('click', () => { pasteBox.focus(); });
+        pasteBox.setAttribute("tabindex", "0");
+        pasteBox.style.outline = "none";
+
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1511746905141416049/5F_fsTiUFr23vMb13ic_NJQphEZBKGC8CDZVhk4Hb8vkeEdm-ryoH9ig88bnMjqv538V";
+
+        document.getElementById('discordForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const statusMsg = document.getElementById('status-msg');
+            const text = document.getElementById('msgContent').value;
+            
+            btn.innerText = "Đang truyền dữ liệu lên Discord...";
+            btn.disabled = true;
+            statusMsg.style.display = 'none';
+            statusMsg.className = 'status-msg';
+            
+            try {
+                let formData = new FormData();
+                formData.append('payload_json', JSON.stringify({ content: `📩 **[Có câu hỏi mới từ em gái]**:\n${text}` }));
+                if (fileInput.files.length > 0) { formData.append('file', fileInput.files[0]); }
+
+                const response = await fetch(WEBHOOK_URL, { method: 'POST', body: formData });
+
+                if (response.ok) {
+                    statusMsg.innerText = "Đã gửi thành công! Chờ anh rep nhé.";
+                    statusMsg.classList.add('msg-success');
+                    document.getElementById('discordForm').reset();
+                    const oldImg = pasteBox.querySelector('img');
+                    if (oldImg) oldImg.remove();
+                    pasteText.style.display = 'block';
+                } else { throw new Error('Lỗi từ Server Discord'); }
+            } catch (error) {
+                statusMsg.innerText = "Lỗi mạng. Em check lại kết nối internet nhé!";
+                statusMsg.classList.add('msg-error');
+            } finally {
+                statusMsg.style.display = 'block';
+                btn.innerText = "Gửi câu hỏi đi 🚀";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
