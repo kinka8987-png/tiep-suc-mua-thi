@@ -151,6 +151,7 @@
                 <button class="cat-btn" onclick="filterCategory('to-hop-xac-suat')">Tổ hợp - Xác suất & Thống kê</button>
                 <button class="cat-btn" onclick="filterCategory('day-so-dai-so')">Đại số tổng hợp</button>
                 <button class="cat-btn" onclick="filterCategory('on-luyen')">🔥 Ôn Luyện</button>
+                <button class="cat-btn" onclick="filterCategory('dap-an')">đáp án</button>
             </div>
 
             <div class="problem-list" id="problemList"></div>
@@ -7982,6 +7983,228 @@ nên đưa vào khai thác chính xác bao nhiêu phòng mỗi đêm để thu v
 nhất?`,
     dapAnTuongTu: String.raw``
 });
+khoDuLieu.push({
+    id: "cau_2_bai_toan",
+    chuyenDe: "dap-an",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 2: Bài toán thực tế phương trình vi phân",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`<img src="images/t_m_t_p.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nhận diện phương trình vi phân và 'cô lập' các biến số",
+            toanHoc: String.raw`Ta có phương trình: $T'(t) = k \cdot [T(t) - 25]$
+Biến đổi phương trình tương đương:
+$\frac{T'(t)}{T(t) - 25} = k$
+Lấy nguyên hàm hai vế theo biến $t$:
+$\int \frac{T'(t)}{T(t) - 25} dt = \int k \, dt$
+$\Leftrightarrow \ln|T(t) - 25| = kt + C$ (với $C$ là hằng số)`,
+            giaiThich: String.raw`Đọc lướt qua cái đề thực tế toàn chữ là chữ, mắt anh bỏ qua ngay mấy yếu tố râu ria và khóa thẳng vào cái phương trình: $T'(t) = k \cdot [T(t) - 25]$. 
+Trong đầu anh lập tức nảy số: Đây là bài toán Ứng dụng tích phân (cụ thể là phương trình vi phân tách biến). Phản xạ sinh tồn ở dạng này là: **"Tuyệt đối không để lẫn lộn"**. Họ hàng nhà $T$ phải chuyển hết sang vế trái, còn họ hàng nhà $t$ (và hằng số $k$) vứt hết sang vế phải. 
+
+Sau khi chia $T(t) - 25$ xuống dưới mẫu bên trái, anh sẽ lấy nguyên hàm hai vế. Lúc này anh cần dùng công thức:
+$$ \int \frac{u'(x)}{u(x)} dx = \ln|u(x)| + C $$
+
+Cứ ốp đúng công thức này, anh sẽ gỡ được cái đạo hàm $T'(t)$ chướng mắt kia.`
+        },
+        {
+            tenBuoc: "Bước 2: Phá trị tuyệt đối và dùng mốc thời gian t=0 để tìm hằng số",
+            toanHoc: String.raw`Vì nhiệt độ chất lỏng luôn cao hơn nhiệt độ phòng nên $T(t) > 25 \Rightarrow T(t) - 25 > 0$.
+Phương trình trở thành:
+$\ln(T(t) - 25) = kt + C$
+Đội mũ $e$ hai vế:
+$T(t) - 25 = e^{kt + C} = e^C \cdot e^{kt}$
+Đặt $A = e^C$ ($A$ là một hằng số dương), ta có hàm số:
+$T(t) = 25 + A \cdot e^{kt}$
+Tại thời điểm ban đầu $t = 0$, chất lỏng có nhiệt độ $95^\circ C$, ta có:
+$T(0) = 25 + A \cdot e^0 = 95$
+$\Leftrightarrow 25 + A = 95 \Leftrightarrow A = 70$.
+Vậy phương trình nhiệt độ là: $T(t) = 25 + 70e^{kt}$.`,
+            giaiThich: String.raw`Đến đây, biểu thức dính cái trị tuyệt đối nhìn khá nguy hiểm. Nhìn lại dữ kiện đề bài: nhiệt độ ban đầu là $95^\circ C$, phòng thì có $25^\circ C$. Vật nóng để trong phòng lạnh thì nhiệt độ sẽ giảm dần tiệm cận về 25, tức là $T(t)$ lúc nào cũng lớn hơn 25. Vậy là $T(t) - 25 > 0$, anh vứt luôn dấu trị tuyệt đối đi cho rảnh nợ.
+
+Để rút thằng $T(t)$ ra khỏi cái hàm $\ln$, anh dùng chiêu "đội mũ $e$" cả 2 vế lên.
+Sau khi rút gọn, biểu thức sẽ dư ra một hằng số lạ hoắc. Lúc này anh nhớ ngay đến dữ kiện "vừa được đun sôi có nhiệt độ $95^\circ C$". "Vừa đun sôi" nghĩa là bộ đếm thời gian chưa chạy, tức là $t = 0$ thì $T(0) = 95$. Lắp cái này vào là anh chốt hạ được luôn hệ số $C$ ban đầu.`
+        },
+        {
+            tenBuoc: "Bước 3: Đồng nhất hệ số ép kiểu logarit và tìm nốt k",
+            toanHoc: String.raw`Ta có: $T(t) = 25 + 70e^{kt}$.
+Để đưa về dạng $T(t) = 25 + e^{g(t)}$, ta biến đổi:
+$70 = e^{\ln 70}$
+$\Rightarrow 70e^{kt} = e^{\ln 70} \cdot e^{kt} = e^{kt + \ln 70}$.
+Đồng nhất hệ số, ta suy ra hàm $g(t)$ có dạng:
+$g(t) = kt + \ln 70$.
+
+Sử dụng dữ kiện: sau $t = 10$ phút, nhiệt độ $T(10) = 60^\circ C$:
+$25 + 70e^{10k} = 60$
+$\Leftrightarrow 70e^{10k} = 35$
+$\Leftrightarrow e^{10k} = \frac{1}{2}$
+Lấy $\ln$ hai vế:
+$10k = \ln\left(\frac{1}{2}\right) = -\ln 2$
+$\Leftrightarrow k = -\frac{\ln 2}{10}$.
+
+Thay $k$ ngược lại vào $g(t)$, ta được hàm cụ thể:
+$g(t) = -\frac{\ln 2}{10}t + \ln 70$.
+(Từ hàm số $T(t)$ và $g(t)$ tường minh này, ta tiến hành kiểm tra tính Đúng/Sai của các mệnh đề bên dưới đề bài).
+
+**LIỆT KÊ NGẮN GỌN QUY TRÌNH:**
+1. Cô lập biến $T$ và biến $t$ về 2 vế, lấy tích phân 2 vế ra hàm $\ln$.
+2. "Đội mũ $e$" để rút $T(t)$, thay thời điểm ban đầu ($t=0$, $T=95$) để tìm hệ số tự do.
+3. Dùng mẹo $a = e^{\ln a}$ nhét hệ số vào trong mũ để đồng nhất với dạng $e^{g(t)}$ của đề.
+4. Thay mốc thời gian phụ ($t=10, T=60$) tìm nốt tham số $k$ và chốt hàm $g(t)$ cuối cùng để xét mệnh đề.`,
+            giaiThich: String.raw`Bây giờ anh đối chiếu cái hàm thực tế anh vừa tìm được là $T(t) = 25 + 70e^{kt}$ với cái form mà đề bắt ép là $T(t) = 25 + e^{g(t)}$. 
+Cái rắc rối duy nhất ở đây là con số 70 đang đứng chình ình bên ngoài, trong khi cái form của đề thì chỉ có một mình thằng $e$. Đây là cái bẫy kỹ năng cơ bản mà mức 6 điểm hay lúng túng. Để nhét số 70 lên trên đầu chữ $e$, anh dùng ngay công cụ ép kiểu logarit:
+$$ a = e^{\ln a} $$
+$$ e^m \cdot e^n = e^{m+n} $$
+
+Nhét số 70 lên xong, anh ép hai cái mũ bằng nhau là lòi ra hàm $g(t)$. 
+Cuối cùng, đề vẫn còn chừa lại dữ kiện "sau 10 phút giảm còn $60^\circ C$" ($t=10, T=60$). Anh thế nốt vào là tóm gọn được thằng hằng số $k$. Có hàm $g(t)$ tường minh rồi thì đề có hỏi mệnh đề Đúng/Sai nào anh cũng tự tin bấm máy kiểm tra được hết.`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "tinh_the_tich_khoi",
+    chuyenDe: "dap-an",
+    loaiTag: "Bài toán",
+    tieuDe: "Bài toán tính thể tích khối xuyến (Bánh Donut)",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`<img src="images/m_x_b_k.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Giải mã mặt cắt khối xuyến (Tìm bán kính trục R và bán kính ống r)",
+            toanHoc: String.raw`Gọi $R_{ngoai}$ và $R_{trong}$ lần lượt là bán kính ngoài và bán kính trong của khối xuyến.
+Theo giả thiết:
+$R_{ngoai} = \frac{12}{2} = 6 \text{ (cm)}$
+$R_{trong} = \frac{4}{2} = 2 \text{ (cm)}$
+Bán kính đường tròn mặt cắt (phần thân bánh) là:
+$r = \frac{R_{ngoai} - R_{trong}}{2} = \frac{6 - 2}{2} = 2 \text{ (cm)}$
+Khoảng cách từ tâm khối xuyến đến tâm đường tròn mặt cắt là:
+$R = R_{trong} + r = 2 + 2 = 4 \text{ (cm)}$`,
+            giaiThich: String.raw`Đọc đề bài, khi anh thấy từ khóa **"khối xuyến"** (bánh Donut) và các con số về **"đường kính ngoài/trong"**, trong đầu anh lập tức nảy số đến dạng toán vật thể tròn xoay. Bẫy kinh điển nhất ở mức điểm 6 là cắm đầu lấy luôn mấy cái đường kính này đem bình phương lên tính toán. 
+
+Để tính được thể tích khối xuyến, anh cần xác định 2 thông số cốt lõi của mặt cắt: Bán kính của phần "thịt bánh" (gọi là $r$) và khoảng cách từ tâm lỗ hổng đến tâm của phần thịt bánh đó (gọi là $R$).
+Từ đường kính ngoài $12\text{ cm}$ và đường kính trong $4\text{ cm}$, anh nhẩm nhanh ra bán kính ngoài là $6\text{ cm}$, bán kính trong là $2\text{ cm}$. 
+Phần thịt bánh dày: $6 - 2 = 4\text{ cm}$. Suy ra bán kính mặt cắt (ống) là $r = 2\text{ cm}$.
+Tâm của phần thịt bánh cách trục quay một khoảng là $R = \text{bán kính trong} + r = 2 + 2 = 4\text{ cm}$.
+
+$$ r = \frac{R_{ngoai} - R_{trong}}{2} $$
+$$ R = R_{trong} + r $$
+Anh vẽ phác trong đầu và chốt ngay 2 thông số $r=2, R=4$ này để chuẩn bị ốp công thức.`
+        },
+        {
+            tenBuoc: "Bước 2: Tung tuyệt chiêu tính thể tích khối xuyến (Định lý Pappus)",
+            toanHoc: String.raw`Áp dụng công thức tính thể tích khối xuyến:
+$V = 2\pi^2 R r^2$
+Thay $R = 4$ và $r = 2$ vào công thức, ta được thể tích của 1 chiếc bánh Donut là:
+$V = 2 \cdot \pi^2 \cdot 4 \cdot 2^2 = 32\pi^2 \text{ (cm}^3)$`,
+            giaiThich: String.raw`Đến đoạn tính thể tích. Nếu anh dại dột đặt hệ trục tọa độ $Oxy$ rồi bấm máy tính tích phân $\int \pi (f^2(x) - g^2(x))dx$ thì vừa dài vừa dễ sai số. Thay vào đó, anh dùng thẳng "vũ khí hạng nặng" là công thức tính nhanh thể tích khối xuyến (Định lý Pappus). 
+Logic cực kỳ đơn giản: Lấy diện tích của hình tròn mặt cắt nhân với chu vi quỹ đạo mà tâm của nó quay quanh trục.
+
+$$ V = S_{day} \cdot C_{quay} = (\pi \cdot r^2) \cdot (2\pi \cdot R) = 2\pi^2 R r^2 $$
+
+Anh chỉ việc tống 2 con số $r=2, R=4$ vừa tìm được ở Bước 1 vào đây là ra thẳng thể tích của một cái bánh mà không cần giải tích phân mệt mỏi.`
+        },
+        {
+            tenBuoc: "Bước 3: Xử lý bẫy khối lượng, đổi đơn vị và chốt hạ số liệu",
+            toanHoc: String.raw`Khối lượng của 1 chiếc bánh Donut là (đơn vị gam):
+$m_1 = V \cdot D = 32\pi^2 \cdot 1,2 = 38,4\pi^2 \text{ (g)}$
+Khối lượng của 50 chiếc bánh Donut là (đơn vị gam):
+$m_{50} = 50 \cdot 38,4\pi^2 = 1920\pi^2 \text{ (g)}$
+Đổi sang đơn vị ki-lô-gam (kg), ta chia cho 1000:
+$M = \frac{1920\pi^2}{1000} = 1,92\pi^2 \text{ (kg)}$
+Áp dụng quy ước $\pi \approx 3,14$, ta tính được:
+$M \approx 1,92 \cdot (3,14)^2 = 1,92 \cdot 9,8596 = 18,930432 \text{ (kg)}$
+Làm tròn kết quả đến hàng phần mười, ta được $18,9 \text{ kg}$.
+Vậy khối lượng của 50 chiếc bánh Donut là $18,9 \text{ kg}$.
+
+**LIỆT KÊ NGẮN GỌN QUY TRÌNH:**
+1. Chuyển đổi đường kính ngoài/trong thành bán kính trục $R$ và bán kính mặt cắt $r$.
+2. Áp dụng công thức giải nhanh thể tích khối xuyến $V = 2\pi^2 R r^2$.
+3. Nhân với khối lượng riêng và số lượng bánh (50 cái).
+4. Đổi đơn vị gam sang kg, thay $\pi = 3,14$ thủ công và làm tròn theo yêu cầu.`,
+            giaiThich: String.raw`Có thể tích rồi, anh tính khối lượng bằng cách lấy thể tích nhân với khối lượng riêng. Đề hỏi 50 cái thì anh nhân thêm 50. 
+Nhưng khoan đã! Mắt anh quét lại yêu cầu đề bài và phát hiện ra 2 cái bẫy chết người:
+1. Đề cho khối lượng riêng đơn vị là $\text{g/cm}^3$, nhưng lại bắt tính khối lượng theo **$\text{kg}$**. Nếu tính xong không chia cho 1000 thì coi như vứt đi cả bài.
+2. Đề ép dùng quy ước **$\pi \approx 3,14$**. Nghĩa là trên máy tính, anh tuyệt đối không được bấm nút $\pi$, mà phải gõ thủ công số $3,14$. Ai quen tay bấm nút $\pi$ là kết quả làm tròn sẽ bị lệch đuôi ngay lập tức.
+
+Anh lập phép tính tổng, thay $\pi = 3,14$, bấm máy cẩn thận và làm tròn đến hàng phần mười theo đúng chỉ thị.`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "thiet_lap_he_truc",
+    chuyenDe: "dap-an",
+    loaiTag: "Bài toán",
+    tieuDe: "Bài toán tính thể tích thùng rượu tròn xoay có mặt cắt là parabol",
+    tuDuy: String.raw``,
+    hinhAnhLeft: "",
+    deBai: String.raw`<img src="images/m_x_m_n.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Thiết lập hệ trục tọa độ và tìm phương trình Parabol",
+            toanHoc: String.raw`Chọn hệ trục tọa độ $Oxy$ sao cho gốc tọa độ $O$ trùng với tâm của thùng rượu, trục $Ox$ dọc theo trục đối xứng của thùng.
+Chiều dài thùng là $80 \text{ cm} \Rightarrow x \in [-40; 40]$.
+Đường sinh của mặt cắt là một parabol có phương trình dạng: $y = ax^2 + c$.
+Đường kính lớn nhất ở giữa thùng là $60 \text{ cm} \Rightarrow$ Bán kính lớn nhất là $30 \text{ cm}$. Suy ra đỉnh parabol là $I(0; 30) \Rightarrow c = 30$.
+Đường kính hai mặt đáy là $40 \text{ cm} \Rightarrow$ Bán kính đáy là $20 \text{ cm}$. Suy ra parabol đi qua điểm $A(40; 20)$.
+Thay tọa độ $A$ vào phương trình, ta có:
+$20 = a \cdot (40)^2 + 30 \Leftrightarrow 1600a = -10 \Leftrightarrow a = -\frac{1}{160}$.
+Vậy phương trình đường parabol (đường sinh) là: $y = -\frac{1}{160}x^2 + 30$.`,
+            giaiThich: String.raw`Đọc lướt qua cái đề thực tế, mắt anh khóa ngay vào hai từ khóa sinh tử: **"khối tròn xoay"** và **"thiết diện là parabol"**. Trong đầu anh lập tức nảy số: Đây chắc chắn là bài toán Ứng dụng tích phân. 
+
+Nhưng ngặt nỗi, hàm số $f(x)$ đang bị giấu đi. Phản xạ của anh lúc này là phải "tự tạo ra hàm số" bằng cách gắn cho nó một hệ trục tọa độ $Oxy$. 
+Kinh nghiệm xương máu: Gặp vật thể đối xứng như cái thùng rượu này, anh luôn cắm gốc tọa độ $O(0;0)$ vào ngay tâm đối xứng (chính giữa thùng). Khi đó, phương trình parabol sẽ có dạng đơn giản nhất, khuyết mất hệ số bậc 1.
+$$ y = ax^2 + c $$
+
+Anh nhìn vào các con số đề cho để lấy điểm đi qua:
+- Trục $Ox$ dọc theo chiều dài thùng ($80\text{ cm}$), nên hoành độ chạy từ $-40$ đến $40$.
+- Giữa bụng phình to nhất, đường kính $60\text{ cm} \Rightarrow$ bán kính lớn nhất (chính là đỉnh Parabol trên trục $Oy$) là $30\text{ cm}$. Tức là nó đi qua đỉnh $(0; 30)$.
+- Đáy thùng có đường kính $40\text{ cm} \Rightarrow$ bán kính đáy là $20\text{ cm}$. Tức là nó đi qua điểm $(40; 20)$.
+Lắp 2 tọa độ này vào, anh giải ra ngay hệ số $a, c$ nhẹ nhàng.`
+        },
+        {
+            tenBuoc: "Bước 2: Dùng Tích phân tính thể tích khối tròn xoay",
+            toanHoc: String.raw`Thể tích của khối thùng rượu (khối tròn xoay) được tính bằng công thức:
+$V = \pi \int_{-40}^{40} \left( -\frac{1}{160}x^2 + 30 \right)^2 dx$
+Bấm máy tính tính phần tích phân (hoặc khai triển tính tay):
+$\int_{-40}^{40} \left( \frac{1}{25600}x^4 - \frac{3}{8}x^2 + 900 \right) dx = \left[ \frac{x^5}{128000} - \frac{x^3}{8} + 900x \right]_{-40}^{40}$
+$= 2 \left( \frac{40^5}{128000} - \frac{40^3}{8} + 900 \cdot 40 \right) = 2(800 - 8000 + 36000) = 57600$.
+Vậy thể tích phôi gỗ là: $V = 57600\pi \text{ (cm}^3)$.`,
+            giaiThich: String.raw`Có được hàm số $f(x) = -\frac{1}{160}x^2 + 30$ rồi, mọi thứ trở nên quá dễ thở. Để tìm thể tích phôi gỗ đặc ruột, anh lôi ngay vũ khí tối thượng của khối tròn xoay ra:
+$$ V = \pi \int_{a}^{b} [f(x)]^2 dx $$
+
+Cận tích phân chính là chiều dài cái thùng, chạy từ $-40$ đến $40$. Đoạn này hàm số có số mũ khá to, anh không dại gì khai triển hằng đẳng thức rồi nguyên hàm bằng tay cả. Anh bế nguyên cái cụm tích phân này ném vào máy tính Casio để nó xử lý, tránh sai sót dấu má lặt vặt. Nhớ là đừng bấm chữ $\pi$ vào máy vội, cứ tính cái lõi tích phân ra số đẹp rồi nhân $\pi$ sau.`
+        },
+        {
+            tenBuoc: "Bước 3: Gỡ bẫy đơn vị và tính tổng chi phí",
+            toanHoc: String.raw`Đổi đơn vị thể tích từ $\text{cm}^3$ sang $\text{m}^3$:
+$V = 57600\pi \text{ cm}^3 = \frac{57600\pi}{10^6} \text{ m}^3 = 0,0576\pi \text{ (m}^3)$.
+Khối lượng của phôi gỗ sồi là:
+$m = V \cdot D = 0,0576\pi \cdot 750 = 43,2\pi \text{ (kg)}$.
+Chi phí tiền mua gỗ sồi nguyên liệu là:
+$T_{gỗ} = m \cdot 150.000 = 43,2\pi \cdot 150.000 = 6.480.000\pi \text{ (VNĐ)} = 6,48\pi \text{ (triệu đồng)}$.
+Tổng chi phí để hoàn thiện chiếc thùng rượu (gồm tiền gỗ và tiền công) là:
+$T_{tổng} = T_{gỗ} + 2,5 = 6,48\pi + 2,5 \text{ (triệu đồng)}$.
+Bấm máy tính xấp xỉ:
+$T_{tổng} = 6,48 \cdot \pi + 2,5 \approx 22,8575 \text{ (triệu đồng)}$.
+Làm tròn kết quả đến hàng phần mười, ta được $22,9$ triệu đồng.
+
+**LIỆT KÊ NGẮN GỌN QUY TRÌNH:**
+1. Cắm trục tọa độ vào giữa mặt cắt, dùng các bán kính ($x=\pm40, y=20$ và $x=0, y=30$) để lập phương trình Parabol $y = ax^2 + c$.
+2. Áp dụng công thức Tích phân thể tích khối tròn xoay để tính ra $V$ theo đơn vị $\text{cm}^3$.
+3. Chia cho $10^6$ để đổi $\text{cm}^3$ sang $\text{m}^3$, khớp với đơn vị khối lượng riêng.
+4. Tính khối lượng $\rightarrow$ tính tiền gỗ $\rightarrow$ cộng tiền công $\rightarrow$ làm tròn 1 chữ số thập phân.`,
+            giaiThich: String.raw`Ra được thể tích $V = 57600\pi$ xong, anh khựng lại một nhịp! Mắt anh liếc xuống dữ kiện: "khối lượng riêng là $750\text{ kg/m}^3$".
+Đây là cái bẫy kinh điển cực đoạt mạng của Bộ Giáo Dục. Đề cho kích thước bằng **cm**, nhưng khối lượng riêng lại theo **$m^3$**. Mức 6 điểm thường nhắm mắt lấy $57600\pi$ nhân thẳng với $750$, sai ngay tức khắc. 
+
+Anh phải thực hiện bước giải độc: Đổi $\text{cm}^3$ sang $\text{m}^3$ bằng cách chia cho $10^6$ (vì $1m = 100cm \Rightarrow 1m^3 = 10^6 cm^3$).
+Sau khi có thể tích chuẩn, anh dùng công thức vật lý cơ bản để tính khối lượng, rồi nhân với đơn giá tiền:
+$$ m = D \cdot V $$
+Cuối cùng, tính ra tiền gỗ, anh nhớ cộng thêm 2.5 triệu tiền nhân công. Khi bấm kết quả cuối, anh dùng số $\pi$ chuẩn trên máy tính và cẩn thận làm tròn theo đúng yêu cầu "đến hàng phần mười". Chốt sổ!`
+        }
+    ]
+});
 
         // ---------------------------------------------------------------------
         // KẾT THÚC KHU VỰC DÁN DỮ LIỆU
@@ -8003,6 +8226,11 @@ nhất?`,
             let tuKhoaOnLuyen = ["ôn luyện", "luyện tập", "thực chiến", "tổng ôn"];
             if (tuKhoaOnLuyen.some(tu => tieuDe.includes(tu))) {
                 bai.chuyenDe = "on-luyen";
+            }
+            // MÀNG LỌC MỚI: TỰ ĐỘNG GOM BÀI VÀO TAB Đáp Án
+            let tuKhoaDapAn = ["đáp án", "đáp án", "đáp án", "đáp án"];
+            if (tuKhoaDapAN.some(tu => tieuDe.includes(tu))) {
+                bai.chuyenDe = "dap-an";
             }
         });    
     </script>
