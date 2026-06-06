@@ -8238,100 +8238,139 @@ Cuối cùng, tính ra tiền gỗ, anh nhớ cộng thêm 2.5 triệu tiền nh
 
     <script>
         // 1. Hàm render danh sách (chỉ chứa logic hiển thị)
-function renderDanhSach(category = 'all') {
-    const listContainer = document.getElementById('problemList');
-    if (!listContainer) return;
-    listContainer.innerHTML = ''; 
+// =====================================================================
+        // HỆ THỐNG LƯU TRỮ VÀ ĐỒNG BỘ GOOGLE SHEETS
+        // =====================================================================
+        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwRAOwt3YbLihE-p2DKTryN-gO7T-ZxUfhcvFoprcOyWfvZNtMjjFXbAgbLS5donUKx3A/exec";
 
-    let filteredData = khoDuLieu;
-    if (category !== 'all') {
-        filteredData = khoDuLieu.filter(bai => bai.chuyenDe === category);
-    }
+        let tenNguoiHoc = localStorage.getItem('ten_nguoi_hoc');
+        if (!tenNguoiHoc) {
+            tenNguoiHoc = prompt("Hãy nhập tên của bạn để lưu tiến độ (Ví dụ: Ngọc, Anh Hai...):");
+            if (!tenNguoiHoc || tenNguoiHoc.trim() === "") tenNguoiHoc = "Khách Ẩn Danh";
+            localStorage.setItem('ten_nguoi_hoc', tenNguoiHoc);
+        }
 
-    const kienThucList = filteredData.filter(bai => bai.loaiTag.toLowerCase().includes('kiến thức'));
-    const baiTapList = filteredData.filter(bai => bai.loaiTag.toLowerCase().includes('bài toán') || bai.loaiTag.toLowerCase().includes('bài tập'));
+        // 1. Biến lưu danh sách các bài đã hoàn thành lấy từ Server
+        let completedTasks = new Set();
 
-    // Hàm tạo HTML cho từng bài (nằm trong renderDanhSach là hợp lý)
-    const taoItemHTML = (bai) => {
-        const tagClass = bai.loaiTag.toLowerCase().includes('kiến thức') ? 'tag-kt' : 'tag-bt';
-        const isChecked = localStorage.getItem('done_' + bai.id) === 'true' ? 'checked' : '';
-        
-        return `
-            <div class="problem-item" style="display: flex; align-items: center; gap: 15px;">
-                <input type="checkbox" class="done-checkbox" style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--dark-pink);" 
-                    ${isChecked} 
-                    onclick="toggleDone(event, '${bai.id}')">
-                    
-                <div onclick="hienThiChiTiet('${bai.id}')" style="flex-grow: 1; display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                    <span class="tag ${tagClass}">${bai.loaiTag}</span>
-                    <span class="item-title" style="${isChecked ? 'text-decoration: line-through; color: #aaa;' : ''}">${bai.tieuDe}</span>
-                </div>
-            </div>
-        `;
-    };
+        // 2. Hàm tải tiến độ từ Google Sheet về (CHÍNH LÀ ĐOẠN ÔNG CÒN THIẾU)
+        async function syncProgress() {
+            if (!GOOGLE_SHEET_URL) return;
+            try {
+                const response = await fetch(GOOGLE_SHEET_URL); 
+                const data = await response.json();
+                
+                completedTasks.clear();
+                // Duyệt qua dữ liệu trả về từ Sheet (cột C là idBai, cột D là trạng thái)
+                data.forEach(row => {
+                    const idBai = row[2];
+                    const trangThai = row[3];
+                    if (trangThai === "✅ Đã học xong") {
+                        completedTasks.add(idBai);
+                    } else if (trangThai === "❌ Hủy tích") {
+                        completedTasks.delete(idBai);
+                    }
+                });
+                
+                // Vẽ lại giao diện với dấu tích được đồng bộ
+                renderDanhSach('all');
+                
+            } catch (e) {
+                console.log("Đang load tiến độ nội bộ (Hoặc server chưa được cấu hình doGet)");
+            }
+        }
 
-    if (kienThucList.length > 0) {
-        listContainer.insertAdjacentHTML('beforeend', `<h4 style="color: var(--dark-pink); margin: 10px 0 5px 5px; font-size: 15px;">📚 TỔNG ÔN KIẾN THỨC</h4>`);
-        kienThucList.forEach(bai => {
-            listContainer.insertAdjacentHTML('beforeend', taoItemHTML(bai));
-        });
-    }
+        // Gọi hàm đồng bộ ngay khi mở web
+        syncProgress();
 
-    if (baiTapList.length > 0) {
-        listContainer.insertAdjacentHTML('beforeend', `<h4 style="color: #4CAF50; margin: 20px 0 5px 5px; font-size: 15px;">🚀 THỰC CHIẾN BÀI TẬP</h4>`);
-        baiTapList.forEach(bai => {
-            listContainer.insertAdjacentHTML('beforeend', taoItemHTML(bai));
-        });
-    }
-    
-    if (kienThucList.length === 0 && baiTapList.length === 0) {
-        listContainer.innerHTML = `<p style="text-align: center; color: #888; margin-top: 20px;">Chưa có dữ liệu!</p>`;
-    }
-}
+        // 3. Hàm render danh sách 
+        function renderDanhSach(category = 'all') {
+            const listContainer = document.getElementById('problemList');
+            if (!listContainer) return;
+            listContainer.innerHTML = ''; 
 
-// 2. CẤU HÌNH GOOGLE SHEETS (Để ra ngoài hàm render)
-const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbx6NsqigUhgM-EII-naeBh7nzrcG8j3YX3UCaCrPNmsBs1KRZMuKAr3wD5vcFNlxzcIQQ/exec";
+            let filteredData = khoDuLieu;
+            if (category !== 'all') {
+                filteredData = khoDuLieu.filter(bai => bai.chuyenDe === category);
+            }
 
-// Hỏi tên người học 1 lần duy nhất
-let tenNguoiHoc = localStorage.getItem('ten_nguoi_hoc');
-if (!tenNguoiHoc) {
-    tenNguoiHoc = prompt("Hãy nhập tên của bạn để lưu tiến độ (Ví dụ: Ngọc, Anh Hai...):");
-    if (!tenNguoiHoc || tenNguoiHoc.trim() === "") tenNguoiHoc = "Khách Ẩn Danh";
-    localStorage.setItem('ten_nguoi_hoc', tenNguoiHoc);
-}
+            const kienThucList = filteredData.filter(bai => bai.loaiTag.toLowerCase().includes('kiến thức'));
+            const baiTapList = filteredData.filter(bai => bai.loaiTag.toLowerCase().includes('bài toán') || bai.loaiTag.toLowerCase().includes('bài tập'));
 
-// 3. Hàm xử lý logic khi tích (Để ra ngoài hàm render)
-function toggleDone(event, id) {
-    event.stopPropagation();
-    const isChecked = event.target.checked;
-    
-    // Lưu máy
-    localStorage.setItem('done_' + id, isChecked);
-    
-    // Gạch ngang tiêu đề
-    const titleSpan = event.target.nextElementSibling.querySelector('.item-title');
-    if (isChecked) {
-        titleSpan.style.textDecoration = 'line-through';
-        titleSpan.style.color = '#aaa';
-    } else {
-        titleSpan.style.textDecoration = 'none';
-        titleSpan.style.color = '#333';
-    }
+            const taoItemHTML = (bai) => {
+                const tagClass = bai.loaiTag.toLowerCase().includes('kiến thức') ? 'tag-kt' : 'tag-bt';
+                
+                // KIỂM TRA ĐỒNG BỘ: Xét cả dữ liệu trên Sheet và máy tính hiện tại
+                const isDone = completedTasks.has(bai.id) || localStorage.getItem('done_' + bai.id) === 'true';
+                const isChecked = isDone ? 'checked' : '';
+                const lineThrough = isDone ? 'text-decoration: line-through; color: #aaa;' : '';
+                
+                return `
+                    <div class="problem-item" style="display: flex; align-items: center; gap: 15px;">
+                        <input type="checkbox" class="done-checkbox" style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--dark-pink);" 
+                            ${isChecked} 
+                            onclick="toggleDone(event, '${bai.id}')">
+                            
+                        <div onclick="hienThiChiTiet('${bai.id}')" style="flex-grow: 1; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <span class="tag ${tagClass}">${bai.loaiTag}</span>
+                            <span class="item-title" style="${lineThrough}">${bai.tieuDe}</span>
+                        </div>
+                    </div>
+                `;
+            };
 
-    // Gửi lên Sheet
-    if (GOOGLE_SHEET_URL !== "") {
-        fetch(GOOGLE_SHEET_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify({
-                nguoiHoc: tenNguoiHoc,
-                idBai: id,
-                hanhDong: isChecked ? "✅ Đã học xong" : "❌ Hủy tích"
-            })
-        }).catch(err => console.log("Lỗi mạng, không gửi được lên Sheet"));
-    }
-}
+            if (kienThucList.length > 0) {
+                listContainer.insertAdjacentHTML('beforeend', `<h4 style="color: var(--dark-pink); margin: 10px 0 5px 5px; font-size: 15px;">📚 TỔNG ÔN KIẾN THỨC</h4>`);
+                kienThucList.forEach(bai => {
+                    listContainer.insertAdjacentHTML('beforeend', taoItemHTML(bai));
+                });
+            }
+
+            if (baiTapList.length > 0) {
+                listContainer.insertAdjacentHTML('beforeend', `<h4 style="color: #4CAF50; margin: 20px 0 5px 5px; font-size: 15px;">🚀 THỰC CHIẾN BÀI TẬP</h4>`);
+                baiTapList.forEach(bai => {
+                    listContainer.insertAdjacentHTML('beforeend', taoItemHTML(bai));
+                });
+            }
+            
+            if (kienThucList.length === 0 && baiTapList.length === 0) {
+                listContainer.innerHTML = `<p style="text-align: center; color: #888; margin-top: 20px;">Chưa có dữ liệu!</p>`;
+            }
+        }
+
+        // 4. Hàm xử lý khi bấm tích
+        function toggleDone(event, id) {
+            event.stopPropagation();
+            const isChecked = event.target.checked;
+            
+            // Lưu ngầm xuống máy người dùng để khỏi bị giật lag
+            localStorage.setItem('done_' + id, isChecked);
+            if (isChecked) { completedTasks.add(id); } else { completedTasks.delete(id); }
+            
+            // Gạch ngang tiêu đề hiển thị ngay lập tức
+            const titleSpan = event.target.nextElementSibling.querySelector('.item-title');
+            if (isChecked) {
+                titleSpan.style.textDecoration = 'line-through';
+                titleSpan.style.color = '#aaa';
+            } else {
+                titleSpan.style.textDecoration = 'none';
+                titleSpan.style.color = '#333';
+            }
+
+            // Gửi dữ liệu bắn lên Google Sheet
+            if (GOOGLE_SHEET_URL !== "") {
+                fetch(GOOGLE_SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        nguoiHoc: tenNguoiHoc,
+                        idBai: id,
+                        hanhDong: isChecked ? "✅ Đã học xong" : "❌ Hủy tích"
+                    })
+                }).catch(err => console.log("Lỗi mạng, không gửi được lên Sheet"));
+            }
+        }
 
         function hienThiChiTiet(id) {
             const bai = khoDuLieu.find(b => b.id === id);
