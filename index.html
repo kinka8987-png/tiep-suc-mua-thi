@@ -8016,7 +8016,90 @@ Vậy khoảng cách giữa hai đường thẳng $AB$ và $SC$ xấp xỉ $1,96
         }
     ]
 });
+khoDuLieu.push({
+    id: "khao_sat_ham_phan_thuc",
+    chuyenDe: "dap-an",
+    loaiTag: "Bài toán",
+    tieuDe: "Xét tính đúng sai của các mệnh đề khảo sát hàm số phân thức bậc nhất (20:45-6/7)",
+    tuDuy: String.raw`1. Áp dụng công thức đạo hàm nhanh $y' = \frac{ad-bc}{(cx+d)^2}$ để kiểm tra.
+2. Tìm tiệm cận đứng (nghiệm mẫu), tiệm cận ngang (tỉ số hệ số $x$) để chốt tọa độ tâm đối xứng.
+3. Kiểm tra cách viết kết luận tính đồng biến/nghịch biến (bắt lỗi dùng ký hiệu tập hợp).
+4. Soi điều kiện xác định xem có rớt vào giữa đoạn cần tìm Min/Max không trước khi cắm đầu vào tính toán.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`<img src="images/c_h_s_g_x_2_x.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Xử lý mệnh đề a) - Phản xạ công thức đạo hàm nhanh",
+            giaiThich: String.raw`Đọc lướt qua hàm phân thức bậc nhất trên bậc nhất $y = \frac{ax+b}{cx+d}$, trong đầu anh phản xạ ngay đến công thức tính đạo hàm "chéo cánh". 
+Quy tắc cực kỳ đơn giản: Lấy tử số là định thức $\begin{vmatrix} a & b \\ c & d \end{vmatrix} = a \cdot d - b \cdot c$, dưới mẫu số là bình phương cái mẫu ban đầu. 
+Cái bẫy duy nhất ở đây là tính nhầm dấu trừ giữa hai đường chéo, đi thi cứ viết cẩn thận từng con số ra nháp là chắc cốp.
 
+**MOTIF (Công thức nền):**
+Hàm số $y = \frac{ax+b}{cx+d}$ có đạo hàm:
+$$y' = \frac{ad - bc}{(cx+d)^2}$$`,
+            toanHoc: String.raw`Xét mệnh đề a:
+Cho hàm số $g(x) = \frac{2x-3}{x-1}$.
+Tập xác định: $D = \mathbb{R} \setminus \{1\}$.
+Áp dụng công thức đạo hàm nhanh với $a=2, b=-3, c=1, d=-1$:
+$g'(x) = \frac{2 \cdot (-1) - (-3) \cdot 1}{(x-1)^2} = \frac{-2 + 3}{(x-1)^2} = \frac{1}{(x-1)^2}$.
+So sánh với mệnh đề đề bài cho, ta thấy kết quả hoàn toàn trùng khớp.
+Vậy mệnh đề a) là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 2: Xử lý mệnh đề b) - Nhận diện tâm đối xứng của đồ thị",
+            giaiThich: String.raw`Tiếp tục với mệnh đề b hỏi về tâm đối xứng. Anh nhớ ngay đặc trưng hình học của đồ thị hàm số $\frac{ax+b}{cx+d}$ (đường hypebol): Tâm đối xứng của nó chính là giao điểm của hai đường tiệm cận.
+Việc của anh bây giờ chỉ là nhẩm nhanh 2 đường tiệm cận:
+- Tiệm cận đứng: Cho mẫu bằng 0.
+- Tiệm cận ngang: Lấy hệ số của $x$ trên tử chia cho hệ số của $x$ dưới mẫu.
+Tọa độ $(x_{TCĐ}; y_{TCN})$ chính là tọa độ tâm đối xứng cần tìm.
+
+**MOTIF (Công thức nền):**
+Tiệm cận đứng: $x = -\frac{d}{c}$
+Tiệm cận ngang: $y = \frac{a}{c}$
+Tâm đối xứng $I\left(-\frac{d}{c}; \frac{a}{c}\right)$.`,
+            toanHoc: String.raw`Xét mệnh đề b:
+Đồ thị hàm số $g(x) = \frac{2x-3}{x-1}$ có:
+Đường tiệm cận đứng là $x = 1$ (do nghiệm của mẫu $x-1=0$).
+Đường tiệm cận ngang là $y = \frac{2}{1} = 2$ (tỉ số hệ số của $x$).
+Giao điểm của hai đường tiệm cận này là điểm $I(1; 2)$.
+Đây chính là tâm đối xứng của đồ thị hàm số. Trùng khớp với mệnh đề.
+Vậy mệnh đề b) là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 3: Xử lý mệnh đề c) - Bẫy kinh điển về cách kết luận tính đơn điệu",
+            giaiThich: String.raw`Đến câu c, anh nhìn thấy $g'(x) = \frac{1}{(x-1)^2} > 0$ với mọi $x \neq 1$. Nếu vội vàng kết luận "hàm số đồng biến trên $\mathbb{R} \setminus \{1\}$" là anh dính ngay cái bẫy "sát thủ" giết chết vô số học sinh mức 6-7 điểm.
+Nguyên tắc tối thượng trong Toán THPT: **Tuyệt đối không được dùng ký hiệu hợp ($\cup$) hoặc tập hợp ($\mathbb{R} \setminus \{...\}$) để kết luận khoảng đồng biến, nghịch biến.** 
+Tính đơn điệu chỉ được xét trên từng khoảng liên tục. Phải viết tách rời bằng chữ "và" hoặc dấu chấm phẩy (;).
+
+**MOTIF (Khẩu quyết thực chiến):**
+Đạo hàm $>0$, mẫu có điều kiện $x \neq x_0$.
+Kết luận ĐÚNG: Đồng biến trên $(-\infty; x_0)$ và $(x_0; +\infty)$.
+Kết luận SAI: Đồng biến trên $\mathbb{R} \setminus \{x_0\}$ hoặc $(-\infty; x_0) \cup (x_0; +\infty)$.`,
+            toanHoc: String.raw`Xét mệnh đề c:
+Ta có $g'(x) = \frac{1}{(x-1)^2} > 0, \forall x \neq 1$.
+Suy ra hàm số $g(x)$ đồng biến trên từng khoảng xác định, cụ thể là trên khoảng $(-\infty; 1)$ và $(1; +\infty)$.
+Việc sử dụng ký hiệu $\mathbb{R} \setminus \{1\}$ để kết luận khoảng đồng biến là vi phạm quy tắc trình bày tính đơn điệu của hàm số.
+Vậy mệnh đề c) là **Sai**.`
+        },
+        {
+            tenBuoc: "Bước 4: Xử lý mệnh đề d) - Bẫy giá trị lớn nhất trên đoạn chứa điểm gián đoạn",
+            giaiThich: String.raw`Câu d bắt tìm Giá trị lớn nhất trên đoạn $[0; 3]$. Khoan vội đạo hàm hay kẻ bảng! Mắt anh quét ngay lại cái Tập xác định: hàm số bị đứt gãy tại $x = 1$. 
+Anh nhìn đoạn $[0; 3]$ xem có chứa con số $1$ này không? Có! Đoạn từ $0$ đến $3$ chắc chắn đi qua $1$.
+Hàm số mà bị gián đoạn (có tiệm cận đứng) chui tọt vào giữa cái đoạn đang xét thì đồ thị của nó sẽ đâm vút lên tận $+\infty$ hoặc cắm phập xuống $-\infty$ tại vị trí đó. Vì thế, làm gì tồn tại giá trị lớn nhất hay nhỏ nhất trên cái đoạn dở hơi này! Khỏi cần tính toán, chốt luôn là sai.
+
+**MOTIF (Chiến thuật xử lý):**
+Khi tìm Min/Max trên đoạn $[a; b]$, việc đầu tiên là kiểm tra xem điểm làm mẫu số bằng 0 có nằm lọt thỏm vào giữa đoạn $[a; b]$ hay không. Nếu có $\Rightarrow$ Không tồn tại Min/Max.`,
+            toanHoc: String.raw`Xét mệnh đề d:
+Đề yêu cầu tìm GTLN của $g(x)$ trên đoạn $[0; 3]$.
+Tuy nhiên, hàm số $g(x) = \frac{2x-3}{x-1}$ không xác định tại $x = 1$.
+Mà điểm $x = 1$ lại nằm trong khoảng $(0; 3)$ thuộc đoạn $[0; 3]$.
+Khi $x \to 1^-$, ta có $\lim_{x \to 1^-} \frac{2x-3}{x-1} = +\infty$ (do tử tiến tới $-1 < 0$, mẫu tiến tới $0$ và mang dấu âm).
+Vì hàm số tiến tới $+\infty$ trên đoạn này nên không tồn tại giá trị lớn nhất.
+Do đó, kết luận GTLN bằng $\frac{3}{2}$ là hoàn toàn sai.
+Vậy mệnh đề d) là **Sai**.`
+        }
+    ]
+});
         // ---------------------------------------------------------------------
         // KẾT THÚC KHU VỰC DÁN DỮ LIỆU
     // TỰ ĐỘNG LỌC BÀI MŨ VÀ LOGARIT
