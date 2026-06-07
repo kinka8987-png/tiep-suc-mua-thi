@@ -4854,7 +4854,92 @@ c) Khoảng cách từ điểm $C$ đến mặt phẳng $(\alpha)$ lớn hơn kh
 d) Lấy một điểm $N$ bất kỳ di động trên mặt phẳng $(\alpha)$. Giá trị nhỏ nhất của tổng
 khoảng cách $NC + ND$ là $\sqrt{38}$.`
 });
+khoDuLieu.push({
+    id: "vi_tri_tuong_doi_diem_mat_phang",
+    chuyenDe: "dap-an",
+    loaiTag: "Bài toán",
+    tieuDe: "Xét tính đúng sai của các mệnh đề liên quan đến điểm và mặt phẳng",
+    tuDuy: String.raw`1. Tính $\vec{CD}$ bằng tọa độ sau trừ trước để đối chiếu.
+2. Thay tọa độ $C, D$ vào vế trái mặt phẳng để xét dấu (cùng/khác phía).
+3. Ốp công thức khoảng cách cơ bản để so sánh hai giá trị.
+4. Nhận diện bẫy "cùng phía" trong bài toán $NC+ND$ min: Tìm hình chiếu, lấy điểm đối xứng $C'$, rồi mới tính đoạn thẳng $C'D$.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`<img src="images/t_k_g_h_t_d_o.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Xử lý mệnh đề a) - Khởi động với Vector chỉ phương",
+            giaiThich: String.raw`Đọc lướt qua mệnh đề a), mắt anh thấy ngay chữ "Vector chỉ phương của đường thẳng $CD$". Trong đầu anh nảy số: Đây là câu biếu điểm, tuyệt đối không được sai. Vector chỉ phương của đường thẳng đi qua 2 điểm chính là vector nối 2 điểm đó. 
+Quy tắc bất di bất dịch: Lấy tọa độ "Điểm ngọn trừ Điểm gốc" (lấy $D$ trừ $C$). Nhẩm nhanh trong đầu để đối chiếu với đáp án của đề bài xem đúng hay sai.
 
+**MOTIF (Công thức nền):**
+Vector đi qua 2 điểm $C(x_C, y_C, z_C)$ và $D(x_D, y_D, z_D)$:
+$$\vec{CD} = (x_D - x_C; y_D - y_C; z_D - z_C)$$`,
+            toanHoc: String.raw`Xét mệnh đề a:
+Ta tính tọa độ vector $\vec{CD}$ lấy tọa độ điểm $D$ trừ tọa độ điểm $C$:
+$\vec{CD} = (-1 - 1; 3 - (-2); 4 - 1) = (-2; 5; 3)$.
+So sánh với vector $\vec{u} = (-2; 5; 3)$ mà đề bài đưa ra, ta thấy trùng khớp hoàn toàn.
+Vậy mệnh đề a) là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 2: Xử lý mệnh đề b) và c) - Xét vị trí tương đối và Khoảng cách",
+            giaiThich: String.raw`Đến mệnh đề b và c, đề yêu cầu kiểm tra xem 2 điểm nằm "cùng phía" hay "khác phía" và so sánh khoảng cách. Anh biết ngay đây là dạng bài cắm tọa độ vào phương trình mặt phẳng.
+Cái bẫy kinh điển mà mấy đứa mức 6 hay chết là tính toán sai dấu cộng trừ. 
+Anh lập luận thế này: Anh gọi vế trái của phương trình mặt phẳng là $f(x,y,z)$. Anh chỉ việc nhét tọa độ $C$ và $D$ vào $f$. 
+- Nếu $f(C) \times f(D) > 0$ (cùng dấu) thì nó nằm **cùng phía**.
+- Nếu $f(C) \times f(D) < 0$ (trái dấu) thì nó nằm **khác phía**.
+Tính xong cái này, anh tiện tay ốp luôn công thức tính khoảng cách bằng cách lấy trị tuyệt đối kết quả vừa tính chia cho độ dài vector pháp tuyến là xong cả 2 câu một lúc.
+
+**MOTIF (Công thức nền):**
+Khoảng cách từ điểm $M(x_0, y_0, z_0)$ đến mặt phẳng $(\alpha): Ax + By + Cz + D = 0$:
+$$d(M, \alpha) = \frac{|Ax_0 + By_0 + Cz_0 + D|}{\sqrt{A^2 + B^2 + C^2}}$$`,
+            toanHoc: String.raw`Xét phương trình mặt phẳng $(\alpha): f(x,y,z) = 2x + y - 2z + 1 = 0$.
+Thay tọa độ điểm $C(1; -2; 1)$ vào $(\alpha)$ ta được:
+$f(C) = 2(1) + (-2) - 2(1) + 1 = -1$.
+Thay tọa độ điểm $D(-1; 3; 4)$ vào $(\alpha)$ ta được:
+$f(D) = 2(-1) + 3 - 2(4) + 1 = -6$.
+
+Xét mệnh đề b:
+Ta có $f(C) \cdot f(D) = (-1) \cdot (-6) = 6 > 0$.
+Do tích dương nên hai điểm $C$ và $D$ nằm **cùng phía** đối với mặt phẳng $(\alpha)$.
+Vậy mệnh đề b) là **Sai**.
+
+Xét mệnh đề c:
+Khoảng cách từ $C$ đến $(\alpha)$:
+$d(C, (\alpha)) = \frac{|-1|}{\sqrt{2^2 + 1^2 + (-2)^2}} = \frac{1}{\sqrt{9}} = \frac{1}{3}$.
+Khoảng cách từ $D$ đến $(\alpha)$:
+$d(D, (\alpha)) = \frac{|-6|}{\sqrt{2^2 + 1^2 + (-2)^2}} = \frac{6}{\sqrt{9}} = 2$.
+Vì $\frac{1}{3} < 2$ nên khoảng cách từ $C$ đến $(\alpha)$ **nhỏ hơn** khoảng cách từ $D$ đến $(\alpha)$.
+Vậy mệnh đề c) là **Sai**.`
+        },
+        {
+            tenBuoc: "Bước 3: Xử lý mệnh đề d) - Bẫy cực trị hình học",
+            giaiThich: String.raw`Đọc câu d thấy tổng $NC + ND$ nhỏ nhất, não anh rú còi báo động ngay! Đây là dạng "Cực trị tổng khoảng cách".
+Nhìn lướt qua con số $\sqrt{38}$ của đề bài, anh nhẩm thử độ dài $CD = \sqrt{(-2)^2 + 5^2 + 3^2} = \sqrt{38}$. 
+Đến đây anh mỉm cười vì phát hiện ra **cái bẫy cực hiểm**: Đề bài lừa học sinh áp dụng tính chất bất đẳng thức tam giác $NC + ND \ge CD$, dẫn đến vội vàng chọn đáp án bằng đúng đoạn thẳng $CD = \sqrt{38}$. 
+Nhưng điều này **CHỈ ĐÚNG KHI $C$ VÀ $D$ NẰM KHÁC PHÍA** so với mặt phẳng (khi đó $CD$ cắt mặt phẳng tại $N$). 
+Còn ở bước 2, anh đã chứng minh $C$ và $D$ nằm **CÙNG PHÍA**. Do đó, anh tuyệt đối không được lấy $CD$. Anh phải dựng điểm $C'$ đối xứng với $C$ qua mặt phẳng $(\alpha)$. Lúc này, $NC + ND = NC' + ND \ge C'D$. Cái cần tính là đoạn $C'D$ cơ!
+
+**MOTIF (Vũ khí giải quyết):**
+Khi $C, D$ cùng phía, tìm $C'$ đối xứng $C$ qua $(\alpha)$.
+$$\min(NC + ND) = C'D$$`,
+            toanHoc: String.raw`Xét mệnh đề d:
+Từ câu b, ta đã biết $C$ và $D$ nằm **cùng phía** đối với $(\alpha)$.
+Nên để tìm $\min(NC + ND)$, ta phải tìm tọa độ điểm $C'$ đối xứng với $C$ qua $(\alpha)$.
+Viết phương trình đường thẳng $\Delta$ đi qua $C(1; -2; 1)$ và vuông góc với $(\alpha)$, suy ra $\Delta$ nhận $\vec{n}_{(\alpha)} = (2; 1; -2)$ làm VTCP:
+$\Delta: \begin{cases} x = 1 + 2t \\ y = -2 + t \\ z = 1 - 2t \end{cases}$
+Gọi $H$ là hình chiếu của $C$ trên $(\alpha)$, tọa độ $H$ là nghiệm của phương trình:
+$2(1 + 2t) + (-2 + t) - 2(1 - 2t) + 1 = 0 \Leftrightarrow 9t - 1 = 0 \Leftrightarrow t = \frac{1}{9}$.
+Suy ra $H\left(\frac{11}{9}; \frac{-17}{9}; \frac{7}{9}\right)$.
+Vì $H$ là trung điểm của $CC'$, ta có $C' = 2H - C$:
+$C'\left(\frac{13}{9}; \frac{-16}{9}; \frac{5}{9}\right)$.
+Ta có bất đẳng thức tam giác: $NC + ND = NC' + ND \ge C'D$.
+Nên giá trị nhỏ nhất cần tìm là độ dài đoạn $C'D$:
+$C'D = \sqrt{\left(-1 - \frac{13}{9}\right)^2 + \left(3 - \frac{-16}{9}\right)^2 + \left(4 - \frac{5}{9}\right)^2} = \sqrt{\left(\frac{-22}{9}\right)^2 + \left(\frac{43}{9}\right)^2 + \left(\frac{31}{9}\right)^2} = \frac{\sqrt{3294}}{9} = \frac{\sqrt{366}}{3}$.
+Ta thấy $C'D = \frac{\sqrt{366}}{3} \neq \sqrt{38}$ (Thực tế $\sqrt{38}$ chính là độ dài đoạn $CD$).
+Vậy mệnh đề d) là **Sai**.`
+        }
+    ]
+});
 khoDuLieu.push({
     id: "cau_4_phuong_trinh_mu_logarit_lai_tap_cap_so_cong",
     chuyenDe: "on-luyen",
