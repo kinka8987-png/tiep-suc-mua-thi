@@ -7772,7 +7772,78 @@ Cuối cùng, tính ra tiền gỗ, anh nhớ cộng thêm 2.5 triệu tiền nh
         }
     ]
 });
+khoDuLieu.push({
+    id: "khoang_cach_hai_duong",
+    chuyenDe: "dap-an",
+    loaiTag: "Bài toán",
+    tieuDe: "Tính khoảng cách giữa hai đường thẳng chéo nhau bằng phương pháp tọa độ",
+    tuDuy: String.raw`1. Chọn gốc tọa độ tại trung điểm $M$ của $AB$. Suy ra tọa độ các đỉnh đáy và đỉnh chóp $S$.
+2. Xác định các vector chỉ phương $\vec{u}_1$ của $AB$, $\vec{u}_2$ của $SC$ và vector nối $\vec{MC}$.
+3. Tính tích có hướng $[\vec{u}_1, \vec{u}_2]$.
+4. Áp dụng công thức khoảng cách 2 đường chéo nhau bằng tọa độ, bấm máy và làm tròn.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`<img src="images/c_e_l_g_b_t_d_h.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chọn gốc tọa độ và \"đọc\" tọa độ các điểm then chốt",
+            giaiThich: String.raw`Đọc lướt qua cái đề, mắt anh bắt ngay vào cụm từ **"đáy ABC là tam giác đều"**, **"M là trung điểm AB"** và **"SG vuông góc với mặt đáy"**. 
+Trong đầu anh lập tức nảy số: Yêu cầu giải bằng tọa độ hóa thì việc quan trọng nhất là phải tìm được vị trí đặt gốc $O(0;0;0)$ sao cho có 3 trục vuông góc với nhau. Ở đây tam giác đều, $M$ là trung điểm cạnh $AB$ nên chắc chắn $CM \perp AB$. Thêm nữa, $SG$ vuông góc với đáy nên trục $Oz$ sẽ song song với $SG$. Quá đẹp! Anh quyết định cắm ngay gốc tọa độ tại $M$.
+Trục $Mx$ sẽ chạy dọc theo $AB$, trục $My$ chạy dọc theo $MC$, và trục $Mz$ thẳng đứng hướng lên trên.
 
+Cái bẫy kinh điển ở đây là tính sai tọa độ do nhầm lẫn độ dài. Anh cẩn thận nhẩm lại: cạnh đáy bằng 3. Trọng tâm $G$ nằm trên đường trung tuyến $MC$, cách $M$ một khoảng bằng $1/3$ đoạn $MC$.
+
+**MOTIF (Công thức nền):**
+Đường cao tam giác đều cạnh $a$: $h = \frac{a\sqrt{3}}{2}$
+Trọng tâm chia trung tuyến: $MG = \frac{1}{3}MC$`,
+            toanHoc: String.raw`Chọn hệ trục tọa độ $Oxyz$ với gốc $O \equiv M(0;0;0)$.
+Tia $Mx$ trùng với tia $MB$, tia $My$ trùng với tia $MC$, tia $Mz$ cùng hướng với $\vec{GS}$.
+Ta có tam giác $ABC$ đều cạnh bằng 3, $M$ là trung điểm $AB$ nên:
+$MB = MA = \frac{3}{2} \Rightarrow B\left(\frac{3}{2}; 0; 0\right), A\left(-\frac{3}{2}; 0; 0\right)$.
+Độ dài trung tuyến $MC = \frac{3\sqrt{3}}{2} \Rightarrow C\left(0; \frac{3\sqrt{3}}{2}; 0\right)$.
+Trọng tâm $G$ nằm trên $MC$ nên $MG = \frac{1}{3}MC = \frac{\sqrt{3}}{2} \Rightarrow G\left(0; \frac{\sqrt{3}}{2}; 0\right)$.
+Vì $SG \perp (ABC)$ và $SG = 2$ nên đỉnh $S$ có tọa độ $S\left(0; \frac{\sqrt{3}}{2}; 2\right)$.`
+        },
+        {
+            tenBuoc: "Bước 2: Tìm các vector chỉ phương và vector nối",
+            giaiThich: String.raw`Đến đoạn này, đề bắt tính khoảng cách giữa hai đường chéo nhau $AB$ và $SC$. Anh lục lại ngay kho vũ khí, bài này dùng công thức tích có hướng là nhanh gọn nhất, khỏi cần dựng hình phụ lằng nhằng.
+Để xài công thức, anh cần 3 nguyên liệu:
+1. Vector chỉ phương của đường $AB$ (gọi là $\vec{u}_1$). Thực ra đường $AB$ nằm ngay trên trục $Ox$ rồi, nên lấy luôn vector đơn vị cho nhàn, hoặc cứ lấy $\vec{AB}$ cũng chả sao.
+2. Vector chỉ phương của đường $SC$ (gọi là $\vec{u}_2$, chính là $\vec{SC}$).
+3. Một vector nối từ một điểm trên đường này sang một điểm trên đường kia. Anh chọn điểm $M$ (thuộc $AB$) và điểm $C$ (thuộc $SC$) cho dễ tính, lấy $\vec{MC}$.
+
+**Công thức:**
+Khoảng cách giữa hai đường chéo nhau $\Delta_1$ (qua $M_1$, có vtcp $\vec{u}_1$) và $\Delta_2$ (qua $M_2$, có vtcp $\vec{u}_2$):
+$$d(\Delta_1, \Delta_2) = \frac{|[\vec{u}_1, \vec{u}_2] \cdot \vec{M_1M_2}|}{|[\vec{u}_1, \vec{u}_2]|}$$`,
+            toanHoc: String.raw`Ta có:
+Đường thẳng $AB$ đi qua $M(0;0;0)$ và có vector chỉ phương là $\vec{AB} = (3; 0; 0)$. Để tính toán đơn giản, ta chọn vtcp $\vec{u}_1 = (1; 0; 0)$.
+Đường thẳng $SC$ đi qua $C\left(0; \frac{3\sqrt{3}}{2}; 0\right)$ và có vector chỉ phương là $\vec{SC} = C - S = \left(0; \frac{3\sqrt{3}}{2} - \frac{\sqrt{3}}{2}; -2\right) = (0; \sqrt{3}; -2)$. Gọi đây là $\vec{u}_2$.
+Vector nối 2 điểm thuộc 2 đường thẳng là $\vec{MC} = \left(0; \frac{3\sqrt{3}}{2}; 0\right)$.
+
+Tính tích có hướng của $\vec{u}_1$ và $\vec{u}_2$:
+$[\vec{u}_1, \vec{u}_2] = \left( 0\cdot(-2) - 0\cdot\sqrt{3}; 0\cdot0 - 1\cdot(-2); 1\cdot\sqrt{3} - 0\cdot0 \right) = (0; 2; \sqrt{3})$.`
+        },
+        {
+            tenBuoc: "Bước 3: Ráp công thức, bấm máy và chốt hạ",
+            giaiThich: String.raw`Nguyên liệu đã đủ, giờ anh chỉ việc tống hết vào công thức. Cái cần cẩn thận nhất ở đây là thao tác bấm máy tính. Ở trên tử là trị tuyệt đối của tích vô hướng, ở dưới mẫu là độ dài của vector tích có hướng (có căn bậc hai). 
+Ra được số vô tỉ thì anh bấm nút "S<=>D" để chuyển sang số thập phân. Đề yêu cầu làm tròn đến hàng phần trăm (2 chữ số thập phân), anh nhìn số thứ 3 sau dấu phẩy, nếu từ 5 trở lên thì làm tròn lên, dưới 5 thì giữ nguyên. Chốt điểm gọn gàng!`,
+            toanHoc: String.raw`Khoảng cách cần tìm là:
+$d(AB, SC) = \frac{|[\vec{u}_1, \vec{u}_2] \cdot \vec{MC}|}{|[\vec{u}_1, \vec{u}_2]|}$
+
+Tử số (Tích vô hướng):
+$|[\vec{u}_1, \vec{u}_2] \cdot \vec{MC}| = \left| 0\cdot0 + 2\cdot\frac{3\sqrt{3}}{2} + \sqrt{3}\cdot0 \right| = |3\sqrt{3}| = 3\sqrt{3}$.
+
+Mẫu số (Độ dài vector tích có hướng):
+$|[\vec{u}_1, \vec{u}_2]| = \sqrt{0^2 + 2^2 + (\sqrt{3})^2} = \sqrt{4 + 3} = \sqrt{7}$.
+
+Suy ra:
+$d(AB, SC) = \frac{3\sqrt{3}}{\sqrt{7}} = \frac{3\sqrt{21}}{7}$.
+
+Bấm máy tính ta được: $\frac{3\sqrt{21}}{7} \approx 1,963961...$
+Làm tròn kết quả đến hàng phần trăm, ta được: $1,96$.
+Vậy khoảng cách giữa hai đường thẳng $AB$ và $SC$ xấp xỉ $1,96$.`
+        }
+    ]
+});
 
         // ---------------------------------------------------------------------
         // KẾT THÚC KHU VỰC DÁN DỮ LIỆU
