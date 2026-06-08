@@ -8100,6 +8100,102 @@ Vậy mệnh đề d) là **Sai**.`
         }
     ]
 });
+khoDuLieu.push({
+    id: "toa_do_hoa_flycam",
+    chuyenDe: "dap-an",
+    loaiTag: "Bài toán",
+    tieuDe: "Ứng dụng tọa độ hóa giải bài toán thực tế vị trí Flycam (18:30-8/6)",
+    tuDuy: String.raw`1. Chia các số liệu 30m, 50m cho 10 để đưa về đơn vị tọa độ. Dùng bảo toàn khoảng cách $SA=SB$ lập phương trình trung trực.
+2. Dùng dữ kiện chênh lệch độ cao $z$ để ép hệ thức mặt phẳng thứ hai.
+3. Không giải trực tiếp $S$. Viết tọa độ hình chiếu $H$ theo tham số $t$, thế vào $T$ để triệt tiêu chéo ẩn $x$ và $z$, đưa $T$ về hàm bậc nhất theo $y$.
+4. Thế toàn bộ vào phương trình khoảng cách ban đầu để chốt nghiệm $y$ và ra đáp án.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`<img src="images/t_d_d_t_c_h_l_l.png" />`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Giải mã bẫy đơn vị và thiết lập mặt phẳng trung trực",
+            giaiThich: String.raw`Đọc lướt qua cái đề thực tế dài ngoằng này, mắt anh lập tức bị khựng lại ở dòng chữ **"Đơn vị trên các trục tọa độ được quy ước là 10 m"**. 
+Trong đầu anh rú còi báo động: Đây là cái bẫy "lùa gà" kinh điển nhất! Nếu anh cứ cắm đầu lấy số $30$ và $50$ để tính toán thì coi như vứt đi cả bài. Anh phải chia ngay cho 10. Khoảng cách 30m tức là $3$ đơn vị, 50m tức là $5$ đơn vị. Tọa độ $A(3;0;0)$ và $B(0;-4;0)$ giữ nguyên vì nó đã nằm trên hệ trục.
+
+Tiếp theo, Flycam ở vị trí $S$ cách đều 2 ca-nô $A$ và $B$ một khoảng bằng 5. Anh nảy số ngay: $S$ chắc chắn phải nằm trên mặt phẳng trung trực của đoạn thẳng $AB$. Thay vì giải hệ lằng nhằng, anh lôi công thức độ dài ra trừ vế theo vế là lòi ngay ra mối liên hệ giữa $x$ và $y$.
+
+**MOTIF (Công thức nền):**
+Điều kiện cách đều 2 điểm:
+$$SA^2 = SB^2$$`,
+            toanHoc: String.raw`Quy đổi đơn vị đo: 1 đơn vị tọa độ tương ứng 10m. 
+Vậy khoảng cách từ Flycam $S(x; y; z)$ đến mái nhà là $3$, và khoảng cách đến các ca-nô là $SA = SB = 5$.
+Ta có tọa độ $A(3; 0; 0)$ và $B(0; -4; 0)$.
+Áp dụng công thức khoảng cách:
+$SA^2 = (x - 3)^2 + y^2 + z^2 = 25$  (1)
+$SB^2 = x^2 + (y + 4)^2 + z^2 = 25$  (2)
+Vì $SA^2 = SB^2$, trừ vế theo vế phương trình (1) cho (2), ta được:
+$(x^2 - 6x + 9 + y^2 + z^2) - (x^2 + y^2 + 8y + 16 + z^2) = 0$
+$\Leftrightarrow -6x - 8y - 7 = 0 \Leftrightarrow 6x + 8y + 7 = 0$
+$\Rightarrow x = \frac{-8y - 7}{6}$  (3)`
+        },
+        {
+            tenBuoc: "Bước 2: Xử lý dữ kiện 'Bay thẳng đứng' cực hiểm",
+            giaiThich: String.raw`Đến đoạn "Flycam bay thẳng đứng cách mái nhà xưởng một khoảng là 30m (song song với trục Oz)". Câu này rất dễ hiểu nhầm thành khoảng cách vuông góc từ điểm đến mặt phẳng. 
+Nhưng anh cẩn thận phân tích cụm từ **"song song với trục Oz"**. Nghĩa là nếu kẻ một đường thẳng đứng từ $S$ cắm xuống mái nhà $(P)$ tại điểm $K$, thì đoạn $SK = 3$. Hay nói cách khác, độ chênh lệch cao độ ($z$) giữa Flycam và mái nhà đúng bằng $3$.
+Vì Flycam bay ở trên thả hàng xuống nên cao độ của nó phải lớn hơn mái nhà, tức là $z_S - z_P = 3$. Anh lập phương trình là ra ngay mối quan hệ của cả 3 ẩn $x, y, z$.
+
+**MOTIF (Đọc vị ngôn từ):**
+Khoảng cách đo theo phương thẳng đứng (song song $Oz$) giữa điểm $S$ và mặt phẳng $(P)$:
+$$|z_S - z_P| = d$$`,
+            toanHoc: String.raw`Mặt phẳng mái nhà $(P): 2x - y + 2z - 6 = 0$.
+Gọi $K(x; y; z_P)$ là điểm nằm trên mái nhà ngay phía dưới Flycam $S(x; y; z)$. 
+Vì $K \in (P)$ nên $2x - y + 2z_P - 6 = 0 \Rightarrow z_P = \frac{6 - 2x + y}{2}$.
+Khoảng cách thẳng đứng từ Flycam đến mái nhà là 3 (đơn vị), và Flycam ở trên cao nên:
+$z - z_P = 3 \Leftrightarrow z - \frac{6 - 2x + y}{2} = 3$
+$\Leftrightarrow 2z - 6 + 2x - y = 6 \Leftrightarrow 2x - y + 2z = 12$  (4)
+Từ (4) suy ra: $z = \frac{12 - 2x + y}{2} = 6 - x + 0,5y$.`
+        },
+        {
+            tenBuoc: "Bước 3: Dùng 'Thủ đoạn đại số' triệt tiêu cụm T",
+            giaiThich: String.raw`Bây giờ đề bắt tính $T = x_H - 2y_H + z_H$. Điểm $H$ là hình chiếu của $S$ lên $(P)$. 
+Nếu anh cắm đầu đi giải cái hệ (1), (3), (4) để tìm ra tọa độ $S$ bằng số cụ thể rồi chiếu xuống $H$, chắc chắn anh sẽ chết chìm trong đống phương trình bậc hai số lẻ hoắc.
+Anh quyết định đổi chiến thuật: Cứ viết tọa độ $H$ theo $S$ dưới dạng tham số $t$, rồi quăng thẳng nó vào biểu thức $T$ xem có điều kỳ diệu xảy ra không. Thường mấy bài Vận dụng cao này, tác giả đã cố tình "độ" hệ số để nó tự triệt tiêu nhau!
+
+**MOTIF (Tuyệt chiêu Hình chiếu):**
+Hình chiếu $H$ của $S$ lên $(P): Ax+By+Cz+D=0$:
+$$H = S + t\cdot \vec{n}_{(P)}$$
+Thế $H$ vào $(P)$ để tìm $t$, sau đó thế ngược vào $T$.`,
+            toanHoc: String.raw`Đường thẳng $SH$ đi qua $S(x; y; z)$ và nhận vector pháp tuyến của $(P)$ là $\vec{n} = (2; -1; 2)$ làm vector chỉ phương.
+Phương trình tham số của $SH$: $\begin{cases} x_H = x + 2t \\ y_H = y - t \\ z_H = z + 2t \end{cases}$
+Vì $H \in (P)$ nên thay vào phương trình $(P)$:
+$2(x + 2t) - (y - t) + 2(z + 2t) - 6 = 0$
+$\Leftrightarrow (2x - y + 2z) + 9t - 6 = 0$.
+Mà theo phương trình (4) ta đã có $2x - y + 2z = 12$, thế vào ta được:
+$12 + 9t - 6 = 0 \Leftrightarrow 9t = -6 \Leftrightarrow t = -\frac{2}{3}$.
+Suy ra tọa độ điểm $H$ theo $x, y, z$ là: $H\left(x - \frac{4}{3}; y + \frac{2}{3}; z - \frac{4}{3}\right)$.
+
+Thay tọa độ $H$ vào biểu thức $T$:
+$T = x_H - 2y_H + z_H = \left(x - \frac{4}{3}\right) - 2\left(y + \frac{2}{3}\right) + \left(z - \frac{4}{3}\right)$
+$T = x - 2y + z - \frac{4}{3} - \frac{4}{3} - \frac{4}{3} = x - 2y + z - 4$.
+Ta thế $z = 6 - x + 0,5y$ (đã rút ở bước 2) vào $T$:
+$T = x - 2y + (6 - x + 0,5y) - 4$
+$T = 2 - 1,5y$.
+(Biến $x$ và $z$ đã bị triệt tiêu hoàn toàn, biểu thức $T$ lúc này chỉ còn phụ thuộc duy nhất vào tung độ $y$ của Flycam).`
+        },
+        {
+            tenBuoc: "Bước 4: Chốt hạ tọa độ y và kết luận",
+            giaiThich: String.raw`Ra được đến đây là anh sướng rơn người rồi, $T = 2 - 1,5y$. Việc còn lại chỉ là mượn cái phương trình mặt cầu $SA^2=25$ lúc đầu, thế toàn bộ $x$ và $z$ theo $y$ vào để bấm máy tính ra $y$. 
+Anh cẩn thận thế $x = \frac{-8y-7}{6}$ và biểu thức $z$ vào. Tuy ra phương trình bậc 2 có số hơi to, nhưng tư duy của anh đã thông suốt hoàn toàn, cứ bấm máy lấy nghiệm thỏa mãn điều kiện $x>0$ là dứt điểm bài toán.`,
+            toanHoc: String.raw`Ta có $x = \frac{-8y - 7}{6}$ and $z = 6 - x + 0,5y = \frac{11y + 43}{6}$.
+Thế tất cả vào phương trình mặt cầu $(x - 3)^2 + y^2 + z^2 = 25$:
+$\left(\frac{-8y - 7}{6} - 3\right)^2 + y^2 + \left(\frac{11y + 43}{6}\right)^2 = 25$
+$\Leftrightarrow \left(\frac{-8y - 25}{6}\right)^2 + y^2 + \left(\frac{11y + 43}{6}\right)^2 = 25$
+Nhân 2 vế với 36 và khai triển:
+$(64y^2 + 400y + 625) + 36y^2 + (121y^2 + 946y + 1849) = 900$
+$\Leftrightarrow 221y^2 + 1346y + 1574 = 0$
+Bấm máy tính giải phương trình, ta thu được nghiệm $y = \frac{-673 - \sqrt{105075}}{221}$ (loại nghiệm kia vì khi thế vào $x = \frac{-8y-7}{6}$ không thỏa mãn điều kiện $x>0$ hoặc điều kiện vật lý của bài toán).
+
+Vậy giá trị biểu thức $T$ là:
+$T = 2 - 1,5 \times \left( \frac{-673 - \sqrt{105075}}{221} \right) \approx 8,76$.
+*(Biểu thức T được tính trực tiếp từ tung độ y của điểm S lơ lửng)*.`
+        }
+    ]
+});
         // ---------------------------------------------------------------------
         // KẾT THÚC KHU VỰC DÁN DỮ LIỆU
     // TỰ ĐỘNG LỌC BÀI MŨ VÀ LOGARIT
