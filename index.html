@@ -152,6 +152,8 @@
                 <button class="cat-btn" onclick="filterCategory('day-so-dai-so')">Đại số tổng hợp</button>
                 <button class="cat-btn" onclick="filterCategory('on-luyen')">🔥 Ôn Luyện</button>
                 <button class="cat-btn" onclick="filterCategory('dap-an')">đáp án</button>
+                <button class="cat-btn" onclick="filterCategory('ly')">Lý</button>
+                <button class="cat-btn" onclick="filterCategory('hoa')">Hóa</button>
             </div>
 
             <div class="problem-list" id="problemList"></div>
@@ -8196,9 +8198,902 @@ $T = 2 - 1,5 \times \left( \frac{-673 - \sqrt{105075}}{221} \right) \approx 8,76
         }
     ]
 });
+khoDuLieu.push({
+    id: "mot_khoi_khi_li",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 1: Biến đổi trạng thái của khối khí lí tưởng",
+    tuDuy: String.raw`1. Đếm ô đồ thị suy ra tọa độ giấu kín: $V_2 = 6.10^{-3}, p_2 = 0,5.10^5$.
+2. Kiểm tra đẳng nhiệt bằng tích $p \cdot V$.
+3. Tính công bằng diện tích hình thang dưới đồ thị.
+4. Lập tỉ số trạng thái tìm $T_2$.
+5. Lập phương trình đường thẳng, tìm hệ số tự do $b$ rồi chia 2 để lấy áp suất cho $T_{max}$.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Một khối khí lí tưởng thực hiện quá trình biến đổi trạng thái nhiệt từ trạng thái (1) sang trạng thái (2) mà áp suất p của khối khí phụ thuộc vào thể tích V của nó được mô tả như giản đồ ở hình vẽ bên. Biết ở trạng thái (1) khối khí có nhiệt độ $T_1 = 600$ K, thể tích $V_1 = 2.10^{-3} m^3$ và áp suất $p_1 = 2.10^5$ Pa.
+a) Quá trình biến đổi khí từ trạng thái (1) sang trạng thái (2) là quá trình đẳng nhiệt.
+b) Công do chất khí thực hiện khi biến đổi từ trạng thái (1) sang trạng thái (2) có độ lớn là 500 J.
+c) Nhiệt độ của khối khí ở trạng thái (2) là 450 K.
+d) Nhiệt độ của khối khí trong quá trình biến đổi từ trạng thái (1) sang trạng thái (2) đạt giá trị lớn nhất khi áp suất của khối khí là $1,375.10^5$ Pa.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Giải mã đồ thị và test nhanh tính đẳng nhiệt (Ý a)",
+            giaiThich: String.raw`Đọc đề bài, anh thấy một cái đồ thị đường thẳng xiên chéo nhưng lại giấu nhẹm tọa độ của trạng thái (2). Học sinh mức 6 điểm tới đây hay hoảng, nhưng anh bình tĩnh đếm ô vuông trên lưới tọa độ. 
+Trục thể tích V: Điểm (1) nằm ở vạch số 2 (ứng với $2 \cdot 10^{-3}$), điểm (2) nằm ở vạch số 6. Tức là $V_2 = 6 \cdot 10^{-3} m^3$.
+Trục áp suất p: Điểm (2) nằm ở vạch số 1, điểm (1) nằm ở vạch số 4. Vậy $p_1$ gấp 4 lần $p_2$. Nếu $p_1 = 2 \cdot 10^5$ thì $p_2 = 0,5 \cdot 10^5$ Pa.
+Lòi ra hết tọa độ rồi! Để biết có phải đẳng nhiệt hay không, anh chỉ cần lấy $p \cdot V$ ở hai trạng thái so sánh với nhau. Đồ thị đẳng nhiệt trong hệ p-V nó phải là đường cong hypebol chứ không bao giờ là đường thẳng như thế này. 
+
+MENU CÔNG THỨC:
+$T_1 = T_2 \Leftrightarrow p_1 V_1 = p_2 V_2$
+
+MOTIF:
+Nếu $p_1 V_1 \neq p_2 V_2$ thì chắc chắn không phải đẳng nhiệt.`,
+            toanHoc: String.raw`Dựa vào lưới tọa độ trên đồ thị:
+- Vị trí $V_1$ chiếm 2 ô $\Rightarrow 1 \text{ ô} = 10^{-3} m^3$. Vị trí $V_2$ chiếm 6 ô $\Rightarrow V_2 = 6 \cdot 10^{-3} m^3$.
+- Vị trí $p_1$ chiếm 4 ô $\Rightarrow 1 \text{ ô} = 0,5 \cdot 10^5 \text{ Pa}$. Vị trí $p_2$ chiếm 1 ô $\Rightarrow p_2 = 0,5 \cdot 10^5 \text{ Pa}$.
+Kiểm tra tích $p \cdot V$:
+$p_1 V_1 = (2 \cdot 10^5) \cdot (2 \cdot 10^{-3}) = 400$
+$p_2 V_2 = (0,5 \cdot 10^5) \cdot (6 \cdot 10^{-3}) = 300$
+Vì $p_1 V_1 \neq p_2 V_2$ nên nhiệt độ không đổi là sai. Ngoài ra, đường đẳng nhiệt trong hệ tọa độ (p, V) phải là đường hypebol.
+Vậy phát biểu a là **Sai**.`
+        },
+        {
+            tenBuoc: "Bước 2: Tính công sinh ra bằng diện tích hình thang (Ý b)",
+            giaiThich: String.raw`Đến đoạn tính công A, anh dùng luôn phản xạ: Công A chính là DIỆN TÍCH hình phẳng giới hạn bởi đồ thị và trục hoành (trục V). Hình này là hình thang vuông. Cái bẫy chết người ở đây là quên nhân với cái đuôi đơn vị $10^{-3}$ của trục V và $10^5$ của trục p. Cứ cẩn thận thay số là ăn trọn điểm.
+
+MOTIF:
+$$A = S_{hinh\_thang} = \frac{1}{2}(p_1 + p_2)(V_2 - V_1)$$`,
+            toanHoc: String.raw`Công do chất khí thực hiện có độ lớn bằng diện tích hình thang giới hạn bởi đồ thị từ (1) đến (2) và trục V:
+$A = \frac{1}{2} \cdot (p_1 + p_2) \cdot (V_2 - V_1)$
+$A = \frac{1}{2} \cdot (2 \cdot 10^5 + 0,5 \cdot 10^5) \cdot (6 \cdot 10^{-3} - 2 \cdot 10^{-3})$
+$A = \frac{1}{2} \cdot (2,5 \cdot 10^5) \cdot (4 \cdot 10^{-3}) = 500 \text{ J}$
+Vậy phát biểu b là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 3: Suy ra nhiệt độ T_2 (Ý c)",
+            giaiThich: String.raw`Có tọa độ đầy đủ rồi, muốn tìm $T_2$ anh chỉ việc lập tỉ số phương trình trạng thái khí lý tưởng. Rút gọn hai vế là đập chết ngay bài toán.
+
+MOTIF:
+$$\frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2}$$`,
+            toanHoc: String.raw`Áp dụng phương trình trạng thái khí lí tưởng:
+$\frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2}$
+$\Rightarrow \frac{400}{600} = \frac{300}{T_2} \Rightarrow T_2 = \frac{300 \cdot 600}{400} = 450 \text{ K}$
+Vậy phát biểu c là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 4: Chiến thuật giải quyết nhiệt độ cực đại (Ý d)",
+            giaiThich: String.raw`Câu d này là trùm cuối. Đề hỏi nhiệt độ lớn nhất trên một quá trình biến đổi là đường thẳng xiên. Anh chia sẻ cho em một bí quyết "tà đạo" cực nhanh: Nối dài đường thẳng cắt trục áp suất $p$ tại một điểm $p_{max}$. Nhiệt độ lớn nhất sẽ luôn xảy ra ở vị trí có áp suất bằng chính xác một nửa cái đoạn cắt đó (Tức là $p = p_{max} / 2$).
+Anh chỉ cần lập phương trình đường thẳng $p = aV + b$, tìm hệ số tự do $b$ (chính là $p_{max}$), rồi chia đôi là xong, khỏi cần đạo hàm cho rươm rà.
+
+MOTIF:
+Phương trình đường thẳng: $p = aV + b$
+Nhiệt độ max đạt tại: $p = \frac{b}{2}$`,
+            toanHoc: String.raw`Giả sử phương trình đường thẳng của đồ thị là $p = aV + b$.
+Độ dốc $a = \frac{p_2 - p_1}{V_2 - V_1} = \frac{0,5 \cdot 10^5 - 2 \cdot 10^5}{6 \cdot 10^{-3} - 2 \cdot 10^{-3}} = \frac{-1,5 \cdot 10^5}{4 \cdot 10^{-3}} = -0,375 \cdot 10^8$.
+Thay tọa độ trạng thái (1) vào để tìm b:
+$2 \cdot 10^5 = (-0,375 \cdot 10^8) \cdot (2 \cdot 10^{-3}) + b$
+$\Rightarrow b = 2 \cdot 10^5 + 0,75 \cdot 10^5 = 2,75 \cdot 10^5 \text{ Pa}$.
+Theo tính chất của hàm bậc hai $T \sim pV = (aV+b)V$, nhiệt độ T đạt cực đại tại vị trí chính giữa của đoạn cắt trục tọa độ, tức là tại áp suất:
+$p = \frac{b}{2} = \frac{2,75 \cdot 10^5}{2} = 1,375 \cdot 10^5 \text{ Pa}$.
+Đúng bằng giá trị đề bài cho.
+Vậy phát biểu d là **Đúng**.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "nguoi_ta_dung_mot",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 2: Bài toán thực tế lò hồ quang điện nấu chảy kim loại",
+    tuDuy: String.raw`1. Đọc đồ thị: Đường xiên -> Tăng nhiệt, Đường ngang -> Nóng chảy.
+2. Dùng $P \cdot t = mc\Delta T$ cho đoạn AB (nhớ đổi phút sang giây).
+3. Dùng $P \cdot t = \lambda m$ cho đoạn BC để tìm $\lambda$.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Người ta dùng một lò hồ quang điện để nấu chảy một khối kim loại nặng 20 kg. Biết lò hồ quang cung cấp cho khối kim loại một nhiệt lượng không đổi là 5000 J/s. Sự thay đổi nhiệt độ của khối kim loại được ghi lại theo thời gian như hình vẽ.
+a) Giai đoạn AB trên đồ thị tương ứng với quá trình nóng chảy của kim loại.
+b) Giai đoạn BC khối kim loại không nhận thêm nhiệt lượng từ lò nung.
+c) Nhiệt dung riêng của khối kim loại là 500 J/kg.K.
+d) Nhiệt nóng chảy riêng của khối kim loại là $3.10^5$ J/kg.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Nhận diện hiện tượng trên đồ thị (Ý a, b)",
+            giaiThich: String.raw`Đọc đề bài, khi anh thấy cái đồ thị nhiệt độ - thời gian, trong đầu anh lập tức chốt 2 pha kinh điển: Đường xiên lên (AB) là lúc vật đang thu nhiệt để tăng nhiệt độ. Còn đường nằm ngang (BC) là lúc vật bắt đầu chuyển thể (nóng chảy). 
+Cái bẫy lý thuyết ở đây là nghĩ "nhiệt độ nằm ngang thì vật không nhận nhiệt". Lò vẫn đang bật 5000 J/s cơ mà! Vật vẫn nuốt nhiệt lượng để bẻ gãy liên kết rắn thôi. Nhìn thấu bản chất, anh gạch luôn ý a và b.
+
+MOTIF:
+Đường thẳng song song với trục thời gian $\rightarrow$ Quá trình chuyển thể (Nóng chảy/Sôi).`,
+            toanHoc: String.raw`- Giai đoạn AB: Nhiệt độ tăng từ $30^\circ C$ lên $1530^\circ C$. Đây là quá trình khối kim loại thu nhiệt để tăng nhiệt độ (chưa nóng chảy). Vậy phát biểu a là **Sai**.
+- Giai đoạn BC: Nhiệt độ duy trì ở $1530^\circ C$. Đây là quá trình nóng chảy. Trong giai đoạn này, lò vẫn cung cấp nhiệt để vật chuyển từ rắn sang lỏng. Vậy phát biểu b là **Sai**.`
+        },
+        {
+            tenBuoc: "Bước 2: Xử lý nhiệt dung riêng (Ý c)",
+            giaiThich: String.raw`Chuyển qua đoạn AB để tìm $c$. Năng lượng lò nhả ra bằng năng lượng vật hấp thụ. Nhìn xuống trục hoành đơn vị là "phút", phản xạ ngay: phải nhân 60 đổi ra giây. Gắn vào công thức cân bằng năng lượng là bấm máy ra ngay.
+
+MOTIF:
+$$P \cdot t = m \cdot c \cdot \Delta T$$`,
+            toanHoc: String.raw`Xét giai đoạn AB (từ $0$ đến $50$ phút), kim loại tăng nhiệt độ từ $30^\circ C$ lên $1530^\circ C$.
+Thời gian đun: $t_{AB} = 50 \cdot 60 = 3000 \text{ s}$.
+Nhiệt lượng lò cung cấp: $Q = P \cdot t_{AB} = 5000 \cdot 3000 = 15 \cdot 10^6 \text{ J}$.
+Nhiệt lượng kim loại thu vào: $Q = m \cdot c \cdot \Delta T = 20 \cdot c \cdot (1530 - 30) = 30000 \cdot c$.
+Ta có: $30000 \cdot c = 15 \cdot 10^6 \Rightarrow c = 500 \text{ J/kg.K}$.
+Vậy phát biểu c là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 3: Tính nhiệt nóng chảy riêng (Ý d)",
+            giaiThich: String.raw`Đến đoạn BC (từ 50 đến 70 phút), nhiệt độ đứng im nên không xài $\Delta T$ nữa. Anh xài công thức nhiệt nóng chảy $\lambda m$. Cứ lấy công suất nhân với thời gian nóng chảy (20 phút) rồi chia cho khối lượng là chốt đơn.
+
+MOTIF:
+$$P \cdot t = \lambda \cdot m$$`,
+            toanHoc: String.raw`Xét giai đoạn BC (từ $50$ đến $70$ phút), đây là quá trình nóng chảy.
+Thời gian nóng chảy: $t_{BC} = (70 - 50) \cdot 60 = 1200 \text{ s}$.
+Nhiệt lượng cần thiết để nóng chảy: $Q = P \cdot t_{BC} = 5000 \cdot 1200 = 6 \cdot 10^6 \text{ J}$.
+Ta có: $Q = \lambda \cdot m \Rightarrow 6 \cdot 10^6 = \lambda \cdot 20 \Rightarrow \lambda = 3 \cdot 10^5 \text{ J/kg}$.
+Vậy phát biểu d là **Đúng**.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "trong_linh_vuc_y",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 3: Bài toán ứng dụng đồng vị phóng xạ trong y học",
+    tuDuy: String.raw`1. Đổi $T$ ra giây, dùng $\lambda = \ln 2 / T$.
+2. Tính $N_0 = H_0 / \lambda$.
+3. Thấy $t = 3T$, lập tỉ số còn lại / phân rã = $1 / (2^3 - 1) = 1/7$.
+4. Tính thời gian giảm e lần bằng $T / \ln 2$ rồi so sánh.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Trong lĩnh vực y học, đồng vị phóng xạ $^{131}_{53}I$, với chu kỳ bán rã 8 ngày, được sử dụng rộng rãi trong điều trị ung thư tuyến giáp. Bệnh nhân nhận được liều thuốc có độ phóng xạ $H_0 = 5.10^{15}$ Bq.
+a) Hằng số phóng xạ của $^{131}_{53}I$ là $10^{-6} s^{-1}$.
+b) Số hạt nhân của chất phóng xạ tại thời điểm ban đầu là $5.10^{21}$ hạt.
+c) Tỉ số giữa số hạt nhân $^{131}_{53}I$ còn lại và số hạt nhân $^{131}_{53}I$ đã phân rã sau 24 ngày kể từ khi nhận liều thuốc là 1/7.
+d) Khối lượng chất phóng xạ còn lại bị giảm đi e lần (với e là cơ số tự nhiên) sau 11,75 ngày.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tính hằng số phóng xạ \\lambda (Ý a)",
+            giaiThich: String.raw`Đọc đề bài, cho chu kỳ T = 8 ngày mà bắt tính hằng số phóng xạ $\lambda$ theo đơn vị $s^{-1}$. Cái bẫy chết người ở đây là lười đổi đơn vị. Anh lập tức phải lấy 8 ngày nhân cho 24 giờ, nhân tiếp cho 3600 giây rồi mới ráp vào công thức $\ln 2 / T$.
+
+MOTIF:
+$$\lambda = \frac{\ln 2}{T}$$`,
+            toanHoc: String.raw`Đổi chu kỳ bán rã ra giây: $T = 8 \cdot 24 \cdot 3600 = 691200 \text{ s}$.
+Hằng số phóng xạ $\lambda$ là:
+$\lambda = \frac{\ln 2}{T} = \frac{0,693}{691200} \approx 1,002 \cdot 10^{-6} \text{ s}^{-1} \approx 10^{-6} \text{ s}^{-1}$.
+Vậy phát biểu a là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 2: Tìm số hạt nhân ban đầu N_0 (Ý b)",
+            giaiThich: String.raw`Đã có $\lambda$ và độ phóng xạ $H_0$. Cặp bài trùng này liên kết với nhau bằng một công thức cực ngắn. Phân chia ra là lòi ra số hạt nhân ban đầu. 
+
+MOTIF:
+$$H_0 = \lambda N_0 \Rightarrow N_0 = \frac{H_0}{\lambda}$$`,
+            toanHoc: String.raw`Số hạt nhân ban đầu là:
+$N_0 = \frac{H_0}{\lambda} = \frac{5 \cdot 10^{15}}{10^{-6}} = 5 \cdot 10^{21} \text{ hạt}$.
+Vậy phát biểu b là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 3: Lập tỉ số hạt còn lại và hạt bị phân rã (Ý c)",
+            giaiThich: String.raw`Thời gian trôi qua là 24 ngày. Nhìn con số này anh nhẩm ngay 24 chia 8 là vừa tròn 3 chu kỳ bán rã (3T). Tức là lượng hạt nhân bị chẻ đôi 3 lần ($2^3 = 8$). Còn lại 1 phần, vậy mất đi (phân rã) là $8 - 1 = 7$ phần. Tỉ số nhắm mắt cũng biết là 1/7.
+
+MOTIF:
+$N_{con\_lai} = \frac{N_0}{2^k}$ (với $k = \frac{t}{T}$)
+$\Delta N_{phan\_ra} = N_0 - N_{con\_lai}$`,
+            toanHoc: String.raw`Thời gian $t = 24 \text{ ngày} = 3T$.
+Số hạt nhân còn lại: $N = \frac{N_0}{2^3} = \frac{N_0}{8}$.
+Số hạt nhân đã phân rã: $\Delta N = N_0 - N = N_0 - \frac{N_0}{8} = \frac{7N_0}{8}$.
+Tỉ số: $\frac{N}{\Delta N} = \frac{N_0 / 8}{7N_0 / 8} = \frac{1}{7}$.
+Vậy phát biểu c là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 4: Kiểm tra thời gian để khối lượng giảm e lần (Ý d)",
+            giaiThich: String.raw`Chữ "giảm đi e lần" nghĩa là khối lượng lúc sau $m = m_0 / e$. Trong vật lí hạt nhân, thời gian để lượng chất giảm e lần chính là bằng "tuổi thọ trung bình" $\tau = 1/\lambda$. Anh lôi công thức ra tính phát xem có ra con số 11,75 ngày như đề nói không. Kết quả tính ra là 11,54 ngày. Sai bét, anh gạch luôn.
+
+MOTIF:
+$m = m_0 e^{-\lambda t}$. Để $m = \frac{m_0}{e} \Rightarrow \lambda t = 1 \Rightarrow t = \frac{1}{\lambda} = \frac{T}{\ln 2}$.`,
+            toanHoc: String.raw`Theo định luật phóng xạ: $m = m_0 e^{-\lambda t}$.
+Khối lượng giảm e lần, tức là $m = \frac{m_0}{e} = m_0 e^{-1}$.
+Suy ra: $\lambda t = 1 \Rightarrow t = \frac{1}{\lambda} = \frac{T}{\ln 2}$.
+Thay $T = 8 \text{ ngày}$ vào ta được:
+$t = \frac{8}{\ln 2} \approx \frac{8}{0,693} \approx 11,54 \text{ ngày}$.
+Giá trị này khác với 11,75 ngày.
+Vậy phát biểu d là **Sai**.`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "de_do_cam_ung_tu",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 4: Đo cảm ứng từ bằng phương pháp cân bằng lực từ",
+    tuDuy: String.raw`1. Nhận diện từ trường đều và dùng quy tắc bàn tay trái xác định chiều lực từ.
+2. Dùng công thức $M = B \cdot I \cdot \ell \cdot d$ (nhớ đổi cm ra m).
+3. Rút $I$ ra so sánh với dữ kiện của đề.
+4. Lập luận tỷ lệ nghịch giữa $I$ và $R$ để xác định cách tăng lực từ.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Để đo cảm ứng từ trong lòng một nam châm, một bạn học sinh bố trí thí nghiệm như Hình a. Ban đầu, khung dây được giữ cân bằng trên nêm kim loại bằng thanh cách điện.
+a) Từ trường trong lòng nam châm ở thí nghiệm nêu trên có các đường sức từ song song và cách đều nhau (từ trường đều).
+b) Khi đóng khóa K, phần khung dây trong lòng nam châm (X) chịu tác dụng của lực từ và đoạn dây di chuyển đi xuống.
+c) Khi đóng khóa K, để lấy lại cân bằng cho khung dây, bạn học sinh đó đặt lên trên thanh cách điện một vật nhỏ (Hình b). Biết đoạn dây X dài 10 cm và độ lớn cảm ứng từ trong lòng nam châm bằng 0,16T. Vật nhỏ gây ra một mô men có độ lớn $8 \cdot 10^{-3}Nm$. Số chỉ của Ampe kế là 0,2A.
+d) Với cách bố trí thí nghiệm như Hình a, để tăng độ lớn của lực từ tác dụng vào đoạn dây X, bạn học sinh đó cần điều chỉnh giảm điện trở của biến trở.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Phân tích đặc điểm từ trường và chiều lực từ (Ý a, b)",
+            giaiThich: String.raw`Đọc đề bài, nhìn vào cái nam châm hình chữ U, trong đầu anh lập tức nảy số: khoảng không gian ở giữa hai cực từ của nam châm chữ U luôn là từ trường đều, các đường sức từ chạy thẳng song song từ cực Bắc (N) sang cực Nam (S). Nên ý a đúng.
+Tiếp theo, để biết khung dây dịch chuyển đi đâu khi đóng khóa K, anh phải dùng quy tắc bàn tay trái. Dòng điện chạy qua đoạn dây X sẽ vuông góc với các đường sức từ. Lực từ sinh ra đẩy đoạn dây X chúi xuống dưới. Cái này là cơ chế kinh điển của thí nghiệm cân bằng dòng điện.
+
+MOTIF:
+Quy tắc bàn tay trái xác định chiều lực từ $\vec{F}$ vuông góc với cả $\vec{I}$ và $\vec{B}$.`,
+            toanHoc: String.raw`- Tại khoảng không gian hẹp giữa hai cực của nam châm chữ U, từ trường được coi là từ trường đều, các đường sức từ song song và cách đều nhau. Vậy phát biểu a là **Đúng**.
+- Khi đóng khóa K, dòng điện chạy qua đoạn dây X đặt trong từ trường sẽ chịu tác dụng của lực từ (lực Ampere). Theo quy tắc bàn tay trái, lực từ có chiều hướng từ trên xuống, làm đoạn dây X bị kéo chúi xuống dưới. Vậy phát biểu b là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 2: Dùng phương trình cân bằng Mô-men để tính dòng điện (Ý c)",
+            giaiThich: String.raw`Đến đoạn đặt vật nhỏ để lấy lại cân bằng, anh hiểu ngay đây là bài toán đòn bẩy. Khung dây bị mất cân bằng do lực từ $F$ kéo xuống, nên ta phải bù lại bằng một mô-men xoắn ngược chiều. 
+Mô-men do vật nhỏ gây ra bằng đúng mô-men do lực từ sinh ra đối với trục quay (chỗ nêm kim loại). Anh cẩn thận nhìn vào hình vẽ để lấy đúng cánh tay đòn: khoảng cách từ trục quay đến đoạn dây X là 8 cm. Cái bẫy chết người ở đây là quên đổi 8 cm và 10 cm ra mét. Anh thiết lập phương trình để giải ngược ra cường độ dòng điện $I$, nếu nó không ra 0,2A thì câu này sai.
+
+MENU CÔNG THỨC:
+$F = B \cdot I \cdot \ell \cdot \sin\alpha$
+$M = F \cdot d$
+
+MOTIF:
+$$M_{vat} = M_{tu} = B \cdot I \cdot \ell \cdot d$$`,
+            toanHoc: String.raw`Khung dây cân bằng khi mô-men do lực từ gây ra bằng với mô-men do trọng lượng vật nhỏ gây ra đối với trục quay.
+Cánh tay đòn của lực từ là $d = 8 \text{ cm} = 0,08 \text{ m}$.
+Chiều dài đoạn dây trong từ trường $\ell = 10 \text{ cm} = 0,1 \text{ m}$.
+Ta có mô-men lực từ: $M = F_{tu} \cdot d = B \cdot I \cdot \ell \cdot d$.
+Thay các giá trị đã biết vào phương trình:
+$8 \cdot 10^{-3} = 0,16 \cdot I \cdot 0,1 \cdot 0,08$
+$8 \cdot 10^{-3} = 0,00128 \cdot I \Rightarrow I = \frac{8 \cdot 10^{-3}}{0,00128} = 6,25 \text{ A}$.
+Cường độ dòng điện thực tế là 6,25A, hoàn toàn khác với con số 0,2A của đề bài.
+Vậy phát biểu c là **Sai**.`
+        },
+        {
+            tenBuoc: "Bước 3: Suy luận cách tăng lực từ (Ý d)",
+            giaiThich: String.raw`Để tăng lực từ $F$, nhìn vào công thức $F = BIL$, anh thấy rõ $B$ và $L$ cố định rồi, chỉ có cách làm tăng dòng điện $I$. Mà theo định luật Ohm, $I = U/R$, muốn $I$ to thì phải giảm điện trở $R$ của mạch. Ý d mô tả chính xác tư duy này. Chốt luôn.`,
+            toanHoc: String.raw`Công thức tính lực từ tác dụng lên đoạn dây là $F = B \cdot I \cdot \ell$.
+Để tăng độ lớn lực từ $F$, ta cần tăng cường độ dòng điện $I$ chạy trong mạch. Theo định luật Ohm $I = \frac{U}{R}$, để $I$ tăng thì phải giảm điện trở toàn phần của mạch. Do đó, việc giảm điện trở của biến trở là thao tác đúng.
+Vậy phát biểu d là **Đúng**.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "ranh_marianas_hay_ranh",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 1: Tính áp suất tuyệt đối ở độ sâu đáy biển",
+    tuDuy: String.raw`1. Đổi $h$ từ km sang m.
+2. Áp dụng công thức $p = p_0 + \rho g h$.
+3. Dời dấu phẩy để đưa về định dạng khoa học và làm tròn 1 chữ số.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Rãnh Marianas (hay Rãnh Mariana) là một rãnh đại dương nằm ở phía tây Thái Bình Dương... Áp suất ở độ sâu khoảng 10,92 km là $a.10^8$ Pa. Giá trị của a bằng bao nhiêu? (làm tròn đến chữ số thập phân thứ nhất). Biết áp suất khí quyển ở mặt biển là $p_0 = 10^5$ Pa, khối lượng riêng của nước biển khoảng $1025 \text{ kg/m}^3$ và lấy gia tốc trọng trường $g = 9,81 \text{ m/s}^2$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tính toán áp suất thủy tĩnh tuyệt đối",
+            giaiThich: String.raw`Đọc đề bài, khi thấy dữ kiện độ sâu của nước, anh định hình ngay bài toán áp suất chất lỏng. Cái bẫy kinh điển mà nhiều bạn hay vấp phải là: thứ nhất, quên đổi đơn vị km sang m; thứ hai, tính xong áp suất cột nước $\rho g h$ rồi mang đi nộp luôn mà quên cộng thêm cái áp suất khí quyển $p_0$ đè lên từ mặt biển. 
+Anh quyết định viết chuẩn một lèo công thức tổng, bấm máy cẩn thận.
+
+MENU CÔNG THỨC:
+$p = \rho g h$ (Áp suất do cột chất lỏng)
+$p = p_0 + \rho g h$ (Áp suất tuyệt đối - Công thức đúng)
+
+MOTIF:
+$$p = p_0 + \rho g h$$`,
+            toanHoc: String.raw`Đổi đơn vị độ sâu: $h = 10,92 \text{ km} = 10920 \text{ m}$.
+Áp suất tuyệt đối ở độ sâu h dưới đáy biển được xác định bằng tổng áp suất khí quyển trên mặt biển và áp suất thủy tĩnh do cột nước gây ra:
+$p = p_0 + \rho \cdot g \cdot h$
+Thay số liệu vào ta có:
+$p = 10^5 + 1025 \cdot 9,81 \cdot 10920$
+$p = 100000 + 109804812 = 109904812 \text{ Pa}$.`
+        },
+        {
+            tenBuoc: "Bước 2: Rút ra hệ số a và làm tròn",
+            giaiThich: String.raw`Tính ra một số dài ngoằng, anh bình tĩnh nhìn lại yêu cầu đề bài: viết dưới dạng $a \cdot 10^8$. Việc của anh chỉ là dời dấu phẩy sang trái 8 chữ số, rồi làm tròn 1 chữ số thập phân là xong.`,
+            toanHoc: String.raw`Ta viết lại kết quả áp suất dưới dạng khoa học:
+$p = 109904812 \text{ Pa} \approx 1,099 \cdot 10^8 \text{ Pa}$.
+Đề bài yêu cầu định dạng $p = a \cdot 10^8$ và làm tròn đến chữ số thập phân thứ nhất.
+Vì chữ số thập phân thứ hai là 9, ta làm tròn lên:
+$a \approx 1,1$.
+Kết luận: Giá trị của a là 1,1.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "khi_chup_cong_huong",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 2: Dòng điện cảm ứng trong vòng dây kim loại",
+    tuDuy: String.raw`1. Xác định góc $\alpha = 0^\circ$.
+2. Tính suất điện động $e_c$ thông qua độ biến thiên cảm ứng từ.
+3. Dùng $I = e_c / R$ để chốt kết quả.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Khi chụp cộng hưởng từ... Giả sử có một vòng dây dẫn kim loại nằm trong máy sao cho mặt phẳng của vòng vuông góc với cảm ứng từ. Biết diện tích và điện trở của vòng lần lượt là $2 \cdot 10^{-3} \text{ m}^2$ và $0,015 \Omega$. Nếu trong 0,50 s, độ lớn của cảm ứng từ này giảm đều từ 2,00 T xuống 0,50 T. Dòng điện cảm ứng xuất hiện trong vòng dây kim loại bằng bao nhiêu A?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tính suất điện động cảm ứng",
+            giaiThich: String.raw`Thấy vòng dây nằm trong từ trường biến thiên, anh lập tức nghĩ đến Định luật Faraday. Đề hỏi cường độ dòng điện $I$, anh chia lộ trình làm 2 chặng: tìm suất điện động $e_c$ trước, rồi nhét nó vào định luật Ohm.
+Từ khóa ăn điểm ở đây là "mặt phẳng vòng dây vuông góc với cảm ứng từ", nghĩa là góc $\alpha$ giữa pháp tuyến và $\vec{B}$ bằng $0^\circ$. Cứ thế mà ốp công thức độ biến thiên từ thông.
+
+MENU CÔNG THỨC:
+$\Delta \Phi = S \cdot \Delta B \cdot \cos\alpha$
+$e_c = \left| \frac{\Delta \Phi}{\Delta t} \right|$
+
+MOTIF:
+$$e_c = S \cdot \left| \frac{\Delta B}{\Delta t} \right|$$`,
+            toanHoc: String.raw`Vì mặt phẳng vòng dây vuông góc với đường sức từ nên góc tạo bởi véctơ pháp tuyến và véctơ cảm ứng từ $\vec{B}$ là $\alpha = 0^\circ \Rightarrow \cos(0^\circ) = 1$.
+Độ biến thiên của cảm ứng từ: $\Delta B = B_2 - B_1 = 0,50 - 2,00 = -1,50 \text{ T}$.
+Độ biến thiên từ thông gửi qua vòng dây:
+$\Delta \Phi = \Delta B \cdot S \cdot \cos\alpha = -1,50 \cdot 2 \cdot 10^{-3} \cdot 1 = -3 \cdot 10^{-3} \text{ Wb}$.
+Độ lớn suất điện động cảm ứng sinh ra trong vòng dây theo định luật Faraday là:
+$e_c = \left| \frac{\Delta \Phi}{\Delta t} \right| = \left| \frac{-3 \cdot 10^{-3}}{0,50} \right| = 6 \cdot 10^{-3} \text{ V}$.`
+        },
+        {
+            tenBuoc: "Bước 2: Tìm dòng điện qua định luật Ohm",
+            giaiThich: String.raw`Đã có suất điện động và điện trở, anh chỉ cần thực hiện một phép chia đơn giản là xong. Bài này không gài bẫy gì thêm.`,
+            toanHoc: String.raw`Áp dụng định luật Ohm cho mạch kín, cường độ dòng điện cảm ứng chạy trong vòng dây là:
+$I = \frac{e_c}{R} = \frac{6 \cdot 10^{-3}}{0,015} = 0,4 \text{ A}$.
+Kết luận: Dòng điện cảm ứng xuất hiện trong vòng dây là 0,4 A.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "khi_mot_chiec_ban",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 3: Khối lượng hơi nước tạo thành của bàn là hơi nước",
+    tuDuy: String.raw`1. Tính nhiệt lượng điện cung cấp $Q = P \cdot t$.
+2. Biểu diễn tổng nhiệt lượng nước thu vào gồm quá trình tăng nhiệt ($mc\Delta T$) và quá trình hóa hơi ($mL$).
+3. Cân bằng phương trình rút ra $m$ (đơn vị kg).
+4. Nhân 1000 đổi ra gam và làm tròn 1 chữ số thập phân.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Khi một chiếc bàn là hơi nước hoạt động, nước ban đầu từ bình ở nhiệt độ $27^\circ C$ nhỏ xuống tấm kim loại, sau đó bay hơi thành hơi nước ở $100^\circ C$. Bộ phận làm nóng có công suất điện là 1800W. Giả sử toàn bộ năng lượng điện được truyền vào tấm kim loại. Cho biết nhiệt dung riêng của nước là $4200 \text{ J/(kg.K)}$ và nhiệt hóa hơi riêng của nước là $2,3.10^6 \text{ J/kg}$. Trong 30 giây, bàn là tạo ra bao nhiêu gam hơi nước? (làm tròn kết quả đến chữ số hàng phần mười).`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tính tổng nhiệt lượng điện cung cấp",
+            giaiThich: String.raw`Đọc đề bài, anh thấy bàn là biến điện năng thành nhiệt năng. Có công suất 1800W, có thời gian 30 giây, anh tính ngay được tổng "nguồn cung" năng lượng. Đơn vị giây đã chuẩn, không cần đổi gì cả.
+
+MOTIF:
+$$Q_{cung\_cap} = P \cdot t$$`,
+            toanHoc: String.raw`Nhiệt lượng do bộ phận làm nóng của bàn là tỏa ra trong 30 giây là:
+$Q = P \cdot t = 1800 \cdot 30 = 54000 \text{ J}$.`
+        },
+        {
+            tenBuoc: "Bước 2: Lập phương trình thu nhiệt của nước",
+            giaiThich: String.raw`Nước từ $27^\circ C$ muốn hóa hơi hoàn toàn thì phải trải qua 2 chặng: Chặng 1 là tăng nhiệt độ lên $100^\circ C$ (sôi), Chặng 2 là chuyển từ lỏng sang khí (hóa hơi) ở chính $100^\circ C$ đó. 
+Cái bẫy ở đây là học sinh hay tính thiếu một trong hai quá trình. Anh gộp cả hai cụm $mc\Delta T$ và $mL$ vào làm một phương trình cân bằng với cái năng lượng 54000 J vừa tính ở trên. Lấy ẩn là $m$.
+
+MENU CÔNG THỨC:
+$Q_{thu} = m \cdot c \cdot \Delta T + m \cdot L$
+
+MOTIF:
+$$Q_{cung\_cap} = m \cdot (c \cdot \Delta T + L)$$`,
+            toanHoc: String.raw`Để nước ban đầu ở $27^\circ C$ hóa hơi hoàn toàn thành hơi nước ở $100^\circ C$, nước phải trải qua hai quá trình thu nhiệt:
+1. Thu nhiệt để tăng nhiệt độ từ $27^\circ C$ lên $100^\circ C$: $Q_1 = m \cdot c \cdot (100 - 27) = m \cdot 4200 \cdot 73 = 306600 \cdot m$.
+2. Thu nhiệt để hóa hơi hoàn toàn ở $100^\circ C$: $Q_2 = m \cdot L = m \cdot 2,3 \cdot 10^6 = 2300000 \cdot m$.
+Tổng nhiệt lượng nước thu vào là:
+$Q_{thu} = Q_1 + Q_2 = 306600 \cdot m + 2300000 \cdot m = 2606600 \cdot m$.
+Theo định luật bảo toàn năng lượng, toàn bộ nhiệt lượng bàn là tỏa ra được nước hấp thụ:
+$2606600 \cdot m = 54000$
+$\Rightarrow m = \frac{54000}{2606600} \approx 0,020716 \text{ kg}$.`
+        },
+        {
+            tenBuoc: "Bước 3: Đổi đơn vị và làm tròn",
+            giaiThich: String.raw`Ra được khối lượng rồi, nhưng anh liếc nhanh lại câu hỏi: đề hỏi "bao nhiêu gam" chứ không hỏi kg. Anh nhân 1000 để lùi dấu phẩy, sau đó làm tròn đến hàng phần mười theo đúng chỉ thị.`,
+            toanHoc: String.raw`Đổi khối lượng nước từ kg sang gam:
+$m \approx 0,020716 \text{ kg} = 20,716 \text{ g}$.
+Làm tròn kết quả đến chữ số hàng phần mười, ta được:
+$m \approx 20,7 \text{ g}$.
+Kết luận: Bàn là tạo ra 20,7 gam hơi nước.`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "hat_nhan_13_6c",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 4: Tính năng lượng liên kết của hạt nhân Carbon-13",
+    tuDuy: String.raw`1. Tính số neutron $N = A - Z$.
+2. Tính độ hụt khối $\Delta m$.
+3. Nhân $\Delta m$ với 931,5 để ra năng lượng liên kết theo MeV.
+4. Làm tròn đến phần nguyên.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hạt nhân $^{13}_6C$ có khối lượng 13,0001 amu. Cho khối lượng proton và neutron lần lượt là 1,0073 amu và 1,0087 amu. Lấy $1\text{amu} = 931,5 \text{MeV/c}^2$. Năng lượng liên kết của hạt nhân $^{13}_6C$ bằng bao nhiêu MeV? (Kết quả lấy đến chữ số hàng đơn vị).`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đếm số hạt và tính độ hụt khối \\Delta m",
+            giaiThich: String.raw`Đọc đề bài, anh thấy ngay một bài toán cơ bản của chương Vật lí hạt nhân. Để tính năng lượng liên kết, việc đầu tiên là phải tìm được "độ hụt khối" - tức là khối lượng bị mất đi khi các proton và neutron gom lại thành hạt nhân.
+Nhìn vào kí hiệu $^{13}_6C$, anh tách ra ngay: chỉ số dưới $Z=6$ là số proton, chỉ số trên $A=13$ là tổng số hạt, suy ra số neutron $N = 13 - 6 = 7$. Cứ lấy tổng khối lượng của các hạt rời rạc trừ đi khối lượng thực tế của hạt nhân là ra độ hụt khối. Bấm máy cẩn thận vì mấy con số này rất nhiều số thập phân.
+
+MENU CÔNG THỨC:
+$\Delta m = Z \cdot m_p + (A - Z) \cdot m_n - m_X$
+
+MOTIF:
+$$\Delta m = Z \cdot m_p + N \cdot m_n - m_X$$`,
+            toanHoc: String.raw`Hạt nhân $^{13}_6C$ có số proton là $Z = 6$ và số neutron là $N = 13 - 6 = 7$.
+Độ hụt khối của hạt nhân $^{13}_6C$ được tính theo công thức:
+$\Delta m = Z \cdot m_p + N \cdot m_n - m_X$
+Thay các giá trị từ đề bài:
+$\Delta m = 6 \cdot 1,0073 + 7 \cdot 1,0087 - 13,0001$
+$\Delta m = 6,0438 + 7,0609 - 13,0001 = 13,1047 - 13,0001 = 0,1046 \text{ amu}$.`
+        },
+        {
+            tenBuoc: "Bước 2: Đổi sang năng lượng liên kết và làm tròn",
+            giaiThich: String.raw`Có độ hụt khối rồi, anh áp dụng hệ thức Einstein thần thánh $E = mc^2$. Đề đã cho sẵn hệ số chuyển đổi $1\text{amu} = 931,5 \text{MeV/c}^2$, nên anh chỉ việc nhân thẳng con số $\Delta m$ với 931,5 là ra ngay năng lượng đơn vị MeV. Đừng quên bước cuối cùng: làm tròn đến phần nguyên theo lệnh của đề.
+
+MOTIF:
+$$W_{lk} = \Delta m \cdot 931,5$$`,
+            toanHoc: String.raw`Năng lượng liên kết của hạt nhân $^{13}_6C$ là:
+$W_{lk} = \Delta m \cdot c^2 = 0,1046 \cdot 931,5 \approx 97,4349 \text{ MeV}$.
+Làm tròn kết quả đến chữ số hàng đơn vị, ta được 97.
+Kết luận: Năng lượng liên kết là 97 MeV.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "mot_khi_cau_chua",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 5: Xác định thể tích khí cầu bằng phương trình trạng thái",
+    tuDuy: String.raw`1. Đổi nhiệt độ từ $^\circ C$ sang $K$ cho cả 2 trạng thái.
+2. Lập phương trình $\frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2}$.
+3. Rút ra V2 và làm tròn phần nguyên.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Một khí cầu chứa khí hydrogen có áp suất $10^5 \text{ Pa}$, nhiệt độ $27^\circ C$ và thể tích $10 \text{ m}^3$. Khi khí cầu bay cao, khí bên trong có áp suất $0,6 \cdot 10^5 \text{ Pa}$ và nhiệt độ $-13^\circ C$ thì thể tích của khí cầu là bao nhiêu $\text{ m}^3$? Kết quả lấy đến chữ số hàng đơn vị và khí cầu không bị vỡ.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Đổi nhiệt độ và thiết lập phương trình trạng thái",
+            giaiThich: String.raw`Đọc lướt qua cái đề, anh thấy ngay 2 trạng thái của một khối khí lý tưởng bị nhốt kín trong quả khí cầu. Bài này dùng Phương trình trạng thái khí lý tưởng là chết đòn ngay lập tức. Cái bẫy "to đùng" mà học sinh hay mắc phải là cứ để nguyên độ C ($^\circ C$) mà bấm máy. Bắt buộc phải cộng thêm 273 để đổi sang độ K (Kelvin). Anh cẩn thận liệt kê thông số của 2 trạng thái ra nháp rồi ráp phương trình.
+
+MENU CÔNG THỨC:
+$T(K) = t(^\circ C) + 273$
+$\frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2}$
+
+MOTIF:
+$$\frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2}$$`,
+            toanHoc: String.raw`Xác định các thông số của khối khí ở hai trạng thái:
+- Trạng thái 1 (mặt đất):
+  Áp suất $p_1 = 10^5 \text{ Pa}$.
+  Thể tích $V_1 = 10 \text{ m}^3$.
+  Nhiệt độ $T_1 = 27 + 273 = 300 \text{ K}$.
+  
+- Trạng thái 2 (trên cao):
+  Áp suất $p_2 = 0,6 \cdot 10^5 \text{ Pa}$.
+  Nhiệt độ $T_2 = -13 + 273 = 260 \text{ K}$.
+  Thể tích $V_2$ cần tìm.
+
+Áp dụng phương trình trạng thái khí lí tưởng:
+$\frac{p_1 \cdot V_1}{T_1} = \frac{p_2 \cdot V_2}{T_2}$
+Thay các số liệu đã biến đổi vào:
+$\frac{10^5 \cdot 10}{300} = \frac{0,6 \cdot 10^5 \cdot V_2}{260}$`
+        },
+        {
+            tenBuoc: "Bước 2: Giải phương trình tìm V2",
+            giaiThich: String.raw`Triệt tiêu luôn cái $10^5$ ở hai vế cho gọn mắt. Bấm máy chéo lên là ra ngay kết quả. Ra xong nhớ làm tròn đến hàng đơn vị như đề yêu cầu.`,
+            toanHoc: String.raw`Triệt tiêu $10^5$ ở hai vế, ta được:
+$\frac{10}{300} = \frac{0,6 \cdot V_2}{260}$
+$\Leftrightarrow \frac{1}{30} = \frac{0,6 \cdot V_2}{260}$
+$\Rightarrow V_2 = \frac{260}{30 \cdot 0,6} = \frac{260}{18} \approx 144,44 \text{ m}^3$.
+Làm tròn đến chữ số hàng đơn vị, ta được 144.
+Kết luận: Thể tích của khí cầu lúc sau là $144 \text{ m}^3$.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "mot_ong_hinh_chu",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 6: Điều chỉnh nhiệt độ cột khí trong ống chữ U",
+    tuDuy: String.raw`1. Tính áp suất đầu $p_1 = p_0 + \Delta h$. Thể tích $V_1 = 10 \cdot S$.
+2. Xác định áp suất sau $p_2 = p_0$.
+3. Biện luận độ dịch chuyển thủy ngân: mỗi bên dịch 2cm $\Rightarrow$ chiều dài khí giảm 2cm, $V_2 = 8 \cdot S$.
+4. Lập phương trình $\frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2}$ để tìm $T_2$.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Một ống hình chữ U tiết diện đều được đặt thẳng đứng có thủy ngân ở bên trong. Khi nhiệt độ là $30^\circ C$, chiều dài cột không khí ở nhánh kín (nhánh phải) là 10 cm. Bề mặt thủy ngân ở nhánh hở cao hơn ở nhánh kín 4 cm. Biết rằng áp suất khí quyển là 75 cmHg. Để bề mặt thủy ngân ở hai nhánh bằng nhau thì nhiệt độ của cột khí phải điều chỉnh tới bao nhiêu độ K? (làm tròn kết quả đến chữ số hàng đơn vị).`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Chốt thông số áp suất và thể tích ban đầu",
+            giaiThich: String.raw`Gặp bài ống chữ U nhốt khí, quy tắc đầu tiên là: cứ chỗ nào thủy ngân thấp hơn, chỗ đó chịu áp suất lớn hơn. Nhánh kín đang bị thủy ngân nhánh hở đè lên thêm một đoạn 4cm. Vậy áp suất khí bên trong sẽ bằng áp suất khí quyển (đang ấn từ ngoài vào nhánh hở) cộng thêm cái độ chênh lệch 4cm này.
+Thể tích thì cứ lấy tiết diện S nhân với chiều dài cột khí là ra. Không cần tìm S dâu vì tí nữa lập tỉ số nó sẽ tự triệt tiêu. Anh cũng không quên cộng 273 vào nhiệt độ.
+
+MENU CÔNG THỨC:
+$p = p_0 + \Delta h$ (nếu nhánh hở cao hơn nhánh kín)
+$V = \ell \cdot S$
+
+MOTIF:
+$$p_1 = p_0 + \Delta h_1$$`,
+            toanHoc: String.raw`Xét khối khí nhốt trong nhánh kín ở trạng thái 1:
+- Nhiệt độ: $T_1 = 30 + 273 = 303 \text{ K}$.
+- Thể tích: $V_1 = \ell_1 \cdot S = 10 \cdot S$ (với S là tiết diện ống).
+- Áp suất: Do bề mặt thủy ngân ở nhánh hở cao hơn nhánh kín 4 cm, áp suất của khối khí bằng áp suất khí quyển cộng thêm áp suất cột thủy ngân chênh lệch:
+$p_1 = p_0 + \Delta h = 75 + 4 = 79 \text{ cmHg}$.`
+        },
+        {
+            tenBuoc: "Bước 2: Suy luận sự dịch chuyển để tìm trạng thái lúc sau",
+            giaiThich: String.raw`Đề yêu cầu làm thế nào để mực thủy ngân hai bên bằng nhau ($\Delta h = 0$). Lúc này, áp suất khí bên trong nhánh kín sẽ cân bằng chính xác với áp suất khí quyển bên ngoài. Vậy là anh chốt được áp suất lúc sau $p_2 = 75 \text{ cmHg}$.
+Khó nhất là chỗ này: để chênh lệch 4cm biến mất, mức thủy ngân bên nhánh hở phải tụt xuống 2cm, và mức bên nhánh kín phải dâng lên 2cm. Nhánh kín dâng lên 2cm đồng nghĩa với việc cột không khí bị ép ngắn lại 2cm. Vậy chiều dài cột khí mới chỉ còn 8cm thôi. 
+
+MOTIF:
+Độ dịch chuyển mức thủy ngân mỗi nhánh = $\frac{\Delta h}{2}$`,
+            toanHoc: String.raw`Xét khối khí ở trạng thái 2:
+- Áp suất: Bề mặt thủy ngân ở hai nhánh bằng nhau nên áp suất khối khí bằng đúng áp suất khí quyển: $p_2 = 75 \text{ cmHg}$.
+- Thể tích: Để xóa bỏ độ chênh lệch 4 cm ban đầu, mức thủy ngân ở nhánh hở phải hạ xuống 2 cm và mức thủy ngân ở nhánh kín phải dâng lên 2 cm. Do đó, cột khí bị nén lại đi 2 cm.
+Chiều dài cột khí lúc sau: $\ell_2 = 10 - 2 = 8 \text{ cm}$.
+Thể tích: $V_2 = 8 \cdot S$.
+- Nhiệt độ: $T_2$ cần tìm.`
+        },
+        {
+            tenBuoc: "Bước 3: Lập phương trình và giải ra nhiệt độ",
+            giaiThich: String.raw`Có đủ 3 thông số của hai trạng thái, anh lập tỉ số phương trình trạng thái khí lý tưởng. Tiết diện S tự động bị triệt tiêu, giải phương trình bậc nhất là chốt hạ.`,
+            toanHoc: String.raw`Áp dụng phương trình trạng thái khí lí tưởng:
+$\frac{p_1 \cdot V_1}{T_1} = \frac{p_2 \cdot V_2}{T_2}$
+Thay số vào ta được:
+$\frac{79 \cdot (10 \cdot S)}{303} = \frac{75 \cdot (8 \cdot S)}{T_2}$
+Triệt tiêu S ở hai vế:
+$\frac{790}{303} = \frac{600}{T_2}$
+$\Rightarrow T_2 = \frac{600 \cdot 303}{790} \approx 230,13 \text{ K}$.
+Làm tròn kết quả đến chữ số hàng đơn vị, ta được 230.
+Kết luận: Nhiệt độ cột khí cần điều chỉnh tới là 230 K.`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "trong_hai_binh_thong",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 4: Cân bằng nhiệt - cơ của khối khí lí tưởng dưới piston lò xo",
+    tuDuy: String.raw`1. Đánh giá piston cân bằng, lò xo không nén -> $p_1 = p_0$.
+2. Tính $V_1 = S \cdot l$, dùng $n = p_1 V_1 / R T_1$ tìm số mol.
+3. Giải quyết $2y = 20 \text{ cm} \Rightarrow y = 0,1 \text{ m}$.
+4. Tính $p_2 = p_0 + \rho g(2y)$.
+5. Cân bằng lực tìm $x$: $\frac{kx}{S} = \rho g(2y) \Rightarrow x = 0,1 \text{ m}$.
+6. Tính $V_2 = S(l+x+y)$, lập tỉ số suy ra $T_2 = 459 \text{ K}$.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Trong hai bình thông nhau có mặt cắt ngang $S = 50 \text{ cm}^2$, chứa nước. Trong một bình, có một piston không trọng lượng, được gắn với một lò xo cố định có độ cứng $k = 100 \text{ N/m}$. Không gian dưới piston được chứa đầy không khí (coi là khí lí tưởng). Khi nhiệt độ không khí trong bình là $t_0 = 27^\circ C$ thì khoảng cách giữa piston đến mặt nước là $l = 40 \text{ cm}$, lò xo không bị biến dạng và mức nước trong cả hai bình là bằng nhau. Biết áp suất khí quyển là $p_0 = 10^5 \text{ Pa}$, $\rho = 1000 \text{ kg/m}^3$, $g = 10 \text{ m/s}^2$. $R = 8,31 \text{ J/mol.K}$.
+a) Áp suất khí ban đầu trong piston lớn hơn áp suất khí quyển.
+b) Trong piston chứa $0,08 \text{ mol}$ khí.
+c) Khi tăng nhiệt độ của lượng khí trong piston thì mật độ phân tử khí giảm.
+d) Nếu tăng nhiệt độ của không khí trong bình đến $T = 459 \text{ K}$ thì mức chất lỏng ở hai bình chênh lệch nhau $20 \text{ cm}$.`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Phân tích áp suất trạng thái ban đầu (Ý a, b)",
+            giaiThich: String.raw`Đọc đoạn "piston không trọng lượng, lò xo không bị biến dạng, mức nước bằng nhau", trong đầu anh bật ngay ra tính chất cân bằng của chất lỏng. Không có lực nào đè thêm lên khối khí, mặt nước hai bên lại bằng nhau, nên áp suất khí bên trong chả có lý do gì khác áp suất khí quyển bên ngoài cả. Ý a bảo lớn hơn là sai luôn.
+Có áp suất $p_1$, có thể tích $V_1 = S \cdot l$, có nhiệt độ $T_1$, anh ốp ngay phương trình Claperon-Mendeleev để tìm số mol $n$. Đừng quên đổi $cm$ ra $m$, $cm^2$ ra $m^2$ và độ C ra K nhé. Cái bẫy chết người ở đây là không đổi đơn vị diện tích $50 \text{ cm}^2 = 50 \cdot 10^{-4} \text{ m}^2$.
+
+MENU CÔNG THỨC:
+$V = S \cdot l$
+$p \cdot V = n \cdot R \cdot T$
+
+MOTIF:
+$$n = \frac{p \cdot V}{R \cdot T}$$`,
+            toanHoc: String.raw`- Ban đầu, piston không có trọng lượng, lò xo không biến dạng, mực nước 2 bình ngang nhau nên áp suất khí bên trong đúng bằng áp suất khí quyển: $p_1 = p_0 = 10^5 \text{ Pa}$. Vậy phát biểu a là **Sai**.
+- Thể tích khối khí ban đầu: $V_1 = S \cdot l = 50 \cdot 10^{-4} \cdot 40 \cdot 10^{-2} = 2 \cdot 10^{-3} \text{ m}^3$.
+Nhiệt độ ban đầu: $T_1 = 27 + 273 = 300 \text{ K}$.
+Áp dụng phương trình trạng thái khí lí tưởng:
+$n = \frac{p_1 \cdot V_1}{R \cdot T_1} = \frac{10^5 \cdot 2 \cdot 10^{-3}}{8,31 \cdot 300} = \frac{200}{2493} \approx 0,0802 \text{ mol}$.
+Làm tròn thành $0,08 \text{ mol}$. Vậy phát biểu b là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 2: Phân tích sự nở vì nhiệt và mật độ phân tử (Ý c)",
+            giaiThich: String.raw`Mật độ phân tử là số hạt chia cho thể tích. Khi tăng nhiệt độ, khối khí sẽ nở ra (đẩy piston lên), tức là thể tích $V$ tăng. Lượng khí (số hạt) bị nhốt kín không đổi. Tử số giữ nguyên, mẫu số tăng lên thì chắc chắn cái phân số mật độ phải giảm. Cứ thế mà chốt.`,
+            toanHoc: String.raw`Mật độ phân tử khí được tính bằng công thức: $n_0 = \frac{N}{V}$.
+Khi tăng nhiệt độ, áp suất tăng làm khí đẩy piston đi lên, thể tích $V$ của khối khí tăng. Vì lượng khí bị nhốt kín nên số phân tử $N$ không đổi. Do đó, mật độ phân tử khí giảm.
+Vậy phát biểu c là **Đúng**.`
+        },
+        {
+            tenBuoc: "Bước 3: Giải hệ phương trình cân bằng áp suất lúc sau (Ý d)",
+            giaiThich: String.raw`Ý d là trùm cuối bài này. Khi chênh lệch mực nước 2 bình là $20 \text{ cm}$, anh phân tích hiện tượng: vì tiết diện 2 bình bằng nhau, nên nước ở bình 1 (dưới piston) hạ xuống 1 đoạn $y$, thì nước ở bình 2 sẽ dâng lên đúng đoạn $y$ đó. Độ chênh lệch là $2y = 20 \text{ cm}$, suy ra $y = 10 \text{ cm} = 0,1 \text{ m}$.
+Áp suất khí lúc này vừa bị lò xo nén lại, vừa phải nâng cái cột nước chênh lệch $2y$ đó lên. Anh lập 2 phương trình:
+1. Áp suất khí theo cột nước: $p_2 = p_0 + \rho g (2y)$.
+2. Áp suất khí theo lực lò xo: $p_2 = p_0 + \frac{kx}{S}$ (với x là độ nén lò xo).
+Cho 2 cái này bằng nhau, anh sẽ tìm được độ nén $x$ của lò xo. Có $x$ và $y$, anh tính được thể tích mới $V_2 = S \cdot (l + x + y)$. Rồi rút $T_2$ xem có đúng 459 K không. Bài này dài nhưng logic rất thẳng.
+
+MOTIF:
+Độ tăng thể tích: $\Delta V = S(x+y)$
+Cân bằng lực: $\Delta p = \frac{kx}{S} = \rho g \Delta h$`,
+            toanHoc: String.raw`Giả sử lúc sau, nước ở bình có piston hạ xuống một đoạn $y$, nước bình kia dâng lên $y$. Chênh lệch mực nước: $\Delta h = 2y = 20 \text{ cm} \Rightarrow y = 10 \text{ cm} = 0,1 \text{ m}$.
+Lúc này áp suất khí bên trong là:
+$p_2 = p_0 + \rho \cdot g \cdot (2y) = 10^5 + 1000 \cdot 10 \cdot 0,2 = 102000 \text{ Pa}$.
+Gọi piston bị dịch lên trên một đoạn $x$. Lò xo bị nén một đoạn $x$.
+Áp suất khí theo phương trình cân bằng lực trên piston là:
+$p_2 = p_0 + \frac{k \cdot x}{S}$
+Cho 2 vế bằng nhau:
+$102000 = 100000 + \frac{100 \cdot x}{50 \cdot 10^{-4}} \Rightarrow 2000 = 20000 \cdot x \Rightarrow x = 0,1 \text{ m}$.
+Thể tích khí lúc sau tăng thêm do piston đẩy lên $x$ và mặt nước hạ xuống $y$:
+$V_2 = S \cdot (l + x + y) = 50 \cdot 10^{-4} \cdot (0,4 + 0,1 + 0,1) = 50 \cdot 10^{-4} \cdot 0,6 = 3 \cdot 10^{-3} \text{ m}^3$.
+Áp dụng phương trình trạng thái:
+$\frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2} \Rightarrow \frac{10^5 \cdot 2 \cdot 10^{-3}}{300} = \frac{102000 \cdot 3 \cdot 10^{-3}}{T_2}$
+$\Rightarrow \frac{200}{300} = \frac{306}{T_2} \Rightarrow T_2 = \frac{306 \cdot 300}{200} = 459 \text{ K}$.
+Trùng khớp với số liệu đề bài. Vậy phát biểu d là **Đúng**.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "hai_vat_1_va_2",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 1: Xác định nhiệt độ ban đầu qua đồ thị trao đổi nhiệt",
+    tuDuy: String.raw`1. Dùng tam giác đồ thị 2: $\tan 45^\circ = 100 / Q_0 \Rightarrow Q_0 = 100$.
+2. Dùng tam giác đồ thị 1: $\tan 60^\circ = (T_1 - 100) / Q_0$.
+3. Rút $T_1 = 100 + 100\sqrt{3}$ và làm tròn.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hai vật (1) và (2) có cùng khối lượng cho tiếp xúc và trao đổi nhiệt với nhau. Hình vẽ bên dưới là đồ thị biểu diễn sự thay đổi nhiệt độ của từng vật theo nhiệt lượng mà hai vật trao đổi cho nhau. Biết nhiệt độ tại giao điểm của hai đồ thị là $100^\circ C$. Nhiệt độ ban đầu của vật (1) bằng bao nhiêu $^\circ C$? (Kết quả làm tròn đến chữ số hàng đơn vị).`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Phân tích đồ thị và nhiệt lượng trao đổi",
+            giaiThich: String.raw`Đọc đồ thị này, anh thấy Trục tung là Nhiệt độ T, Trục hoành là Nhiệt lượng Q. 
+Đường (2) đi lên từ gốc tọa độ, tức là nhiệt độ ban đầu của vật 2 là $0^\circ C$ và nó đang thu nhiệt. Góc của đường này là $45^\circ$.
+Đường (1) đi xuống, tức là nó đang tỏa nhiệt. Điểm giao nhau (cân bằng nhiệt) gióng sang trục tung là $100^\circ C$, gióng xuống trục hoành là một đoạn Q.
+Phản xạ ngay: Hàm số của cái đồ thị này là $\Delta T = \frac{1}{mc} \cdot Q$. Nên tan của góc nghiêng chính bằng tỉ số $\Delta T / Q$. Cứ xét từng tam giác vuông tạo bởi đồ thị và các trục tọa độ là đập chết ngay.
+
+MENU CÔNG THỨC:
+$\tan(\alpha) = \frac{\text{Đối}}{\text{Kề}} = \frac{\Delta T}{Q}$
+
+MOTIF:
+$$Q = \frac{\Delta T}{\tan(\alpha)}$$`,
+            toanHoc: String.raw`Từ đồ thị, ta thấy:
+Trục tung biểu diễn nhiệt độ $T$, trục hoành biểu diễn nhiệt lượng $Q$.
+Đường thẳng (2) xuất phát từ gốc tọa độ, nghĩa là nhiệt độ ban đầu của vật 2 là $0^\circ C$.
+Giao điểm của 2 đồ thị ứng với trạng thái cân bằng nhiệt có nhiệt độ $t_{cb} = 100^\circ C$ và nhiệt lượng trao đổi chung là $Q_0$.
+Xét tam giác vuông của đồ thị (2) (nằm dưới giao điểm):
+$\tan 45^\circ = \frac{\Delta T_2}{Q_0} = \frac{100 - 0}{Q_0} \Rightarrow 1 = \frac{100}{Q_0} \Rightarrow Q_0 = 100 \text{ J}$ (hoặc một đơn vị năng lượng bất kỳ).`
+        },
+        {
+            tenBuoc: "Bước 2: Tìm nhiệt độ ban đầu của vật 1",
+            giaiThich: String.raw`Có cái đoạn hoành độ $Q_0 = 100$ rồi. Anh nhìn sang đồ thị (1). Nó tạo một góc $60^\circ$ với phương ngang. Tam giác vuông tạo bởi đồ thị (1) có cạnh kề là $Q_0 = 100$, cạnh đối chính là phần chênh lệch nhiệt độ từ lúc cân bằng ($100^\circ C$) lên đến nhiệt độ đỉnh ban đầu $T_1$. Anh dùng $\tan 60^\circ$ nhân với 100 là lòi ra cạnh đối đó.`,
+            toanHoc: String.raw`Xét tam giác vuông tạo bởi đồ thị (1) (phần phía trên giao điểm):
+Góc hợp bởi đồ thị (1) và phương ngang là $60^\circ$. Cạnh kề của tam giác này chính là đoạn $Q_0 = 100$.
+Cạnh đối của tam giác chính là độ biến thiên nhiệt độ của vật 1: $\Delta T_1 = T_1 - 100$.
+Ta có:
+$\tan 60^\circ = \frac{\Delta T_1}{Q_0} \Rightarrow \sqrt{3} = \frac{T_1 - 100}{100}$
+$\Rightarrow T_1 - 100 = 100\sqrt{3} \approx 173,2$
+$\Rightarrow T_1 = 100 + 173,2 = 273,2^\circ C$.
+Làm tròn kết quả đến chữ số hàng đơn vị, ta được $273$.
+Kết luận: Nhiệt độ ban đầu của vật (1) là $273^\circ C$.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "mot_lop_xe_co_the",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 2: Bài toán thực tế bơm hơi lốp xe",
+    tuDuy: String.raw`1. Tính tích $p \cdot V$ ban đầu của lốp: $1 \cdot 6 = 6$.
+2. Tính tổng tích $p \cdot V$ bơm thêm vào: $9 \times (1 \cdot 1) = 9$.
+3. Lấy tổng lượng khí chia cho thể tích lốp: $(6 + 9) / 6 = 2,5$.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Một lốp xe có thể tích 6 lít chứa không khí ở áp suất $1 \text{ atm}$. Bây giờ sử dụng một bộ bơm hơi có thể tích 1 lít để bơm hơi cho lốp xe. Coi thể tích lốp và nhiệt độ không khí không thay đổi trong quá trình bơm hơi. Áp suất khí quyển là $1 \text{ atm}$. Sau 9 lần bơm thì áp suất của khí bên trong lốp xe bằng bao nhiêu atm?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tính tổng số mol khí sau 9 lần bơm",
+            giaiThich: String.raw`Đọc đề bài, khi thấy bơm khí vào bình kín có thể tích và nhiệt độ cố định, trong đầu anh phản xạ ngay: Áp suất $p$ sẽ tỉ lệ thuận với lượng khí (số mol $n$).
+Anh không dại gì đi tìm $n$ bằng số cụ thể vì không có nhiệt độ. Anh dùng tư duy tỉ lệ: "Coi 1 lít khí ở $1 \text{ atm}$ là 1 phần lượng khí". 
+Ban đầu lốp có 6 lít ở $1 \text{ atm}$ $\Rightarrow$ có 6 phần khí. Mỗi lần bơm nhét thêm 1 lít ở $1 \text{ atm}$ $\Rightarrow$ nhét thêm 1 phần khí. Bơm 9 lần thì nhét thêm mấy phần? Xong rồi cộng dồn lại thôi.
+
+MENU CÔNG THỨC:
+$n = \frac{p \cdot V}{R \cdot T}$ (T không đổi, nên $n \propto p \cdot V$)
+
+MOTIF:
+Lượng khí tổng = Lượng khí ban đầu + Lượng khí bơm thêm
+$$p_{\text{tổng}} \cdot V_{\text{lốp}} = p_{\text{đầu}} \cdot V_{\text{lốp}} + N \cdot p_0 \cdot \Delta V$$`,
+            toanHoc: String.raw`Vì quá trình bơm coi như nhiệt độ $T$ và thể tích lốp $V$ không đổi, lượng khí trong lốp tỉ lệ thuận với tích số $p \cdot V$.
+Lượng khí ban đầu có sẵn trong lốp tương đương với:
+$X_0 = p_1 \cdot V = 1 \text{ atm} \cdot 6 \text{ lít} = 6$ (đơn vị lượng khí).
+Mỗi lần bơm đẩy vào lốp một lượng khí lấy từ ngoài khí quyển:
+$\Delta X = p_0 \cdot v_0 = 1 \text{ atm} \cdot 1 \text{ lít} = 1$ (đơn vị lượng khí).
+Sau 9 lần bơm, tổng lượng khí nhồi thêm là:
+$X_{\text{thêm}} = 9 \cdot 1 = 9$.
+Tổng lượng khí trong lốp lúc sau:
+$X_{\text{tổng}} = X_0 + X_{\text{thêm}} = 6 + 9 = 15$.`
+        },
+        {
+            tenBuoc: "Bước 2: Suy ngược ra áp suất lúc sau",
+            giaiThich: String.raw`Có tổng lượng khí rồi, anh chia ngược lại cho cái thể tích cố định của lốp xe (6 lít) là đẻ ra được cái áp suất mới nằm đè lên thành lốp. Chỉ là một phép chia tiểu học.`,
+            toanHoc: String.raw`Lượng khí lúc sau này bị nhốt hoàn toàn trong không gian lốp xe $V = 6$ lít.
+Áp suất lúc sau $p_2$ thỏa mãn:
+$p_2 \cdot V = X_{\text{tổng}} \Rightarrow p_2 \cdot 6 = 15$
+$\Rightarrow p_2 = \frac{15}{6} = 2,5 \text{ atm}$.
+Kết luận: Áp suất của khí bên trong lốp xe sau 9 lần bơm là 2,5 atm.`
+        }
+    ]
+});
+khoDuLieu.push({
+    id: "hinh_ve_ben_la",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 3: Xác định độ lệch pha u-i từ đồ thị dao động",
+    tuDuy: String.raw`1. Đếm ô một chu kỳ $T = 6$ ô.
+2. Tìm tọa độ của đỉnh u ($1$ ô) và đỉnh i ($1,5$ ô).
+3. Tính $\Delta t = 0,5$ ô.
+4. Nhân tỉ lệ $\frac{\Delta t}{T} \times 360^\circ = 30^\circ$.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Hình vẽ bên là đồ thị biểu diễn hiệu điện thế và cường độ dòng điện tức thời chạy qua mạch theo thời gian (các đường hình sin). Độ lệch pha giữa hiệu điện thế và cường độ dòng điện trong mạch bằng bao nhiêu độ? (kết quả làm tròn đến chữ số hàng phần mười).`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Khai thác chu kỳ T từ đồ thị",
+            giaiThich: String.raw`Khi nhìn thấy đồ thị hình sin của hai đại lượng u và i chéo nhau, trong đầu anh lập tức định hình phương pháp đếm ô thần thánh. Bài này không cho con số cụ thể trên trục thời gian, nhưng lại có sẵn lưới ô vuông. 
+Anh nhắm vào đường cong có biên độ cao hơn (đường u). Anh đếm số ô từ một đỉnh cực đại đến đỉnh cực đại tiếp theo. Hoặc đếm từ lúc đồ thị cắt trục hoành đi lên, qua 1 cực đại, 1 cực tiểu rồi quay lại trục hoành đi lên. Anh đếm được chính xác 6 ô. Vậy chu kỳ $T = 6$ ô.
+
+MOTIF:
+Xác định chu kỳ $T$ bằng số ô trên trục hoành.`,
+            toanHoc: String.raw`Từ đồ thị, xét đường biểu diễn có biên độ lớn (giả sử là u): khoảng cách giữa hai lần liên tiếp đồ thị cắt trục hoành và cùng đi lên (hoặc khoảng cách giữa hai đỉnh cực đại liên tiếp) trải dài qua 6 ô lưới. 
+Do đó, chu kỳ dao động của mạch là $T = 6$ ô.`
+        },
+        {
+            tenBuoc: "Bước 2: Tìm khoảng thời gian lệch nhau \\Delta t và tính độ lệch pha",
+            giaiThich: String.raw`Có chu kỳ $T$ rồi, anh cần tìm khoảng thời gian $\Delta t$ mà hai đồ thị "lệch" nhau. Trực quan nhất là so sánh vị trí của hai đỉnh cực đại nằm cạnh nhau nhất.
+Đường i (biên độ thấp hơn) đạt cực đại tại vị trí 1,5 ô (tính từ gốc O).
+Đường u (biên độ cao hơn) đạt cực đại tại vị trí 1 ô.
+Vậy thời gian hai cái đỉnh này lệch nhau là $1,5 - 1 = 0,5$ ô. 
+Từ $\Delta t$, anh quy ra độ lệch pha $\Delta \varphi$ cực nhanh bằng tỉ lệ với vòng tròn $360^\circ$. Bấm máy 1 phát là chốt đáp án.
+
+MENU CÔNG THỨC:
+$\Delta \varphi = \frac{\Delta t}{T} \cdot 2\pi \text{ (rad)}$
+$\Delta \varphi = \frac{\Delta t}{T} \cdot 360^\circ$
+
+MOTIF:
+$$\Delta \varphi = \frac{\Delta t}{T} \cdot 360^\circ$$`,
+            toanHoc: String.raw`Xét vị trí đạt cực đại (đỉnh) của hai đồ thị nằm sát nhau nhất tính từ gốc tọa độ:
+Đỉnh của đường điện áp $u$ nằm ở vạch thứ 1 trên trục hoành ($t_u = 1$ ô).
+Đỉnh của đường dòng điện $i$ nằm ngay chính giữa vạch 1 và 2 ($t_i = 1,5$ ô).
+Khoảng thời gian chênh lệch giữa hai đỉnh là:
+$\Delta t = 1,5 - 1 = 0,5$ ô.
+Độ lệch pha giữa hiệu điện thế và cường độ dòng điện tính theo độ là:
+$\Delta \varphi = \frac{\Delta t}{T} \cdot 360^\circ = \frac{0,5}{6} \cdot 360^\circ = 30^\circ$.
+Kết luận: Độ lệch pha bằng $30^\circ$.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "mot_khung_day_hinh",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 4: Cường độ dòng điện hiệu dụng trong khung dây quay đều",
+    tuDuy: String.raw`1. Đổi $\omega$ ra rad/s, $S$ ra m2 $\Rightarrow$ Tính $E_0 = NBS\omega$.
+2. Tính tổng chiều dài $l = N \times (\text{Chu vi}) \Rightarrow$ Tính $r = \rho l / S_{day}$.
+3. Tính tổng điện trở $R_{td} = R + r$.
+4. Lấy $E_0 / \sqrt{2}$ chia cho $R_{td}$ và làm tròn.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Một khung dây hình chữ nhật có $N = 400$ vòng với chiều dài các cạnh lần lượt là $ab = 20\text{ cm}$ và $bc = 10\text{ cm}$ quay đều với tốc độ $3000/\pi$ vòng/phút trong từ trường đều $B = 0,25\text{ T}$. Biết dây dẫn của khung được làm bằng vật liệu có điện trở suất $1,6 \cdot 10^{-8} \Omega m$, và có tiết diện là $0,4\text{ mm}^2$. Cuộn dây được kết nối với hệ thống bộ góp với chổi quét để tiếp xúc và nối với điện trở $R = 11\Omega$ như hình vẽ. Bỏ qua điện trở của dây nối, cường độ dòng điện hiệu dụng trong mạch bằng bao nhiêu A? (Kết quả làm tròn đến chữ số hàng đơn vị).`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Tính suất điện động cực đại của khung dây",
+            giaiThich: String.raw`Đọc đề bài một cái, anh thấy chi chít số liệu. Việc đầu tiên anh làm là càn quét hết đống đơn vị lộn xộn này. Tốc độ góc phải đổi từ vòng/phút ra rad/s. Diện tích khung dây phải đổi từ cm sang m. 
+Sau đó, anh ốp thẳng vào công thức kinh điển tính suất điện động cực đại $E_0$ của máy phát điện xoay chiều.
+
+MENU CÔNG THỨC:
+$\omega = \text{vòng/phút} \cdot \frac{2\pi}{60}$
+$E_0 = N \cdot B \cdot S \cdot \omega$
+
+MOTIF:
+$$E_0 = N \cdot B \cdot S \cdot \omega$$`,
+            toanHoc: String.raw`Đổi đơn vị tốc độ góc:
+$\omega = \frac{3000}{\pi} \text{ (vòng/phút)} \cdot \frac{2\pi}{60} = 100 \text{ rad/s}$.
+Diện tích một vòng của khung dây hình chữ nhật:
+$S = ab \cdot bc = 0,2 \text{ m} \cdot 0,1 \text{ m} = 0,02 \text{ m}^2$.
+Suất điện động cực đại sinh ra trong khung dây là:
+$E_0 = N \cdot B \cdot S \cdot \omega = 400 \cdot 0,25 \cdot 0,02 \cdot 100 = 200 \text{ V}$.`
+        },
+        {
+            tenBuoc: "Bước 2: Tính điện trở trong của cuộn dây",
+            giaiThich: String.raw`Máy phát điện thực tế không bao giờ lý tưởng, khung dây quấn bằng đồng có điện trở trong $r$. Muốn tính nó, anh xài công thức $r = \rho \cdot \frac{l}{S_{day}}$.
+Cái bẫy to đùng ở đây là học sinh hay lấy nhầm cái diện tích khung (0,02) làm $S_{day}$, hoặc quên nhân số vòng $N$ khi tính tổng chiều dài dây quấn. Anh tính cẩn thận chu vi 1 vòng, nhân cho 400 vòng ra tổng chiều dài $l$, rồi mới ráp vào công thức.
+
+MOTIF:
+$$r = \rho \frac{l}{S_{day}}$$`,
+            toanHoc: String.raw`Chiều dài một vòng dây (chu vi hình chữ nhật):
+$l_1 = 2 \cdot (ab + bc) = 2 \cdot (0,2 + 0,1) = 0,6 \text{ m}$.
+Tổng chiều dài dây dẫn quấn 400 vòng là:
+$l = N \cdot l_1 = 400 \cdot 0,6 = 240 \text{ m}$.
+Tiết diện dây dẫn: $S_{day} = 0,4 \text{ mm}^2 = 0,4 \cdot 10^{-6} \text{ m}^2$.
+Điện trở trong của khung dây là:
+$r = \rho \frac{l}{S_{day}} = 1,6 \cdot 10^{-8} \cdot \frac{240}{0,4 \cdot 10^{-6}} = 9,6 \Omega$.`
+        },
+        {
+            tenBuoc: "Bước 3: Chốt cường độ dòng điện hiệu dụng",
+            giaiThich: String.raw`Đến đoạn mạch ngoài. Mặc dù hình vẽ có vành bán khuyên (chỉnh lưu dòng thành một chiều mạch động), nhưng đại lượng "hiệu dụng" tính theo công suất tỏa nhiệt thì vẫn y chang điện xoay chiều bình thường, tức là phải lấy Cực đại chia cho căn 2.
+Anh gom điện trở trong $r$ và điện trở ngoài $R$ thành $R_{td}$, lấy suất điện động hiệu dụng $E$ chia cho nó là xong. Đề dặn làm tròn hàng đơn vị nên anh cứ thế mà múc.
+
+MOTIF:
+$E_{rms} = \frac{E_0}{\sqrt{2}}$
+$$I_{rms} = \frac{E_{rms}}{R + r}$$`,
+            toanHoc: String.raw`Suất điện động hiệu dụng của mạch:
+$E = \frac{E_0}{\sqrt{2}} = \frac{200}{\sqrt{2}} = 100\sqrt{2} \approx 141,42 \text{ V}$.
+Tổng điện trở toàn mạch gồm điện trở ngoài $R$ và điện trở trong $r$ mắc nối tiếp:
+$R_{td} = R + r = 11 + 9,6 = 20,6 \Omega$.
+Cường độ dòng điện hiệu dụng trong mạch là:
+$I = \frac{E}{R_{td}} = \frac{141,42}{20,6} \approx 6,865 \text{ A}$.
+Làm tròn đến chữ số hàng đơn vị, ta được $7 \text{ A}$.
+Kết luận: Cường độ dòng điện hiệu dụng là 7 A.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "dong_vi_phong_xa",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 5: Cấu tạo hạt nhân sản phẩm phân rã phóng xạ Xenon-133",
+    tuDuy: String.raw`1. Nhận diện bẫy thông tin thừa (Bỏ qua $H_0$, $T$, $t$).
+2. Viết phương trình phân rã $\beta^-$ tìm $A=133, Z=55$.
+3. Trừ đi để lấy số neutron $N = A - Z = 78$.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Đồng vị phóng xạ $\beta^-$ xenon $^{133}_{54}Xe$ được sử dụng trong phương pháp nguyên tử đánh dấu... Mỗi hạt nhân xenon phân rã tạo thành một hạt nhân cesium, một hạt $\beta^-$ và một hạt $\bar{\nu}^0_0$. Chu kì bán rã là $T=5,24$ ngày. Một mẫu khí có độ phóng xạ $H_0 = 6,25 \cdot 10^9 Bq$ ... được sử dụng cho bệnh nhân sau 3 ngày. Hạt nhân cesium có bao nhiêu neutron?`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Né bẫy thông tin và viết phương trình phân rã",
+            giaiThich: String.raw`Đọc đề bài, anh thấy một rổ số liệu: chu kỳ 5,24 ngày, độ phóng xạ $6,25 \cdot 10^9$, dùng sau 3 ngày. Học sinh 6 điểm đọc tới đây thể nào cũng hì hục lôi máy ra bấm khối lượng với độ phóng xạ. Nhưng khoan! Đọc kỹ câu hỏi cuối cùng: "Hạt nhân cesium có bao nhiêu neutron?". 
+Trời ơi, nó chỉ hỏi cấu tạo hạt nhân sản phẩm. Cái đống số liệu về thời gian và độ phóng xạ kia chỉ là thông tin gây nhiễu. Anh phớt lờ hết, viết luôn cái phương trình phóng xạ để tìm số khối $A$ và nguyên tử số $Z$ của Cesium (Cs).
+
+MENU CÔNG THỨC:
+$^{A_1}_{Z_1}X \rightarrow ^{A_2}_{Z_2}Y + ^{0}_{-1}e$ (Phân rã $\beta^-$)
+Số nơtron $N = A - Z$
+
+MOTIF:
+Bảo toàn điện tích: $Z_1 = Z_2 + (-1)$
+Bảo toàn số khối: $A_1 = A_2 + 0$`,
+            toanHoc: String.raw`Bỏ qua các dữ kiện về độ phóng xạ và thời gian vì không liên quan đến yêu cầu bài toán.
+Phương trình phân rã $\beta^-$ của Xenon:
+$^{133}_{54}\text{Xe} \rightarrow ^{A}_{Z}\text{Cs} + ^{0}_{-1}\text{e} + ^{0}_{0}\bar{\nu}$
+Áp dụng định luật bảo toàn số khối:
+$133 = A + 0 + 0 \Rightarrow A = 133$.
+Áp dụng định luật bảo toàn điện tích:
+$54 = Z - 1 + 0 \Rightarrow Z = 55$.
+Hạt nhân sản phẩm là $^{133}_{55}\text{Cs}$.
+Số neutron trong hạt nhân Cesium là:
+$N = A - Z = 133 - 55 = 78$.
+Kết luận: Hạt nhân Cesium có 78 neutron.`
+        }
+    ]
+});
+
+khoDuLieu.push({
+    id: "dong_vi_phong_xa_xe133",
+    chuyenDe: "ly",
+    loaiTag: "Bài toán",
+    tieuDe: "Câu 6: Tính độ phóng xạ của Xenon-133 sau thời gian lưu trữ",
+    tuDuy: String.raw`1. Dùng công thức $H = H_0 \cdot 2^{-t/T}$.
+2. Bấm máy tính trực tiếp không cần đổi đơn vị ngày.
+3. Rút lấy phần hệ số $a$ và làm tròn 1 chữ số thập phân.`,
+    hinhAnhLeft: "",
+    deBai: String.raw`Đồng vị phóng xạ $\beta^-$ xenon $^{133}_{54}Xe$ ... Chu kì bán rã $T=5,24$ ngày. Mẫu khí có độ phóng xạ $H_0 = 6,25 \cdot 10^9 Bq$. Sử dụng cho bệnh nhân sau 3 ngày. Độ phóng xạ của mẫu xenon khi sử dụng là $a \cdot 10^9 Bq$. Giá trị của $a$ bằng bao nhiêu? (làm tròn đến chữ số hàng phần mười).`,
+    loiGiai: [
+        {
+            tenBuoc: "Bước 1: Áp dụng định luật phóng xạ tính H",
+            giaiThich: String.raw`Cùng là cái đề bài trên, nhưng câu 6 này mới chính thức yêu cầu tính toán độ phóng xạ. Đề cho độ phóng xạ ban đầu $H_0$, thời gian trôi qua $t=3$, chu kỳ $T=5,24$. Anh lôi thẳng công thức cơ bản nhất của định luật phóng xạ ra bấm. Không cần đổi đơn vị ngày ra giây, vì $t$ và $T$ nằm trên mẫu số chung nó tự triệt tiêu đơn vị cho nhau rồi.
+
+MENU CÔNG THỨC:
+$H = H_0 \cdot 2^{-\frac{t}{T}}$
+
+MOTIF:
+$$H = H_0 \cdot 2^{-\frac{t}{T}}$$`,
+            toanHoc: String.raw`Độ phóng xạ của mẫu sau thời gian $t = 3$ ngày được tính theo định luật phóng xạ:
+$H = H_0 \cdot 2^{-\frac{t}{T}}$
+Thay các số liệu $H_0 = 6,25 \cdot 10^9 \text{ Bq}$, $t = 3$ ngày, $T = 5,24$ ngày vào:
+$H = (6,25 \cdot 10^9) \cdot 2^{-\frac{3}{5,24}}$
+Bấm máy tính số hạng mũ: $2^{-\frac{3}{5,24}} \approx 0,67246$.
+$H = 6,25 \cdot 10^9 \cdot 0,67246 \approx 4,2028 \cdot 10^9 \text{ Bq}$.`
+        },
+        {
+            tenBuoc: "Bước 2: Đồng nhất hệ số và làm tròn",
+            giaiThich: String.raw`Đề ép kết quả về dạng $a \cdot 10^9$. Anh nhìn cái cụm $4,2028 \cdot 10^9$ vừa tính ra, rõ ràng thằng $a$ chính là $4,2028$. Đề bảo làm tròn 1 chữ số thập phân (hàng phần mười), chữ số tiếp theo là 0 nên giữ nguyên. Chốt hạ đáp án.`,
+            toanHoc: String.raw`Ta có: $H = 4,2028 \cdot 10^9 \text{ Bq}$.
+Đồng nhất với biểu thức $a \cdot 10^9 \text{ Bq}$, ta suy ra $a = 4,2028$.
+Làm tròn kết quả đến chữ số hàng phần mười, ta được $4,2$.
+Kết luận: Giá trị của $a$ là 4,2.`
+        }
+    ]
+});
+
         // ---------------------------------------------------------------------
         // KẾT THÚC KHU VỰC DÁN DỮ LIỆU
-    // TỰ ĐỘNG LỌC BÀI MŨ VÀ LOGARIT
+    // =====================================================================
+        // TỰ ĐỘNG LỌC TỪ KHÓA
         // =====================================================================
         khoDuLieu.forEach(bai => {
             let tieuDe = bai.tieuDe.toLowerCase();
@@ -8217,10 +9112,21 @@ $T = 2 - 1,5 \times \left( \frac{-673 - \sqrt{105075}}{221} \right) \approx 8,76
             if (tuKhoaOnLuyen.some(tu => tieuDe.includes(tu))) {
                 bai.chuyenDe = "on-luyen";
             }
-            // MÀNG LỌC MỚI: TỰ ĐỘNG GOM BÀI VÀO TAB Đáp Án
-            let tuKhoaDapAn = ["đáp án", "đáp án", "đáp án", "đáp án"];
-            if (tuKhoaDapAN.some(tu => tieuDe.includes(tu))) {
+
+            // MÀNG LỌC ĐÁP ÁN
+            let tuKhoaDapAn = ["đáp án"];
+            if (tuKhoaDapAn.some(tu => tieuDe.includes(tu))) {
                 bai.chuyenDe = "dap-an";
+            }
+
+            // MÀNG LỌC LÝ
+            if (tuKhoaLy.some(tu => tieuDe.includes(tu))) {
+                bai.chuyenDe = "ly";
+            }
+
+            // MÀNG LỌC HÓA
+            if (tuKhoaHoa.some(tu => tieuDe.includes(tu))) {
+                bai.chuyenDe = "hoa";
             }
         });    
     </script>
